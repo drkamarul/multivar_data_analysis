@@ -1,0 +1,27 @@
+---
+output:
+  pdf_document: default
+---
+
+# Preface {-}
+
+This is the **draft** version of our book on  making plots, exploring data and doing regression analysis in R.
+
+All in all, we hope you enjoy this book!
+
+
+<p>&nbsp;</p>
+
+
+**Kamarul Imran Musa**
+
+<p>&nbsp;</p>
+
+**Wan Nor Arifin Wan Mansor**
+
+
+*School of Medical Sciences,* 
+
+*Universiti Sains Malaysia*
+
+

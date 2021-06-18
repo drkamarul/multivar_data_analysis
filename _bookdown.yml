@@ -1,0 +1,10 @@
+book_filename: Multivariable_Data_Analysis
+clean: [skeleton.bib, skeleton1.bib, bookdown.bbl]
+delete_merged_file: true
+language:
+  label:
+    fig: "FIGURE "
+    tab: "TABLE "
+  ui:
+    edit: "Edit"
+    chapter_name: "Chapter "

@@ -1,0 +1,350 @@
+
+# Data Wrangling  
+
+## Definition of data wrangling  
+
+Data wrangling is also known as Data Munging or Data Transformation. It is loosely the process of manually converting or mapping data from one "raw" form into another format. The process allows for more convenient consumption of the data. In doing so, we will be using semi-automated tools in RStudio. You can find more information here <https://community.modeanalytics.com/sql/tutorial/data-wrangling-with-sql/>
+
+## Data wrangling with **dplyr** package
+
+### **dplyr** package 
+
+**dplyr** is a package grouped inside **tidyverse** collection of packages. **dplyr** package is a very useful package to munge or wrangle or to tranform your data. It is a grammar of data manipulation. It provides a consistent set of verbs that help you solve the most common data manipulation challenges. This **tidyverse** webpage <https://github.com/tidyverse/dplyr> has more information and examples. 
+
+## Common procedures for doing data transformation 
+
+The common data wrangling procedures that data analyst does include:
+
+1.  reducing the size of dataset by selecting certain variables (or columns)
+2.  generating new variable from existing variables 
+3.  sorting observation of a variable 
+4.  grouping observations based on certain criteria
+5.  reducing variable to groups to in order to estimate summary statistic 
+
+## Some **dplyr** functions 
+
+For the procedures listed above, the corresponding **dplyr** functions are
+
+1.  `dplyr::select()` - to select a number of variables from a dataframe
+2.  `dplyr::mutate()` - to generate a new variable from existing variables 
+3.  `dplyr::arrange()` - to sort observation of a variable
+4.  `dplyr::filter()` - to group observations that fulfil certain criteria 
+5.  `dplyr::group_by()` and `dplyr::summarize()` - to reduce variable to groups in order to provide summary statistic  
+
+
+## Create a new project or set your working directory
+
+It is very important to ensure you know where your working directory is. To do so, the best practice is *is to create a new project everytime you want to start new analysis with R*. To do so, create a new project by `File -> New Project`. If you do not start with a new project, you still need to know **Where is my working directory?**. 
+
+So, again we emphasize that every time you want to start processing your data, please make sure:
+
+1.  you use R project. It is much easier and cleaner to start your work with a new R project. Once you have done or need to log off your computer, close the project and reopen the project the next time you need to.  
+2.  that if you are not using R project, you are inside the correct working directory. Type `getwd()` to display the active **working directory**.  And to set a new working directory use the function `setwd()`. Once you are know where your working directory is, you can start read or import data into your working directory. 
+
+
+Once you are inside the project, you can import your data if necessary. Remember, there are a number of packages you can use to read the data into R. R can read almost all (if not all format) types of data format. For example, we know that common data format are the:
+
+1.  SPSS (`.sav`) format, 
+2.  Stata (`.dta`) format, 
+3.  SAS format, 
+4.  MS Excel (`.xlsx`) format
+5.  Comma-separated-values `.csv` format. 
+
+But they are other formats too for examples data in DICOM format. DICOM format data includes data from CT scan and MRI images. There are data in shapefile format to store geographical information. Three packages - **haven**, **readr** and **foreign** packages - are very useful to read or import your data into R memory. 
+
+1.  **readr** provides a fast and friendly way to read rectangular data (like csv, tsv, and fwf).
+2.  **readxl** reads .xls and .xlsx sheets.
+3.  **haven** reads SPSS, Stata, and SAS data.
+
+## *starwars* data
+
+To make life easier and to facilitate reproducibility, we will use examples available from the public domains. We will produce and reproduce the outputs demonstrated on **tidyverse** website (<https://github.com/tidyverse/dplyr>). One of the useful datasets is `starwars` dataset. The `starwars` data comes together with **dplyr** package. This original source of data is from SWAPI, the Star Wars API accessible at http://swapi.co/. 
+
+The `starwars` data is class of `tibble`. The data have:
+
+- 87 rows (observations) 
+- 13 columns (variables)
+
+Now, let us:
+
+1.  load the **tidyverse** package
+2.  examine the column names (variable names) 
+
+Loading **tidyverse** packages will load **dplyr** automatically. If you want to load only **dplyr**, just type `library(dplyr)`.
+
+```{r activatedplyr}
+library(dplyr)
+```
+
+Take a peek at the `starwars` data
+
+```{r}
+glimpse(starwars)
+```
+
+Next, we examine the first 10 observations of the data. There are 77 more rows NOT SHOWN. You can also see the types of the variables:
+
+1.  `chr` (character),
+2.  `int` (integer), 
+3.  `dbl` (double)
+
+```{r datastarwars1}
+starwars
+```
+
+## Select variables, generate new variable and rename variable
+
+We will work with these functions
+
+- `dplyr::select()`
+- `dplyr::mutate()` and
+- `dplyr::rename()`
+
+### Select variables using `dplyr::select()`
+
+When you work with large datasets with many columns, sometimes it is easier to select only the necessary columns to reduce the size of dataset. This is possible by creating a smaller dataset (less variables). Then you can work on at the initial part of data analysis with this smaller dataset. This will greatly help data exploration.   
+
+To create smaller datasets, select some of the columns (variables) in the dataset. For example, in `starwars` data, we have 13 variables. From this dataset, let us generate a new dataset named as `mysw` with only these 4 variables , 
+1.  name
+2.  height
+3.  mass 
+4.  gender
+
+```{r}
+mysw <- starwars %>% select(name, gender, height, mass)
+mysw
+```
+
+
+The new dataset `mysw` is now created. You can see it in the `Environment` pane.
+
+### Generate varibale using `dplyr::mutate()`
+
+With `dplyr::mutate()`, you can generate new variable. For example, in the dataset `mysw`, we want to create a new variable named as `bmi`. This variable equals mass in kg divided by squared height (in meter) 
+
+$$bmi = \frac{kg}{m^2}$$
+
+
+```{r}
+mysw <- mysw %>% mutate(bmi = mass/(height/100)^2)
+mysw
+```
+
+Now, your dataset `mysw` has 5 columns (variables). The last variable is `bmi`
+
+### Rename variable using `dplyr::rename()`
+
+Now, 
+
+1.  create a new variable *bmi2* which equals $bmi^2$.
+2.  rename *bmi2* to *bmisq*
+
+```{r}
+mysw <- mysw %>% mutate(bmi2 = bmi^2)
+mysw
+mysw <- mysw %>% rename(bmisq = bmi2)
+mysw
+```
+
+
+## Sorting data and select observation
+
+The function `dplyr::arrange()` can sort the data. And the function `dplyr::filter()` allows you to select observations based on your criteria. 
+
+### Sorting data using `dplyr::arrange()`
+
+We can sort data in ascending or descending order. To do that, we will use `dplyr::arrange()`. It will sort the observation based on the values of the specified variable. For dataset `mysw`, let us sort the `bmi` from the biggest bmi (descending).  
+
+```{r}
+mysw <- mysw %>% arrange(desc(bmi))
+mysw
+```
+
+Now, we will replace the dataset `mysw` with data that contain the `bmi` values from the lowest to the biggest bmi (ascending). 
+
+```{r}
+mysw <- mysw %>% arrange(bmi)
+mysw
+```
+
+
+### Select observation using `dplyr::filter()`
+
+To select observations based on certain criteria, we use the `dplyr::filter()` function. Here, in this example, we will create a new dataset (which we will name as `mysw_m_40`) that contains observations with these criteria:
+
+- gender is male AND
+- bmi at or above 40
+
+```{r}
+mysw_m_40 <- mysw %>% filter(gender == 'male', bmi >= 40)
+mysw_m_40
+```
+
+Next, we will create a new dataset (named as `mysw_ht_45`) that contain
+
+- `height` above 200 OR `BMI` above 45, AND
+- does not include `NA` (which is missing value) observation for `bmi`
+
+```{r}
+mysw_ht_45 <- mysw %>% filter(height >200 | bmi >45, bmi != 'NA')
+mysw_ht_45
+```
+
+## Group data and get summary statistics 
+
+The`dplyr::group_by()` function allows us to group data based on categorical variable. Using the  `dplyr::summarize` we do summary statistics for the overall data or for groups created using `group_by()` function. 
+
+### Group data using `dplyr::group_by()`
+
+The `group_by` function will prepare the data for group analysis. For example, 
+
+1.  to get summary values for mean `bmi`, mean `ht` and mean `mass`
+2.  for male, female, hermaphrodite and none (`gender` variable)
+
+```{r}
+mysw_g <- mysw %>% group_by(gender)
+mysw_g
+```
+
+### Summary statistic using `dplyr::summarize()`
+
+Now that we have a group data named `mysw_g`, now, we would summarize our data using the mean and standard deviation (SD) for the groups specified above. 
+
+```{r}
+mysw_g %>% summarise(meanbmi = mean(bmi, na.rm = TRUE), 
+                     meanht  = mean(height, na.rm = TRUE),
+                     meanmass = mean(mass, na.rm = TRUE),
+                     sdbmi = sd(bmi, na.rm = TRUE),
+                     sdht = sd(height, na.rm = TRUE),
+                     sdmass = sd(mass, na.rm = TRUE))
+```
+
+To calculate the frequencies for one variable
+
+```{r}
+freq_species <- starwars %>% count(species, sort = TRUE)
+freq_species
+```
+
+And to calculate the frequencies for two variables. You can add the categorical or factor variable to get the frequencies for more groups. 
+
+```{r}
+freq_species_home <- starwars %>% count(species, homeworld, sort = TRUE)
+freq_species_home
+```
+
+
+## More complicated **dplyr** verbs
+
+To be more efficent, use multiple **dplyr** functions in one line of R code. For example, 
+
+```{r filterstarwars}
+starwars %>% filter(gender == "male", height > 100, mass > 100) %>% 
+  select(height, mass, species) %>%
+  group_by(species) %>%
+  summarize(mean_ht = mean(height, na.rm = TRUE), 
+            mean_mass = mean(mass, na.rm = TRUE),
+            freq = n())
+```
+
+
+## Data transformation for categorical variables 
+
+### **forcats** package
+
+Data transformation for categorical variables (factor variables) can be facilitated using the **forcats** package. 
+
+### Create a dataset
+
+Let us create create a dataset to demonstrate **forcats** package. The dataset will contain
+
+1.  a vector column named as **sex1** , values = 0,1
+2.  a vector column named as **race1** , values = 1,2,3,4
+3.  a tibble dataframe (dataset) named as **data_f**
+
+```{r}
+sex1 <- rbinom(n = 100, size = 1, prob = 0.5) 
+str(sex1)
+race1 <- rep(seq(1:4), 25)
+str(race1)
+data_f <- tibble(sex1, race1)
+head(data_f)
+```
+
+Now let us see the structure of the dataset. You should see that they are all in the integer (numerical) format
+
+```{r}
+str(data_f)
+```
+
+### Conversion from numeric to factor variables
+
+Now, we will convert the integer (numerical) variable to a factor (categorical) variable. For example, we will generate a new factor (categorical) variable named as `male` from variable `sex1` (which is an integer variable). We will label `male`as *No* or *Yes*.
+
+We then generate a new factor (categorical) variable named as `race2` from `race1` (which is an integer variable) and label as *Mal, Chi, Ind, Others*
+
+```{r}
+data_f$male <- factor(data_f$sex1, labels = c('No', 'Yes')) 
+data_f$race2 <- factor(data_f$race1, labels = c('Mal', 'Chi', 'Ind', 'Others')) 
+str(data_f)
+head(data_f) ; tail(data_f)
+```
+
+### Recoding variables using `forcats::fct_recode()`
+
+We use this function to recode variables from the old levels to the new levels. Let us say that our objectives is to:
+
+1.  modify the levels for variable **male** by changing the levels from `No` vs `Yes` to `Fem` and `Male`, respectively.
+2.  create a new variable **malay** from variable **race2**. We then want to label `Chi` to `Non-Malay`, `Ind` to `Non-Malay` and `Others` to `Non-Malay`. But we keep `Mal` as it is.
+
+To do that, use the codes below, 
+
+```{r useforcats} 
+library(forcats)
+data_f$male2 <- data_f$male %>% fct_recode('Fem' = 'No', 'Male' = 'Yes')
+data_f <- data_f %>% mutate(malay = fct_recode(race2, 
+                                        'Non-Malay' = 'Chi', 
+                                        'Non-Malay' = 'Ind', 
+                                        'Non-Malay' = 'Others'))
+head(data_f) ; tail(data_f)
+```
+
+## Summary
+
+**dplyr** package is a very useful package that encourages users to use proper verb when manipulating variables (columns) and observations (rows). We have learned to use 5 functions but there are more functions available.  Other useful functions include:
+
+1.  `dplyr::distinct()`
+2.  `dplyr::transmutate()`
+3.  `dplyr::sample_n()` and `dplyr::sample_frac()`
+
+Also note that, package **dplyr** is very useful when it is combined with another function that is `group_by`
+
+If you working with database, you can use **dbplyr** which has been developed to perform very effectively with databases. 
+
+For categorical variables, you can use **forcats** package. 
+
+## Self-practice
+
+If you have completed the tutorial above, you may:
+
+1.  Read your own data (hints: **haven**, **foreign**) or you can download data from <https://www.kaggle.com/datasets> . Maybe can try this dataset <https://www.kaggle.com/blastchar/telco-customer-churn>
+2.  Create a smaller dataset by selecting some variable (hints: `dplyr::select()`)
+3.  Creating a dataset with some selection (hints: `dplyr::filter()`)
+4.  Generate a new variable (hints`dplyr::mutate()`)
+5.  Creata an object using pipe and combining `dplyr::select()`, `dplyr::filter()` and `dplyr::mutate()` in one single line of R code
+6.  Summarise the mean, standard deviation and median for numerical variables `dplyr::group_by()` and `dplyr::summarize()`
+7.  Calculare the number of observations for categorical variables (hints: `dplyr::count()`)
+8.  Recode a categorical variable (hints: `forcats::fct_recode()`)
+
+
+## References
+
+1.  dplyr vignettes here <https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html>
+2.  forcats examples here <http://r4ds.had.co.nz/factors.html>
+3.  reading data into R <https://garthtarr.github.io/meatR/rio.html>
+
+
+
+
+
+

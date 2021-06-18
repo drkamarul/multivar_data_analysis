@@ -1,0 +1,479 @@
+
+
+# Exploratory data analysis (EDA)
+
+## Motivation 
+
+In statistics, exploratory data analysis (EDA) is an approach in data analysis in order to summarize their main characteristics, often with visual methods. 
+
+A statistical model can be used or not, but primarily EDA is for seeing what the data can tell us beyond the formal modeling or hypothesis testing task. 
+
+Exploratory data analysis was promoted by John Tukey to encourage statisticians to explore the data, and possibly formulate hypotheses that could lead to new data collection
+
+Source: https://en.wikipedia.org/wiki/Exploratory_data_analysis
+
+## Questions to ask before making graphs
+
+You must ask yourselves these:
+
+- Which data do I want to use? `data = `
+- Which variable or variables do I want to plot? `mapping = aes()`
+- What is (or are) the type of that variable? 
+    - Are they factor (categorical) variables ? 
+    - Are they numerical variables?
+- Am I going to plot 
+    - a single variable?
+    - two variables together?
+    - three variables together?
+- What plot? `geom_` 
+
+## EDA using ggplot2 package
+
+### Usage of **ggplot2** 
+
+1.  start with `ggplot()`
+2.  supply a dataset `data = `
+3.  and aesthetic mapping (with `aes()`) - variables
+4.  add on layers
+
+- geom_X : `geom_point()`, `geom_histogram()`
+- scales (like `scale_colour_brewer()`)
+- faceting specifications (like `facet_wrap()`)
+- coordinate systems (like `coord_flip()`).
+
+
+## Loading the library
+
+### **tidyverse** package for EDA
+
+We will load the **tidyverse** library
+
+The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. 
+
+<https://www.tidyverse.org/>
+
+```{r}
+library(tidyverse)
+```
+
+### the **gapminder** for dataset
+
+And load **gapminder** package to use the *gapminder* dataset
+
+Excerpt from the Gapminder data. The main object in this package is the gapminder data frame or *tibble*. 
+
+There are other goodies in the package, such as the data in tab delimited form, a larger unfiltered dataset, premade color schemes for the countries and continents, and ISO 3166-1 country codes.
+
+Variables:
+
+- country
+- continent
+- year
+- lifeExp:	life expectancy at birth
+- pop:	total population
+- gdpPercap:	per-capita GDP
+
+Load the library
+
+```{r}
+library(gapminder)
+```
+
+Peek at the data
+
+```{r}
+glimpse(gapminder)
+```
+
+Summary statistics of data
+
+```{r}
+summary(gapminder)
+```
+
+More information about *gapminder* data is here <https://www.gapminder.org/>
+
+We can see the top of our *gapminder* data and the bottom of our *gapminder* data
+
+```{r}
+head(gapminder) ; tail(gapminder)
+```
+
+
+
+## One variable: Distribution of a categorical variable
+
+### Bar chart
+
+The frequencies (number of countries) based on continents 
+
+```{r}
+gapminder %>% group_by(continent) %>% summarise(freq = n())
+```
+
+To examine the distribution of a categorical variable, we can use a bar chart.
+
+```{r}
+ggplot(data = gapminder) + 
+  geom_bar(mapping = aes(x = continent))
+```
+
+But we can also pass the `aes()` to ggplot
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = continent)) + 
+  geom_bar()
+```
+
+Combining dplyr and ggplot
+
+dplyr part:
+
+
+```{r}
+gapminder_life <- gapminder %>% group_by(continent) %>% 
+  summarize(mean_life = mean(lifeExp)) 
+gapminder_life
+```
+
+ggplot part:
+
+```{r}
+ggplot(gapminder_life, mapping = aes(x = continent, y = mean_life)) + geom_col()
+```
+
+dplyr and ggplot in action:
+
+```{r}
+gapminder %>% group_by(continent) %>% summarize(mean_life = mean(lifeExp)) %>% 
+  ggplot(mapping = aes(x = continent, y = mean_life, fill = continent)) + geom_col() +
+  ylab("Mean of Life Expectancy (Years)")
+```
+
+Personalize the plot
+
+- using `coord_flip()`
+
+```{r}
+gapminder %>% filter(continent == "Asia", year == 2007) %>% arrange(lifeExp) %>%
+  ggplot(mapping = aes(x = country, y = lifeExp, fill = country)) +
+  geom_col(position = "dodge", show.legend = FALSE) + 
+  coord_flip()
+```
+
+
+Excellent resource from this website <http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_(ggplot2)/>. It is a must go to website!!
+
+
+## One variable: Distribution of a numerical variable
+
+Plot distribution of values of a numerical variable
+
+### Histogram
+
+To see the distribution of a numerical variable, we can plot a histogram. And this is bu using the default number of bin widths.
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram()
+```
+
+To specify the number of bin, we can use bindwidth
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = lifeExp)) + 
+  geom_histogram(binwidth = 5)
+```
+
+
+**ggplot2** has lots of flexibility and personalization. For example, the histogram above is very plain. We can improve it by setting the line color and fill color, the theme, the size, the symbols and many other parameters. 
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = lifeExp)) + 
+  geom_histogram(binwidth = 5, colour = "black", fill = "white")
+```
+
+### Density curve
+
+Let us create a density curve. Density curve is useful to examine the distribution of observations.
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_density()
+```
+
+Very skewed. Let us focus (zoom) to the x axis
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = pop)) + 
+  geom_histogram(binwidth = 10000000, colour = "black", fill = "white") +
+  coord_cartesian(xlim = c(0, 100000000))
+```
+
+Histogram for life expectancy
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = lifeExp)) + 
+  geom_histogram(fill = "white", colour = "black")
+```
+
+Density curve for life expectancy
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = lifeExp)) + 
+  geom_density(colour = "red")
+```
+
+
+### Histogram and density curve together
+
+If we want to display both the histogram and the density curve, we can use `geom_histogram()` and `geom_density()` in the single line of codes.
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = lifeExp)) + 
+  geom_histogram(mapping = aes(y = ..density..), 
+                 colour = "black", fill = "white") +
+  geom_density(colour = "red")
+```
+
+
+
+## Two variables: Plotting a numerical and a categorical variable
+
+### Overlaying histogramss
+
+Now, examine the distribution of a numerical variable (var **pop**) based on variable **continent** by overlaying histograms.
+
+```{r}
+ggplot(data = gapminder, aes(x = lifeExp, fill = continent)) +
+    geom_histogram(position = "identity", alpha = 0.5)
+```
+
+### Using facet
+
+We can see better plots if we splot the histogram based on certain grouping. 
+
+In this example, we stratify the distibution of life expectancy (a numerical variable) based on continent (a categorical variable)
+
+```{r}
+ggplot(data = gapminder, aes(x = lifeExp)) +
+         geom_histogram(position = "identity", fill = "white", colour = "black") +
+         facet_wrap(~ continent)
+```
+
+We can draw histogram life expectancy, and this plot can be split based on year and continent. We will also add a vertical line using `geom_vline()`. 
+
+But, first, we use filter (part of **dplyr** verb) to choose observations from variable year that equal year 1952 and 2007. We want to reduce the number of plots created afterwards. We named this data as `gapminder_52_07`
+
+```{r fig.width=5, fig.height=8}
+gapminder_52_07 <- gapminder %>% filter(year == 1952 | year == 2007)
+ggplot(data = gapminder_52_07) +
+  geom_histogram(mapping = aes(x = lifeExp), binwidth = 4) + 
+  facet_wrap(~ year + continent, nrow = 5) +
+  geom_vline(xintercept = c(50, 60, 80), colour = "red") 
+```
+
+
+
+## Box plot
+
+Box plot contains a box and whiskers. The box goes from the 25th percentile to the 75th percentile of the data, also known as the inter-quartile range (IQR). 
+
+There's a line indicating the median, or the 50th percentile of the data. 
+
+The whiskers start from the edge of the box and extend to the furthest data point that is within 1.5 times the IQR. 
+
+Outliers are points that stay beyond the end of whiskers
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = continent, y = lifeExp)) +
+  geom_boxplot()
+```
+
+For 1952 and 2007
+
+
+```{r}
+ggplot(data = gapminder_52_07, mapping = aes(x = continent, y = lifeExp)) +
+  geom_boxplot() +
+  facet_wrap(~ year)
+```
+
+
+
+## Violin plot
+
+You want to make a violin plot to compare density estimates of different groups.
+
+Violin plots are a way of comparing multiple data distributions. 
+
+A violin plot is a kernel density estimate, mirrored so that it forms a symmetrical shape.
+
+```{r}
+my_violin <- ggplot(data = gapminder, mapping = aes(x = continent, y = lifeExp)) +
+  geom_violin() 
+my_violin
+```
+
+We can overlay with box plot
+
+```{r}
+my_violin + geom_boxplot(width = .1)
+```
+
+
+## Dot plot
+
+Dot plots are sometimes overlaid on box plots. In these cases, it may be helpful to make the dots hollow
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = continent, y = lifeExp)) +
+  geom_boxplot() +
+  scale_y_continuous(breaks = seq(30,80,10)) +
+  geom_dotplot(binaxis = "y", binwidth = 0.5, fill = NA, colour = "blue", alpha = 0.5) 
+```
+
+
+## Line plot
+
+Line graphs are typically used for visualizing how one continuous variable, on the y-axis, changes in relation to another continuous variable, on the x-axis. 
+
+As with bar graphs, there are exceptions. Line graphs can also be used with a discrete variable on the x-axis. This is appropriate when the variable is ordered (e.g., "small," "medium," "large").
+
+How about the life expectancy for Asia continent and also Malaysia in comparison 
+
+1.  gapminder data
+2.  continent == "Asia"
+3.  life expectancy
+4.  trend
+
+```{r}
+gapminder %>% filter(continent == "Asia") %>%
+ggplot(mapping = aes(x = year, y = lifeExp)) +
+  geom_line()
+```
+
+Does not seem right, 
+
+```{r}
+gapminder %>% filter(continent == "Asia") %>%
+ggplot(mapping = aes(x = year, y = lifeExp, colour = country)) +
+  geom_line(show.legend = FALSE)
+```
+
+
+Let us make a line graph for only Malaysia
+
+1.  gapminder data
+2.  country == "Malaysia"
+3.  life expectancy
+4.  trend 
+
+Pay attention to the dplyr codes and ggplot2 codes:
+
+```{r}
+gapminder %>% filter(country == "Malaysia") %>%
+  ggplot(mapping = aes(x = year, y = lifeExp)) +
+  geom_line()
+```
+
+
+
+
+## Plotting means and error bars (10 min)
+
+We want to error bar for life expectancy for Asia continent only. Error bar that will contain
+
+- mean
+- standard deviation 
+
+Our approach is:
+
+- use filter to choose Asia continent only `filter()`
+- generate the mean and SD for life expectancy using `mutate()`
+- plot the scatterplot (country vs mean life expectancy) `geom_point()`
+- plot errorbar `geom_errorbar()`
+
+```{r}
+gap_continent <- gapminder %>% filter(continent == "Asia") %>%
+  group_by(country) %>% mutate(mean = mean(lifeExp), sd = sd(lifeExp)) %>%
+  arrange(desc(mean))
+```
+
+Let is check the result
+
+```{r}
+head(gap_continent)
+```
+
+Plot them with `coord_flip()`
+
+```{r}
+gap_continent %>%   
+  ggplot(mapping = aes(x = country, y = mean)) + 
+  geom_point(mapping = aes(x = country, y = mean)) +
+  geom_errorbar(mapping = aes(ymin = mean - sd, ymax = mean + sd),
+                position = position_dodge()) +
+  coord_flip()
+```
+
+
+
+
+## Scatterplot with fit line
+
+The steps below shows that:
+
+- data is gapminder
+- a new variable log_gdp which equals log of gdpPercap
+- filter to Asia continent
+- make a plot
+- choose variables log_gdp and lifeExp based on country
+- plot scatterplot
+- plot fit line
+
+```{r}
+gapminder %>% mutate(log_gdp = log(gdpPercap)) %>%
+  filter(continent == "Asia") %>%
+ggplot(mapping = aes(x = log_gdp, y = lifeExp, colour = country)) +
+  geom_point(show.legend = FALSE) +
+  geom_smooth(method = lm, se = FALSE, show.legend = FALSE)
+```
+
+Now, 
+
+- choose selected countries: Malaysia, Indonesia, Singapore and Thailand.
+- use `facet_wrap()` to split the plots based on the 4 countries
+
+```{r}
+gapminder %>% mutate(log_gdp = log(gdpPercap)) %>%
+  filter(country %in% c("Malaysia", "Indonesia", "Singapore", "Thailand")) %>%
+ggplot(mapping = aes(x = log_gdp, y = lifeExp)) +
+  geom_point(show.legend = FALSE) +
+  geom_smooth(method = lm, se = FALSE, show.legend = FALSE) +
+  facet_wrap(~ country, ncol = 2)
+```
+
+## Balloon plot
+
+Relationship between log_gdp and life expectancy
+
+- gapminder data for countries in the Asia continent 
+- variable log_gdp as the predictor
+- variable life expectancy as the outcome
+- variable population for the size
+- using scatterplot
+
+```{r}
+ballon_plot <- gapminder %>% mutate(log_gdp = log(gdpPercap)) %>%
+  filter(continent == "Asia") %>%
+  ggplot(mapping = aes(x = log_gdp, y = lifeExp, size = pop)) +
+  geom_point(shape = 21, colour = "black", fill = "yellow") 
+ballon_plot
+```
+
+We instead want to map the value of population to the area of the dots, which we can do using scale_size_area()
+
+```{r}
+ballon_plot + scale_size_area(max_size = 10)
+```
+
+
