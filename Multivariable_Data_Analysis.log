@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 20.12) (preloaded format=xelatex 2021.1.9)  18 JUN 2021 21:44
+This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 20.12) (preloaded format=xelatex 2021.1.9)  18 JUN 2021 22:09
 entering extended mode
 **./Multivariable_Data_Analysis.tex
 (Multivariable_Data_Analysis.tex
@@ -1589,7 +1589,7 @@ _mass <dbl>,[]
 
 [67] [68]
 Overfull \hbox (6.75pt too wide) in paragraph at lines 2360--2360
-[]\TU/lmtt/m/n/10 ##  $ male : Factor w/ 2 levels "No","Yes": 2 1 2 2 2 1 1 1 2
+[]\TU/lmtt/m/n/10 ##  $ male : Factor w/ 2 levels "No","Yes": 1 1 2 1 2 2 1 2 1
  2 ...[] 
  []
 
