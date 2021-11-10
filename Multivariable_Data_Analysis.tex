@@ -180,7 +180,7 @@
 \makeatother
 \subtitle{A brief book using R}
 \author{Kamarul Imran \and Wan Nor Arifin}
-\date{2021-06-18}
+\date{2021-07-18}
 
 \begin{document}
 \maketitle
@@ -2289,7 +2289,7 @@ Let us create create a dataset to demonstrate \textbf{forcats} package. The data
 \end{Shaded}
 
 \begin{verbatim}
-##  int [1:100] 0 0 1 0 1 1 0 1 0 1 ...
+##  int [1:100] 0 1 1 0 1 1 0 0 0 1 ...
 \end{verbatim}
 
 \begin{Shaded}
@@ -2315,7 +2315,7 @@ Let us create create a dataset to demonstrate \textbf{forcats} package. The data
 ##    sex1 race1
 ##   <int> <int>
 ## 1     0     1
-## 2     0     2
+## 2     1     2
 ## 3     1     3
 ## 4     0     4
 ## 5     1     1
@@ -2332,7 +2332,7 @@ Now let us see the structure of the dataset. You should see that they are all in
 
 \begin{verbatim}
 ## tibble [100 x 2] (S3: tbl_df/tbl/data.frame)
-##  $ sex1 : int [1:100] 0 0 1 0 1 1 0 1 0 1 ...
+##  $ sex1 : int [1:100] 0 1 1 0 1 1 0 0 0 1 ...
 ##  $ race1: int [1:100] 1 2 3 4 1 2 3 4 1 2 ...
 \end{verbatim}
 
@@ -2353,9 +2353,9 @@ We then generate a new factor (categorical) variable named as \texttt{race2} fro
 
 \begin{verbatim}
 ## tibble [100 x 4] (S3: tbl_df/tbl/data.frame)
-##  $ sex1 : int [1:100] 0 0 1 0 1 1 0 1 0 1 ...
+##  $ sex1 : int [1:100] 0 1 1 0 1 1 0 0 0 1 ...
 ##  $ race1: int [1:100] 1 2 3 4 1 2 3 4 1 2 ...
-##  $ male : Factor w/ 2 levels "No","Yes": 1 1 2 1 2 2 1 2 1 2 ...
+##  $ male : Factor w/ 2 levels "No","Yes": 1 2 2 1 2 2 1 1 1 2 ...
 ##  $ race2: Factor w/ 4 levels "Mal","Chi","Ind",..: 1 2 3 4 1 2 3 4 1 2 ...
 \end{verbatim}
 
@@ -2370,7 +2370,7 @@ We then generate a new factor (categorical) variable named as \texttt{race2} fro
 ##    sex1 race1 male  race2 
 ##   <int> <int> <fct> <fct> 
 ## 1     0     1 No    Mal   
-## 2     0     2 No    Chi   
+## 2     1     2 Yes   Chi   
 ## 3     1     3 Yes   Ind   
 ## 4     0     4 No    Others
 ## 5     1     1 Yes   Mal   
@@ -2381,10 +2381,10 @@ We then generate a new factor (categorical) variable named as \texttt{race2} fro
 ## # A tibble: 6 x 4
 ##    sex1 race1 male  race2 
 ##   <int> <int> <fct> <fct> 
-## 1     1     3 Yes   Ind   
+## 1     0     3 No    Ind   
 ## 2     0     4 No    Others
-## 3     0     1 No    Mal   
-## 4     0     2 No    Chi   
+## 3     1     1 Yes   Mal   
+## 4     1     2 Yes   Chi   
 ## 5     0     3 No    Ind   
 ## 6     0     4 No    Others
 \end{verbatim}
@@ -2422,7 +2422,7 @@ To do that, use the codes below,
 ##    sex1 race1 male  race2  male2 malay    
 ##   <int> <int> <fct> <fct>  <fct> <fct>    
 ## 1     0     1 No    Mal    Fem   Mal      
-## 2     0     2 No    Chi    Fem   Non-Malay
+## 2     1     2 Yes   Chi    Male  Non-Malay
 ## 3     1     3 Yes   Ind    Male  Non-Malay
 ## 4     0     4 No    Others Fem   Non-Malay
 ## 5     1     1 Yes   Mal    Male  Mal      
@@ -2433,10 +2433,10 @@ To do that, use the codes below,
 ## # A tibble: 6 x 6
 ##    sex1 race1 male  race2  male2 malay    
 ##   <int> <int> <fct> <fct>  <fct> <fct>    
-## 1     1     3 Yes   Ind    Male  Non-Malay
+## 1     0     3 No    Ind    Fem   Non-Malay
 ## 2     0     4 No    Others Fem   Non-Malay
-## 3     0     1 No    Mal    Fem   Mal      
-## 4     0     2 No    Chi    Fem   Non-Malay
+## 3     1     1 Yes   Mal    Male  Mal      
+## 4     1     2 Yes   Chi    Male  Non-Malay
 ## 5     0     3 No    Ind    Fem   Non-Malay
 ## 6     0     4 No    Others Fem   Non-Malay
 \end{verbatim}
