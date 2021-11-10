@@ -1,0 +1,297 @@
+
+# Binary Logistic Regression
+
+## Introduction
+
+Binary logistic regression is used to model the relationship between a covariate or a set of covariates and an outcome variables which is categorical.
+
+This categorical outcome is of binary type. A binary type outcome variable means it has two categories or levels. For example:
+
+- survival status: alive or dead
+- relapse: relapse or not
+- satisfaction: satisfied or not satisfied 
+- glucose control: good control or poor control 
+
+There are a examples of workflow that you may follow to work with binary logistic regression. For example, the workflow from
+
+- the Applied Logistic Regression book 
+- the Logistic Regression: Self Learning Text 
+- the workflow from <http://ftp.auckland.ac.nz/software/CRAN/doc/vignettes/HSAUR/Ch_logistic_regression_glm.pdf>
+
+## Objectives
+
+The objective of the chapter is 
+
+- to perform univariable binary logistic regression
+- to perform multivariable binary logistic regression
+- to perform model assessment
+
+## Prepare environment for analysis
+
+Start a new analysis task by creating a new RStudio project. To do this,
+
+1. Go to File
+2. Click New Project
+3. Choose New Directory or Existing Directory. This directory points to the folder that usually contains the dataset to be analyzed
+
+Next, we will load the necessary packages. We will use 5 packages
+
+1. the built in **stat** package - to run Generalized Linear Model. it is already loaded
+2. **tidyverse** package - for data transformation 
+3. **broom** package - to tidy up the results 
+4. **LogisticDx** package - to do model assessment
+5. **here** package - to ensure proper directory     
+
+
+```{r}
+library(tidyverse)
+library(broom)
+library(LogisticDx)
+library(here)
+```
+
+## Data
+
+We will use a dataset named **stroke_dta**. These data come from a stroke study and contain variables at the time of admission, date of admission, date of discharge and the status at discharge. 
+
+WE will call data in the working directory into R environment 
+
+```{r}
+fatal <- read_csv(here('data','stroke_data.csv'))
+```
+
+Take a peek at data. Check 
+
+- the variable names
+- the types of variables 
+
+```{r}
+glimpse(fatal)
+```
+
+Get summary statistics
+
+```{r}
+summary(fatal)
+```
+
+The **fatal** data contain status as  the dependent variable. It is a binary variable but classed as a character variable.
+
+```{r}
+str(fatal$status)
+```
+
+We can convert the character variable to a factor (categorical) variable. The coding and label of the outcome variable is important. If we would like to interpret the effect of a covariate of dead patients in the form of odds ratio, then we must make sure dead is labelled as 2 in R and alive as 1.
+
+We can use `str()` to verify that status is a factor (categorical variable) with
+
+- $dead$ is coded as 2
+- $alive$ is coded as 1
+
+
+
+```{r}
+fatal <- fatal %>%
+  mutate(status = factor(status))
+str(fatal$status)
+```
+
+If somehow, alive is labelled as 1 by R. The the interpretation becomes the effect of a covariate on the patients being alive at discharge. And to change the label to what we desire we can use the `fct_relevel()` function.     
+
+## Estimate the regression parameters
+
+Objective for this section is to let the logistic regression estimates the regression parameters $\hat\beta_s$
+
+There are two approaches of estimation :
+
+1.  Univariable where there is only one independent variable (covariate)
+2.  Multivariable wgere there are two or more independent variable (covariates)
+
+## Univariable analysis 
+
+This is model by having one binary dependent variable with one independent (predictor) variable.
+
+1.  The dependent variable is status, a binary variable.
+2.  The predictor can be a numerical or a categorical variable 
+
+For example, if we estimate the log odds (the regression parameters, $\beta$) for the covariate Glasgow Coma Scale (GCS). 
+
+$$log\frac{Pr(status = dead)}{1 - Pr(status = dead)}  = \beta_0 + \beta_1(gcs)$$
+
+We will use the `glm()` function to estimate the regression parameters and other parameters. Let's name the model as `fatal_glm_1`
+
+```{r}
+fatal_glm_1 <- glm(status ~ gcs, data = fatal, 
+                    family = binomial(link = 'logit'))
+```
+
+Get the summarized result of the model by using `summary()` function
+
+```{r}
+summary(fatal_glm_1)
+```
+
+The function `tidy()` from the **broom** package is very useful to give us cleaner result in data frame format. It also provides other parameters useful for us later. 
+
+The function `conf.int()` will provide the confidence intervals (CI). The default is at the $95%$ level. 
+
+```{r}
+tidy(fatal_glm_1, conf.int = TRUE)
+```
+
+Now, let's use another covariate, `str_type`, that refers to stroke type. In out data stroke type has 2 levels or categories; Haemorrhagic Stroke (HS) and Ischaemic Stroke (IS). HS is known to cause higher risk for deaths in stroke.  
+
+```{r}
+fatal %>% count(stroke_type)
+```
+
+As stroke type is a character variable, we will convert it to a categorical variable.
+
+```{r}
+fatal <- fatal %>% mutate(stroke_type = factor(stroke_type))
+```
+
+
+We will model stroke type (`stroke_type`), name the model as `fatal_glm_2` and show the result using `tidy()`
+
+```{r}
+fatal_glm_2 <- glm(status ~ stroke_type, data = fatal, 
+                    family = binomial(link = 'logit'))
+tidy(fatal_glm_2, conf.int = TRUE)
+```
+
+It seems that patients with IS have lower log odds (-1.89) than patients with HS for death at discharge.  
+
+## Multivariable analysis
+
+It is unlikely that only one variable (gcs or stroke type) that is related with stroke. cardiovascular disease has many factors that affect the outcome. It makes more sense to consider adding other seemingly important independent variable for example stroke type. To add or not to add variables is a big subject on its own. Usually it is governed by clinical experience, subject matter experts and some preliminary analysis. 
+
+Let's expand our model and add Glasgow Coma Scale together with Stroke Type. We will name this model as `fatal_mv`. 
+
+Estimate the model
+
+```{r}
+fatal_mv1 <- glm(status ~ gcs + stroke_type + sex + dm + sbp, data = fatal,
+                    family = binomial(link = 'logit'))
+```
+
+Quickly get a summary of estimates
+
+```{r}
+summary(fatal_mv1)
+```
+
+We could get a cleaner result in a data frame format (which you can use in other spreadsheet easily).
+
+```{r}
+log_odds <- tidy(fatal_mv1, conf.int = TRUE)
+log_odds
+```
+We could see in the multivariable model, that
+
+- with one unit increase in Glasgow Coma Scale (GCS), the log odds for death at discharge is equal to $-0.34$, adjusting for other covariates
+- patients with IS has $-1.02$ the log odds for death as compared to patients with HS, adjusting for other covariates.
+- Male patients have $-0.64$ the log odds for death compare to female patients (p = 0.154), adjusting for other covariates
+- Patients with diabetes mellitus had $-0.21$ the log odds for deaths compared to patients with no diabetes mellitus (p = 0.642)
+- With one mmHg increase in systolic blood pressure, the log odds change by $0.0018$, when adjusting for other variables.  
+
+## Estimate the odds ratio
+
+For lay person, it is difficult to interpret the log odds. It is easier to interpret - for lay person - the model using the odds ratio. 
+
+This can be easily done by adding the `exponentiate = TRUE` . However, we also know that the odds ratio can be easily calculate by $\exp^{\beta_i}$
+
+```{r}
+odds_ratio <- tidy(fatal_mv1,exponentiate = TRUE,  conf.int = TRUE)
+odds_ratio
+```
+
+## Inference 
+
+Let us combine the results from the log odds and the odds ratio and rename the table properly.
+
+```{r}
+tab_logistic <- bind_cols(log_odds, odds_ratio) 
+tab_logistic %>% rename(covariate = term...1, 
+                        log_odds = estimate...2,
+                        odds_ratio = estimate...9)
+```
+
+In the model, it means that if **gcs** increases by 1 unit (when *stroke type* is adjusted), the odds to be in the fatal group, change to 0.71 or $29\%$ reduction.
+
+We can also interpret this table is :
+
+- with one unit increase in Glasgow Coma Scale (GCS), the odds for death at discharge reduce for about $30\%$ with $95\%CI : 22\%,38\%$, adjusting for stroke type
+- patients with IS has $64\%$ lower odds with $95\%CI : 17\%, 85\%$ for death as compared to patients with HS, adjusting for GCS.
+- Male patients have $58\%$ lower odds for death compare to female patients (p = 0.154), adjusting for other covariates
+- Patients with diabetes mellitus had $19\%$ lower odds for deaths compared to patients with no diabetes mellitus (p = 0.642)
+- With one mmHg increase in systolic blood pressure, the odds for death change by $1.002$, when adjusting for other variables. 
+
+
+## Model comparison
+
+Is there any difference between model 1 (`fatal_mv`) and model 2 (`fatal_glm_1`) at the level of significance of $5\%$?
+
+```{r}
+anova( fatal_glm_1, fatal_mv1, test = 'Chisq')
+```
+That justifies us to have a simple model
+
+```{r}
+fatal_mv <- glm(status ~ gcs + stroke_type, data = fatal,
+                    family = binomial(link = 'logit'))
+```
+
+And perform model comparison again
+
+```{r}
+anova( fatal_glm_1, fatal_mv, test = 'Chisq')
+```
+The p-value is below the threshold of $5\%$, so we say the models are different. So it is worth to consider a more complicated model, in this case, the multivariable model `fatal_mv` is chosen.
+
+## Prediction 
+
+We used `broom::augment()` to calculate the
+
+1.  log odds and probability
+2.  residuals
+3.  hat values
+4.  Cooks distance
+5.  standardized residuals
+
+### Predict the log odds
+
+the `.fitted` column represents the estimated log odds for death at discharge for each patient in our dataset
+
+```{r}
+augment(fatal_mv)
+```
+
+### Predict the probability
+
+the `.fitted` column represents the estimated probability for death at discharge for each patient in our dataset
+
+
+```{r}
+augment(fatal_mv, type.predict = "response")
+```
+
+## Model fitness
+
+We will assess the overall model fitness by checking the
+
+- the area under the curve
+- the Hosmer-Lemeshow test
+- the modidied Hosmer-Lemeshow test
+- the Oseo Rojek test
+
+The p-values of bigger than 0.05 indicates that the difference between the observed data and the predicted data are not different which means model has good fit. 
+
+```{r}
+library(LogisticDx)
+fit_m <- gof(fatal_mv, g = 8)
+fit_m$gof
+```
+
+
+

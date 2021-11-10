@@ -1,0 +1,258 @@
+# R Markdown
+
+## Motivation
+
+### What is R Markdown?
+
+In short,
+
+- R Markdown document allows reproducible report for data science.
+- You can run R code and generate quality report.
+
+Source: https://rmarkdown.rstudio.com/lesson-1.html
+
+### Why should we bother learning R Markdown?
+A few questions:
+
+- Have you recently made some changes to the data? Just generate a new report in seconds!
+- Do you need to include some more analyses and plots? Just add in some R code and generate a new report in seconds!
+- Do need to share the report but too lazy to edit? Compile and share nicely prepared report!
+
+### Sources to learn R Markdown
+R Markdown resources:
+
+- Main website: https://rmarkdown.rstudio.com/
+- Most important, cheatsheet!: https://github.com/rstudio/cheatsheets/raw/master/rmarkdown.pdf
+- Part of _R for Data Science_ book: https://r4ds.had.co.nz/r-markdown-formats.html
+- The definitive guide by the masters: https://bookdown.org/yihui/rmarkdown/
+- And a more advanced guide by the masters: https://bookdown.org/yihui/rmarkdown-cookbook/
+
+Because R Markdown is based on Markdown, it is important to know the syntax:
+
+- A good introduction to Markdown: https://daringfireball.net/projects/markdown/
+- Basic syntax: https://www.markdownguide.org/basic-syntax and extended syntax: https://www.markdownguide.org/extended-syntax
+
+## R Markdown Basics
+
+### Install `rmarkdown` package
+```
+install.packages("rmarkdown")
+```
+
+### Install LaTeX package for PDF
+R Markdown relies on LaTeX package, which can be installed on the respective OSs,
+
+- Windows & MacOS -- MikTeX @ https://miktex.org/download
+- Linux -- texlive.
+
+LaTeX package is important so that you can generate PDF output.
+
+### New .Rmd file
+- From menu, select **File > New file > R script**
+- Edit the **Title** and **Author** fields.
+- Choose any of the **Default Output Format**.
+- A basic template will be generated.
+
+### Knit it!
+- Click on **Knit** menu. You may click on the dropdown menu for more options.
+- Compare the contents in the .Rmd file and your output.
+
+### YAML header
+- Anything that are included in between the two `---`.
+- Basically we have the `title`, `author`, `date` and `output`.
+- This can be further customized.
+
+### Code chunks
+- In between the opening three backticks ` ``` ` and closing three backticks ` ``` `. It can be any code here.
+- Include the opening as ` ```{r} ` to specify the chunk as R code.
+
+### Header levels
+- First level, second level and third level are preceded by `#`, `##` and `###`.
+- Add more `#` for more header sublevel.
+
+### Exercise 1
+1. Customize the template with your own analyses and plots.
+2. Explore chunk options (refer to R Markdown Cheatsheet). More important ones are:
+
+    - `echo`
+    - `eval`
+    - `comment`
+
+## Table
+
+### Basic table
+A sample table like this:
+
+```
+| Right | Left | Default | Center |
+|---:|:---|---|:---:|
+| 12 | 12 | 12 | 12 |
+| 123 | 123 | 123 | 123 |
+| 1.0 | 1.0 | 1.0 | 1.0 | 
+
+Table: Sample table
+```
+
+becomes like this:
+
+| Right | Left | Default | Center |
+|---:|:---|---|:---:|
+| 12 | 12 | 12 | 12 |
+| 123 | 123 | 123 | 123 |
+| 1.0 | 1.0 | 1.0 | 1.0 |
+
+Table: Sample table
+
+### Table (from data frame)
+```{r comment = "", echo = FALSE}
+cat("```{r}
+library(knitr)
+kable(head(iris))
+```")
+```
+
+becomes:
+```{r, echo=FALSE}
+library(knitr)
+kable(head(iris))
+```
+
+### More on table
+You can explore the following packages for table:
+
+- `kableExtra`
+- `stargazer`
+
+## Plot, figure and image
+
+### Plot caption -- `fig.cap`
+```{r comment = "", echo = FALSE}
+cat('```{r, fig.cap="Sample caption", echo=FALSE}
+plot(pressure)
+```')
+```
+
+becomes:
+
+```{r, fig.cap="Sample caption", echo=FALSE}
+plot(pressure)
+```
+
+### Plot size -- `fig.height`(in inch)
+```{r comment = "", echo = FALSE}
+cat('```{r, fig.cap="Sample caption", echo=FALSE, fig.height=3}
+plot(pressure)
+```')
+```
+
+becomes:
+
+```{r, fig.cap="Sample caption", echo=FALSE, fig.height=3}
+plot(pressure)
+```
+
+### Plot size -- `fig.width` (in inch)
+```{r comment = "", echo = FALSE}
+cat('```{r, fig.cap="Sample caption", echo=FALSE, fig.width=3}
+plot(pressure)
+```')
+```
+
+becomes:
+
+```{r, fig.cap="Sample caption", echo=FALSE, fig.width=3}
+plot(pressure)
+```
+
+### Plot aspect ratio -- `fig.asp`
+```{r comment = "", echo = FALSE}
+cat('```{r, fig.cap="Sample caption", echo=FALSE, fig.width=3, fig.asp=1}
+plot(pressure)
+```')
+```
+
+becomes:
+
+```{r, fig.cap="Sample caption", echo=FALSE, fig.width=3, fig.asp=1}
+plot(pressure)
+```
+
+## Image
+To add image is as simple as:
+```
+![caption](image_path}
+```
+
+For example,
+```
+![Sample image](smile.png)
+```
+becomes:
+
+![Sample image](smile.png)
+
+We may add `width` to change the size of the image,
+```
+![caption](image_path){width=}
+```
+
+For example,
+```
+![Sample image](smile.png){width=25%}
+```
+becomes:
+
+![Sample image](smile.png){width=25%}
+
+### Exercise 2
+1. Create a report containing tables, figures and images.
+
+
+## Inline output
+
+R output can be included in an R Markdown document using a code chunk, for example,
+```{r}
+mean(iris$Petal.Width)
+```
+
+The code chunck can be included in between the text, for example
+```{r, eval=FALSE}
+The mean of petal width is `r mean(iris$Petal.Width)`.
+```
+becomes:
+
+```
+The mean of petal width is `r mean(iris$Petal.Width)`.
+```
+
+## Equation
+
+### Mathematical equation
+We need the knowledge of mathematical expressions and symbols used in LaTeX to be able to utilize it in R Markdown. This can be learned from these good sources:
+
+1. A good starter: https://www.overleaf.com/learn/latex/Mathematical_expressions
+2. More advanced reference: https://en.wikibooks.org/wiki/LaTeX/Mathematics
+3. A (quite) an extensive list of mathematical symbols: https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+
+### Inline equation
+Inline equation is included between two `$` signs, for example,
+```{r, eval=FALSE}
+The equation is $y = \beta_0 + \beta_1 x$
+```
+
+The equation is $y = \beta_0 + \beta_1 x$
+
+### Display equation
+Display equation is included between two `$$` signs, for example,
+```{r, eval=FALSE}
+The equation is,
+
+$$y = \beta_0 + \beta_1 x$$
+```
+
+The equation is,
+
+$$y = \beta_0 + \beta_1 x$$
+
+### Exercise 3
+1. Create a report containing inline outputs and equations.

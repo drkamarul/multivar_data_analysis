@@ -1,0 +1,29 @@
+---
+title: "Data Visualization, Exploration and Analysis"
+author: "Kamarul Imran and Wan Nor Arifin"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: krantz
+biblio-style: apalike
+graphics: yes
+link-citations: yes
+colorlinks: yes
+lot: yes
+lof: yes
+bibliography: [skeleton.bib, skeleton1.bib]
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, strip.white = TRUE, message = FALSE, error = FALSE)
+knitr::opts_chunk$set(out.width = "70%", out.extra = "keepaspectratio", fig.asp = 1, fig.align = "center")
+#knitr::opts_chunk$set(out.width = "70%", fig.align = "center")
+```
+
+```{r bib, include=FALSE}
+# create a bib file for the R packages used in this document
+knitr::write_bib(c('foreign', 'lattice', 'epiDisplay', 'psych', 'rsq', 'MASS', 'car', 'broom'), file = 'skeleton.bib')
+knitr::write_bib(c('car', 'foreign', 'ggplot2', 'lattice', 'plyr', 'psych'), file = 'skeleton1.bib')
+```
+
+

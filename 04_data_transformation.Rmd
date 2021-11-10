@@ -1,0 +1,382 @@
+
+# Data Wrangling  
+
+## Definition of data wrangling  
+
+Data wrangling is also known as Data Munging or Data Transformation. It is loosely the process of manually converting or mapping data from one "raw" form into another format. The process allows for more convenient consumption of the data. In doing so, we will be using semi-automated tools in RStudio. You can find more information here <https://community.modeanalytics.com/sql/tutorial/data-wrangling-with-sql/>
+
+## Data wrangling with **dplyr** package
+
+### **dplyr** package 
+
+**dplyr** is a package grouped inside **tidyverse** collection of packages. **dplyr** package is a very useful package to munge or wrangle or to tranform your data. It is a grammar of data manipulation. It provides a consistent set of verbs that help you solve the most common data manipulation challenges. This **tidyverse** webpage <https://github.com/tidyverse/dplyr> has more information and examples. 
+
+## Common procedures for doing data transformation 
+
+The common data wrangling procedures that data analyst does include:
+
+1.  reducing the size of dataset by selecting certain variables (or columns)
+2.  generating new variable from existing variables 
+3.  sorting observation of a variable 
+4.  grouping observations based on certain criteria
+5.  reducing variable to groups to in order to estimate summary statistic 
+
+## Some **dplyr** functions 
+
+For the procedures listed above, the corresponding **dplyr** functions are
+
+1.  `dplyr::select()` - to select a number of variables from a dataframe
+2.  `dplyr::mutate()` - to generate a new variable from existing variables 
+3.  `dplyr::arrange()` - to sort observation of a variable
+4.  `dplyr::filter()` - to group observations that fulfil certain criteria 
+5.  `dplyr::group_by()` and `dplyr::summarize()` - to reduce variable to groups in order to provide summary statistic  
+
+
+## Create a new project or set your working directory
+
+It is very important to ensure you know where your working directory is. To do so, the best practice is *is to create a new project everytime you want to start new analysis with R*. To do so, create a new project by `File -> New Project`. If you do not start with a new project, you still need to know **Where is my working directory?**. 
+
+So, again we emphasize that every time you want to start processing your data, please make sure:
+
+1.  you use R project. It is much easier and cleaner to start your work with a new R project. Once you have done or need to log off your computer, close the project and reopen the project the next time you need to.  
+2.  that if you are not using R project, you are inside the correct working directory. Type `getwd()` to display the active **working directory**.  And to set a new working directory use the function `setwd()`. Once you are know where your working directory is, you can start read or import data into your working directory. 
+
+
+Once you are inside the project, you can import your data if necessary. 
+
+## Load the libraries
+
+Remember, there are a number of packages you can use to read the data into R. R can read almost all (if not all format) types of data format. For example, we know that common data format are the:
+
+1.  SPSS (`.sav`) format, 
+2.  Stata (`.dta`) format, 
+3.  SAS format, 
+4.  MS Excel (`.xlsx`) format
+5.  Comma-separated-values `.csv` format. 
+
+But they are other formats too for examples data in DICOM format. DICOM format data includes data from CT scan and MRI images. There are data in shapefile format to store geographical information. Three packages - **haven**, **rio**, **readr** and **foreign** packages - are very useful to read or import your data into R memory. 
+
+1.  **readr** provides a fast and friendly way to read rectangular data (like csv, tsv, and fwf). This is contained inside the **tidyverse** metapackage
+2.  **rio** provides a quick way to read almost all type of spreadsheet and statistical software data
+2.  **readxl** reads .xls and .xlsx sheets.
+3.  **haven** reads SPSS, Stata, and SAS data.
+
+We will use the **here** package to facilitate us working with the working directory and **lubridate** to help us wrangle dates. 
+
+```{r}
+library(tidyverse)
+library(rio)
+library(here)
+library(lubridate)
+```
+
+
+When we read dataset that have long variable names and spaces - especially after reading MS Excel dataset - we can use the **janitor** package to generate more R user-friendly variable names. 
+
+## Datasets
+
+We will use 2 datasets
+
+- the stroke dataset in `csv` format
+- the peptic ulcer dataset in `xlsx` format
+
+Let's read the datasets and name it, each as 
+
+- stroke
+- pep
+
+```{r}
+stroke <- read_csv(here('data', 'stroke_data.csv'))
+pep <- import(here('data', 'peptic_ulcer.xlsx'))
+```
+
+
+Take a peek at the dataset
+
+- 219 observations
+- 12 variables 
+
+```{r}
+glimpse(stroke)
+```
+
+- 121 observations
+- 34 variables
+
+```{r}
+glimpse(pep)
+```
+
+
+Next, we examine the first 10 observations of the data. There rest are NOT SHOWN. You can also see the types of the variables:
+
+1.  `chr` (character),
+2.  `int` (integer), 
+3.  `dbl` (double)
+
+```{r datastarwars1}
+stroke
+```
+
+```{r}
+pep %>% slice_head(n = 10)
+```
+
+## Select variables, generate new variable and rename variable
+
+We will work with these functions
+
+- `dplyr::select()`
+- `dplyr::mutate()` and
+- `dplyr::rename()`
+
+### Select variables using `dplyr::select()`
+
+When you work with large datasets with many columns, sometimes it is easier to select only the necessary columns to reduce the size of dataset. This is possible by creating a smaller dataset (less variables). Then you can work on at the initial part of data analysis with this smaller dataset. This will greatly help data exploration.   
+
+To create smaller datasets, select some of the columns (variables) in the dataset. For example, in `pep` data, we have 34 variables. Let us generate a new dataset named as `pep2` with only 10 variables , 
+
+
+```{r}
+pep2 <- pep %>% dplyr::select(age, systolic, diastolic, perforation, twc,
+                              gender, vomiting, malena, ASA, outcome)
+glimpse(pep2)
+```
+
+The new dataset `pep2` is now created. You can see it in the `Environment` pane.
+
+### Generate new variable using `mutate()`
+
+With `mutate()`, you can generate new variable. For example, in the dataset `pep2`, we want to create a new variable named as `pulse_pressure`. This variable equals systolic minus diastolic BP.  
+
+$$pulse \: pressure = systolic \: BP - diastolic \: BP $$
+
+
+```{r}
+pep2 <- pep2 %>% mutate(pulse_pressure = systolic - diastolic)
+pep2 %>% dplyr::select(systolic, diastolic, pulse_pressure )
+```
+Now for stroke dataset, we will convert doa and dod, both a character variable to variable of date type
+
+```{r}
+stroke <- stroke %>% mutate(doa = dmy(doa), dod = dmy(dod))
+stroke
+```
+
+
+
+### Rename variable using `rename()`
+
+Now, we want to rename 
+
+- variable gender to sex 
+- variable ASA to asa
+
+
+```{r}
+pep2 <- pep2 %>% rename(sex = gender,
+                        asa = ASA)
+```
+
+
+## Sorting data and select observation
+
+The function `arrange()` can sort the data. And the function `filter()` allows you to select observations based on your criteria. 
+
+### Sorting data using `arrange()`
+
+We can sort data in ascending or descending order. To do that, we will use `arrange()`. It will sort the observation based on the values of the specified variable. For dataset `stroke`, let us sort the `doa` from the earliest.  
+
+```{r}
+stroke %>% arrange(doa)
+```
+
+### Select observation using `filter()`
+
+To select observations based on certain criteria, we use the `filter()` function. Here, in this example, we will create a new dataset (which we will name as `stroke_m_40`) that contains patients that have sex as male and Glasgow Coma Scale (gcs) at 7 or higher:
+
+- gender is male 
+- gcs at 7 or higher
+
+```{r}
+stroke_m_7 <- stroke %>% filter(sex == 'male', gcs >= 7)
+stroke_m_7
+```
+
+Next, we will create a new dataset (named as `stroke_high_BP`) that contain
+
+- `sbp` above 130 OR `dbp` above 90, AND
+
+```{r}
+stroke_high_BP <- stroke %>% filter(sbp > 130 | dbp > 90)
+stroke_high_BP
+```
+
+## Group data and get summary statistics 
+
+The`group_by()` function allows us to group data based on categorical variable. Using the  `summarize` we do summary statistics for the overall data or for groups created using `group_by()` function. 
+
+### Group data using `group_by()`
+
+The `group_by` function will prepare the data for group analysis. For example, 
+
+1.  to get summary values for mean `sbp`, mean `dbp` and mean `gcs`
+2.  for sex
+
+```{r}
+stroke_sex <- stroke %>% group_by(sex)
+```
+
+### Summary statistic using `summarize()`
+
+Now that we have a group data named `stroke_sex`, now, we would summarize our data using the mean and standard deviation (SD) for the groups specified above. 
+
+```{r}
+stroke_sex %>% summarise(meansbp = mean(sbp, na.rm = TRUE), 
+                     meandbp  = mean(dbp, na.rm = TRUE),
+                     meangcs = mean(gcs, na.rm = TRUE))
+```
+
+To calculate the frequencies for two variables for pep dataset
+
+- sex
+- outcome
+
+```{r}
+pep2 %>% group_by(sex) %>%
+  count(outcome, sort = TRUE)
+```
+
+or 
+
+```{r}
+pep2 %>% count(sex, outcome, sort = TRUE)
+```
+
+
+## More complicated **dplyr** verbs
+
+To be more efficent, use multiple **dplyr** (a package inside tidyverse metapackage) functions in one line of R code. For example, 
+
+```{r filterstarwars}
+pep2 %>% filter(sex == "male", diastolic >= 60, systolic >= 80) %>% 
+  dplyr::select(age, systolic, diastolic, perforation, outcome) %>%
+  group_by(outcome) %>%
+  summarize(mean_sbp = mean(systolic, na.rm = TRUE), 
+            mean_dbp = mean(diastolic, na.rm = TRUE),
+            mean_perf = mean(perforation, na.rm = TRUE),
+            freq = n())
+```
+
+
+## Data transformation for categorical variables 
+
+### **forcats** package
+
+Data transformation for categorical variables (factor variables) can be facilitated using the **forcats** package. 
+
+### Conversion from numeric to factor variables
+
+Now, we will convert the integer (numerical) variable to a factor (categorical) variable. For example, we will generate a new factor (categorical) variable named as `high_bp` from variable `sbp` and `dbp` (which both are double variable). We will label `high_bp`as *High* or *Not High*.
+
+The criteria:
+
+- if sbp $sbp \geq 130$ or $dbp \geq 90$ then labelled as High, else is Not High
+
+```{r}
+stroke <- stroke %>% 
+  mutate(high_bp = if_else(sbp >= 130 | dbp >= 90, "High", "Not High"))
+stroke %>% count(high_bp)
+```
+
+of by using `cut()`
+
+```{r}
+stroke <- stroke %>% 
+  mutate(cat_sbp = cut(sbp, breaks = c(-Inf, 120, 130, Inf)))
+stroke %>% count(cat_sbp)
+stroke %>% group_by(cat_sbp) %>% summarize(minsbp = min(sbp),
+                                           maxsbp = max(sbp))
+```
+The label $]$ means including while $($ means above. So the label $(120, 130]$ means above 120 and including 130 
+
+### Recoding variables 
+
+We use this function to recode variables from the old levels to the new levels. Let us say that our objectives is to:
+
+1. modify the levels for variable **cat_sbp** by changing the levels from $(-Inf,120]$ to $\leq120$ and 
+2. $(120,130]$ to `121-130` and 
+3. $(130, Inf]$ for $\geq 130$
+
+
+To do that, use the codes below, 
+
+```{r } 
+stroke <- stroke %>%
+  mutate(cat_sbp = recode(cat_sbp, "(-Inf,120]" = "less or 120",
+                          "(120,130]" = "121 - 130",
+                          "(130, Inf]" = "131 or higher"))
+stroke %>% count(cat_sbp)
+```
+
+### Changing the level of categorical variable
+
+Variable `cat_sbp` will be ordered as 
+
+- less or 120, then 
+- 121 - 130, then
+- 131 or higher
+
+```{r}
+levels(stroke$cat_sbp)
+```
+To change in reverse for example, we can use `fct_relevel`
+
+```{r}
+stroke <- stroke %>%
+  mutate(relevel_cat_sbp = fct_relevel(cat_sbp, levels = c("131 or higher", 
+                                                       "121 - 130",
+                                                       "less or 120")))
+levels(stroke$relevel_cat_sbp)
+stroke %>% count(relevel_cat_sbp)
+```
+
+## Summary
+
+**dplyr** package is a very useful package that encourages users to use proper verb when manipulating variables (columns) and observations (rows). We have learned to use 5 functions but there are more functions available.  Other useful functions include:
+
+1.  `dplyr::distinct()`
+2.  `dplyr::transmutate()`
+3.  `dplyr::sample_n()` and `dplyr::sample_frac()`
+
+Also note that, package **dplyr** is very useful when it is combined with another function that is `group_by`
+
+If you working with database, you can use **dbplyr** which has been developed to perform very effectively with databases. 
+
+For categorical variables, you can use **forcats** package. 
+
+## Self-practice
+
+If you have completed the tutorial above, you may:
+
+1.  Read your own data (hints: **haven**, **foreign**) or you can download data from <https://www.kaggle.com/datasets> . Maybe can try this dataset <https://www.kaggle.com/blastchar/telco-customer-churn>
+2.  Create a smaller dataset by selecting some variable (hints: `dplyr::select()`)
+3.  Creating a dataset with some selection (hints: `dplyr::filter()`)
+4.  Generate a new variable (hints`dplyr::mutate()`)
+5.  Creata an object using pipe and combining `dplyr::select()`, `dplyr::filter()` and `dplyr::mutate()` in one single line of R code
+6.  Summarise the mean, standard deviation and median for numerical variables `dplyr::group_by()` and `dplyr::summarize()`
+7.  Calculare the number of observations for categorical variables (hints: `dplyr::count()`)
+8.  Recode a categorical variable (hints: `forcats::fct_recode()`)
+
+
+## References
+
+1.  dplyr vignettes here <https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html>
+2.  forcats examples here <http://r4ds.had.co.nz/factors.html>
+3.  reading data into R <https://garthtarr.github.io/meatR/rio.html>
+
+
+
+
+
+
