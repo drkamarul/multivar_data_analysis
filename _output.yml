@@ -4,7 +4,7 @@ bookdown::gitbook:
     toc:
       collapse: none
       before: |
-        <li><a href="./">Visualization, Exploration and Regression Analysis</a></li>
+        <li><a href="./">Multivariable Analysis Book</a></li>
       after: |
         <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
     download: [pdf, epub]
@@ -30,5 +30,3 @@ bookdown::pdf_book:
   highlight_bw: true
 bookdown::epub_book:
   stylesheet: css/style.css
-bookdown::markdown_document2:
-    default

@@ -1,4 +1,4 @@
-book_filename: Multivariable_Data_Analysis
+book_filename: BUKUKIM
 clean: [skeleton.bib, skeleton1.bib, bookdown.bbl]
 delete_merged_file: true
 language:
