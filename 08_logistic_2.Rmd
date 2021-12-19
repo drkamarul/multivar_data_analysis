@@ -14,9 +14,10 @@ This categorical outcome is of binary type. A binary type outcome variable means
 
 There are a examples of workflow that you may follow to work with binary logistic regression. For example, the workflow from
 
-- the Applied Logistic Regression book 
-- the Logistic Regression: Self Learning Text 
-- the workflow from <http://ftp.auckland.ac.nz/software/CRAN/doc/vignettes/HSAUR/Ch_logistic_regression_glm.pdf>
+- the Applied Logistic Regression book [@hosmer2013applied]
+- the Logistic Regression: Self Learning Text [@kleinbaum2010logistic]
+- the workflow from A Handbook of Statistical Analyses Using R [@R-HSAUR]
+
 
 ## Objectives
 
@@ -293,5 +294,7 @@ fit_m <- gof(fatal_mv, g = 8)
 fit_m$gof
 ```
 
+
+## References
 
 

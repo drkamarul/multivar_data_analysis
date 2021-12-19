@@ -1,6 +1,6 @@
 ---
-title: "Data Visualization, Exploration and Analysis"
-author: "Kamarul Imran and Wan Nor Arifin"
+title: "Data Analysis in Medicine and Health using R"
+author: "Kamarul Imran, Wan Nor Arifin, Tengku Muhammad Hanis Tengku Mukhtar"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: krantz
@@ -10,7 +10,7 @@ link-citations: yes
 colorlinks: yes
 lot: yes
 lof: yes
-bibliography: [skeleton.bib, skeleton1.bib]
+bibliography: [skeleton.bib, skeleton1.bib, packages.bib, references.bib]
 
 ---
 
