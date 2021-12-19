@@ -4,7 +4,7 @@ bookdown::gitbook:
     toc:
       collapse: none
       before: |
-        <li><a href="./">Multivariable Analysis Book</a></li>
+        <li><a href="./">Data Analysis in Medicine and Health using R</a></li>
       after: |
         <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
     download: [pdf, epub]

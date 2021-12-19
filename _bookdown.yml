@@ -1,5 +1,5 @@
 book_filename: BUKUKIM
-clean: [skeleton.bib, skeleton1.bib, bookdown.bbl]
+clean: [skeleton.bib, skeleton1.bib, packages.bib, references.bib, bookdown.bbl]
 delete_merged_file: true
 language:
   label:
