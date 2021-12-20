@@ -265,7 +265,7 @@ odds_ratio <- tidy(fatal_mv1,
 odds_ratio
 ```
 
-## Inference 
+## Making inference 
 
 Let us combine the results from the log odds and the odds ratio and rename the table properly.
 
@@ -323,6 +323,36 @@ anova( fatal_mv1,
 
 The p-value is above the threshold of $5\%$, so we can not reject the null hypothesis that say both models are not statistically different. So by obeying the Occam's razor principle, we will choose a simpler model that is model `fatal_mv2` for further exploration. 
 
+
+## Adding an interaction term
+
+Interaction effects occur when the effect of one variable depends on the value of another variable. Interaction effects are common in regression analysis, ANOVA, and designed experiments. 
+
+Interaction involves two risk factors (and their effect on one disease outcome). If the effect of one risk factor is the same within strata defined by the other, then there is NO interaction. When the effect of one risk factor is different within strata defined by the other, then there is an interaction (biological) 
+
+(Statistical) interaction can be measured based on the ways that risks are calculated (modeling). The presence of interaction based on measurements is called statistical interaction, and inherently it may not reflect the true biological interaction.
+
+Let's add an interaction between stroke type and diabetes:
+
+```{r}
+fatal_mv2_ia <- 
+  glm(status ~ gcs + stroke_type + stroke_type:gcs + age, 
+      data = fatal, 
+      family = binomial(link = 'logit'))
+tidy(fatal_mv2_ia)
+```
+
+
+$$\hat{g}(x)  = \hat\beta_0 + \hat\beta_1(gcs) + \hat\beta_2(stroke type) + \hat\beta_3(age)+ \hat\beta_4(gcs \times stroke_type)$$
+
+To decide if an interaction term should stay in the model, we suggest you to consider the biological and statistical significance. If you think the interaction justifies both reasons, then it is preferred you keep the interaction term in the model. For example, for our model:
+
+- the coefficient for the interaction term for stroke type and gcs is not significant at %5\%$ level.
+- after getting further advice from the stroke experts, we believe that the effect of gcs on stroke death is not largely different between different stroke type
+
+And because of both reasons, we have decided not to keep the interaction for gcs and stroke type in the model. 
+
+
 ## Prediction from binary logistic regression
 
 We can use the `broom::augment()` function to calculate the
@@ -374,7 +404,7 @@ The p-values of bigger than 0.05 indicates that there is no significant differen
 fit_m <- gof(fatal_mv2, 
              g = 8)
 ```
-The area under the curve is $87.2\5$. The values of above 80 are considered to have good discriminating effect. 
+The area under the curve is $87.2\%$. The values of above 80 are considered to have good discriminating effect. 
 
 
 ```{r}
@@ -382,6 +412,22 @@ fit_m$gof
 ```
 
 The Hosmer Lemeshow, modified Hosmer Lemeshow and Oseo Rojek are all above $5\%$ values which are supportive of good fit of the model. 
+
+## Presentation
+
+The **gtsummary** package has a useful function `tbld_regression()` to produce a formatted table suitable for publication. 
+
+This is the table for adjusted log odds ratio:
+
+```{r}
+tbl_regression(fatal_mv2)
+```
+
+And this is the table for adjusted odds ratio:
+
+```{r}
+tbl_regression(fatal_mv2, exponentiate = TRUE)
+```
 
 ## References
 
