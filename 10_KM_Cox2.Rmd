@@ -3,94 +3,102 @@
 
 ## Introduction
 
-Survival analysis is a common analysis in medicine. The dataset comes from a follow-up study either from a restrosprective or prospective study.
+### Background
 
-The survival analysis is also known as duration analysis or time-to-event analysis. Because sometime people confuse and wrongly think the survival analysis is only applicable to the study of survival (alive or death condition).
+Regression concerns the relationship between a response variable and one or more exploratory variables. The independent variables are also called covariates. Some common regression analysis in health and medicine is linear regression, logistic regression, Poisson regression and Cox proportional hazard regression. Linear regression falls under the general linear model while the other three regression models fall under the generalized linear regression. 
 
-The survival or duration analysis is performed on data that has duration until an event occurs. Such dataset usually have a variable in the form of duration - the time variable - and another variable - the event variable - that is categorical.
+Survival analysis is also known as duration analysis or time-to-event analysis. This analysis is useful in follow up studies where participants or patients are followed-up until they develop the event of interest. Examples of such studies include the retrospective cohort or prospective cohort studies.
 
-The event can be of any interest, for example:
+Sometime people confuse and wrongly think that the survival analysis is only applicable to the study of survival (where the event of interest is either alive or death condition). It is not. Any study that involves both the duration of follow up (in days or weeks or months) and the event of interest can be considered as suitable for survival analysis. So, survival or duration analysis is performed on data that has duration until an event occurs. 
 
-- relapse
-- death
-- recurrence 
-- success
+In health and medicine studies, this event can be of interest, for example:
 
-And variable time can be in any time form such as days, weeks, years or event minutes. If we combine them together then it can become:
+- relapse after treatment
+- death after diagnosis
+- recurrence of disease
+- treatment success 
 
-- time to relapse
-- time to death
-- time to recurrence
-- time to succed 
+And for variable time, it can be in any time form such as days, weeks, years or event minutes. If we combine them together (with the event of interest) then it can become:
 
-There are three types of survival analysis:
+- months to relapse
+- years from diagnosis to death
+- weeks before recurrence
+- days taken from the start of treatment to treatment success 
 
-- the non-parametric survival analsysis
-- the semi-parametric survival analysis
-- the parametric survival analysis
 
-At the beginning of the analysis, we usually perform the non-parametric analysis for example the Kaplan-Meier estimates. Following that, we will perform univariable or multivariable Cox proportional hazard (PH) regression model. If we are sure about the distribution of the risk, then we can proceed to parametric survival analysis.  
+### Types of survival analysis
 
-## Objectives 
+There are three main types of survival analysis:
 
-The objective of the chapter is 
+- the non-parametric survival analysis for example Kaplan-Meier estimates.
+- the semi-parametric survival analysis for example Cox proportional hazard regression.
+- the parametric survival analysis for example Weibull parametric survival analysis. 
 
-- to perform a non-parametric survival analysis that is the Kaplan-Meier survival analysis
-- to perform the univariable semi-parametric survival model that's Cox proportional hazard regression analysis 
-- to perform the multivariable Cox PH regression analysis 
+In medical literature, we usually perform the non-parametric analysis for example the Kaplan-Meier estimates at the beginning of the analysis to understand the trend of survival probabilities. Following that, we perform simple (univariable) or multiple (multivariable) Cox proportional hazard (PH) regression model. If we are sure with the distribution of the risk and aim to estimate the survival time, then we can perform parametric survival analysis.  
+
+### Objectives 
+
+At the end of the chapter, the readers will be  
+
+- to perform Kaplan-Meier survival analysis
+- to perform the simple (univariable) Cox PH regression analysis 
+- to perform the multiple (multivariable) Cox PH regression analysis 
 
 ## Prepare environment for analysis
 
-Start a new analysis task by creating a new RStudio project. To do this,
+### RStudio project
+
+We recommend your start a new analysis project by creating a new RStudio project. To do this: 
 
 1. Go to File
 2. Click New Project
-3. Choose New Directory or Existing Directory. This directory points to the folder that usually contains the dataset to be analyzed
+3. Choose New Directory or Existing Directory. 
 
-Next, we will load the necessary packages. We will use 5 packages
+This directory actually a folder that should contain the R codes, the dataset and the outputs from the analysis. To organize further, we would create a folder and name it as `data` in the directory. And we will copy the dataset `stroke_data.csv` in the `data` folder. 
 
-## Load packages
 
-To run the tutorial, we will use 
+### Packages 
 
-- **summarytools** package to give us quick descriptive statistics
-- **tidyverse**: a package for data transformation
-- **survival**: This is a package necessary to run survival analysis. There are other survival packages that can run survival analysis which you can find here <https://cran.r-project.org/web/views/Survival.html>
+Next, we will load the necessary packages. We will use these packages: 
+
+- **gtsummary**: a package that give us a nice formatted tables of statistics
+- **tidyverse**: a package for data wrangling and making plots
+- **lubridate** : a package to manipulate dates
+- **survival**: a package to run survival analysis. 
 - **survminer**: a package to plot survival objects
-- **pec**: a package to use a breast cancer dataset
-- **broom**: to make prettier outputs
-- **here** to manage location fo files
+- **broom**: a package to make prettier outputs
+- **here** : a package to manage location fo files
 
-Remember, check if all packages are available in your R library. If you have not installed them, use `install.packages()` function to download and install the packages. 
+In addition to **survival** package, there are other packages that can perform survival analysis. The details of the package is available here <https://cran.r-project.org/web/views/Survival.html>.
 
-Note: If or once the packages are already installed, then load the package
+Now, we will load the packages: 
+
 
 ```{r}
-library(summarytools)
+library(here)
 library(tidyverse)
+library(lubridate)
 library(survival)
 library(survminer)
-library(pec)
 library(broom)
-library(here)
+library(gtsummary)
 ```
 
 
+Remember, check if all packages are available in your R library. If not, you will receive an error message stating that the package is not available. To install the package, use the `install.packages()` function. It will download and install the packages to your R libraries. Once the packages are installed, load the packages again using the `library()` function. 
+
 ## Data
 
-The tutorial uses a dataset named *stroke_dat* in the csv. These data come patients with stroke. We will look at  variables - at the time of admission - that may be prognostic of stroke deaths. 
-
-The oucome of interest time from admission to death. These variables are codes as variable `time` and the event variable as `status`
-
-Now let us load the data 
+The tutorial uses a dataset named `stroke_data.csv`. This is comma-separated value dataset. Now let us load the data 
 
 ```{r}
 stroke <- read_csv(here('data', 'stroke_data.csv'))
 ```
 
+
 And take a peek at our data to check
 
-- number of observations (n=219)
+- number of observations (n=213)
 - name of variables (12 variables)
 - type of variables (character and double)
 
@@ -99,217 +107,286 @@ And take a peek at our data to check
 glimpse(stroke)
 ```
 
-And the summary statistics are
+These data come from patients who were admitted at a tertiary hospital due to acute stroke. They were treated in the ward and the status (dead or alive) were recorded. The variables are:
+
+- doa : date of admission          
+- dod : date of discharge
+- status : event at discharge (alive or dead)        
+- sex : male or female          
+- dm : diabetes (yes or no)           
+- gcs : Glasgow Coma Scale (value from 3 to 15)          
+- sbp : Systolic blood pressure (mmHg)           
+- dbp : Diastolic blood pressure (mmHg)          
+- wbc : Total white cell count           
+- time2 : days in ward         
+- stroke_type : stroke type (Ischaemic stroke or Haemorrhagic stroke)  
+- referral_from : patient was referred from a hospital or not from a hospital
+
+
+The outcome of interest is time from admission to death. The time variable is `time2` (in days) and the event variable is `status`. The event of interest is `dead`. We also note that variables dates and other categorical variables are in character format. The rest are in numerical format. 
+
+## Exploratory data
+
+We will convert the variables doa and doa to a more valid format that is date:
+
+```{r}
+stroke <- 
+  stroke %>%
+  mutate(doa = dmy(doa),
+         dod = dmy(dod))
+```
+
+
+We will perform a quick preliminary analysis. First, by looking at the summary statistics: 
 
 ```{r}
 summary(stroke)
 ```
 
 
-To be able to perform survival analysis, the dataset has to have a time-to-event variable
-
-1.  time : a time variable indicates days taken from the first day the patient was enrolled in the study until the last seen  
-2.  an event variable : a status variable for the patient when he or she was last seen  
-
-So, it is a time-to-event dataset. There are other variables too for example
-
-- sex:  
-- referral: 
-- dm:
-- gcs:
-- sbp:
-- dbp: 
-- wbc:
-- str_type2:
-- referral2:
-
-In the dataset: 
-
-1.  variable time *time* is a numeric variable measured in days
-2.  variable event *event*  is a categorical variable coded as alive or dead
-
-
-## Exploratory data   
-
-The distribution of status at discharge
+The `tbl_summary()` function from **gtsummary** package can produce nice tables. For example, the overall characteristics of patients can be obtained by:
 
 ```{r}
-stroke %>% group_by(status) %>% count()
+stroke %>%
+  tbl_summary()
 ```
 
-The distribution of stroke types 
-
-```{r}
-stroke %>% group_by(status, stroke_type) %>% count()
-```
-
-The descriptive statistics for 
-
-- the numerical variables
-
-```{r}
-stroke %>% descr()
-```
-
-- the categorical variable
+To obtain the patients characteristics based on status: 
 
 ```{r}
 stroke %>% 
-  dplyr::select(sex, dm, stroke_type, referral_from) %>%
-  freq()
+  tbl_summary(by = status)
 ```
 
+To obtain the patients characteristics based on stroke types: 
 
+```{r}
+stroke %>% 
+  tbl_summary(by = stroke_type)
+```
 
 ## Kaplan-Meier survival estimates 
 
-### Estimate the KM survivals 
+Kaplan-Meier survival estimates is the non-parametric survival estimates. It provides the survival probability estimates at different time. Using `survfit()`, we can estimate the survival probability based on Kaplan-Meier (KM). 
+
+Let's estimate the survival probabilities for 
+
+- overall 
+- stroke types 
+
+The survival probabilities for all patients:
+
+```{r}
+KM <- survfit(Surv(time = time2, 
+                   event = status == "dead" ) ~ 1, 
+              data = stroke)
+summary(KM)
+```
 
 
-This is a non-parametric survival estimates. It provides the survival probability estimates at different time.  
-
-## Survival probability
-
-Kaplan-Meier (KM) is a non-parametric survival analysis. Using `survfit()`, we will estimate the survival probability using the Kaplan-Meier (KM) estimates. We will estimate KM for stroke types.  
-And the result will be named `KM_str_type2`
+Next, we will estimate the survival probabilities for stroke type: 
 
 
 ```{r}
-KM_str_type2 <- survfit(Surv(time = time2, event = status == "dead" ) ~ 
-                          stroke_type, 
+KM_str_type2 <- survfit(Surv(time = time2, 
+                             event = status == "dead" ) ~ stroke_type, 
                         data = stroke)
 summary(KM_str_type2)
 ```
 
 ## Plot the survival probability  
 
-We will plot the survival probability based on the KM estimate.
+The KM estimate provides the survival probabilites. We can plot these probabilities to look at the trend of survival over time. The plot provides
 
-The plot provides
-
-1.  y axis: survival probability
-2.  x axis: time
+1.  survival probability on the y-axis
+2.  time on the x-axis
 
 ```{r}
-ggsurvplot(KM_str_type2, data = stroke, risk.table = TRUE, 
-           linetype = c(1,4), pval = TRUE)
+ggsurvplot(KM_str_type2, 
+           data = stroke, 
+           risk.table = TRUE, 
+           linetype = c(1,4),
+           tables.height = 0.3,
+           pval = TRUE)
 ```
 
-Run the Kaplan-Meier estimates for variable dm and named the output as KM_dm
+We can perform the Kaplan-Meier estimates for variable dm too: 
 
 ```{r}
-KM_dm <- survfit(Surv(time = time2, event = status == "dead" ) ~ dm, 
-                        data = stroke)
+KM_dm <- survfit(Surv(time = time2, 
+                      event = status == "dead" ) ~ dm,
+                 data = stroke)
 summary(KM_dm)
 ```
 
-Plot the survival estimates
+And then we can plot the survival estimates for patients with and without diabetes:
 
 ```{r}
-ggsurvplot(KM_dm, data = stroke, risk.table = TRUE, 
-           linetype = c(1,4), pval = TRUE)
+ggsurvplot(KM_dm, 
+           data = stroke, 
+           risk.table = TRUE, 
+           linetype = c(1,4), 
+           tables.height = 0.3,
+           pval = TRUE)
 ```
 
-## Comparing survival estimates from Kaplan-Meier analysis 
+## Comparing Kaplan-Meier estimates across groups 
 
-### Log-rank test
-
-Plotting Kaplan-Meier survival curves provides graphical representation of survival probabilities in different group. 
-
-The question is : Do the survival estimates differ between different levels (groups)?
-
-To answer, we test the null hypothesis that the survival times between levels in variable *group* are similar.
-
-A few available tests, for example:
+There are a number of available tests to compare the survival estimates between groups based on KM. The tests include: 
 
 1.  log-rank test (default)
 2.  peto-peto test
 
+
+### Log-rank test
+
+From Kaplan-Meier survival curves, we could see the graphical representation of survival probabilities in different group over time. And to answer question if the survival estimates are different between levels or groups we can use statistical tests for example the log rank and the peto-peto tests.
+
+For all the test, the null hypothesis is that that the survival estimates between levels or groups are not different. For example, to do that:
+
+
 ```{r}
-survdiff(Surv(time = time2, event = status == "dead") ~ stroke_type, 
-         data = stroke)
+survdiff(Surv(time = time2, 
+              event = status == "dead") ~ stroke_type, 
+         data = stroke,
+         rho = 0)
 ```
 
-The survival times between the stroke types *IS* and *HS* groups are different (p = 0.014). 
+The survival estimates between the stroke types (*IS* vs *HS* groups) are different at the level of $5\%$ significance (p = 0.03). 
+
+And for the survival estimates based on diabetes status:
 
 ```{r}
-survdiff(Surv(time = time2, event = status == "dead") ~ dm, data = stroke)
+survdiff(Surv(time = time2, 
+              event = status == "dead") ~ dm, 
+         data = stroke,
+         rho = 0)
 ```
 
-The survival times between the dm status *yes* and *no* groups are not different (p = 0.2). 
+The survival estimates between patients with and without diabetes (dm status *yes* vs *no* groups) are not different (p = 0.1). 
 
-## Cox proportional hazard regression
+### peto-peto test
 
-### Advantages of Cox proportional hazard regression
+We will be confident with our results if we obtain almost similar findings from other tests. So, now let's compare survival estimates using the peto-peto test.
 
-The disadvantages of the Kaplan-Meier (KM) analysis include these:
+This is the result for comparing survival estimates for stroke type using peto-peto test.
 
-1.  The need to categorize numerical variable
+```{r}
+survdiff(Surv(time = time2, 
+              event = status == "dead") ~ stroke_type, 
+         data = stroke,
+         rho = 1)
+```
+
+This is the result for comparing survival estimates for diabetes status using peto-peto test.
+
+```{r}
+survdiff(Surv(time = time2, 
+              event = status == "dead") ~ dm, 
+         data = stroke,
+         rho = 1)
+```
+
+## Semi-parametric models in survival analysis
+
+One advantage of time-to-event data (from a cohort study) is the ability to estimate the hazard or risk to develop the event (outcome) of interest. However, the challenge in the cohort study is the presence of censoring. Censoring can happen due to 
+
+- patients leave the study (loss to follow up) randomly
+- patients do not experience the event even at the termination of the study
+- patients are withdrawn from the study
+
+In censored patients, we do not know exactly the time for them to develop the event. 
+
+To explore how to incorporate a regression model-like structure into the hazard function, we can model the hazard function using:
+
+$$h(t) = \theta_0$$
+The hazard function is a rate, and because of that it must be strictly positive. To constrain $\theta$ at greater than zero, we can parameterize the hazard function as:
+
+$$h(t) = \exp^{\beta_0}$$
+
+
+So for a covariate $x$ the log-hazard function is:
+
+$$ln[h(t.x)] = \beta_0 + \beta_1(x)$$
+and the hazard function is
+
+$$h(t.x) = exp^{\beta_0 + \beta_1(x)}$$
+
+This is the exponential distribution which is one example of a fully parametric hazard function. Fully parametric models accomplishes two goals simultaneously:
+
+- It describes the basic underlying distribution of survival time (error component)
+- It characterizes how that distribution changes as a function of the covariates (systematic component).
+
+
+However, even though fully parametric models can be used to accomplish the above goals, the assumptions required for their error components may be unnecessarily stringent or unrealistic. One option is to have a fully parametric regression structure but leave their dependence on time unspecified. The models that utilize this approach are called semiparametric regression models. 
+
+
+### Cox proportional hazard regression
+
+If we take our dataset for example, where want to compare the survival experience of stroke patients on different types of stroke (Ischaemic stroke vs Haemorrhagic stroke), one form of a regression model for the hazard function that addresses the study goal is:
+
+
+$$h(t,x,\beta) = h_0(t)r(x,\beta)$$
+We can see that the hazard function is the product of two functions:
+
+- The function, $h_0(t)$, characterizes how the hazard function changes as a function of survival time. 
+- The function, $r(x,\beta)$, characterizes how the hazard function changes as a function of subject covariates.
+
+The $h_0(t)$ is frequently referred to as the baseline hazard function. Thus the baseline hazard function is, in some sense, a generalization of the intercept or constant term found in parametric regression models. 
+
+
+
+The hazard ratio (HR) depends only on the function $r(x,\beta)$. If the ratio function $HR(t,x_1,x_0)$ has a clear clinical interpretation then, the actual form of the baseline hazard function is of little importance.
+
+
+With this parameterization the hazard function is
+
+$$h(t,x,\beta) = h_o(t)exp^{x \beta}$$
+
+and the hazard ratio is
+
+$$HR(t,x_1, x_0) = exp^{\beta(x_1 - x_0)}$$
+
+This model is referred to in the literature by a variety of terms, such as the Cox model, the Cox proportional hazards model or simply the proportional hazards model.
+
+
+So for example, if we have a covariate which is a dichomotomous (binary), such as stroke type: coded as a value of $x_1 = 1$ and $x_0 = 0$, for HS and IS, respectively, then the hazard ratio becomes
+
+$$HR(t,x_1, x_0) = exp^\beta$$
+If the value of the coefficient is $\beta = ln(2)$, then the interpretation is that HS are dying at twice $(exp^\beta = 2)$ the rate of patients with IS. 
+
+
+### Advantages of the Cox proportional hazard regression
+
+If you remember that by using Kaplan-Meier (KM) analysis, we could estimate the survival probability. And using the log-rank or peto-peto test, we could compare the survival between categorical covariates. However, the disadvantages of KM include:
+
+1.  Need to categorize numerical variable to compare survival
 2.  It is a univariable analysis
 3.  It is a non-parametric analysis
 
-
-To overcome the limitations of the KM analysis, we can model our survival data using the semi-parametric **Cox proportional hazard regression**. 
-
-We will use **Breast cancer survival data (GBSG2)** from **pec** package
-
-Load the *GBSG2* data
-
-```{r}
-data(GBSG2)
-```
-
-Take a peek at data
-
-```{r}
-glimpse(GBSG2)
-```
-
-Get the summary statistics
-
-```{r}
-summary(GBSG2)
-```
-
-In the dataset (686 observations):
-
-1.  the time variable: *time* (days)
-2.  the event variable: *cens* (coded as 1 vs 0). The event of interest is 1 and censored cases (for example, loss to follow up) is 0. 
-
-299 developed the event (n = 299)
-
-```{r}
-GBSG2 %>% count(cens)
-```
-
-Let us convert the `cens` (0 and 1) variable to 
-
-1.  a variable named `event`
-2.  and code *failed* for 1, and *censored* for 0
-
-```{r}
-GBSG2 <- GBSG2 %>% 
-  mutate(event = factor(cens, 
-                        labels =  c("censored", "failed")))
-GBSG2 %>% count(event)
-```
+We also acknowledge that the fully parametric regression models in survival analysis have stringent assumptions and distribution requirement. So, to overcome the limitations of the KM analysis and the fully parametric analysis, we can model our survival data using the semi-parametric **Cox proportional hazard regression**. 
 
 
-## Estimation of Cox proportional hazards regression
+## Estimation from Cox proportional hazards regression
 
-We will run a generalized linear model using Cox PH regression with
+### Simple Cox PH regression
 
-1.  time variable *time*
-2.  event variable *event == "failed"*
-3.  all covariates 
+Using our stroke dataset, we will estimate the parameters using the Cox PH regression. Remember, in our data we have 
 
-This becomes a multivariable Cox PH model
+1. the time variable : `time2`
+2. the event variable : `status` and the event of interest is **dead**. Event classified other than dead are considered as censored.
+3. date variables : date of admission (doa) and date of discharge (dod) 
+4. all other covariates 
+
+Now let's take stroke type as the covariate of interest:
 
 
 ```{r}
-GBSG2_coxph <- coxph(Surv(time = time, event = event == 'failed') ~ .,
-                     data = GBSG2)
-summary(GBSG2_coxph)
+stroke_stype <- 
+  coxph(Surv(time = time2, 
+             event = status == 'dead') ~ stroke_type,
+                     data = stroke)
+summary(stroke_stype)
 ```
 
 But for nicer output (in a data frame format), we can use `tidy()`. This will give us
@@ -320,106 +397,349 @@ But for nicer output (in a data frame format), we can use `tidy()`. This will gi
 - the confidence intervals for the log hazard
 
 ```{r}
-tidy(GBSG2_coxph, conf.int = TRUE)
+tidy(stroke_stype,
+     conf.int = TRUE)
 ```
 
-The results:
+The simple Cox PH model with covariate stroke type shows that the patients with IS has $-0.0662$ times the crude log hazard for death as compared to patients with HS (p-value = 0.0368). 
 
-1.  The `coef` is the log hazard. 
-2.  And the `exp(coef)` is hazard ratio. 
+The $95\%$ confidence intervals for the crude log hazards are calculated by:
 
-Interpretation: 
+$$\hat\beta \pm 1.96 \times \widehat{SE}(\hat\beta)$$
 
-1.  Each 1 unit increase in **progrec**, the adjusted log hazard for dying change by -0.002. So, with 10 units increase in **progrec**, the adjusted log hazard for dying change by -0.02
-2.  Each 1 unit increase in **progrec**, the adjusted rate for hazard or the risk for dying changed by 0.998. Or similarly, the risk for dying with 1 unit increase in **progrec**reduces by 0.2%.
-
-## Inference from Cox proportional hazard regression
-
-In inference, we assess the 
-
-1.  the Wald test. This is shown with p-values in the example above
-2.  the 95% confidence intervals for the log hazards
-
-We can transform log hazard to hazard ratio by exp the $\hat\beta$. It is more interesting for applied scientists to make inferences based on the 95% CI of the hazard ratios.
-
-This can be easily done using 
+$$-0.662 \pm 1.96 \times 0.317 = -1.284 , -0.041$$
 
 ```{r}
-tidy(GBSG2_coxph, exponentiate = TRUE, conf.int = TRUE)
+tidy(stroke_stype, 
+     exponentiate = TRUE,
+     conf.int = TRUE)
 ```
 
-This result implies that:
+Or we can get the crude hazard ratio (HR) by exponentiating the log HR. In this example, the simple Cox PH model with covariate stroke type shows that the patients with IS has $49\%$ lower risk for stroke death as compared to patients with HS (p-value = 0.0368 and $95\% CI 0.277, 0.960$). 
 
-1.  patients treated with a hormonal therapy (`horThyes`) had a lower
-risk ($29\%$ lower) to die. Thus they survived longer compared to women who were not treated this way, when adjusted for other covariates. 
-2.  the risk for dying for patients treated with a hormonal therapy (`horThyes`) can be as small as $9\%$ or as big as $45\%$ at $95\%$ confidence levels, controlled for other covariates.  
+The $95\%$ confidence intervals for crude HR are calculated by 
 
+$$exp[\hat\beta \pm 1.96 \times \widehat{SE}(\hat\beta)]$$
 
-## Prediction
+Hence, the lower bound for crude HR is $exp(-1.284)= 0.277$ and the upper bound for crude HR is $exp(-0.0041) = 0.996$ at $95\%$ confidence.
 
-We can predict
-
-1.  the linear predictor
-2.  the risk (risk score exp(lp))
-3.  the he expected number of events given the covariates and follow-up time
+Let's model the risk for stroke death for covariate gcs:
 
 ```{r}
-library(broom)
-lp <- augment(GBSG2_coxph, data = GBSG2)
-risks <- augment(GBSG2_coxph, data = GBSG2, type.predict = "risk")
-expected <- augment(GBSG2_coxph, data = GBSG2, type.predict = "expected")
-```
-
-We can also plot the survival
-
-```{r}
-mod_coxph <- coxph(Surv(time = time, event = event == 'failed') ~ horTh + age + tgrade, data = GBSG2)
-ggadjustedcurves(mod_coxph, data = GBSG2)
-ggadjustedcurves(mod_coxph, data = GBSG2, variable = "horTh")
-ggadjustedcurves(mod_coxph, data = GBSG2, method = "average", variable = "horTh")
+stroke_gcs <- 
+  coxph(Surv(time = time2, 
+             event = status == 'dead') ~ gcs,
+                     data = stroke)
+summary(stroke_gcs)
 ```
 
 
-## Checking the proportional hazard assumption
-
-### Proportional hazard assumption
-
-The most important assumption in Cox PH regression is the proportionality of the hazards over time.
-
-A check of the proportional hazards assumption can be done by looking at the parameter estimates $\beta_1, ..., \beta_q$ over time. 
-
-We can safely assume proportional hazards when the estimates don't vary much over time. 
-
-The null hypothesis of constant regression coefficients can be tested, both globally as well as for each covariate, by using the cox.zph function.
+The simple Cox PH model with covariate gcs shows that with each one unit increase in gcs, the crude log hazard for death changes by a factor of $-0.175$. 
 
 
 ```{r}
-GBSG2_zph <- cox.zph(GBSG2_coxph)
-GBSG2_zph
+tidy(stroke_gcs,
+     exponentiate = TRUE,
+     conf.int = TRUE)
 ```
 
-Evidence of time-varying effects (non-proportionality), especially for age (p = 0.0855)
-and tumor grading. But we keep at this for now. Because this requires a more advanced method.
+When we exponentiate the log HR, the simple Cox PH model shows that with each one unit increase in gcs, the crude risk for death decreases for about $16\%$ and the of decrease are between $95\% CI (0.785, 0.898)$. The relationship between stroke death and gcs is highly significant (p-value $< 0.0001$) when not adjusting for other covariates. 
 
-So basically, if the GLOBAL test gives non-significant (p> 0.05), the assumption of proportional hazard is met. if it is less than 0.05, we need to remedial measures. 
-
-We can plot the log hazard over time, to see the performance of our model (in terms of proportionality)
+By using `tbl_uvregression()` we can generate simple univariable model for all covariates in one line of code. In return, we get the crude HR for all the covariates of interest.
 
 ```{r}
-plot(GBSG2_zph, var = "age")
-plot(GBSG2_zph, var = "tgrade")
-plot(GBSG2_zph, var = "menostat")
-plot(GBSG2_zph, var = "progrec")
-plot(GBSG2_zph, var = "horTh")
+stroke %>%
+  dplyr::select(time2, status, sex, dm, gcs, sbp, dbp, wbc, stroke_type, referral_from) %>%
+  tbl_uvregression(
+    method = coxph,
+    y = Surv(time2, event = status == 'dead'),
+    exponentiate = TRUE,
+    pvalue_fun = ~style_pvalue(.x, digits = 3)
+  ) 
 ```
 
-For now, we will assume the proportionality of hazard is acceptable. In the case of serious violation of proportionality of hazard, we can remedy using 
+### Multiple Cox PH regression
+
+There are two primary reasons to include more than one covariates in the model. One of the primary reasons for using a regression model is to include multiple covariates to adjust statistically for possible imbalances in the observed data before making statistical inferences. In traditional statistical applications, it is called analysis of covariance, while in clinical and epidemiological investigations it is often called control of confounding. The other reason is a statistically related issue where the inclusion of higher-order terms in a model representing interactions between covariates. These are also called effect modifiers. 
+
+Let's decide based on our clinical expertise and statistical significance, we would model a Cox PH model with these covariates.  
+
+- stroke_type
+- gcs
+- referral_from
+
+The reasons because we found that both gcs and stroke type are statistically significant. We also believe that the way patients are referred to hospital may indicate the severity of stroke. On the other hand, we assumed variables sex, sbp, dbp and wbc are not clinically important risk factors for stroke death.
+
+In addition to that, we foresee that stroke type and death is mediated through gcs. For example, patients that suffer from haemorrhagic stroke will suffer more severe bleeding. This will lead to poorer gcs and pooer survival status. So, by adding both gcs and stroke, we can estimate the total effect from stroke type to death and the effect mediated through gcs. 
+
+To estimate to Cox PH model with stroke_type, gcs and referral_from:
+
+```{r}
+stroke_mv <- 
+  coxph(Surv(time = time2, 
+             event = status == 'dead') ~ stroke_type +  gcs + referral_from, 
+        data = stroke)
+tidy(stroke_mv, exponentiate = TRUE, conf.int = TRUE)
+```
+
+We would like to doubly confirm if the model with covariates stroke_type, gcs and referral_from and really statistically different from model with stroke type and referral from:
+
+```{r}
+stroke_mv2 <- 
+  coxph(Surv(time = time2, 
+             event = status == 'dead') ~ stroke_type + referral_from, 
+        data = stroke)
+tidy(stroke_mv, exponentiate = TRUE, conf.int = TRUE)
+```
+We can confirm this by running the likelihood ratio test between the two Cox PH models:
+
+```{r}
+anova(stroke_mv, stroke_mv2, test = 'Chisq')
+```
+
+And true enough, the two Cox PH modes are different (p-value < 0.0001). And we will choose the larger model. 
+
+
+## Inference
+
+
+## Adding interaction in the model
+
+Interaction in the model is an interesting phenomenon. To illustrate how we manage interaction term, let's start with a model with three covariates, gcs, stroke type and dm. In this model, based on clinical knowledge and curiosity, we would develop a two-way interaction term between gcs and stroke type. This interaction term (a product from gcs and stroke type) means the relationship between stroke type and risk for death is heterogenous in different values of gcs.
+
+Let's assign stroke type as $st$ and code it as either 1 (HS) and 0 (IS)
+
+$$g(t,st,gsc,dm,\beta) = ln[h_0(t) + st\beta_1 + gcs\beta_2 + (st \times gcs)\beta_3 + dm\beta_4]$$
+And the difference in the log hazard function becomes 
+
+
+$$[g(t,st = 1,gcs, dm,\beta) - g(t,st = 0,gcs, dm,\beta)]$$
+$$= ln[h_0(t) + 1beta_1 + gcs\beta_2 + (1gcs)\beta_3 + dm\beta_4] -$$
+$$ln[h_0(t) + 0beta_1 + gcs\beta_2 + (0gcs)\beta_3 + dm\beta_4]$$
+$$=beta_1 + gcs\beta_3$$
+
+To run model with an interaction for Cox PH model, we can:
+
+```{r}
+stroke_noia <- 
+  coxph(Surv(time = time2, 
+             event = status == 'dead') ~ stroke_type + gcs + dm, 
+        data = stroke)
+
+stroke_ia <- 
+  coxph(Surv(time = time2, 
+             event = status == 'dead') ~ stroke_type + gcs + stroke_type:gcs + dm, 
+        data = stroke)
+
+tidy(stroke_ia, exponentiate = TRUE, conf.int = TRUE)
+```
+
+It appears that the p-value for the interaction term (a product of gcs and stroke type) is large (p value = 0.852). 
+
+```{r}
+anova(stroke_ia, stroke_noia, test = 'Chisq')
+```
+
+
+And when we run likelihood ratio test, we also observe the same result (p value = 0.851). And because of that, we decide not to add the interaction term in the model. However, it is also recommended to confirm this decision after discussion with subject matter expert, in this case, a stroke physician or neurosurgeon.
+
+## The proportional hazard assumption
+
+### Risk constant over time
+
+The most important assumption in Cox PH regression is the proportionality of the hazards over time. It refers to the requirement that, the hazard functions are multiplicatively related and that their ratio is constant over survival time or it simply says that the estimated HR do not depend on time. 
+
+A check of the proportional hazards assumption can be done by looking at the parameter estimates $\beta_1, ..., \beta_q$ over time. And we can safely assume proportional hazards when the estimates don't vary much over time. In most settings, in order to test the PH assumption, we can employ two-step procedure for assessing: 
+
+- calculate covariate specific tests and
+- plot the scaled and smoothed scaled Schoenfeld residuals obtained from the model.
+
+
+### Test for PH assumption
+
+In many statistical software, the null hypothesis of constant regression coefficients can be tested, both globally as well as for each covariate. In R, this can be done using the `cox.zph()` function from the **survival** package.
+
+
+```{r}
+stroke_zph <- cox.zph(stroke_mv, transform = 'km')
+stroke_zph
+```
+
+The global test is not significant (p value = 0.65)E and the p-value for each of the covariate is also larger than 0.05. These evidence support that the there risks are proportional over time. 
+
+
+```{r}
+stroke_zph_rank <- cox.zph(stroke_mv, transform = 'rank')
+stroke_zph_rank
+```
+
+### Plots to assess PH assumption
+
+We can plots these residuals
+
+- deviance
+- schoenfeld
+- scaled schoenfeld
+
+For example, let's start with plotting the residuals
+
+```{r}
+ggcoxdiagnostics(stroke_mv, type = "deviance")
+```
+
+Now, we will use schoenfeld
+
+
+```{r}
+ggcoxdiagnostics(stroke_mv, type = "schoenfeld")
+```
+
+```{r}
+ggcoxdiagnostics(stroke_mv, type = "deviance", ox.scale = 'time')
+```
+
+```{r}
+ggcoxdiagnostics(stroke_mv, type = "deviance", ox.scale = "linear.predictions")
+```
+
+```{r}
+ggcoxdiagnostics(stroke_mv, type = "schoenfeld", ox.scale = "observation.id")
+```
+
+You may refer to this link for more details http://pdf.medrang.co.kr/CSAM/2017/024/csam-24-583_suppl.pdf 
+
+
+```{r}
+plot(stroke_zph, var = "stroke_type")
+```
+
+- for gcs
+
+```{r}
+plot(stroke_zph, var = "gcs")
+```
+
+The plot for gcs shows possible violation of PH assumption. Even though, the `coxzph()` shows p value of larger than 0.05, there is a possibility that due to small sample size in the data, the PH test lost its power. However we believe that the violation is not severe.   
+
+- for referral type
+
+```{r}
+plot(stroke_zph, var = "referral_from")
+```
+
+
+In the case of serious violation of proportionality of hazard, we can remedy using 
 
 1.  stratified cox regression
 2.  extended cox regression using time-varying dependent variable
 3.  parametric survival analysis
 
+## Model checking
+
+### Prediction from Cox PH model
+
+From the Cox PH model, we can predict
+
+1.  the linear predictor
+2.  the risk 
+3.  the expected number of events given the covariates and follow-up time
+
+- The linear predictor
+
+```{r}
+stroke_lp <- augment(stroke_mv, data = stroke)
+stroke_lp %>%
+  dplyr::select(gcs, stroke_type, referral_from, .fitted:.resid) %>%
+  slice(1:10)
+```
+
+- The predicted risk which is the risk score $exp(lp)$ ("risk"),
+
+```{r}
+risks <- 
+  augment(stroke_mv, 
+                 data = stroke, 
+                 type.predict = "risk")
+risks %>%
+  dplyr::select(status, gcs, stroke_type, referral_from, .fitted:.resid) %>%
+  slice(1:10)
+```
+
+- The expected is the expected number of events given the covariates and follow-up time ("expected"). The survival probability for a subject is equal to $exp(-expected)$. 
+
+```{r}
+expected <- 
+  augment(stroke_mv, 
+          data = stroke, 
+          type.predict = "expected")
+expected %>%
+  dplyr::select(status, gcs, stroke_type, referral_from, .fitted:.resid) %>%
+  mutate(surv_prob = exp(-(.fitted))) %>%
+  slice(1:10)
+```
+
+The Cox model is a relative risk model; predictions of type "linear predictor", "risk", and "terms" are all relative to the sample from which they came. By default, the reference value for each of these is the mean covariate within strata. Predictions of type "expected" incorporate the baseline hazard and are thus absolute instead of relative; the reference option has no effect on these. 
+
+### Residuas from Cox PH model
+
+Here, we will generate the
+
+- martingale residuals
+- deviance
+- schoenfeld
+- dfbeta
+- scaled schoenfeld
+
+```{r}
+rmartingale <- residuals(stroke_mv, 'martingale')
+rdeviance <- residuals(stroke_mv, 'deviance')
+rschoenfeld <- residuals(stroke_mv, 'schoenfeld')
+rdfbeta <- residuals(stroke_mv, 'dfbeta')
+rscaled_sch <- residuals(stroke_mv, 'scaledsch')
+```
+
+### Influential observations
+
+We may check the $dfbetas$ residual. This is residual that comes from a transformation of the score residual. It enables us to check the influence of dropping any single observation on parameter estimates. We may suspect influential observations when the $dfbetas$ residuals greater than 1. 
+
+
+```{r}
+ggcoxdiagnostics(stroke_mv, 
+                 type = "dfbetas", 
+                 point.size = 0, 
+                 hline.col = "black", 
+                 sline.col = "black") + geom_bar(stat = "identity")
+
+```
+
+
+
+## Plot the adjusted survival 
+
+The function `surv_adjustedcurves()` calculates while the function `ggadjustedcurves()` plots adjusted survival curves for the coxph model. The main idea behind this function is to present expected survival curves calculated based on Cox model separately for subpopulations. 
+
+
+```{r}
+ggadjustedcurves(stroke_mv, 
+                 data = stroke)
+```
+
+## Presentation and interpretation
+
+The Cox PH model that we believe explains the risk for death among hospitalized acute stroke patients can be presented as below:
+
+```{r}
+stroke_mv %>%
+  tbl_regression(
+    exponentiate = TRUE,
+    pvalue_fun = ~style_pvalue(.x, digits = 3)
+    ) %>%
+  add_nevent(location = 'level') %>%
+  bold_p(t = 0.10) %>%
+  bold_labels()
+```
+
 
 ## References
 
-1. Parts of this note are taken from this source  <http://ftp.auckland.ac.nz/software/CRAN/doc/vignettes/HSAUR/Ch_survival_analysis.pdf>. The source comes from the book entitled A Handbook of Statistical Analyses Using R - and if you are interested - the book can be bought here <https://www.amazon.com/Handbook-Statistical-Analyses-Using-Second/dp/1420079336>
+For further understanding of the survival analysis concepts and application, the excellent text include [@hosmer2008applied; @kleinbaum2012survival; @survival-book]
