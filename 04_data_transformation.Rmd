@@ -293,30 +293,24 @@ of by using `cut()`
 
 ```{r}
 stroke <- stroke %>% 
-  mutate(cat_sbp = cut(sbp, breaks = c(-Inf, 120, 130, Inf)))
+  mutate(cat_sbp = cut(sbp, breaks = c(-Inf, 120, 130, Inf),
+                       labels = c('<120', '121-130', '>130')))
 stroke %>% count(cat_sbp)
 stroke %>% group_by(cat_sbp) %>% summarize(minsbp = min(sbp),
                                            maxsbp = max(sbp))
 ```
-The label $]$ means including while $($ means above. So the label $(120, 130]$ means above 120 and including 130 
+
 
 ### Recoding variables 
 
-We use this function to recode variables from the old levels to the new levels. Let us say that our objectives is to:
-
-1. modify the levels for variable **cat_sbp** by changing the levels from $(-Inf,120]$ to $\leq120$ and 
-2. $(120,130]$ to `121-130` and 
-3. $(130, Inf]$ for $\geq 130$
-
-
-To do that, use the codes below, 
+We use this function to recode variables from the old levels to the new levels. For example:
 
 ```{r } 
 stroke <- stroke %>%
-  mutate(cat_sbp = recode(cat_sbp, "(-Inf,120]" = "less or 120",
-                          "(120,130]" = "121 - 130",
-                          "(130, Inf]" = "131 or higher"))
-stroke %>% count(cat_sbp)
+  mutate(cat_sbp2 = recode(cat_sbp, "<120" = "120 or less",
+                          "121-130" = "121 to 130",
+                          ">130" = "131 or higher"))
+stroke %>% count(cat_sbp2)
 ```
 
 ### Changing the level of categorical variable

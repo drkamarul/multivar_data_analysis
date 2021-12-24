@@ -1,5 +1,7 @@
-book_filename: BUKUKIM
-clean: [skeleton.bib, skeleton1.bib, packages.bib, references.bib, bookdown.bbl]
+book_filename: dataanalysis
+repo: https://github.com/drkamarul/multivar_data_analysis
+clean: [packages.bib, references.bib, bookdown.bbl]
+new_session: yes
 delete_merged_file: true
 language:
   label:
@@ -8,3 +10,4 @@ language:
   ui:
     edit: "Edit"
     chapter_name: "Chapter "
+output_dir: _book

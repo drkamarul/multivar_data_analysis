@@ -10,20 +10,73 @@ link-citations: yes
 colorlinks: yes
 lot: yes
 lof: yes
-bibliography: [skeleton.bib, skeleton1.bib, packages.bib, references.bib]
+fontsize: 12pt
+bibliography: [packages.bib, references.bib]
+url: 'https\://bookdown.org/drki_musa/dataanalysis/'
+github-repo: drkamarul/multivar_data_analysis 
 
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, strip.white = TRUE, message = FALSE, error = FALSE)
-knitr::opts_chunk$set(out.width = "70%", out.extra = "keepaspectratio", fig.asp = 1, fig.align = "center")
-#knitr::opts_chunk$set(out.width = "70%", fig.align = "center")
+
+<!-- ```{r setup, include=FALSE} -->
+<!-- knitr::opts_chunk$set(echo = TRUE, strip.white = TRUE, message = FALSE, error = FALSE) -->
+<!-- knitr::opts_chunk$set(out.width = "70%", out.extra = "keepaspectratio", fig.asp = 1, fig.align = "center") -->
+<!-- #knitr::opts_chunk$set(out.width = "70%", fig.align = "center") -->
+<!-- ``` -->
+
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+options(
+  htmltools.dir.version = FALSE, formatR.indent = 2,
+  width = 55, digits = 4, warnPartialMatchAttr = FALSE, warnPartialMatchDollar = FALSE
+)
+local({
+  r = getOption('repos')
+  if (!length(r) || identical(unname(r['CRAN']), '@CRAN@'))
+    r['CRAN'] = 'https://cran.rstudio.com' 
+  options(repos = r)
+})
+lapply(c('DT', 'formatR', 'svglite', 'rticles'), function(pkg) {
+  if (system.file(package = pkg) == '') install.packages(pkg)
+})
+# install from github
+githubs <- c('citr' = 'crsh/citr')
+lapply(names(githubs), function(pkg) {
+  if (system.file(package = pkg) == '') remotes::install_github(githubs[pkg], upgrade = FALSE)
+})
 ```
 
-```{r bib, include=FALSE}
-# create a bib file for the R packages used in this document
-knitr::write_bib(c('foreign', 'lattice', 'epiDisplay', 'psych', 'rsq', 'MASS', 'car', 'broom'), file = 'skeleton.bib')
-knitr::write_bib(c('car', 'foreign', 'ggplot2', 'lattice', 'plyr', 'psych'), file = 'skeleton1.bib')
-```
+# Preface {-}
+
+We write this book to help new R users who have limited programming and statistical background. The main audience for this book will be medical epidemiologists, public health researchers and analysts and post-graduate students in public health and epidemiology. 
+
+The book aims to help R users to quickly able to make plots, explore data and to perform regression analysis using the R programming language in RStudio IDE setting.
+
+We used *Rmarkdown* to write this book using the **bookdown** package and because of that we are entirely grateful for people who have developed this platform at RStudio and outside RStudio. 
+
+All in all, we hope you enjoy this book!
+
+
+<p>&nbsp;</p>
+
+
+**Kamarul Imran Musa**
+
+
+<p>&nbsp;</p>
+
+**Wan Nor Arifin Wan Mansor**
+
+<p>&nbsp;</p>
+
+**Tengku Muhammad Hanis Tengku Mokhtar**
+
+<p>&nbsp;</p>
+
+*School of Medical Sciences,* 
+
+*Universiti Sains Malaysia*
+
+`r Sys.Date()`
 
 

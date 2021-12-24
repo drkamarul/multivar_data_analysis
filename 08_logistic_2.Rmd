@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 
 # Binary Logistic Regression
 
@@ -148,14 +153,16 @@ Now, we can look at the summary statistics
 
 ```{r}
 fatal %>%
-  tbl_summary()
+  tbl_summary() %>%
+  as_hux_table()
 ```
 
 or to get summary statistics for each status category:
 
 ```{r}
 fatal %>%
-  tbl_summary(by = status)
+  tbl_summary(by = status) %>%
+  as_hux_table()
 ```
 
 
