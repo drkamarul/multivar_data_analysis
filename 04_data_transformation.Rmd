@@ -1,4 +1,3 @@
-
 # Data Wrangling  
 
 ## Definition of data wrangling  

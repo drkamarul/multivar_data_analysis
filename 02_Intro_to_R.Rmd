@@ -4,37 +4,41 @@
 
 In this chapter, we would like to achieve these objectives: 
 
-1. To introduce readers to R and RStudio
-2. To introduce readers to RStudio Cloud which is a platform to run RStudio on the cloud
-3. To guide you to install R in your local machine 
-4. To guide you to install RStudio in your local machine 
-5. To show how to install optional; latex editor (Miktex or Texlive and MacTex)
-6. To demonstrate how R scripts work
-7. To describe about R packages and R Taskview
+1. To introduce R
+2. To introduce RStudio
+2. To introduce RStudio Cloud. This is a platform where we can run RStudio on the cloud
+3. To guide to install R in your local machine 
+4. To guide to install RStudio in your local machine 
+5. To show readers to install optional; latex editor (Miktex or Texlive and MacTex)
+6. To demonstrate to readers how R scripts work
+7. To describe R packages and R Taskview 
 
 ## RStudio Cloud
 
-RStudio cloud facilitates the learning of R. Anyone can sign up and start using RStudio on the cloud.
+RStudio cloud facilitates the learning of R. Anyone can sign up and start using RStudio on the cloud.It is one of the the quickest way to learn R. 
 
-It is one of the the quickest way to learn R. You do not need to install R on your machine. RStudio Cloud allows collaboration between teachers and students. It also helps colleagues working together on R codes.
+By using RStudio Cloud, we do not need to install R on our local machine. RStudio Cloud also allows collaboration between R teachers and students. It also helps colleagues working together on R codes.
 
-On its webpage, RStudio says that RStudio Cloud is a lightweight, cloud-based solution that allows anyone to do, share, teach and learn data science online. This exciting platform means you can 
+On its webpage, RStudio is described as a lightweight, cloud-based solution that allows anyone to do, share, teach and learn data science online. And it also adds that by using this exciting platform, it means we can  
 
-- Analyze your data using the RStudio IDE, directly from your browser.
-- Share projects with your team, class, workshop or the world.
-- Teach data science with R to your students or colleagues.
-- Learn data science in an instructor-led environment or with interactive tutorials.
+- analyze our data using the RStudio IDE, directly from our browser.
+- share projects with our team, class, workshop or the world.
+- teach data science with R to our students or colleagues.
+- learn data science in an instructor-led environment or with interactive tutorials.
 
-RStudio Cloud is has the free version and the paid version (which is fortunately very affordable). To start using RStudio Cloud, visit <https://rstudio.cloud/> and register.
+RStudio Cloud has the free and the commercial version (which is fortunately very affordable). To start using RStudio Cloud, visit <https://rstudio.cloud/>. On the page, click `Sign Up`.
 
-There is nothing to configure and no dedicated hardware, installation or annual purchase contract required. Individual users, instructors and students only need a browser to do, share, teach and learn data science.
+![Sign Up Page for RStudio Cloud](1login.png)
+
+
+With RStudio Cloud, there is almost nothing to configure and you do not need dedicated hardware, installation or annual purchase contract required. Individual users, instructors and students only need a browser to do, share, teach and learn data science.
 
 
 ### The RStudio Cloud Registration
 
-This is the main webpage for RStudio Cloud. 
+This is the registration and login webpage for RStudio Cloud. 
 
-![RStudio Cloud main webpage](cloud.PNG)
+![RStudio Cloud webpage](cloud.PNG)
 
 
 ### Register and log in
@@ -64,12 +68,12 @@ jamovi is an interesting software. It is a new “3rd generation” statistical 
 
 ## RStudio Server
 
-You can run R and RStudio on the server. To do this you have to install  RStudio Server. having RStudio Server enables you to do analysis on the server. Using RStudio server can give you a taste of working on BIG DATA ON THE CLOUD. 
+You can run R and RStudio on the server. To do this you have to install RStudio Server. By having RStudio Server, it enables you to do analysis on the server. Using RStudio server can give you a taste of working on BIG DATA ON THE CLOUD. 
 
 There are two versions of RStudio Server
 
-- RStudio Server 
-- RStudio Server Professional 
+- RStudio Server: This is the Open Source edition
+- RStudio Workbench: This is the Professional edition. 
   
 At our medical school. we have RStudio Server Professional Edition (**courtesy of** RStudio, of course) running on our server here <https://healthdata.usm.my/rstudio/auth-sign-in>
   
@@ -129,10 +133,7 @@ And this is MacTeX, for Mac OS
 ![MacTeX webpage](mactex.PNG)
 
 
-
-
 ## Starting your RStudio 
-
 
 You can either login to RStudio Cloud and automatically see the RStudio interface OR you can start RStudio on your local machine by loading it. Remember, to login to RStudio Cloud, go to <https://rstudio.cloud>. You will be asked for your username and password.   
 
