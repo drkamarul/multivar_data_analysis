@@ -1,0 +1,232 @@
+# R Scripts and R Packages
+
+## Open a new R script
+
+For beginner, you may start by writing some simple codes. To do this, go to **File**, then click **R Script**
+
+- File -> R Script
+- In Window OS, CTRL-SHIFT-N
+
+
+![New R Script](Rscript.PNG)
+
+### Our first R script
+
+Let us write our very first R codes inside an R script. 
+
+- In Line 1, type `2 + 3` 
+- click CTRL-ENTER or CMD-ENTER 
+- see the outputs in the Console Pane
+
+```{r}
+2 + 3
+```
+
+After writing your codes inside the R script, you can save the R script file. This will allow you to open it up again to continue your work. 
+
+And to save R script, go to 
+
+- File ->
+- Save As ->
+- Choose folder ->  
+- Name the file
+
+Now, types this to check the version of R
+
+```{r}
+version[6:7]
+```
+
+The current version for R is `r version[6:7]`
+
+If you lower version, then you want to upgrade. To upgrade
+
+- for Windows, you can use **installr** package
+- for Mac OS, you can use some functions 
+
+More info here <https://www.linkedin.com/pulse/3-methods-update-r-rstudio-windows-mac-woratana-ngarmtrakulchol/>
+
+
+
+### Function, Argument and Parameters
+
+R codes contain
+
+- function
+- argument
+- parameters
+
+```
+f <- function(<arguments>) {
+## Do something interesting
+}
+```
+For example, for the function `lm()` to estimate parameters for linear regression model
+
+```{r}
+args(lm)
+```
+
+For example:
+
+```{r}
+lm(weight ~ Time, data = ChickWeight)
+```
+
+### Need more help?
+
+Then type the ? before the function
+
+```{r}
+?lm
+```
+
+See what will be displayed in Help Pane
+
+![Help Pane](lm.PNG)
+
+
+## Packages
+
+R is a programming language. And R software runs on packages. R packages are collections of functions and data sets developed by the community. They increase the power of R by improving existing base R functionalities, or by adding new ones. 
+
+A package is a suitable way to organize your own work and, if you want to, share it with others. Typically, a package will include code (not only R code!), documentation for the package and the functions inside, some tests to check everything works as it should, and data sets. ^[https://www.datacamp.com/community/tutorials/r-packages-guide]
+
+### Packages on CRAN
+
+<https://cran.r-project.org/>
+
+- Currently, the CRAN package repository features 12784 available packages
+- Cran Task Views 
+
+![Task Views](packages.PNG)
+
+
+### Check if the package you need is available in your R library
+
+Type this inside your console
+
+```{r}
+library(tidyverse)
+```
+
+You should not receive any error message. If you have not installed the package, you will receive and error message. And it tells you that the package is not available in your R. By default the package is stored in the R folder in your My Document or HOME directory
+
+```{r}
+.libPaths()
+```
+
+
+### Install an R package 
+
+To install an R package, there are two ways:
+
+1. you can type below (without the # tag)
+
+```{r}
+# install.packages(tidyverse, dependencies = TRUE)
+```
+
+2. using the GUI
+
+![Packages pane](tidyverse.png)
+
+Now, type the package you want to install. For example you want to install the **tidyverse** package
+
+![Typing the package to install](tidyverse2.png)
+
+And then click the `Install` button. And you need to have internet access to do this. You can also install packages from: 
+
+- a zip file (from your machine or USB), 
+- from github repository
+- other repository
+
+
+## Directory
+
+This is important. Not knowing your working directory will make you lost (you do not know where your R codes, R outputs, datasets etc)
+
+You must know where your folder is located. The folder can contain many sub folders. The folder should contain dataset (if you want to analyze your data). It will later store the objects created during R session
+
+```{r}
+getwd()
+```
+
+You have to know to write file path. It is written differently for Window OS and other OS
+
+
+
+### Starting your R job
+
+There are 2 ways to start your job:
+
+- create a new project (recommended)
+- setting your working directory using `setwd()` (not recommended)
+
+
+
+### Create new project
+
+Always create a new project (This is the recommended way). This can be by 
+
+- Go to `File -> New Project`
+
+[![New Project](new_proj.PNG)]
+
+When you see project type, click New Project
+
+![Project Type](new_proj2.PNG)
+
+
+### Where is my data?
+
+Datasets for analysis in R and usually in data frame format. You can see the datasets in the environment pane. Your data is read from the original dataset to a memory. SO you must know the size of your computer RAM. How much your RAM for your machine? The bigger the RAM, thelarger R can read and store your data. 
+
+The data that is read (in memory) will dissaper once you close RStudio. But the original stays in its location. This will not change your original data (so be happy!)
+
+![My Data](mydata.PNG)
+
+
+
+## Upload data to RStudio Cloud
+
+You have to upload data to RStudio Cloud  Or link data to dropbox folder
+
+![Upload Data in RStudio Cloud](upload_data.PNG)
+
+
+
+## More resources on RStudio Cloud
+
+You can learn more about RStudio Cloud here
+
+- on YouTube : RStudio Cloud for educationn <https://www.youtube.com/watch?v=PviVimazpz8>
+
+- YouTube: Working with R in Cloud <https://www.youtube.com/watch?v=SFpzr21Pavg>
+
+
+## Need help?
+
+If you need help you can
+
+-  Type a question mark infront of a function
+
+```{r}
+?plot
+```
+
+Other options are these:
+
+- register and join RStudio Community here <https://community.rstudio.com/>
+- Ask questions on Stack Overflow <https://stackoverflow.com/>
+- Search for mailing list and subscribe to it
+- Books on R <https://bookdown.org/>
+
+
+
+## Bookdown
+
+This webpage contains many useful books that use R codes <https://bookdown.org/>. 
+ 
+![Bookdown](bookdown.PNG)
+
