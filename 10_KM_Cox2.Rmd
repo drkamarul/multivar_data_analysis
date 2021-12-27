@@ -742,4 +742,4 @@ stroke_mv %>%
 
 ## References
 
-For further understanding of the survival analysis concepts and application, the excellent text include [@hosmer2008applied; @kleinbaum2012survival; @survival-book]
+For further understanding of the survival analysis concepts and application, excellent text include [@Lemeshow_Stanley2008-03-07][@survival-book]
