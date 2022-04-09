@@ -1,6 +1,6 @@
 # Linear Regression
 
-1. A statistical method to model relationship between:
+1. A statistical method to model a relationship between:
 
     - outcome: numerical variable.
     - predictors/independent variables: numerical, categorical variables.
