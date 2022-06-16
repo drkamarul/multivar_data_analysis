@@ -1,25 +1,6 @@
----
-title: "Multinomial"
-author: "Kim"
-date: '2022-06-16'
-output: html_document
----
-
 # Multinomial Logistic Regression
 
 ## Background 
-
-
-At the end of the module, students should be able:
-
-1.  to understand the concept of logistic regression model to analyze data with polychotomous (multinomial) outcome
-2.  to estimate parameters of interest in a logistic regression model from data with polychotomous (multinomial) outcome
-3.  to make inference based on a logistic regression model from data with polychotomous (multinomial) outcome
-4.  to predict the outcome based on a logistic regression model from data with polychotomous (multinomial) outcome
-5.  to perform model checking of logistic regression model from data with with polychotomous (multinomial) outcomes
-
-
-## Motivation
 
 Some data come with multinomial outcomes in which case, the outcome variable is a nominal or polychotomous variable with more than two levels. In multinomial outcome data, the outcome has no natural ordering. if it has, then it is best treated as a ordinal outcome data. For these data, we can modify the binary logistic model to make estimation and inference [@kleinbaum2010logistic ; @Hosmer2013-03-22]. 
 
@@ -33,7 +14,18 @@ Variables with more than two levels are known as either:
 
 If we employ logistic regression to such data, then the analysis is known as polytomous or multinomial logistic regression. Again, the polychotomous outcome does not have any natural order. When the categories of the outcome variable do have a natural order, ordinal logistic regression is preferred. 
 
-## Examples of data
+## Objectives 
+
+At the end of this chapter, readers should be able:
+
+1.  to understand the concept of logistic regression model to analyze data with polychotomous (multinomial) outcome
+2.  to estimate parameters of interest in a logistic regression model from data with polychotomous (multinomial) outcome
+3.  to make inference based on a logistic regression model from data with polychotomous (multinomial) outcome
+4.  to predict the outcome based on a logistic regression model from data with polychotomous (multinomial) outcome
+5.  to perform model checking of logistic regression model from data with with polychotomous (multinomial) outcomes
+
+
+## Examples of multinomial outcome variable 
 
 Examples of data with polychotomous outcome variables (with more than two levels) include:
 
@@ -43,28 +35,17 @@ Examples of data with polychotomous outcome variables (with more than two levels
 
 A numerical outcome can be categorized based on different cut-off points. The newly created categorical variable is now either treated as a nominal or polychotomous or multinomial outcome  or as a ordinal outcome. That justifies the use of multinomial logistic regression. 
 
-## Models to analyze multinomial outcome data
+## Models for multinomial outcome data
 
-### Multinomial logit model
+With a multinomial outcome data, an extension of logistic regression know as multinomial logit or multinomial logistic regression can be performed. In multinomial logistic regression, one of the categories of the outcome variable is designated as the reference category and each of the other levels is compared with this reference. The choice of reference category can be arbitrary and is at the discretion of the researcher. Most software set the first category as the reference (also known as the baseline category) by default.
 
-With a multinomial outcome data, an extension of logistic regression know as multinomial logit or multinomial logistic regression can be performed. 
-
-In multinomial logistic regression, one of the categories of the outcome variable is designated as the reference category and each of the other levels is compared with this reference.
-
-The choice of reference category can be arbitrary and is at the discretion of the researcher. Most software set the first category as the reference (also known as the baseline category) by default.
-
-### Other models
-
-Other models that can analyze data with polychotomous outcome are:
+Other models that can analyze data with polychotomous outcome include:
 
 1. Stereotype logistic regression - each independent variable has one value for each individual
 2. Alternative-specific variables  
 
-Both are beyond the scope of our lecture. 
 
-## Multinomial logit model
-
-### Estimation
+## Estimation for Multinomial logit model
 
 Remember, interpreting and assessing the significance of the estimated coefficients are the main objectives in regression analysis. in multinomial logistic regression, we would like to model the relationship between covariates with the outcome variable that has more than two categories but without ordering or ranking. 
 
@@ -102,7 +83,7 @@ $$OR_2(X=2,X=0)= \frac{Pr(D=2|X=1)/(Pr(D=0|X=1)} {Pr(D=2|X=0)/Pr(D=0|X=0)}=\exp^
 
 ### Conditional probabilities
 
-And the conditional probabilities are
+The conditional probabilities for the multinomial logit model are: 
 
 $$Pr(D = 0 | x) = \frac{1}{1+e^{g_1(x)} + e^{g_2(x)}}$$
 
@@ -111,13 +92,7 @@ $$Pr(D = 1 | x) = \frac{e^{g_1(x)}}{1+e^{g_1(x)} + e^{g_2(x)}}$$
 $$Pr(D = 2 | x) = \frac{e^{g_2(x)}}{1+e^{g_1(x)} + e^{g_2(x)}}$$
 
 
-## Practicals 1: mammography experience dataset
-
-We will do practicals using the materials available on the ats.ucla website. We will do some modifications in order to simulate result better to suit our needs. The link to source is  <https://stats.idre.ucla.edu/stata/examples/alr2/applied-logistic-regression-second-edition-by-hosmer-and-lemeshowchapter-8-special-topics/m>
-
-You have to be careful with the codes of the variables. Pay attention to the labels and levels of the variable. STATA software provides a more polish interface of results and the coding of variables seems easier to understand too. 
-
-### Prepate environment
+## Prepare environment
 
 Start brand new analysis with a new project in RStudio 
 
@@ -134,53 +109,52 @@ library(gtsummary)
 
 ### Dataset
 
-The dataset contains these variables:
+The dataset we are going to use comes from the low birth weight dataset. The dataset can be loaded from **aplore3** package. In this chapter, we have categorized variable low from a numerical variable to a categorical variable. 
 
-1.  me: the outcome variable is mammography experience (0 = never, 1 = within a year, 2 = over a year ago)
-2.  sympt: "You do not need a mamogram unless you develop symptoms". Codes are, 1 = Strongly Agree, 2 = Agree, 3 = Disagree, 4 = Strongly Disagree
-3.  pb: Perveived benefit of mammography. Score between 5 - 20 
-4.  HIST: Mother or Sister with a history of breast cancer. Codes are 0 = No, 1 = Yes 
-5.  bse: "Has anyone taught you how to examine your own breasts: that is BSE". Codes are 0 = No, 1 = Yes
-6.  detc: "How likely is it that a mamogram could find a new case of breast cancer". Codes are 1= Not likely, 2 = Somewhat likely, 3 = Very likely
+
+- me: the outcome variable is mammography experience (0 = never, 1 = within a year, 2 = over a year ago)
+-  sympt: "You do not need a mamogram unless you develop symptoms". Codes are, 1 = Strongly Agree, 2 = Agree, 3 = Disagree, 4 = Strongly Disagree
+-  pb: Perceived benefit of mammography. Score between 5 - 20 
+-  HIST: Mother or Sister with a history of breast cancer. Codes are 0 = No, 1 = Yes 
+-  bse: "Has anyone taught you how to examine your own breasts: that is BSE". Codes are 0 = No, 1 = Yes
+-  detc: "How likely is it that a mamogram could find a new case of breast cancer". Codes are 1= Not likely, 2 = Somewhat likely, 3 = Very likely
 
 ### Read data
 
-
 We will use `haven::read_dta()` function to read stata `.dta` data into the memory. Remember, we can also use `foreign::read.dta()` function to read stata `.dta` data. It is your choice.  
 
-We examine the first 6 observations. Then we describe the variables in the data.
+We use `here()` to indicate that the folder `data` contains the dataset `mammog9.dta` 
+
 
 ```{r}
-dat.m1 <- read_dta('data','mammog9.dta')
+dat.m1 <- read_dta(here('data','mammog9.dta'))
 ```
 
-We can then
+We can then quickly check types variables
 
-1.  check types variables
-2.  observe the first 6 observations of data
-3.  get summary statistics
 
 ```{r}
 glimpse(dat.m1)
-summary(dat.m1)
 ```
 
-Variable `me` is a class of numeric. We will convert it to a new variable `me2` as a class of factor variable. 
+Next, is to return the table of summary statistics 
 
 ```{r}
-dat.m1 %>% group_by(me) %>% count()
+tbl_summary(dat.m1)
 ```
 
-
-To do that, we use `factor()` function. The function will categorize a numerical variable
-
-We will create a new variable me2, then we will verify the categories of the variable me2
+We will create a new variable `me2`, then we will check the categories of the variable `me2` to ensure it validly mirror variable `me`
 
 ```{r}
 dat.m1 <- 
   dat.m1 %>% 
-  mutate(me2 = factor(me, 
-                      labels = c("never","within.a.year","over.a.year.ago")))
+  mutate(me2 = 
+           factor(me, 
+                  labels =   c("never","within.a.year","over.a.year.ago")))
+```
+
+
+```{r}
 dat.m1 %>% 
   count(me2)
 ```
@@ -192,23 +166,26 @@ dat.m1 <-
   dat.m1 %>% 
   mutate(hist2 = factor(hist,
                         labels = c("no","yes")))
+```
+
+```{r}
 dat.m1 %>% 
   count(hist2)
 ```
 
+We can now generate a table of summary statistics based on categories of `me2`. The summary statistics for numerical variables will be mean and SD. 
 
 ```{r}
 dat.m1 %>%
+  select(-me, -hist) %>%
   tbl_summary(by = me2,
               statistic = list(all_continuous() ~ "{mean} ({sd})"))
 ```
 
 
-### Estimation
+## Univariable multinomial logistic regression 
 
-#### VGAM package 
-
-We will use **VGAM** package and we need to reverse the levels for variable **me2** to replicate the outputs in Applied Logistic Regression book. To do that, we make the group `never` (the last group) as the reference category.
+We will use **VGAM** package and we need to reverse the levels for variable **me2** to replicate the outputs in Chapter 8 from tthe Applied Logistic Regression book [@Hosmer2013-03-22]. To do that, we make the group `never` (the last group) as the reference category.
 
 The steps below:
 
@@ -229,25 +206,17 @@ dat.m1 <-
 table(dat.m1$me) ; summary(dat.m1$me2) ; summary(dat.m1$me3)
 ```
 
-Let us check the order (if you are still anxious)
-
-```{r}
-levels(dat.m1$me2) ; levels(dat.m1$me3)
-```
-
-
-The function `VGAM::vglm()` runs the multinomial logistic regression. And we want to estimate the model for
+The function `VGAM::vglm()` runs the multinomial logistic regression. Using the `vglm()`A function we will estimate a multinomial logit model for 
 
 1.  group 1 vs group 3 : over a year ago vs never did me
 2.  group 2 vs group 3 : within a year ago vs never did me
 
 So, the reference group is - again -  the *never* group. 
 
+The steps we are taking are:
 
-The steps below:
-
-- We load the library
-- Perform estimation and name the object as `fitmlog1`
+- Load the **VGAM** library
+- Estimate the model and name the model object as `fitmlog1`
 - Return the result of `fitmlog1`
 
 ```{r}
@@ -263,17 +232,15 @@ Be careful:
 3.  hist2yes:1 for outcome me = over a year ago vs never
 4.  hist2yes:2 for outcome me =  within a year vs never
 
-Next, to replicate results for `detc` as show on this webpage <http://www.ats.ucla.edu/stat/stata/examples/alr2/alr2stata8.htm>, we will run these codes:
-
+Next, we will convert `detc` to a new categorical variable `detc2`. 
 
 ```{r}
 dat.m1 <- 
   dat.m1 %>% 
   mutate(detc2 = factor(detc))
-table(dat.m1$me2, dat.m1$detc2)
 ```
 
-Now, we will fit the multinomial logit again (with covariate `detc2`) and name the model as fitmlog2. Remember, the comparisons are:
+We will fit the multinomial logit again (with covariate `detc2`) and name the model as `fitmlog2`. Remember, the comparisons are:
 
 1.  group 1 vs group 3 : for outcome me = over a year ago vs never
 2.  group 2 vs group 3 : for outcome me =  within a year vs never
@@ -283,19 +250,18 @@ fitmlog2 <- vglm(me3 ~ detc2, multinomial, data = dat.m1)
 summary(fitmlog2)
 ```
 
-### Inferences
+## Inferences
 
 For the inference, we will:
 
 1.  calculate the $95\%$ CI (interval estimates)
 2.  calculate the p-values (hypothesis testing)
 
-The codes below will:
+Because there is `broom::tidy()` for object with class vglm, we will use the codes below to produce a rather nice table:
 
-1.  return the regression coefficents for all $\hat\beta$ as an object named b_fitmlog2
-2.  return the the confidence intervals for all $\hat\beta$ as an object named ci_fitmlog2 
+1.  return the regression coefficents for all $\hat\beta$ as an object named `b_fitmlog2`
+2.  return the the confidence intervals for all $\hat\beta$ as an object named `ci_fitmlog2` 
 3.  combine the $\hat\beta$ and the corresponding $95\%$ CIs
-
 
 
 ```{r}
@@ -306,7 +272,7 @@ b_ci_fitmlog2
 ```
 
 
-Afterwards, we will *exponentiate* the coefficients to obtain the **relative-risk ratio**. And combine the results to the previous table. Then we will name the columns of the object tab_fitmlog2. 
+Afterwards, we will *exponentiate* the coefficients to obtain the **relative-risk ratio**. And combine the results to the previous table. Then we will name the columns of the object `tab_fitmlog2`. 
 
 ```{r}
 rrr_fitmlog2 <- exp(b_ci_fitmlog2)
@@ -316,23 +282,10 @@ colnames(tab_fitmlog2) <- c('b', 'lower b', 'upper b',
 tab_fitmlog2
 ```
 
-## Practicals 2
+## Multivariable multinomial logistic regression 
 
-### Estimation
+We will add other covariates to our model and name the new (multivariable) model as `fitmlog3`. Using the `factor()` function, we  could easily convert the numeric variables (for example `sympt`) to a categorical variable.
 
-### VGAM package
-
-Adding more covariates (independent variables) to the model:
-
-1.  sympt (as a factor variable)  
-2.  pb 
-3.  hist 
-4.  bse
-5.  detc
-
-We will obtain the estimates (and name the model as fitmlog3). The `factor()` function could easily convert the numeric variables to categorical variables.
-
-The model is multinomial and the data is dat.m1
 
 ```{r}
 fitmlog3 <- vglm(me3 ~ factor(sympt) + pb + hist2 + bse + detc2,
@@ -340,23 +293,17 @@ fitmlog3 <- vglm(me3 ~ factor(sympt) + pb + hist2 + bse + detc2,
 summary(fitmlog3)
 ```
 
-Variable **sympt** has 4 categories. 
-
-```{r}
-dat.m1 %>% count(sympt)
-```
-
-To simulate results as in Applied Logistic Regression book, we recode **sympt** (4 categories) into 2 category factor variable **symptd**. This can be done using the `ifelse()` function
+Variable **sympt** has 4 categories. To replicate the results as in Chapter 8 in Applied Logistic Regression book [@Hosmer2013-03-22], we recode **sympt** (4 categories) into 2 category factor variable **symptd**. This can be done using the `ifelse()` function
 
 ```{r}
 dat.m1 <- 
   dat.m1 %>% 
-  mutate(symptd = ifelse(sympt<3, '<3', '3 or more'))
-dat.m1 %>% 
+  mutate(symptd = ifelse(sympt<3, '<3', '3 or more')) 
+dat.m1 %>%  
   count(sympt,symptd)
 ```
 
-Now, we refit the model and name the model as fitmlog4.
+Now, we refit the model and name the model as `fitmlog4`.
 
 ```{r}
 fitmlog4 <- vglm(me3 ~ symptd + pb + hist2 + bse + detc2,
@@ -364,7 +311,7 @@ fitmlog4 <- vglm(me3 ~ symptd + pb + hist2 + bse + detc2,
 summary(fitmlog4)
 ```
 
-### Inferences 
+## Inferences 
 
 We could get the the confidence intervals and the p-values for each covariate. Then we will `cbind` (combine the columns) them together. 
 
@@ -374,7 +321,7 @@ ci_fitmlog4 <- confint(fitmlog4)
 cbind(b_fitmlog4, ci_fitmlog4)
 ```
 
-As in the book, we will convert predictor variable `detc` (3 categories) to a binary category variable named as `detcd`. Then, we fit the model with covariate `detcd` and name the model as fitmlog5.
+As in the book, we will convert predictor variable `detc` (3 categories) to a binary category variable named as `detcd`. Then, we fit the model with covariate `detcd` and name the model as `fitmlog5`.
 
 ```{r}
 dat.m1 <- 
@@ -406,6 +353,31 @@ colnames(res_fitmlog5) <- c('b', 'rrr',
                             'lower 95% rrr' , 'upper b95% rrr')
 res_fitmlog5
 ```
+
+## Interpretation
+
+We will choose one numerical variable (`pb`) and one categorical variable (`hist`) for interpretation. 
+
+For `pb`
+
+- With one unit increase in score for `pb`, the relative rate (RR) ratio for doing me over a year ago change for a factor of 0.86 ($95\%$ CI 0.74 to 0.99, p-value = 0.033) or $14\%$ lower RR compared to never did me (when adjusting for other covariates)  
+- With one unit increase in score for `pb`, the relative rate ratio for doing me within a year ago change for a factor of 0.78 ($95\%$ CI 0.68 to 0.90, p-value = $< 0.0001$) or $22\%$ lower RR compared to never did me (when adjusting for other covariates)
+
+For `hist`
+
+- Women with positive family history of breast cancer have 2.90 times the relative rate compared to women with no family history of breast cancer ($95\%$ CI 1.19 to 7.03) for doing me over a year ago than no me at all, when adjusting for other covariates (p-value 0.0189).   
+- Women with positive family history of breast cancer have 3.71 times the relative rate compared to women with no family history of breast cancer ($95\%$ CI 1.21 to 8.67) for doing me within a year ago than no me at all, when adjusting for other covariates (p-value 0.003).
+
+## Prediction
+
+We can calculate the predicted probability of each category of outcome by using the `predict()` function. Below are the result for the top 10 observations. 
+
+```{r}
+predict.vgam(fitmlog5, type = 'response') %>% 
+  head(10)
+```
+
+## Presentation of table of statistics 
 
 We can make a *better* table using **knitr** and **kableExtra** packages
 

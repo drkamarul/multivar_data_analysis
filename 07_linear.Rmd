@@ -20,6 +20,7 @@ numerical\ outcome = &\ numerical\ predictors \\
 More appropriate forms of this relationship will explained later under simple and multiple linear regressions sections.
 
 ### Objectives
+
 After completing this chapter, the readers are expected to
 
 - understand the concept of simple and multiple linear regression 
