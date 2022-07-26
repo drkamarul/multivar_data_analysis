@@ -1,0 +1,126 @@
+---
+title: "Parametric Survival Analysis"
+author: "Kim"
+date: '2022-07-26'
+output: html_document
+---
+
+# Parametric Survival Analysis
+
+## Objectives
+
+## Introduction
+
+This study was conducted from latest release data from the 2017 submission of the SEER database (1973--2015 data) of the National Cancer Institute. Patients with a diagnosis of AO were selected from the SEER database using the International Classification of Diseases for Oncology, Third Edition (ICD-O-3) histology code 9451. There are 1824 patients were diagnosed with AO in this dataset
+
+## Dataset
+
+Data Set The datasets contains all variables of our interest. For the purpose of this assignment, we want to explore prognostic factor association of age, surgery status and marital status with the survival of AO patients. The variables in the datasets as follow:
+
+-   age : biological age at the beginning of the study. This data in numerical values.
+
+-   surgery : is the patient has undergone surgery. Coded as "Yes" and "No"
+
+-   marital : Marital status at diagnosis. Coded as "single", "married", or "separated/divorced/widowed".
+
+-   survivaltime : survival time in month. This data is in numerical values.
+
+-   status : survival status coded as "1 = died" and "0 = censored"
+
+## Set the enviroment 
+
+```{r}
+library(here)
+library(tidyverse)
+library(gtsummary)
+library(broom)
+library(flexsurv)
+library(SurvRegCensCov)
+```
+
+## Read dataset
+
+```{r}
+d1 <- read_csv(here('data','survivaloa.csv'))
+```
+
+
+## Data Wrangling
+
+```{r}
+d1<- d1 %>% select(age, surgery, marital, survivaltime, status) %>%
+  mutate_if(is.character, as.factor)
+glimpse(d1)
+```
+
+## Exploratory Data Analysis
+
+```{r}
+summary(d1)
+d1 %>% mutate(status = recode(status,"0" = "Censored", "1" = "Death")) %>%
+tbl_summary(by = status,
+              statistic = list(all_continuous() ~ "{mean} ({sd})", 
+                              all_categorical() ~ "{n} ({p}%)"),
+              type = list(where(is.logical) ~ "categorical"),
+              label = list(age ~ "Age (in years old)", surgery ~ "Surgery Status", marital~"Marital Status", survivaltime ~ "Time (month)"),
+            missing_text = "Missing") %>% 
+  modify_caption("**Table 1. Patient Characteristic**")  %>%
+  modify_header(label ~ "**Variable**") %>% 
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Survival Status**") %>%
+  modify_footnote(all_stat_cols() ~ "Mean (SD) or Frequency (%)") %>%
+  bold_labels()
+```
+
+## Weibull (Accelerated Failure Time)
+
+```{r}
+wei.mod.aft <- flexsurvreg(Surv(survivaltime, status) ~ age + surgery + marital, 
+                           data = d1, dist = 'weibull')
+wei.mod.aft
+```
+
+### Interpretation
+
+- The estimated log time to die for every increment of 1 year of age was -0.0527. The Acceleration Factor (AF) or Time Ratio (TR) is exp-0.0527 which is 0.949. This means that every 1 year of age OA patient has shorter time by a factor of 0.949 to die. Another way to state the effect is that every 1 year of age AO patient, the survival time is significantly shorter by 5.1% when adjusted for surgery status and marital status. The reduction period to die could be range between 4.6% and 5.7% when the similar model applied in the similar population (Adj. TR = 0.949, 95% CI = 0.943,0.954).
+
+- The estimated log time to die in subjects with underwent the surgery (in comparison to those not underwent surgery) was 0.625. The Acceleration Factor (AF) or Time Ratio (TR) is exp0.625 which is 1.87. The survival time for patients who underwent surgery (surgery = yes) is estimated to be 187.0% of that of patients who did not underwent surgery. Another way to state the effect is that survival time among patients who underwent surgery is significantly longer by 87.0% when adjusted for age and marital status. The increment period to die could be range between 51.0% and 131.0% when the similar model applied in the similar population (Adj. TR = 1.87, 95% CI = 1.51,2.31)
+
+- The estimated log time to die in subjects who are single (in comparison to those are married) was -0.354. The Acceleration Factor (AF) or Time Ratio (TR) is exp-0.354 which is 0.702. The survival time for patients who are single is estimated to be 70.2% of that of patients who are married. Another way to state the effect is that survival time among patients who are single is significantly shorter by 29.8% when adjusted for surgery status and age. The reduction period to die could be range between 14.3% and 42.5% when the similar model applied in the similar population (Adj. TR = 0.702, 95% CI = 0.575,0.857).
+
+- Whereas the estimated log time to die in subjects who are separated or divorce or widowed (in comparison to those are married) was -0.100. The Acceleration Factor (AF) or Time Ratio (TR) is exp-0.100 which is 0.905. The survival time for patients who are separated or divorce or widowed is estimated to be 90.5% of that of patients who are married. Another way to state the effect is that survival time among patients who are separated or divorce or widowed is shorter by 9.5% when adjusted for surgery status and age. The period to die could be range between shorter by 26.7% and longer by 12.0% when the similar model applied in the similar population. However, this factor is not a significant contribution (Adj. TR = 0.905, 95% CI = 0.733,1.12).
+
+
+## Weibull (Proportional Hazard)
+
+```{r}
+wei.mod.ph <- flexsurvreg(Surv(survivaltime, status) ~ age + marital + surgery, 
+                           data = d1, dist = 'weibullph')
+wei.mod.ph
+```
+
+### Interpretation
+
+- Patients who has underwent surgery has significantly reduce hazard of death by 39.9% as compared to patients who did not underwent surgery when adjusted for age and marital status. The reduction of hazard of death could be range between 28.5% and 39.4% when the similar model applied in the similar population (Adj. HR = 0.601, 95% CI = 0.506,0.715).
+
+- An additional of 1 years old of age will significantly increase hazard of death by 4.3% when adjusted for marital status and surgery status. The hazard of death increment could be range between 3.9% and 4.9% when the similar model applied in the similar population (Adj. HR = 1.043, 95% CI = 1.039, 1.049).
+
+- Patients who are separated or widowed or divorced has increase hazard of death by 8.5% as compared to patients who are married when adjusted for age and surgery status. The hazard of death could be range between reducing the hazard by 8.5% and increasing the hazard of death by 28.7% when the similar model applied in the similar population. However, this is not a significant contribution (Adj. HR = 1.085, 95% CI = 0.915,1.287).
+
+- On the other hands, Patients who are single has significantly increase hazard of death by 33.4% as compared to patients who are married when adjusted for age and surgery status. The increment of hazard of death could be range between 13.4% and 56.8% when the similar model applied in the similar population (Adj. HR = 1.334, 95% CI = 1.134,1.568).
+
+## Model adequacy for Weibull distribution
+
+```{r}
+WeibullDiag(Surv(time = d1$survivaltime, event = d1$status == 1) ~ surgery, 
+            data = d1)
+```
+
+Weibull regression diagnostic plot showing that the lines for surgery status are generally parallel and linear in its scale. Thus, the Weibull model is fit.
+
+```{r}
+WeibullDiag(Surv(time = d1$survivaltime, event = d1$status == 1) ~ marital, data = d1)
+```
+
+Weibull regression diagnostic plot showing that the lines for marital status are generally parallel and linear in its scale. Thus, the Weibull model is fit.
+
+
