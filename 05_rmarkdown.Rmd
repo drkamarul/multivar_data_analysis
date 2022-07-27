@@ -35,6 +35,7 @@ Because R Markdown is based on Markdown, it is important to know the syntax:
 ## R Markdown Basics
 
 ### Install `rmarkdown` package
+
 ```
 install.packages("rmarkdown")
 ```
