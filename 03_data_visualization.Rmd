@@ -60,7 +60,7 @@ To work with **ggplot2**, remember to
 - state variables to plot: `aes(x = Variable on x-axis, y = Variable on y-axis )`
 - choose type of graph: for example `geom_histogram()` for histogram, and `geom_points()` for scatterplots
 
-The official website for ggplot2 is here <http://ggplot2.org/>. It has excellent resources. It states that:
+The official website for ggplot2 is here <https://ggplot2.tidyverse.org/>. It has excellent resources. It states that:
 
 *ggplot2 is a plotting system for R, based on the grammar of graphics, which tries to take the good parts of base and lattice graphics and none of the bad parts. It takes care of many of the fiddly details that make plotting a hassle (like drawing legends) as well as providing a powerful model of graphics that makes it easy to produce complex multi-layered graphics.*
 
