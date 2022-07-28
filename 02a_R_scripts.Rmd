@@ -90,9 +90,7 @@ See what will be displayed in Help Pane
 
 R is a programming language. And R software runs on packages. R packages are collections of functions and data sets developed by the community. They increase the power of R by improving existing base R functionalities, or by adding new ones. 
 
-A package is a suitable way to organize your own work and, if you want to, share it with others. Typically, a package will include code (not only R code!), documentation for the package and the functions inside, some tests to check everything works as it should, and data sets. 
-
-Read more here https://www.datacamp.com/community/tutorials/r-packages-guide 
+A package is a suitable way to organize your own work and, if you want to, share it with others. Typically, a package will include code (not only R code!), documentation for the package and the functions inside, some tests to check everything works as it should, and data sets. ^[https://www.datacamp.com/community/tutorials/r-packages-guide]
 
 ### Packages on CRAN
 
