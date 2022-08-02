@@ -1,8 +1,20 @@
 # R Scripts and R Packages
 
+## Introduction
+
+
+## Objectives 
+
+In this chapter, we would like to achieve these objectives: 
+
+-
+-
+-
+
+
 ## Open a new R script
 
-For beginner, you may start by writing some simple codes. To do this, go to **File**, then click **R Script**
+For beginner, you may start by writing some simple codes. Since these codes are written in R language, we call these codes as \index{R scripts}. To do this, go to **File**, then click **R Script**
 
 - File -> R Script
 - In Window OS, CTRL-SHIFT-N
@@ -88,25 +100,27 @@ See what will be displayed in Help Pane
 
 ## Packages
 
-R is a programming language. And R software runs on packages. R packages are collections of functions and data sets developed by the community. They increase the power of R by improving existing base R functionalities, or by adding new ones. 
+R is a programming language. And R software runs on \index{packages}. R packages are collections of functions and data sets developed by the community. They increase the power of R by improving existing base R codes and functions, or by adding new ones. 
 
 A package is a suitable way to organize your own work and, if you want to, share it with others. Typically, a package will include code (not only R code!), documentation for the package and the functions inside, some tests to check everything works as it should, and data sets. 
 
-Read more here <https://www.datacamp.com/community/tutorials/r-packages-guide> 
+Ypu can read more about R packages here <https://www.datacamp.com/community/tutorials/r-packages-guide> 
 
 ### Packages on CRAN
 
 <https://cran.r-project.org/>
 
-- Currently, the CRAN package repository features 12784 available packages
+- At the time of writing, the CRAN package repository features 12784 packages
 - Cran Task Views 
 
 ![Task Views](packages.PNG)
 
 
+CRAN \index{task views} aim to provide some guidance which packages on CRAN are relevant for tasks related to a certain topic. They give a brief overview of the included packages and can be automatically installed using the **ctv** package. The views are intended to have a sharp focus so that it is sufficiently clear which packages should be included (or excluded) and they are not meant to endorse the "best" packages for a given task.
+
 ### Check if the package you need is available in your R library
 
-Type this inside your console
+Type this inside your \index{R console}
 
 ```{r}
 library(tidyverse)
@@ -121,7 +135,7 @@ You should not receive any error message. If you have not installed the package,
 
 ### Install an R package 
 
-To install an R package, there are two ways:
+To install an \index{R package}, there are two ways:
 
 1. you can type below (without the # tag)
 
@@ -146,30 +160,28 @@ And then click the `Install` button. And you need to have internet access to do 
 
 ## Directory
 
-This is important. Not knowing your working directory will make you lost (you do not know where your R codes, R outputs, datasets etc)
+Setting and knowing the \index{R working directory} is very important. Our working directory will contain the R codes, the R outputs, datasets or even resources or tutorials that can help us during in R project or during our R analysis/ 
 
-You must know where your folder is located. The folder can contain many sub folders. The folder should contain dataset (if you want to analyze your data). It will later store the objects created during R session
+The working directory is a just a folder. And the folder can contain many sub folders. We recommend that the folder contain the dataset (if you want to analyze your data locally) in addition to other R objects. R will store many other R objects created during each R session. 
+
+Type this to locate the working directiry:
 
 ```{r}
 getwd()
 ```
-
-You have to know to write file path. It is written differently for Window OS and other OS
-
 
 
 ### Starting your R job
 
 There are 2 ways to start your job:
 
-- create a new project (recommended)
-- setting your working directory using `setwd()` (not recommended)
+- create a new \index{R project} from RStudio IDE. This is the method that we recommend. 
+- setting your working directory using the `setwd()` function. 
 
 
+### Create new R project
 
-### Create new project
-
-Always create a new project (This is the recommended way). This can be by 
+We highly encourage users create a new R project. We can do this by 
 
 - Go to `File -> New Project`
 
@@ -182,9 +194,9 @@ When you see project type, click New Project
 
 ### Where is my data?
 
-Datasets for analysis in R and usually in data frame format. You can see the datasets in the environment pane. Your data is read from the original dataset to a memory. SO you must know the size of your computer RAM. How much your RAM for your machine? The bigger the RAM, thelarger R can read and store your data. 
+Many analysts use data stored in their local machine. R will read data and usually store this data in data frame format or class. When you read your data into RStudio, you will see the dataset in the \index{environment pane}. RStudio reads the original dataset and save in to the RAM (random access memory). SO you must know the size of your computer RAM. How much your RAM for your machine? The bigger the RAM, the larger R can read and store your data in the computer memory. 
 
-The data that is read (in memory) will dissaper once you close RStudio. But the original stays in its location. This will not change your original data (so be happy!)
+The data that is read (in memory) will disappear once you close RStudio. But the source dataset wil stay in its original location. This will not change your original data (so be happy!) unless you choose to save the dataframe in the memory and replace the original file. But we do not recommed you doing this. 
 
 ![My Data](mydata.PNG)
 

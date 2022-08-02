@@ -2,24 +2,26 @@
 
 # Introduction to R, RStudio and RStudio Cloud
 
+## Objectives
+
 In this chapter, we would like to achieve these objectives: 
 
-1. To introduce R
-2. To introduce RStudio
-2. To introduce RStudio Cloud. This is a platform where we can run RStudio on the cloud
-3. To guide to install R in your local machine 
-4. To guide to install RStudio in your local machine 
-5. To show readers to install optional; latex editor (Miktex or Texlive and MacTex)
-6. To demonstrate to readers how R scripts work
-7. To describe R packages and R Taskview 
+1. Introduce R
+2. Introduce RStudio
+2. Introduce RStudio Cloud. This is a platform where we can run RStudio on the cloud
+3. Guide readers to install R on local machine 
+4. Guide readers to install RStudio on local machine 
+5. Briefly describe optional installations of latex editor (Miktex or Tex Live and MacTex)
+6. Demonstrate to readers how R scripts work
+7. Describe R packages and R Taskview 
 
 ## RStudio Cloud
 
-RStudio cloud facilitates the learning of R. Anyone can sign up and start using RStudio on the cloud.It is one of the the quickest way to learn R. 
+\index{RStudio cloud} by RStudio facilitates the learning of R. Anyone can sign up and start using RStudio on the cloud.It is one of the the quickest way to learn R. 
 
-By using RStudio Cloud, we do not need to install R on our local machine. RStudio Cloud also allows collaboration between R teachers and students. It also helps colleagues working together on R codes.
+By using RStudio Cloud, we do not have to install R on our local machine. RStudio Cloud also allows collaboration between R teachers and students. It also helps colleagues working together on R projects.
 
-On its webpage, RStudio is described as a lightweight, cloud-based solution that allows anyone to do, share, teach and learn data science online. And it also adds that by using this exciting platform, it means we can  
+RStudio described it as a lightweight, cloud-based solution that allows anyone to do, share, teach and learn data science online. And it also adds that by using this platform, we can  
 
 - analyze our data using the RStudio IDE, directly from our browser.
 - share projects with our team, class, workshop or the world.
@@ -50,7 +52,7 @@ You can register now. After registration, you can log in.
 
 ## Point and click R GUI
 
-There are a number of the so-called SPSS-like GUI for R. For example 
+There are a number of \index{GUI} versions of R also known as \index{R GUI}. The interface resembles a popular statistical software SPSS. For example 
 
 - Bluesky statistics <https://www.blueskystatistics.com/>
 - JAMOVI - <https://www.jamovi.org/>
@@ -64,13 +66,13 @@ And this is **jamovi** software
 ![jamovi software](jamovi.PNG)
 
 
-jamovi is an interesting software. It is a new “3rd generation” statistical spreadsheet. It is designed from the ground up to be easy to use, it is a compelling alternative to costly statistical products such as SPSS and SAS. jamovi is built on top of the R statistical language, giving you access to the best the statistics community has to offer. jamovi will always be free and open because jamovi is made by the scientific community, for the scientific community.
+\index{jamovi} is an interesting software. It is a new “3rd generation” statistical spreadsheet. It is designed from the ground up to be easy to use, it is a compelling alternative to costly statistical products such as SPSS and SAS. jamovi is built on top of the R statistical language, giving you access to the best the statistics community has to offer. jamovi will always be free and open because jamovi is made by the scientific community, for the scientific community.
 
 ## RStudio Server
 
-You can run R and RStudio on the server. To do this you have to install RStudio Server. By having RStudio Server, it enables you to do analysis on the server. Using RStudio server can give you a taste of working on BIG DATA ON THE CLOUD. 
+You can run R and RStudio on the server. To do this you have to install \index{RStudio Workbench}. Previously, R Studio Workbench was known as \index{RStudio Server}. By using RStudio Server, R users can perform analysis on the server. Using RStudio server can give you a taste of cloud data analysis. 
 
-There are two versions of RStudio Server
+There are two versions of RStudio server:
 
 - RStudio Server: This is the Open Source edition
 - RStudio Workbench: This is the Professional edition. 
@@ -88,14 +90,14 @@ To install R on your local machine, you have to have **Admin Right** to your mac
 
 ### Installing R
 
-Though you can use the native R software (that you just installed) to run R codes, we highly encourage you to use RStudio Integrated Desktop Environment (IDE). 
+Though you can use the native R software (that you just installed) to run R codes, we highly encourage you to use \index{RStudio Integrated Desktop Environment} (IDE). 
 
-We will show this step by step. First, let us install R on your machine. To install R, go to [cran](https://cran.r-project.org/). Then choose the R version that's correct for your machine OS. For example, for Windows OS the link is <https://cran.r-project.org/bin/windows/base/R-3.6.1-win.exe>. And for Mac OS, the download link is  <https://cran.r-project.org/bin/macosx/R-3.6.1.pkg>. Similarly, if you are using Linux, follow the steps as listed before.
+We will show this step by step. First, let us install R on your machine. To install R, go to [cran](https://cran.r-project.org/). Then choose the R version that's correct for your machine OS. For example, for Windows OS the link is <https://cran.r-project.org/bin/windows/base/R-4.2.1-win.exe>. And for Mac OS, the download link is  <https://cran.r-project.org/bin/macosx/base/R-4.2.1.pkg>. Similarly, if you are using Linux, follow the steps as listed before.
 
 
 ![CRAN website](cran.PNG)
 
-It is always recommended that you install the latest version of R. And you can have multiple R version on the same local machines. So you do not need to uninstall the old R version in order to install a new R version.
+It is always recommended that you install the latest version of R. During this writing, the latest version is R version 4.2.1 known as Funny-Looking Kid version that was released on 2022/06/23. You can have multiple R version on the same local machines. So you do not need to uninstall the old R version in order to install a new R version.
 
 
 ### Installing RStudio IDE
