@@ -3,6 +3,7 @@ title: "Data Analysis in Medicine and Health using R"
 author: "Kamarul Imran, Wan Nor Arifin, Tengku Muhammad Hanis Tengku Mukhtar"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
+knit: "bookdown::render_book"
 documentclass: krantz
 biblio-style: apalike
 graphics: yes
@@ -11,10 +12,11 @@ colorlinks: yes
 lot: yes
 lof: yes
 fontsize: 12pt
-bibliography: [packages.bib, references.bib]
-url: 'https\://bookdown.org/drki_musa/dataanalysis/'
-github-repo: drkamarul/multivar_data_analysis 
-
+bibliography:
+- packages.bib
+- references.bib
+#url: https\://bookdown.org/drki_musa/dataanalysis/
+github-repo: drkamarul/multivar_data_analysis
 ---
 
 

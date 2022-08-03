@@ -1,5 +1,15 @@
 # Multinomial Logistic Regression
 
+## Objectives 
+
+At the end of this chapter, readers should be able:
+
+1.  to understand the concept of logistic regression model to analyze data with polychotomous (multinomial) outcome
+2.  to estimate parameters of interest in a logistic regression model from data with polychotomous (multinomial) outcome
+3.  to make inference based on a logistic regression model from data with polychotomous (multinomial) outcome
+4.  to predict the outcome based on a logistic regression model from data with polychotomous (multinomial) outcome
+5.  to perform model checking of logistic regression model from data with with polychotomous (multinomial) outcomes
+
 ## Background 
 
 Some data come with multinomial outcomes in which case, the outcome variable is a nominal or polychotomous variable with more than two levels. In multinomial outcome data, the outcome has no natural ordering. if it has, then it is best treated as a ordinal outcome data. For these data, we can modify the binary logistic model to make estimation and inference [@kleinbaum2010logistic ; @Hosmer2013-03-22]. 
@@ -13,16 +23,6 @@ Variables with more than two levels are known as either:
 3.  polytomous data
 
 If we employ logistic regression to such data, then the analysis is known as polytomous or multinomial logistic regression. Again, the polychotomous outcome does not have any natural order. When the categories of the outcome variable do have a natural order, ordinal logistic regression is preferred. 
-
-## Objectives 
-
-At the end of this chapter, readers should be able:
-
-1.  to understand the concept of logistic regression model to analyze data with polychotomous (multinomial) outcome
-2.  to estimate parameters of interest in a logistic regression model from data with polychotomous (multinomial) outcome
-3.  to make inference based on a logistic regression model from data with polychotomous (multinomial) outcome
-4.  to predict the outcome based on a logistic regression model from data with polychotomous (multinomial) outcome
-5.  to perform model checking of logistic regression model from data with with polychotomous (multinomial) outcomes
 
 
 ## Examples of multinomial outcome variable 

@@ -1,12 +1,7 @@
----
-  output:
-  pdf_document: default
----
+\backmatter
 
-`r if (knitr:::is_html_output()) '
-
+`r if (knitr::is_html_output()) '
 # References {-}
-
 '`
 
 ```{r bib, include=FALSE}

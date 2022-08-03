@@ -1,12 +1,13 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
-
 # Parametric Survival Analysis
 
 ## Objectives
+
+At the end of the chapter, readers will be able to 
+
+-
+-
+-
+-
 
 ## Introduction
 

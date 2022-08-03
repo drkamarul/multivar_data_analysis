@@ -294,7 +294,7 @@ ggplot(data = gapminder) +
 
 ```
 
-We may wonder what number corresponds to what type of shape. We can type $?pch$. And we will see in the Viewer pane, the explanation about the shape available in R. It also shows what number that corresponds to what shape.
+We may wonder what number corresponds to what type of shape. We can type `?pch`. And we will see in the Viewer pane, the explanation about the shape available in R. It also shows what number that corresponds to what shape.
 
 
 ## Making Subplots

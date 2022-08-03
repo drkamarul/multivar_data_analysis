@@ -1,14 +1,16 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
-
 # Binary Logistic Regression
 
-## Introduction
+## Objectives
 
-### Background 
+At the end of the chapter, the readers will be  
+
+- to understand the concept of simple and multiple binary logistic regression 
+- to perform simple binary logistic regression
+- to perform multiple binary logistic regression
+- to perform model assessment of binary logistic regression
+- to present and interpret results from binary logsitic regression
+
+## Background 
 
 The logistic model (or logit model) is used to model the probability of a certain class or event existing such as pass or fail, win or lose, alive or dead or healthy or sick. More specifically, binary logistic regression is used to model the relationship between a covariate or a set of covariates and an outcome variables which is a binary variable.
 
@@ -22,19 +24,9 @@ A binary variable is a categorical outcome has two categories or levels. In medi
 In a binary logistic regression model, the dependent variable has two levels (categorical). When the outcome variable has more than two levels or categories, the analysis are modeled by multinomial logistic regression and, if the multiple categories are ordered, by ordinal logistic regression (for example the proportional odds ordinal logistic model). 
 
 
-### Objectives
+## Further readings
 
-At the end of the chapter, the readers will be  
-
-- to understand the concept of simple and multiple binary logistic regression 
-- to perform simple binary logistic regression
-- to perform multiple binary logistic regression
-- to perform model assessment of binary logistic regression
-- to present and interpret results from binary logsitic regression
-
-### Further readings
-
-There are a number of good references to help readers understand binary logistic regression better. The references that we list below also contains workflow that wil be useful for readers when modelling logistic regression. 
+There are a number of good references to help readers understand binary logistic regression better. The references that we list below also contains workflow that will be useful for readers when modelling logistic regression. 
 
 We highly recommend readers to read 
 
@@ -56,7 +48,7 @@ We will use a dataset named `stroke.dta` which in STATA format. These data come 
 
 The outcome variable is variable status. It is labelled as either dead or alive which is the outcome of each patient during hospitalization.   
 
-## The logit and logistic models
+## logit and logistic models
 
 The simple binary logit and logistic models refer to a a model with only one covariate (also known as independent variable). For example, if the covariate is gcs (Glasgow Coma Scale), the simple logit model is written as:
 
@@ -436,7 +428,7 @@ And this is the table for adjusted odds ratio:
 tbl_regression(fatal_mv2, exponentiate = TRUE)
 ```
 
-## References
+## Resources
 
 
 

@@ -1,5 +1,13 @@
 
-# Survival Analysis 
+# Survival Analysis: Kaplan-Meier and Cox Proportional Hazard (PH) Regression 
+
+### Objectives 
+
+At the end of the chapter, the readers will be  
+
+- to perform Kaplan-Meier survival analysis
+- to perform the simple (univariable) Cox PH regression analysis 
+- to perform the multiple (multivariable) Cox PH regression analysis 
 
 ## Introduction
 
@@ -36,13 +44,7 @@ There are three main types of survival analysis:
 
 In medical literature, we usually perform the non-parametric analysis for example the Kaplan-Meier estimates at the beginning of the analysis to understand the trend of survival probabilities. Following that, we perform simple (univariable) or multiple (multivariable) Cox proportional hazard (PH) regression model. If we are sure with the distribution of the risk and aim to estimate the survival time, then we can perform parametric survival analysis.  
 
-### Objectives 
 
-At the end of the chapter, the readers will be  
-
-- to perform Kaplan-Meier survival analysis
-- to perform the simple (univariable) Cox PH regression analysis 
-- to perform the multiple (multivariable) Cox PH regression analysis 
 
 ## Prepare environment for analysis
 

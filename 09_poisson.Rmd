@@ -1,6 +1,13 @@
-
-
 # Poisson Regression
+
+## Objectives
+
+At the end of the chapter, readers will be able to 
+
+-
+-
+-
+-
 
 ## Introduction
 
@@ -8,7 +15,7 @@ Multiple Poisson Regression for count is given as
 $$ln\,E(Y|\mathbf{X})=ln\,\mu=\beta_{0}+\beta_{1}X_{1}+\cdots+\beta_{p-1}X_{p-1}=\beta_{0}+\sum\beta_{p-1}X_{p-1}$$
 where the **X** (in bold) denotes a collection of Xs. _p_ is the number of estimated parameters.
 
-Multiple Poisson Regression for rate with offset ^[the ln of the denominator/person-years, a(X)] is given as
+Multiple Poisson Regression for rate with offset (the ln of the $\frac{denominator}{person-years}$, $a(X)$) is given as
 $$ln\,E(Y|\mathbf{X})=ln\,a(\mathbf{X})+\beta_{0}+\sum\beta_{p-1}X_{p-1}$$
 The rate ratio, RR is
 $$RR=e^{\beta_{p-1}}$$
@@ -65,7 +72,7 @@ idr.display(model.acc)  # easier, also view LR test
 #### X numerical
 
 ```{r}
-# - Data from https://stats.idre.ucla.edu/stat/data/poisson_sim.csv
+# - Data from <https://stats.idre.ucla.edu/stat/data/poisson_sim.csv>
 aw = read.csv(here::here("data", "poisson_sim.csv"))
 head(aw); tail(aw)
 str(aw)
@@ -124,7 +131,7 @@ exp(coef(model.cig)[[2]]*10)  # interpret?
 ## Multiple Poisson regression model
 
 ```{r}
-# - Again, data from https://stats.idre.ucla.edu/stat/data/poisson_sim.csv
+# - Again, data from <https://stats.idre.ucla.edu/stat/data/poisson_sim.csv>
 aw = read.csv(here::here("data", "poisson_sim.csv"))
 str(aw)
 head(aw); tail(aw)
@@ -194,4 +201,4 @@ b1.ul = confint(model.aw.m1)[[5]]*10
 exp(cbind("Math RR" = b1, "95% LL" = b1.ll, "95% UL" = b1.ul))
 ```
 
-## References
+## Resources

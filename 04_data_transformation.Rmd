@@ -1,5 +1,15 @@
 # Data Wrangling  
 
+## Objectives
+
+At the end of the chapter, readers will be able to 
+
+-
+-
+-
+-
+
+
 ## Definition of data wrangling  
 
 Data wrangling is also known as Data Munging or Data Transformation. It is loosely the process of manually converting or mapping data from one "raw" form into another format. The process allows for more convenient consumption of the data. In doing so, we will be using semi-automated tools in RStudio. You can find more information here <https://community.modeanalytics.com/sql/tutorial/data-wrangling-with-sql/>
@@ -362,10 +372,12 @@ If you have completed the tutorial above, you may:
 8.  Recode a categorical variable (hints: `forcats::fct_recode()`)
 
 
-## References
+## Resources
 
-1.  dplyr vignettes here <https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html>
-2.  forcats examples here <http://r4ds.had.co.nz/factors.html>
+You may head to these webpages to explore more about data transformation or wrangling using R:
+
+1.  **dplyr** vignettes here <https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html>
+2.  **forcats** examples here <http://r4ds.had.co.nz/factors.html>
 3.  reading data into R <https://garthtarr.github.io/meatR/rio.html>
 
 

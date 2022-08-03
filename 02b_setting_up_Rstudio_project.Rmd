@@ -2,7 +2,7 @@
 
 In this chapter, we will guide readers to have a similar folder and file structure. This will help readers to run the codes with minimal risk for errors. And we do this by creating RStudio Project. 
 
-From the RStudio Project webpage https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-Projects , it says that RStudio projects make it straightforward to divide your work into multiple contexts, each with their own working directory, workspace, history, and source documents.RStudio projects are associated with R working directories. You can create an RStudio project:
+From the RStudio Project webpage <https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-Projects> , it says that RStudio projects make it straightforward to divide your work into multiple contexts, each with their own working directory, workspace, history, and source documents.RStudio projects are associated with R working directories. You can create an RStudio project:
 
 - on RStudio Cloud or RStudio on your local machine
 - In a brand new directory

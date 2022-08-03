@@ -1,5 +1,14 @@
 # Exploratory data analysis (EDA) 
 
+## Objectives
+
+At the end of the chapter, readers will be able to 
+
+-
+-
+-
+-
+
 ## Motivation 
 
 In statistics, exploratory data analysis (EDA) is an approach in data analysis in order to summarize their main characteristics, often with visual methods. 
@@ -394,8 +403,10 @@ Now, let us see if the patterns are similar for men and women. We will use `face
 pep_fit + facet_grid(. ~ gender)
 ```
 
-References:
+## Resources
 
-1. ggplot2: Elegant Graphics for Data Analysis. https://ggplot2-book.org/arranging-plots.html
-2. ggplot2. https://ggplot2.tidyverse.org/
-3. gapminder. https://cran.r-project.org/web/packages/gapminder/README.html 
+These links contains great resources to help R users with exploratory data analysis: 
+
+1. Webpage *ggplot2: Elegant Graphics for Data Analysis* accessible at <https://ggplot2-book.org/arranging-plots.html>
+2. **ggplot2** package at <https://ggplot2.tidyverse.org/>
+3. **gapminder** package at <https://cran.r-project.org/web/packages/gapminder/README.html> 

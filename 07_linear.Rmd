@@ -1,6 +1,13 @@
 # Linear Regression
 
-## Introduction
+## Objectives
+
+At the end of the chapter, readers will be able to 
+
+-
+-
+-
+-
 
 ### Background
 Linear regression is one of the most common statistical analyses in medical and health sciences. Linear regression models the linear (i.e. straight line) relationship between:
@@ -362,4 +369,5 @@ new_data
 ```
 
 ## Summary
+
 In this chapter, we went through the basics about SLR and MLR. We performed the analysis for each and learned how to assess the model fit for the regression models. We learned how to nicely present and interpret the results. In addition, we also learned how to utilize the model for prediction.
