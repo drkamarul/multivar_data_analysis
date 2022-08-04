@@ -15,7 +15,7 @@ In statistics, exploratory data analysis (EDA) is an approach in data analysis i
 
 A statistical model can be used or not, but primarily EDA is for seeing what the data can tell us beyond the formal modeling or hypothesis testing task. 
 
-Exploratory data analysis was promoted by John Tukey to encourage statisticians to explore the data, and possibly formulate hypotheses that could lead to new data collection
+Exploratory data analysis was promoted by John Tukey\index{John Tukey} to encourage statisticians to explore the data, and possibly formulate hypotheses that could lead to new data collection
 
 Source: https://en.wikipedia.org/wiki/Exploratory_data_analysis
 
@@ -27,16 +27,16 @@ You must ask yourselves these:
 - Which variable or variables do I want to plot? `mapping = aes()`
 - What is (or are) the type of that variable? 
     - Are they factor (categorical) variables ? 
-    - Are they numerical variables?
+    - Are they numerical variables\index{Numerical variable}?
 - Am I going to plot 
     - a single variable?
     - two variables together?
     - three variables together?
 - What plot? `geom_` 
 
-## EDA using ggplot2 package
+## EDA using ggplot2\index{ggplot2} package
 
-### Usage of **ggplot2** 
+### Usage of **ggplot2**\index{ggplot2} 
 
 1.  start with `ggplot()`
 2.  supply a dataset `data = `
@@ -45,7 +45,7 @@ You must ask yourselves these:
 
 - geom_X : `geom_point()`, `geom_histogram()`
 - scales (like `scale_colour_brewer()`)
-- faceting specifications (like `facet_wrap()`)
+- faceting\index{Faceting} specifications (like `facet_wrap()`)
 - coordinate systems (like `coord_flip()`).
 
 
@@ -53,14 +53,14 @@ You must ask yourselves these:
 
 We will use two packages for data exploration:
 
-1. **tidyverse** package for plotting and data wrangling 
-2. **summarytools** package for summary statistics 
-3. **patchwork** to combine plots
-4. **here** to point to the correct working directory
+1. **tidyverse**\index{tidyverse} package for plotting and data wrangling\index{Data wrangling} 
+2. **summarytools**\index{summarytools} package for summary statistics\index{Summary statistics} 
+3. **patchwork**\index{patchwork} to combine plots
+4. **here**\index{here} to point to the correct working directory
 
-We will load the **tidyverse** and **summarytools** package
+We will load the **tidyverse**\index{tidyverse} and **summarytools**\index{summarytools} package
 
-The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. 
+The tidyverse\index{tidyverse} is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. 
 
 We may find more information about the package here <https://www.tidyverse.org/>
 
@@ -76,7 +76,7 @@ library(here)
 
 Let's read the peptic ulcer data which in MS Excel format. To do this we will
 
-- load the **readxl** package
+- load the **readxl**\index{readxl} package
 
 
 ```{r}
@@ -143,9 +143,9 @@ Another useful package is the **gt** package
 
 ### Plots
 
-## One variable: Distribution of a categorical variable
+## One variable: Distribution of a categorical variable\index{Categorical variable}
 
-### Bar chart
+### Bar chart\index{Bar chart}
 
 The frequency of the outcome  
 
@@ -153,7 +153,7 @@ The frequency of the outcome
 pep %>% group_by(outcome) %>% summarise(freq = n())
 ```
 
-To plot the distribution of a categorical variable, we can use a bar chart.
+To plot the distribution of a categorical variable\index{Categorical variable}, we can use a Bar chart\index{Bar chart}.
 
 ```{r}
 ggplot(data = pep) + 
@@ -167,9 +167,9 @@ ggplot(data = pep, mapping = aes(x = outcome)) +
   geom_bar()
 ```
 
-Combining **dplyr** and **ggplot** (both are packages inside the **tidyverse** metapackage)
+Combining **dplyr**\index{dplyr} and **ggplot** (both are packages inside the **tidyverse**\index{tidyverse} metapackage)
 
-**dplyr** part:
+**dplyr**\index{dplyr} part:
 
 
 ```{r}
@@ -185,7 +185,7 @@ ggplot(pep_age, mapping = aes(x = outcome, y = mean_age)) +
   geom_col()
 ```
 
-**dplyr** and **ggplot** in action:
+**dplyr**\index{dplyr} and **ggplot** in action:
 
 ```{r}
 pep %>% group_by(outcome) %>% 
@@ -198,13 +198,13 @@ pep %>% group_by(outcome) %>%
 Excellent resource from this website <http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_(ggplot2)/>. It is a must go to website!!
 
 
-## One variable: Distribution of a numerical variable
+## One variable: Distribution of a numerical variable\index{Numerical variable}
 
-Plot distribution of values of a numerical variable
+Plot distribution of values of a numerical variable\index{Numerical variable}
 
-### Histogram
+### Histogram\index{Histogram}
 
-To see the distribution of a numerical variable, we can plot a histogram. To specify the number of bin, we can use bindwidth and add some customization
+To see the distribution of a numerical variable\index{Numerical variable}, we can plot a histogram\index{Histogram}. To specify the number of bin, we can use bindwidth and add some customization
 
 ```{r}
 ggplot(data = pep, mapping = aes(x = systolic)) + 
@@ -218,9 +218,9 @@ ggplot(data = pep, mapping = aes(x = systolic)) +
 **ggplot2** has lots of flexibility and personalization. For example, the histogram above is very plain. We can improve it by setting the line color and fill color, the theme, the size, the symbols and many other parameters. 
 
 
-### Density curve
+### Density curve\index{Density curve}
 
-Let us create a density curve. Density curve is useful to examine the distribution of observations.
+Let us create a density curve\index{Density curve}. Density curve is useful to examine the distribution of observations.
 
 ```{r}
 ggplot(data = pep, mapping = aes(x = diastolic)) + 
@@ -231,9 +231,9 @@ ggplot(data = pep, mapping = aes(x = diastolic)) +
        caption = "Source : Peptic ulcer disease data")
 ```
 
-### Histogram and density curve together
+### Histogram\index{Histogram} and density curve\index{Density curve} together
 
-If we want to display both the histogram and the density curve, we can use `geom_histogram()` and `geom_density()` in the single line of codes.
+If we want to display both the histogram\index{Histogram} and the density curve\index{Density curve}, we can use `geom_histogram()` and `geom_density()` in the single line of codes.
 
 ```{r}
 ggplot(pep, mapping = aes(x = diastolic)) + 
@@ -246,9 +246,9 @@ ggplot(pep, mapping = aes(x = diastolic)) +
   theme_bw()
 ```
 
-## Two variables: Plotting a numerical and a categorical variable
+## Two variables: Plotting a numerical\index{Numerical variable} and a categorical variable\index{Categorical variable}
 
-### Overlaying histogramss and boxplot
+### Overlaying histograms\index{Histogram} and boxplot\index{Boxplot}
 
 Now, examine the distribution of a numerical variable (var **age**) based on variable **outcome** by overlaying histograms.
 
@@ -274,11 +274,11 @@ box_age <- ggplot(data = pep, aes(x = outcome, y = age)) +
 
 hist_age |  box_age
 ```
-## Three variables: Plotting a numerical and two categorical variables
+## Three variables: Plotting a numerical\index{Numerical variable} and two categorical variables\index{Categorical variable}
 
 It is hard to visualize three variables in a single histogram plot. Perhaps we can use `facet_.()` function to split the plots. 
 
-### Faceting the plots 
+### Faceting\index{Faceting} the plots 
 
 We can see better plots if we split the histogram based on certain grouping. 
 
@@ -297,18 +297,18 @@ ggplot(data = pep, aes(x = age, fill = gender)) +
   facet_wrap( ~ outcome)
 ```
 
-And the summary statistics for the plots are
+And the summary statistics\index{Summary statistics} for the plots are
 
 ```{r}
 pep %>% group_by(outcome, gender) %>%
   summarize(mean_age = mean(age, na.rm = TRUE), sd_age = sd(age, na.rm = TRUE))
 ```
 
-## Line plot
+## Line plot\index{Line plot}
 
 Line graphs are typically used for visualizing how one continuous variable, on the y-axis, changes in relation to another continuous variable, on the x-axis. This is very useful for longitudinal data. 
 
-Load gapminder package so we can use the gapminder data
+Load gapminder package\index{gapminder} so we can use the gapminder data
 
 ```{r}
 library(gapminder)
@@ -332,7 +332,7 @@ gapminder %>% filter(continent == "Asia") %>%
 ```
 
 
-And the summary statistics
+And the summary statistics\index{Summary statistics}
 
 ```{r}
 gapminder %>%
@@ -343,9 +343,9 @@ gapminder %>%
             sd_life = sd(lifeExp, na.rm = TRUE))
 ```
 
-## Plotting means and error bars 
+## Plotting means and error bars\index{Error bar} 
 
-We want to error bar for life expectancy for Asia continent only. Error bar that will contain
+We want to error bar\index{Error bar} for life expectancy for Asia continent only. Error bar\index{Error bar} that will contain
 
 - mean
 - standard deviation 
@@ -354,7 +354,7 @@ Our approach is:
 
 - use filter to choose Asia continent only `filter()`
 - generate the mean and SD for life expectancy using `mutate()`
-- plot the scatterplot (country vs mean life expectancy) `geom_point()`
+- plot the scatterplot\index{Scatterplot} (country vs mean life expectancy) `geom_point()`
 - plot errorbar `geom_errorbar()`
 
 ```{r}
@@ -375,13 +375,13 @@ gap_continent %>%
 ```
 
 
-## Scatterplot with fit line
+## Scatterplot with fit line\index{Scatterplot}
 
 The steps below shows that:
 
 - data is pep
 - fit line between age and size of perforation
-- plot scatterplot
+- plot scatterplot\index{Scatterplot}
 - plot fit line
 
 ```{r}
@@ -407,6 +407,6 @@ pep_fit + facet_grid(. ~ gender)
 
 These links contains great resources to help R users with exploratory data analysis: 
 
-1. Webpage *ggplot2: Elegant Graphics for Data Analysis* accessible at <https://ggplot2-book.org/arranging-plots.html>
-2. **ggplot2** package at <https://ggplot2.tidyverse.org/>
-3. **gapminder** package at <https://cran.r-project.org/web/packages/gapminder/README.html> 
+1. Webpage *ggplot2: Elegant Graphics for Data Analysis*\index{ggplot2} accessible at <https://ggplot2-book.org/arranging-plots.html>
+2. **ggplot2**\index{ggplot2} package at <https://ggplot2.tidyverse.org/>
+3. **gapminder**\index{gapminder} package at <https://cran.r-project.org/web/packages/gapminder/README.html> 

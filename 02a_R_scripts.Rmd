@@ -1,4 +1,4 @@
-# R Scripts and R Packages
+# R Scripts\index{R script} and R Packages\index{Packages}
 
 ## Introduction
 
@@ -12,19 +12,19 @@ In this chapter, we would like to achieve these objectives:
 -
 
 
-## Open a new R script
+## Open a new R script\index{R script}
 
-For beginner, you may start by writing some simple codes. Since these codes are written in R language, we call these codes as \index{R scripts}. To do this, go to **File**, then click **R Script**
+For beginner, you may start by writing some simple codes. Since these codes are written in R language, we call these codes as R scripts\index{R script}. To do this, go to **File**, then click **R Script**
 
-- File -> R Script
+- File -> R Script\index{R script}
 - In Window OS, CTRL-SHIFT-N
 
 
 ![New R Script](Rscript.PNG)
 
-### Our first R script
+### Our first R script\index{R script}
 
-Let us write our very first R codes inside an R script. 
+Let us write our very first R codes inside an R script\index{R script}. 
 
 - In Line 1, type `2 + 3` 
 - click CTRL-ENTER or CMD-ENTER 
@@ -34,9 +34,9 @@ Let us write our very first R codes inside an R script.
 2 + 3
 ```
 
-After writing your codes inside the R script, you can save the R script file. This will allow you to open it up again to continue your work. 
+After writing your codes inside the R script\index{R script}, you can save the R script\index{R script} file. This will allow you to open it up again to continue your work. 
 
-And to save R script, go to 
+And to save R script\index{R script}, go to 
 
 - File ->
 - Save As ->
@@ -93,34 +93,34 @@ Then type the ? before the function
 ?lm
 ```
 
-See what will be displayed in Help Pane
+See what will be displayed in Help Pane\index{Help pane}
 
 ![Help Pane](lm.PNG)
 
 
-## Packages
+## Packages\index{Packages}
 
-R is a programming language. And R software runs on \index{packages}. R packages are collections of functions and data sets developed by the community. They increase the power of R by improving existing base R codes and functions, or by adding new ones. 
+R is a programming language. And R software runs on packages\index{Packages}. R packages\index{Packages} are collections of functions and data sets developed by the community. They increase the power of R by improving existing base R codes and functions, or by adding new ones. 
 
 A package is a suitable way to organize your own work and, if you want to, share it with others. Typically, a package will include code (not only R code!), documentation for the package and the functions inside, some tests to check everything works as it should, and data sets. 
 
-Ypu can read more about R packages here <https://www.datacamp.com/community/tutorials/r-packages-guide> 
+Ypu can read more about R packages\index{Packages} here <https://www.datacamp.com/community/tutorials/r-packages-guide> 
 
-### Packages on CRAN
+### Packages\index{Packages} on CRAN\index{Packages}
 
 <https://cran.r-project.org/>
 
-- At the time of writing, the CRAN package repository features 12784 packages
-- Cran Task Views 
+- At the time of writing, the CRAN\index{CRAN} package repository features 12784 packages\index{Packages}
+- Cran Task Views\index{Task Views} 
 
 ![Task Views](packages.PNG)
 
 
-CRAN \index{task views} aim to provide some guidance which packages on CRAN are relevant for tasks related to a certain topic. They give a brief overview of the included packages and can be automatically installed using the **ctv** package. The views are intended to have a sharp focus so that it is sufficiently clear which packages should be included (or excluded) and they are not meant to endorse the "best" packages for a given task.
+CRAN task views\index{Task Views} aim to provide some guidance which packages\index{Packages} on CRAN\index{CRAN} are relevant for tasks related to a certain topic. They give a brief overview of the included packages\index{Packages} and can be automatically installed using the **ctv** package. The views are intended to have a sharp focus so that it is sufficiently clear which packages\index{Packages} should be included (or excluded) and they are not meant to endorse the "best" packages\index{Packages} for a given task.
 
 ### Check if the package you need is available in your R library
 
-Type this inside your \index{R console}
+Type this inside your R console
 
 ```{r}
 library(tidyverse)
@@ -133,9 +133,9 @@ You should not receive any error message. If you have not installed the package,
 ```
 
 
-### Install an R package 
+### Install an R package\index{Packages} 
 
-To install an \index{R package}, there are two ways:
+To install an R package\index{Packages}, there are two ways:
 
 1. you can type below (without the # tag)
 
@@ -143,26 +143,26 @@ To install an \index{R package}, there are two ways:
 # install.packages(tidyverse, dependencies = TRUE)
 ```
 
-2. using the GUI
+2. using the GUI\index{GUI}
 
 ![Packages pane](tidyverse.png)
 
-Now, type the package you want to install. For example you want to install the **tidyverse** package
+Now, type the package\index{Packages} you want to install. For example you want to install the **tidyverse**\index{tidyverse} package
 
 ![Typing the package to install](tidyverse2.png)
 
-And then click the `Install` button. And you need to have internet access to do this. You can also install packages from: 
+And then click the `Install` button. And you need to have internet access to do this. You can also install packages\index{Packages} from: 
 
 - a zip file (from your machine or USB), 
-- from github repository
+- from github repository\index{GitHub repository}
 - other repository
 
 
 ## Directory
 
-Setting and knowing the \index{R working directory} is very important. Our working directory will contain the R codes, the R outputs, datasets or even resources or tutorials that can help us during in R project or during our R analysis/ 
+Setting and knowing the R working directory\index{Working directory} is very important. Our working directory\index{Working directory} will contain the R codes, the R outputs, datasets or even resources or tutorials that can help us during in R project or during our R analysis/ 
 
-The working directory is a just a folder. And the folder can contain many sub folders. We recommend that the folder contain the dataset (if you want to analyze your data locally) in addition to other R objects. R will store many other R objects created during each R session. 
+The working directory\index{Working directory} is a just a folder. And the folder can contain many sub folders. We recommend that the folder contain the dataset (if you want to analyze your data locally) in addition to other R objects. R will store many other R objects created during each R session. 
 
 Type this to locate the working directiry:
 
@@ -175,11 +175,11 @@ getwd()
 
 There are 2 ways to start your job:
 
-- create a new \index{R project} from RStudio IDE. This is the method that we recommend. 
+- create a new R project from RStudio IDE\index{RStudio IDE}. This is the method that we recommend. 
 - setting your working directory using the `setwd()` function. 
 
 
-### Create new R project
+### Create new R project\index{New project}
 
 We highly encourage users create a new R project. We can do this by 
 
@@ -187,34 +187,34 @@ We highly encourage users create a new R project. We can do this by
 
 [![New Project](new_proj.PNG)]
 
-When you see project type, click New Project
+When you see project type, click New Project\index{New project}
 
 ![Project Type](new_proj2.PNG)
 
 
 ### Where is my data?
 
-Many analysts use data stored in their local machine. R will read data and usually store this data in data frame format or class. When you read your data into RStudio, you will see the dataset in the \index{environment pane}. RStudio reads the original dataset and save in to the RAM (random access memory). SO you must know the size of your computer RAM. How much your RAM for your machine? The bigger the RAM, the larger R can read and store your data in the computer memory. 
+Many analysts use data stored in their local machine. R will read data and usually store this data in data frame format or class. When you read your data into RStudio\index{RStudio}, you will see the dataset in the environment pane. RStudio\index{RStudio} reads the original dataset and save in to the RAM (random access memory). SO you must know the size of your computer RAM. How much your RAM for your machine? The bigger the RAM, the larger R can read and store your data in the computer memory. 
 
-The data that is read (in memory) will disappear once you close RStudio. But the source dataset wil stay in its original location. This will not change your original data (so be happy!) unless you choose to save the dataframe in the memory and replace the original file. But we do not recommed you doing this. 
+The data that is read (in memory) will disappear once you close RStudio\index{RStudio}. But the source dataset wil stay in its original location. This will not change your original data (so be happy!) unless you choose to save the dataframe in the memory and replace the original file. But we do not recommed you doing this. 
 
 ![My Data](mydata.PNG)
 
 
 
-## Upload data to RStudio Cloud
+## Upload data to RStudio Cloud\index{RStudio cloud}
 
-You have to upload data to RStudio Cloud  Or link data to dropbox folder
+You have to upload data to RStudio Cloud\index{RStudio cloud} or link data to dropbox folder
 
 ![Upload Data in RStudio Cloud](upload_data.PNG)
 
 
 
-## More resources on RStudio Cloud
+## More resources on RStudio Cloud\index{RStudio cloud}
 
-You can learn more about RStudio Cloud here
+You can learn more about RStudio Cloud\index{RStudio cloud} here
 
-- on YouTube : RStudio Cloud for educationn <https://www.youtube.com/watch?v=PviVimazpz8>
+- on YouTube : RStudio Cloud\index{RStudio cloud} for educationn <https://www.youtube.com/watch?v=PviVimazpz8>
 
 - YouTube: Working with R in Cloud <https://www.youtube.com/watch?v=SFpzr21Pavg>
 

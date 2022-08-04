@@ -38,31 +38,31 @@ There are many **graphics packages** in R. Some packages perform general data vi
 
 The popular general purpose graphics packages in R are:
 
-1.  **graphics** : a base R package, which means it is loaded everytime we open R
-2.  **ggplot2** : a user-contributed package by RStudio
-3.  **lattice** : a user-contributed package
+1.  **graphics**\index{graphics} : a base R package, which means it is loaded everytime we open R
+2.  **ggplot2**\index{ggplot2} : a user-contributed package by RStudio
+3.  **lattice**\index{lattice} : a user-contributed package
 
 
-Except for **graphics** package (a base R package), other packages need to downloaded and installed into your R library. A few examples more specific graphical packages include:
+Except for **graphics**\index{graphics} package (a base R package), other packages need to downloaded and installed into your R library. A few examples more specific graphical packages include:
 
-1.  **survminer::ggsurvlot** : The **survminer** R package provides functions for facilitating survival analysis and visualization. 
-2.  **sjPlot** : Collection of plotting and table output functions for data visualization
+1.  **survminer::ggsurvlot** : The **survminer**\index{survminer} R package provides functions for facilitating survival analysis and visualization. 
+2.  **sjPlot**\index{sjPlot} : Collection of plotting and table output functions for data visualization
 
 
-## The **ggplot2** Package
+## The **ggplot2**\index{ggplot2} Package
 
-For this book, we will focus on using the **ggplot2** package. The **ggplot2** package is an elegant, easy and versatile general graphics package in R. It implements the **grammar of graphics** concept. The advantage of this concept is that, it fasten the process of learning graphics. It also facilitates the process of creating complex graphics
+For this book, we will focus on using the **ggplot2**\index{ggplot2} package. The **ggplot2**\index{ggplot2} package is an elegant, easy and versatile general graphics package in R. It implements the **grammar of graphics**\index{Grammar of graphics} concept. The advantage of this concept is that, it fasten the process of learning graphics. It also facilitates the process of creating complex graphics
 
-To work with **ggplot2**, remember to
+To work with **ggplot2**\index{ggplot2}, remember to
 
 - start R codes with `ggplot()`
 - identify which data to plot: `data = Your Data`
 - state variables to plot: `aes(x = Variable on x-axis, y = Variable on y-axis )`
-- choose type of graph: for example `geom_histogram()` for histogram, and `geom_points()` for scatterplots
+- choose type of graph: for example `geom_histogram()` for histogram, and `geom_points()` for scatterplots\index{Scatterplot}
 
-The official website for ggplot2 is here <https://ggplot2.tidyverse.org/>. It has excellent resources. It states that:
+The official website for ggplot2\index{ggplot2} is here <https://ggplot2.tidyverse.org/>. It has excellent resources. It states that:
 
-*ggplot2 is a plotting system for R, based on the grammar of graphics, which tries to take the good parts of base and lattice graphics and none of the bad parts. It takes care of many of the fiddly details that make plotting a hassle (like drawing legends) as well as providing a powerful model of graphics that makes it easy to produce complex multi-layered graphics.*
+*ggplot2\index{ggplot2} is a plotting system for R, based on the grammar of graphics\index{Grammar of graphics}, which tries to take the good parts of base and lattice\index{lattice} graphics and none of the bad parts. It takes care of many of the fiddly details that make plotting a hassle (like drawing legends) as well as providing a powerful model of graphics that makes it easy to produce complex multi-layered graphics.*
 
 ## Preparation
 
@@ -78,7 +78,7 @@ Type `getwd()` in your Console to display your working directory. Inside your wo
 
 1.  dataset or datasets
 2.  outputs - plots 
-3.  codes (R scripts `.R`, R markdown files `.Rmd`)
+3.  codes (R scripts `.R`, R markdown files `.Rmd`\index{R markdown})
 
 ### Important Questions when Making Graphs
 
@@ -100,15 +100,15 @@ The common data formats include
 
 1.  comma separated files (`.csv`)
 2.  MS Excel file (`.xlsx`)
-3.  SPSS file (`.sav`)
-4.  Stata file (`.dta`)
-5.  SAS file 
+3.  SPSS\index{SPSS} file (`.sav`)
+4.  Stata\index{STATA} file (`.dta`)
+5.  SAS\index{SAS} file 
 
-Packages that read these data include **haven** and **rio** packages. Below are the functions to read SAS, SPSS and Stata file using the **haven** package. 
+Packages that read these data include **haven**\index{haven} and **rio**\index{rio} packages. Below are the functions to read SAS\index{SAS}, SPSS\index{SPSS} and Stata\index{STATA} file using the **haven**\index{haven} package. 
 
-1.  SAS: `read_sas()` reads .sas7bdat + .sas7bcat files and read_xpt() reads SAS transport files (version 5 and version 8). write_sas() writes .sas7bdat files.
-2.  SPSS: `read_sav()` reads .sav files and read_por() reads the older .por files. write_sav() writes .sav files.
-3.  Stata: `read_dta()` reads .dta files (up to version 15). write_dta() writes .dta files (versions 8-15).
+1.  SAS\index{SAS}: `read_sas()` reads .sas7bdat + .sas7bcat files and read_xpt() reads SAS\index{SAS} transport files (version 5 and version 8). write_sas() writes .sas7bdat files.
+2.  SPSS\index{SPSS}: `read_sav()` reads .sav files and read_por() reads the older .por files. write_sav() writes .sav files.
+3.  Stata\index{STATA}: `read_dta()` reads .dta files (up to version 15). write_dta() writes .dta files (versions 8-15).
 
 Sometime, we may want to import data from databases. For beginners, this experience is less common. However, the skill to import data from databases are getting more important and more common. Fortunately, R can easily import and read these data. Some examples of common databases format are:
 
@@ -120,7 +120,7 @@ Sometime, we may want to import data from databases. For beginners, this experie
 
 ### Load the Library
 
-The **ggplot2** package is one of the core member of **tidyverse** metapackage (<https://www.tidyverse.org/>). So, if we load the **tidyverse** package, it means we are also loading other packages under the **tidyverse** metapackage: which include **dplyr**, **readr**, **ggplot2**. 
+The **ggplot2**\index{ggplot2} package is one of the core member of **tidyverse**\index{tidyverse} metapackage (<https://www.tidyverse.org/>). So, if we load the **tidyverse**\index{tidyverse} package, it means we are also loading other packages under the **tidyverse**\index{tidyverse} metapackage: which include **dplyr**\index{dplyr}, **readr**\index{readr}, **ggplot2**\index{ggplot2}. 
 
 Loading a package will give you access to
 
@@ -128,22 +128,22 @@ Loading a package will give you access to
 2.  functions available in the package
 3.  sample datasets (not all packages contain this feature)
 
-We will also load the **here** package. This is useful to point to the codes to a specific folder in the project space. We will see this in action later. 
+We will also load the **here**\index{here} package. This is useful to point to the codes to a specific folder in the project space. We will see this in action later. 
 
 ```{r}
 library(tidyverse)
 library(here)
 ```
 
-If you run the code and you get this message *there is no package called tidyverse*, you need to install the **tidyverse** package on your R IDE. 
+If you run the code and you get this message *there is no package called tidyverse*\index{tidyverse}, you need to install the **tidyverse**\index{tidyverse} package on your R IDE. 
 
-To install the package, type `install.package("tidyverse")` in the Console. Once the installation is complete, type `library(tidyverse)` to load the package.
+To install the package, type `install.package("tidyverse")`\index{tidyverse} in the Console. Once the installation is complete, type `library(tidyverse)`\index{tidyverse} to load the package.
 
-Alternatively, you can use the GUI to install the package:
+Alternatively, you can use the GUI\index{GUI} to install the package:
 
 ![Packages pane](tidyverse.png)
 
-Now, type the package you want to install. For example you want to install the **tidyverse** package
+Now, type the package you want to install. For example you want to install the **tidyverse**\index{tidyverse} package
 
 ![Typing the package to install](tidyverse2.png)
 
@@ -151,10 +151,10 @@ Now, type the package you want to install. For example you want to install the *
 
 For now, we will use two datasets: 
 
-a. the built-in dataset in the **gapminder** package. You can read more about *gapminder* from <https://www.gapminder.org/>. The gapminder website contains many useful datasets and show wonderful graphics. It is made popular by Dr Hans Rosling.
+a. the built-in dataset in the **gapminder**\index{gapminder} package. You can read more about *gapminder*\index{gapminder} from <https://www.gapminder.org/>. The gapminder\index{gapminder} website contains many useful datasets and show wonderful graphics. It is made popular by Dr Hans Rosling.
 b. the dataset of patients admitted with peptic ulcer disease `peptic_ulcer.xlsx`. It is in the MS Excel format.
 
-To load the **gapminder** package, type 
+To load the **gapminder**\index{gapminder} package, type 
 
 ```{r}
 library(gapminder)
@@ -199,15 +199,15 @@ To know more about the package, we can use the $?$ mark
 ?gapminder
 ```
 
-## Basic Plots
+## Basic Plots\index{Basic plots}
 
 Let us start by creating a simple plot using these arguments:
 
 - data : `data = gapminder`
 - variables : `x = year`, `y =  lifeExp`
-- graph scatterplot : `geom_point()`
+- graph scatterplot\index{Scatterplot} : `geom_point()`
 
-In **ggplot2** which is a package under **tidyverse** package, we may use the $+$ sign to connect the function. And in R, your codes can span multiple lines. This will increase the visibility of the codes.  
+In **ggplot2**\index{ggplot2} which is a package under **tidyverse**\index{tidyverse} package, we may use the $+$ sign to connect the function. And in R, your codes can span multiple lines. This will increase the visibility of the codes.  
 
 ```{r}
 ggplot(data = gapminder) +
@@ -216,8 +216,8 @@ ggplot(data = gapminder) +
 
 Now, we can see 
 
-1. a scatterplot
-2. the scatterplot shows the relationship between year and life expectancy. 
+1. a scatterplot\index{Scatterplot}
+2. the scatterplot\index{Scatterplot} shows the relationship between year and life expectancy. 
 2. as variable year advances, the life expectancy increases. 
 
 What do the codes tell us?
@@ -225,7 +225,7 @@ What do the codes tell us?
 - the `ggplot()` tells R to be ready to make plot from a specified data. 
 - And `geom_point()` tells R to make a scatter plot.
 
-More resources about **ggplot2** package is available here https://ggplot2.tidyverse.org/reference/ggplot.html 
+More resources about **ggplot2**\index{ggplot2} package is available here https://ggplot2.tidyverse.org/reference/ggplot.html 
 
 ## Adding another variable
 
@@ -244,7 +244,7 @@ ggplot(data = gapminder) +
 
 ```
 
-What can you see from the scatterplot? You may notice that
+What can you see from the scatterplot\index{Scatterplot}? You may notice that
 
 1.  Europe countries have high life expectancy
 2.  Africa countries have lower life expectancy
@@ -262,7 +262,7 @@ ggplot(data = gapminder) +
 
 ```
 
-*ggplot2* will automatically assign a unique level of the aesthetic (here a unique color) to each unique value of the variable, a process known as scaling. *ggplot2* will also add a legend that explains which levels correspond to which values. The plot suggests that with higher gdpPerCap, there is also longer lifeExp. 
+*ggplot2*\index{ggplot2} will automatically assign a unique level of the aesthetic (here a unique color) to each unique value of the variable, a process known as scaling. *ggplot2*\index{ggplot2} will also add a legend that explains which levels correspond to which values. The plot suggests that with higher gdpPerCap, there is also longer lifeExp. 
 
 Instead of using colour, we can use different shapes. This is useful especially in the instances where there is no facility to print out colourful plots.
 
@@ -322,9 +322,9 @@ ggplot(data = gapminder) +
 
 ## Overlaying Plots
 
-Each `geom_X()` in ggplot2 indicates different visual objects.
+Each `geom_X()` in ggplot2\index{ggplot2} indicates different visual objects.
 
-This is a scatterplot
+This is a scatterplot\index{Scatterplot}
 
 ```{r}
 ggplot(data = gapminder) +
@@ -332,7 +332,7 @@ ggplot(data = gapminder) +
 ```
  
 
-This is a smooth line plot
+This is a smooth line plot\index{Line plot}
 
 ```{r}
 ggplot(data = gapminder) +
@@ -377,7 +377,7 @@ ggplot(data = gapminder,
   geom_smooth()
 ```
 
-And we can expand this to make scatterplot shows different colour for continent
+And we can expand this to make scatterplot\index{Scatterplot} shows different colour for continent
  
 ```{r}
 ggplot(data = gapminder, 
@@ -408,7 +408,7 @@ ggplot(data = gapminder,
 
 ## Statistical Transformation
 
-Let us create a bar chart, with y axis as the frequency.
+Let us create a Bar chart\index{Bar chart}, with y axis as the frequency.
 
 ```{r}
 ggplot(data = gapminder) +
@@ -495,7 +495,7 @@ mypop +
 
 
 
-## Saving Plots 
+## Saving Plots\index{Saving plots} 
 
 In R, you can save the plot into different graphical format. You can also set other parameters such as the `dpi` and the size for the plot (height and width). One of the preferred formats for saving a plot is as a PDF format.
 
@@ -534,7 +534,7 @@ And we want to save the plots in a folder named as `plots`. To do this
 ![New folder as plots](newfolder.png)
 ![Name it as plots](plots.png)
 
-We are using the `here()` function now. If you notice, we use a new package called **here**. This is a very useful package that can help get or save files in the correct path (including folder) even when we are using different machines. If we are not clear about this, do you remember any circumstances when the drive name changes automatically (especially when using thumbdrive) in different computers. By using `here()` from the **here** package, we will always get to the correct path or folder. 
+We are using the `here()` function now. If you notice, we use a new package called **here**\index{here}. This is a very useful package that can help get or save files in the correct path (including folder) even when we are using different machines. If we are not clear about this, do you remember any circumstances when the drive name changes automatically (especially when using thumbdrive) in different computers. By using `here()` from the **here**\index{here} package, we will always get to the correct path or folder. 
 
 To save the plots in the directory named as plots, we can do these: 
 

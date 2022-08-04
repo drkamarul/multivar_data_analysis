@@ -4,7 +4,7 @@ In this chapter, we will guide readers to have a similar folder and file structu
 
 From the RStudio Project webpage <https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-Projects> , it says that RStudio projects make it straightforward to divide your work into multiple contexts, each with their own working directory, workspace, history, and source documents.RStudio projects are associated with R working directories. You can create an RStudio project:
 
-- on RStudio Cloud or RStudio on your local machine
+- on RStudio Cloud\index{RStudio cloud} or RStudio on your local machine
 - In a brand new directory
 - In an existing directory where you already have R code and data
 - By cloning a version control (Git or Subversion) repository
@@ -13,38 +13,38 @@ From the RStudio Project webpage <https://support.rstudio.com/hc/en-us/articles/
 
 The objectives of the chapters are
 
-- to share the link for the dataset repository on GitHub
-- to teach readers to create a RStudio Cloud project based on the dataset repository on GitHub
-- to teach readers to create a RStudio project on local machine based on the dataset repository on GitHub
+- to share the link for the dataset repository on GitHub\index{GitHub}
+- to teach readers to create a RStudio Cloud project based on the dataset repository on GitHub\index{GitHub}
+- to teach readers to create a RStudio project on local machine based on the dataset repository on GitHub\index{GitHub}
 
-## Dataset repository on GitHub
+## Dataset repository on GitHub\index{GitHub}
 
-We will use the our book repository on GitHub. The repository is `data-for-RMed`. To go to the repository, click on this link 
+We will use the our book repository on GitHub\index{GitHub}. The repository is `data-for-RMed`. To go to the repository, click on this link 
 
 ![Dataset Repository on GitHub](5clonegit.png)
 
 
-## RStudio project on RStudio Cloud
+## RStudio project on RStudio Cloud\index{RStudio cloud}
 
-Head to RStudio Cloud page
+Head to RStudio Cloud\index{RStudio cloud} page
 
 ![RStudio Cloud](1login.png)
-Login to RStudio Cloud using your credentials
+Login to RStudio Cloud\index{RStudio cloud} using your credentials
 
 ![RStudio Cloud login page](2login.png)
 Once inside your workspace, click New Project
 
 ![Rstudio Cloud, Workspace and New Project](3newproject.png)
 
-And click on `New Project from Git Repository`
+And click on `New Project from Git Repository`\index{Git repository}
 
 ![New Project from Git Repository](4newprojectfromgit.png)
 
-You will got back to our `data-for-RMed` repository on GitHub. And you will click on `Clone` and click the copy button for HTTPS
+You will got back to our `data-for-RMed` repository on GitHub\index{GitHub}. And you will click on `Clone`\index{Clone} and click the copy button for HTTPS
 
 ![Clone Git Repository to RStudio Cloud](5clonegit.png) 
 
-Next, we will clone the repository on our RStudio Cloud. This will ensure the file structure is the same with that of on the RStudio Cloud. Following that, just click OK.
+Next, we will clone\index{Clone} the repository on our RStudio Cloud\index{RStudio cloud}. This will ensure the file structure is the same with that of on the RStudio Cloud\index{RStudio cloud}. Following that, just click OK.
 
 ![Clone the GitHub repository on RStudio Cloud project](6paste_url_git.png)
 
@@ -54,7 +54,7 @@ A new Rstudio Cloud project will be created.
 
 ## RStudio project on local machine
 
-If you want to create a new project on your local machine using the same GitHub repository, then follow these steps.
+If you want to create a new project\index{New project} on your local machine using the same GitHub repository\index{GitHub repository}, then follow these steps.
 
 First, open the RStudio.
 
@@ -74,7 +74,7 @@ and then click `Git`
 
 ![Git](14git.png)
 
-And remember the HTTPS that we have copied from our `dataset-for-RMed` GitHub repository
+And remember the HTTPS that we have copied from our `dataset-for-RMed` GitHub\index{GitHub} repository
 
 ![Copy the HTTPS from GitHub](15copyurlgit.png)
 Now, 
@@ -85,7 +85,7 @@ Now,
 
 ![Clone Git Repository](16clonegit.png)
 
-And now RStudio will create a new working directory on your local machine. This working directory contains the same folder and file structures with the GitHub repository
+And now RStudio will create a new working directory\index{Working directory} on your local machine. This working directory contains the same folder and file structures with the GitHub repository\index{GitHub repository}
 
 ![RStudio Project](17rstudio.png)
 

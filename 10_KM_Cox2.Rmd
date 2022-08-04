@@ -1,11 +1,10 @@
-
-# Survival Analysis: Kaplan-Meier and Cox Proportional Hazard (PH) Regression 
+# Survival Analysis: kaplan-Meier\index{kaplan-Meier} and Cox Proportional Hazard (PH) Regression 
 
 ### Objectives 
 
 At the end of the chapter, the readers will be  
 
-- to perform Kaplan-Meier survival analysis
+- to perform kaplan-Meier\index{kaplan-Meier} survival analysis
 - to perform the simple (univariable) Cox PH regression analysis 
 - to perform the multiple (multivariable) Cox PH regression analysis 
 
@@ -13,11 +12,11 @@ At the end of the chapter, the readers will be
 
 ### Background
 
-Regression concerns the relationship between a response variable and one or more exploratory variables. The independent variables are also called covariates. Some common regression analysis in health and medicine is linear regression, logistic regression, Poisson regression and Cox proportional hazard regression. Linear regression falls under the general linear model while the other three regression models fall under the generalized linear regression. 
+Regression concerns the relationship between a response variable and one or more exploratory variables. The independent variables are also called covariates. Some common regression analysis in health and medicine is linear regression, logistic regression\index{Logistic regression}, Poisson regression\index{Poisson regression} and Cox proportional hazards regression\index{Cox proportional hazards regression}. Linear regression falls under the general linear model while the other three regression models fall under the generalized linear regression. 
 
-Survival analysis is also known as duration analysis or time-to-event analysis. This analysis is useful in follow up studies where participants or patients are followed-up until they develop the event of interest. Examples of such studies include the retrospective cohort or prospective cohort studies.
+Survival analysis is also known as duration analysis\index{Duration analysis} or time-to-event analysis\index{Time-to-event analysis}. This analysis is useful in follow up studies where participants or patients are followed-up until they develop the event of interest. Examples of such studies include the retrospective cohort or prospective cohort studies.
 
-Sometime people confuse and wrongly think that the survival analysis is only applicable to the study of survival (where the event of interest is either alive or death condition). It is not. Any study that involves both the duration of follow up (in days or weeks or months) and the event of interest can be considered as suitable for survival analysis. So, survival or duration analysis is performed on data that has duration until an event occurs. 
+Sometime people confuse and wrongly think that the survival analysis is only applicable to the study of survival (where the event of interest is either alive or death condition). It is not. Any study that involves both the duration of follow up (in days or weeks or months) and the event of interest can be considered as suitable for survival analysis. So, survival or duration analysis\index{Duration analysis} is performed on data that has duration until an event occurs. 
 
 In health and medicine studies, this event can be of interest, for example:
 
@@ -38,11 +37,11 @@ And for variable time, it can be in any time form such as days, weeks, years or 
 
 There are three main types of survival analysis:
 
-- the non-parametric survival analysis for example Kaplan-Meier estimates.
-- the semi-parametric survival analysis for example Cox proportional hazard regression.
+- the non-parametric survival analysis\index{Non-parametric survival analysis} for example kaplan-Meier\index{kaplan-Meier} estimates.
+- the semi-parametric survival analysis for example Cox proportional hazards regression\index{Cox proportional hazards regression}.
 - the parametric survival analysis for example Weibull parametric survival analysis. 
 
-In medical literature, we usually perform the non-parametric analysis for example the Kaplan-Meier estimates at the beginning of the analysis to understand the trend of survival probabilities. Following that, we perform simple (univariable) or multiple (multivariable) Cox proportional hazard (PH) regression model. If we are sure with the distribution of the risk and aim to estimate the survival time, then we can perform parametric survival analysis.  
+In medical literature, we usually perform the non-parametric analysis for example the kaplan-Meier\index{kaplan-Meier} estimates at the beginning of the analysis to understand the trend of survival probabilities. Following that, we perform simple (univariable) or multiple (multivariable) Cox proportional hazard (PH) regression model. If we are sure with the distribution of the risk and aim to estimate the survival time, then we can perform parametric survival analysis.  
 
 
 
@@ -63,15 +62,15 @@ This directory actually a folder that should contain the R codes, the dataset an
 
 Next, we will load the necessary packages. We will use these packages: 
 
-- **gtsummary**: a package that give us a nice formatted tables of statistics
-- **tidyverse**: a package for data wrangling and making plots
-- **lubridate** : a package to manipulate dates
-- **survival**: a package to run survival analysis. 
-- **survminer**: a package to plot survival objects
-- **broom**: a package to make prettier outputs
-- **here** : a package to manage location fo files
+- **gtsummary**\index{gtsummary}: a package that give us a nice formatted tables of statistics
+- **tidyverse**\index{tidyverse}: a package for data wrangling and making plots
+- **lubridate**\index{lubridate} : a package to manipulate dates
+- **survival**\index{survival}: a package to run survival analysis. 
+- **survminer**\index{survminer}: a package to plot survival objects
+- **broom**\index{broom}: a package to make prettier outputs
+- **here**\index{here} : a package to manage location fo files
 
-In addition to **survival** package, there are other packages that can perform survival analysis. The details of the package is available here <https://cran.r-project.org/web/views/Survival.html>.
+In addition to **survival**\index{survival} package, there are other packages that can perform survival analysis. The details of the package is available here <https://cran.r-project.org/web/views/Survival.html>.
 
 Now, we will load the packages: 
 
@@ -146,7 +145,7 @@ summary(stroke)
 ```
 
 
-The `tbl_summary()` function from **gtsummary** package can produce nice tables. For example, the overall characteristics of patients can be obtained by:
+The `tbl_summary()` function from **gtsummary**\index{gtsummary} package can produce nice tables. For example, the overall characteristics of patients can be obtained by:
 
 ```{r}
 stroke %>%
@@ -167,9 +166,9 @@ stroke %>%
   tbl_summary(by = stroke_type)
 ```
 
-## Kaplan-Meier survival estimates 
+## kaplan-Meier\index{kaplan-Meier} survival estimates 
 
-Kaplan-Meier survival estimates is the non-parametric survival estimates. It provides the survival probability estimates at different time. Using `survfit()`, we can estimate the survival probability based on Kaplan-Meier (KM). 
+kaplan-Meier\index{kaplan-Meier} survival estimates is the non-parametric survival estimates. It provides the survival probability\index{Survival probability} estimates at different time. Using `survfit()`, we can estimate the survival probability\index{Survival probability} based on kaplan-Meier\index{kaplan-Meier} (KM). 
 
 Let's estimate the survival probabilities for 
 
@@ -196,11 +195,11 @@ KM_str_type2 <- survfit(Surv(time = time2,
 summary(KM_str_type2)
 ```
 
-## Plot the survival probability  
+## Plot the survival probability\index{Survival probability}  
 
 The KM estimate provides the survival probabilites. We can plot these probabilities to look at the trend of survival over time. The plot provides
 
-1.  survival probability on the y-axis
+1.  survival probability\index{Survival probability} on the y-axis
 2.  time on the x-axis
 
 ```{r}
@@ -212,7 +211,7 @@ ggsurvplot(KM_str_type2,
            pval = TRUE)
 ```
 
-We can perform the Kaplan-Meier estimates for variable dm too: 
+We can perform the kaplan-Meier\index{kaplan-Meier} estimates for variable dm too: 
 
 ```{r}
 KM_dm <- survfit(Surv(time = time2, 
@@ -232,17 +231,17 @@ ggsurvplot(KM_dm,
            pval = TRUE)
 ```
 
-## Comparing Kaplan-Meier estimates across groups 
+## Comparing kaplan-Meier\index{kaplan-Meier} estimates across groups 
 
 There are a number of available tests to compare the survival estimates between groups based on KM. The tests include: 
 
-1.  log-rank test (default)
-2.  peto-peto test
+1.  log-rank\index{Log-rank test} (default)
+2.  peto-peto test\index{Peto-peto test}
 
 
-### Log-rank test
+### Log-rank test\index{Log-rank test}
 
-From Kaplan-Meier survival curves, we could see the graphical representation of survival probabilities in different group over time. And to answer question if the survival estimates are different between levels or groups we can use statistical tests for example the log rank and the peto-peto tests.
+From kaplan-Meier\index{kaplan-Meier} survival curves, we could see the graphical representation of survival probabilities in different group over time. And to answer question if the survival estimates are different between levels or groups we can use statistical tests for example the log rank and the peto-peto tests\index{Peto-peto test}.
 
 For all the test, the null hypothesis is that that the survival estimates between levels or groups are not different. For example, to do that:
 
@@ -267,11 +266,11 @@ survdiff(Surv(time = time2,
 
 The survival estimates between patients with and without diabetes (dm status *yes* vs *no* groups) are not different (p = 0.1). 
 
-### peto-peto test
+### peto-peto test\index{Peto-peto test}
 
-We will be confident with our results if we obtain almost similar findings from other tests. So, now let's compare survival estimates using the peto-peto test.
+We will be confident with our results if we obtain almost similar findings from other tests. So, now let's compare survival estimates using the peto-peto test\index{Peto-peto test}.
 
-This is the result for comparing survival estimates for stroke type using peto-peto test.
+This is the result for comparing survival estimates for stroke type using peto-peto test\index{Peto-peto test}.
 
 ```{r}
 survdiff(Surv(time = time2, 
@@ -280,7 +279,7 @@ survdiff(Surv(time = time2,
          rho = 1)
 ```
 
-This is the result for comparing survival estimates for diabetes status using peto-peto test.
+This is the result for comparing survival estimates for diabetes status using peto-peto test\index{Peto-peto test}.
 
 ```{r}
 survdiff(Surv(time = time2, 
@@ -289,7 +288,7 @@ survdiff(Surv(time = time2,
          rho = 1)
 ```
 
-## Semi-parametric models in survival analysis
+## Semi-parametric models\index{Semi-parametric models} in survival analysis
 
 One advantage of time-to-event data (from a cohort study) is the ability to estimate the hazard or risk to develop the event (outcome) of interest. However, the challenge in the cohort study is the presence of censoring. Censoring can happen due to 
 
@@ -323,7 +322,7 @@ This is the exponential distribution which is one example of a fully parametric 
 However, even though fully parametric models can be used to accomplish the above goals, the assumptions required for their error components may be unnecessarily stringent or unrealistic. One option is to have a fully parametric regression structure but leave their dependence on time unspecified. The models that utilize this approach are called semiparametric regression models. 
 
 
-### Cox proportional hazard regression
+### Cox proportional hazards regression\index{Cox proportional hazards regression}
 
 If we take our dataset for example, where want to compare the survival experience of stroke patients on different types of stroke (Ischaemic stroke vs Haemorrhagic stroke), one form of a regression model for the hazard function that addresses the study goal is:
 
@@ -358,18 +357,18 @@ $$HR(t,x_1, x_0) = exp^\beta$$
 If the value of the coefficient is $\beta = ln(2)$, then the interpretation is that HS are dying at twice $(exp^\beta = 2)$ the rate of patients with IS. 
 
 
-### Advantages of the Cox proportional hazard regression
+### Advantages of the Cox proportional hazards regression\index{Cox proportional hazards regression}
 
-If you remember that by using Kaplan-Meier (KM) analysis, we could estimate the survival probability. And using the log-rank or peto-peto test, we could compare the survival between categorical covariates. However, the disadvantages of KM include:
+If you remember that by using kaplan-Meier\index{kaplan-Meier} (KM) analysis, we could estimate the survival probability\index{Survival probability}. And using the log-rank\index{Log-rank test} or peto-peto test\index{Peto-peto test}, we could compare the survival between categorical covariates. However, the disadvantages of KM include:
 
 1.  Need to categorize numerical variable to compare survival
 2.  It is a univariable analysis
 3.  It is a non-parametric analysis
 
-We also acknowledge that the fully parametric regression models in survival analysis have stringent assumptions and distribution requirement. So, to overcome the limitations of the KM analysis and the fully parametric analysis, we can model our survival data using the semi-parametric **Cox proportional hazard regression**. 
+We also acknowledge that the fully parametric regression models in survival analysis have stringent assumptions and distribution requirement. So, to overcome the limitations of the KM analysis and the fully parametric analysis, we can model our survival data using the semi-parametric **Cox proportional hazards regression**\index{Cox proportional hazards regression}. 
 
 
-## Estimation from Cox proportional hazards regression
+## Estimation from Cox proportional hazards regression\index{Cox proportional hazards regression}
 
 ### Simple Cox PH regression
 
@@ -462,7 +461,7 @@ stroke %>%
 
 ### Multiple Cox PH regression
 
-There are two primary reasons to include more than one covariates in the model. One of the primary reasons for using a regression model is to include multiple covariates to adjust statistically for possible imbalances in the observed data before making statistical inferences. In traditional statistical applications, it is called analysis of covariance, while in clinical and epidemiological investigations it is often called control of confounding. The other reason is a statistically related issue where the inclusion of higher-order terms in a model representing interactions between covariates. These are also called effect modifiers. 
+There are two primary reasons to include more than one covariates in the model. One of the primary reasons for using a regression model is to include multiple covariates to adjust statistically for possible imbalances in the observed data before making statistical inferences. In traditional statistical applications, it is called analysis of covariance, while in clinical and epidemiological investigations it is often called control of confounding. The other reason is a statistically related issue where the inclusion of higher-order terms in a model representing interactions\index{Interaction} between covariates. These are also called effect modifiers. 
 
 Let's decide based on our clinical expertise and statistical significance, we would model a Cox PH model with these covariates.  
 
@@ -505,9 +504,9 @@ And true enough, the two Cox PH modes are different (p-value < 0.0001). And we w
 ## Inference
 
 
-## Adding interaction in the model
+## Adding interaction\index{Interaction} in the model
 
-Interaction in the model is an interesting phenomenon. To illustrate how we manage interaction term, let's start with a model with three covariates, gcs, stroke type and dm. In this model, based on clinical knowledge and curiosity, we would develop a two-way interaction term between gcs and stroke type. This interaction term (a product from gcs and stroke type) means the relationship between stroke type and risk for death is heterogenous in different values of gcs.
+Interaction\index{Interaction} in the model is an interesting phenomenon. To illustrate how we manage interaction\index{Interaction} term, let's start with a model with three covariates, gcs, stroke type and dm. In this model, based on clinical knowledge and curiosity, we would develop a two-way interaction\index{Interaction} term between gcs and stroke type. This interaction\index{Interaction} term (a product from gcs and stroke type) means the relationship between stroke type and risk for death is heterogenous in different values of gcs.
 
 Let's assign stroke type as $st$ and code it as either 1 (HS) and 0 (IS)
 
@@ -520,7 +519,7 @@ $$= ln[h_0(t) + 1beta_1 + gcs\beta_2 + (1gcs)\beta_3 + dm\beta_4] -$$
 $$ln[h_0(t) + 0beta_1 + gcs\beta_2 + (0gcs)\beta_3 + dm\beta_4]$$
 $$=beta_1 + gcs\beta_3$$
 
-To run model with an interaction for Cox PH model, we can:
+To run model with an interaction\index{Interaction} for Cox PH model, we can:
 
 ```{r}
 stroke_noia <- 
@@ -536,16 +535,16 @@ stroke_ia <-
 tidy(stroke_ia, exponentiate = TRUE, conf.int = TRUE)
 ```
 
-It appears that the p-value for the interaction term (a product of gcs and stroke type) is large (p value = 0.852). 
+It appears that the p-value for the interaction\index{Interaction} term (a product of gcs and stroke type) is large (p value = 0.852). 
 
 ```{r}
 anova(stroke_ia, stroke_noia, test = 'Chisq')
 ```
 
 
-And when we run likelihood ratio test, we also observe the same result (p value = 0.851). And because of that, we decide not to add the interaction term in the model. However, it is also recommended to confirm this decision after discussion with subject matter expert, in this case, a stroke physician or neurosurgeon.
+And when we run likelihood ratio test, we also observe the same result (p value = 0.851). And because of that, we decide not to add the interaction\index{Interaction} term in the model. However, it is also recommended to confirm this decision after discussion with subject matter expert, in this case, a stroke physician or neurosurgeon.
 
-## The proportional hazard assumption
+## The proportional hazard assumption\index{Proportional hazard assumption}
 
 ### Risk constant over time
 
@@ -554,12 +553,12 @@ The most important assumption in Cox PH regression is the proportionality of the
 A check of the proportional hazards assumption can be done by looking at the parameter estimates $\beta_1, ..., \beta_q$ over time. And we can safely assume proportional hazards when the estimates don't vary much over time. In most settings, in order to test the PH assumption, we can employ two-step procedure for assessing: 
 
 - calculate covariate specific tests and
-- plot the scaled and smoothed scaled Schoenfeld residuals obtained from the model.
+- plot the scaled and smoothed scaled Schoenfeld residuals\index{Scaled Schoenfeld} obtained from the model.
 
 
 ### Test for PH assumption
 
-In many statistical software, the null hypothesis of constant regression coefficients can be tested, both globally as well as for each covariate. In R, this can be done using the `cox.zph()` function from the **survival** package.
+In many statistical software, the null hypothesis of constant regression coefficients can be tested, both globally as well as for each covariate. In R, this can be done using the `cox.zph()` function from the **survival**\index{survival} package.
 
 
 ```{r}
@@ -579,9 +578,9 @@ stroke_zph_rank
 
 We can plots these residuals
 
-- deviance
-- schoenfeld
-- scaled schoenfeld
+- deviance\index{Deviance}
+- schoenfeld\index{Schoenfeld}
+- scaled schoenfeld\index{Scaled Schoenfeld}
 
 For example, let's start with plotting the residuals
 
@@ -589,7 +588,7 @@ For example, let's start with plotting the residuals
 ggcoxdiagnostics(stroke_mv, type = "deviance")
 ```
 
-Now, we will use schoenfeld
+Now, we will use schoenfeld\index{Schoenfeld}
 
 
 ```{r}
@@ -667,7 +666,7 @@ risks %>%
   slice(1:10)
 ```
 
-- The expected is the expected number of events given the covariates and follow-up time ("expected"). The survival probability for a subject is equal to $exp(-expected)$. 
+- The expected is the expected number of events given the covariates and follow-up time ("expected"). The survival probability\index{Survival probability} for a subject is equal to $exp(-expected)$. 
 
 ```{r}
 expected <- 
@@ -686,11 +685,11 @@ The Cox model is a relative risk model; predictions of type "linear predictor", 
 
 Here, we will generate the
 
-- martingale residuals
-- deviance
-- schoenfeld
-- dfbeta
-- scaled schoenfeld
+- martingale residuals\index{Martingale residuals}
+- deviance\index{Deviance}
+- schoenfeld\index{Schoenfeld}
+- dfbeta\index{Dfbeta}
+- scaled schoenfeld\index{Scaled Schoenfeld}
 
 ```{r}
 rmartingale <- residuals(stroke_mv, 'martingale')
@@ -700,9 +699,9 @@ rdfbeta <- residuals(stroke_mv, 'dfbeta')
 rscaled_sch <- residuals(stroke_mv, 'scaledsch')
 ```
 
-### Influential observations
+### Influential observations\index{Influential observations}
 
-We may check the $dfbetas$ residual. This is residual that comes from a transformation of the score residual. It enables us to check the influence of dropping any single observation on parameter estimates. We may suspect influential observations when the $dfbetas$ residuals greater than 1. 
+We may check the $dfbetas$ residual\index{Dfbeta}. This is residual that comes from a transformation of the score residual. It enables us to check the influence of dropping any single observation on parameter estimates. We may suspect influential observations\index{Influential observations} when the $dfbetas$ residuals\index{Dfbeta} greater than 1. 
 
 
 ```{r}
@@ -716,9 +715,9 @@ ggcoxdiagnostics(stroke_mv,
 
 
 
-## Plot the adjusted survival 
+## Plot the adjusted survival\index{Adjusted survival} 
 
-The function `surv_adjustedcurves()` calculates while the function `ggadjustedcurves()` plots adjusted survival curves for the coxph model. The main idea behind this function is to present expected survival curves calculated based on Cox model separately for subpopulations. 
+The function `surv_adjustedcurves()` calculates while the function `ggadjustedcurves()` plots adjusted survival\index{Adjusted survival} curves for the coxph model. The main idea behind this function is to present expected survival curves calculated based on Cox model separately for subpopulations. 
 
 
 ```{r}

@@ -71,7 +71,7 @@ tbl_summary(by = status,
   bold_labels()
 ```
 
-## Weibull (Accelerated Failure Time)
+## Weibull (Accelerated Failure Time)\index{Weibull}
 
 ```{r}
 wei.mod.aft <- flexsurvreg(Surv(survivaltime, status) ~ age + surgery + marital, 
@@ -90,7 +90,7 @@ wei.mod.aft
 - Whereas the estimated log time to die in subjects who are separated or divorce or widowed (in comparison to those are married) was $-0.100$. The Acceleration Factor (AF) or Time Ratio (TR) is $\exp(-0.100)$ which is 0.905. The survival time for patients who are separated or divorce or widowed is estimated to be $90.5\%$ of that of patients who are married. Another way to state the effect is that survival time among patients who are separated or divorce or widowed is shorter by $9.5\%$ when adjusted for surgery status and age. The period to die could be range between shorter by $26.7\%$ and longer by $12.0\%$ when the similar model applied in the similar population. However, this factor is not a significant contribution (Adj. TR = 0.905, $95\%$ CI = 0.733,1.12).
 
 
-## Weibull (Proportional Hazard)
+## Weibull (Proportional Hazard)\index{Weibull}
 
 ```{r}
 wei.mod.ph <- flexsurvreg(Surv(survivaltime, status) ~ age + marital + surgery, 
@@ -108,19 +108,19 @@ wei.mod.ph
 
 - On the other hands, Patients who are single has significantly increase hazard of death by $33.4\%$ as compared to patients who are married when adjusted for age and surgery status. The increment of hazard of death could be range between $13.4\%$ and $56.8\%$ when the similar model applied in the similar population (Adj. HR = 1.334, $95\%$ CI = 1.134,1.568).
 
-## Model adequacy for Weibull distribution
+## Model adequacy for Weibull distribution\index{Weibull}
 
 ```{r}
 WeibullDiag(Surv(time = d1$survivaltime, event = d1$status == 1) ~ surgery, 
             data = d1)
 ```
 
-Weibull regression diagnostic plot showing that the lines for surgery status are generally parallel and linear in its scale. Thus, the Weibull model is fit.
+Weibull\index{Weibull} regression diagnostic\index{Regression diagnostics} plot showing that the lines for surgery status are generally parallel and linear in its scale. Thus, the Weibull\index{Weibull} model is fit.
 
 ```{r}
 WeibullDiag(Surv(time = d1$survivaltime, event = d1$status == 1) ~ marital, data = d1)
 ```
 
-Weibull regression diagnostic plot showing that the lines for marital status are generally parallel and linear in its scale. Thus, the Weibull model is fit.
+Weibull\index{Weibull} regression diagnostic\index{Regression diagnostics} plot showing that the lines for marital status are generally parallel and linear in its scale. Thus, the Weibull\index{Weibull} model is fit.
 
 

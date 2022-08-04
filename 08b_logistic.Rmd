@@ -18,16 +18,16 @@ Some data come with multinomial outcomes in which case, the outcome variable is 
 
 Variables with more than two levels are known as either:
 
-1.  multinomial data
-2.  polychotomous data
-3.  polytomous data
+1.  multinomial data\index{Multinomial data}
+2.  polychotomous data\index{Polychotomous data}
+3.  polytomous data\index{Polytomous data}
 
-If we employ logistic regression to such data, then the analysis is known as polytomous or multinomial logistic regression. Again, the polychotomous outcome does not have any natural order. When the categories of the outcome variable do have a natural order, ordinal logistic regression is preferred. 
+If we employ logistic regression to such data, then the analysis is known as polytomous or multinomial logistic regression. Again, the polychotomous outcome does not have any natural order. When the categories of the outcome variable do have a natural order, ordinal logistic regression\index{Ordinal logistic regression} is preferred. 
 
 
-## Examples of multinomial outcome variable 
+## Examples of multinomial outcome variables\index{Multinomial outcome variable} 
 
-Examples of data with polychotomous outcome variables (with more than two levels) include:
+Examples of data with polychotomous outcome variables\index{Polychotomous outcome variable} (with more than two levels) include:
 
 1.  disease symptoms that have been classified by subjects as being absent, mild, moderate, or severe,
 2.  tumour invasiveness  classified as in situ, locally invasive, ormetastatic, or
@@ -45,45 +45,45 @@ Other models that can analyze data with polychotomous outcome include:
 2. Alternative-specific variables  
 
 
-## Estimation for Multinomial logit model
+## Estimation for Multinomial logit model\index{Multinomial logit model}
 
 Remember, interpreting and assessing the significance of the estimated coefficients are the main objectives in regression analysis. in multinomial logistic regression, we would like to model the relationship between covariates with the outcome variable that has more than two categories but without ordering or ranking. 
 
-The actual values taken by the dependent variable are irrelevant. In Stata, the **exponentiated beta** $\exp^{\beta}$ will generate the so-called the **relative-risk ratio**. The dependent variable again, is a discrete variable and the model is estimated using maximum likelihood.
+The actual values taken by the dependent variable are irrelevant. In Stata\index{STATA}, the **exponentiated beta** $\exp^{\beta}$ will generate the so-called the **relative-risk ratio**\index{Relative-risk ratio}. The dependent variable again, is a discrete variable and the model is estimated using maximum likelihood.
 
 In multinomial logistic regression for example in data with three categories of the outcome, the sum of the probabilities for the three outcome categories must be equal to 1 (the total probability). The comparison is done between two categories each time. Because of that, each comparison considers only two probabilities, and the probabilities in the ratio do not sum to 1. Thus, the two odds-like expressions in multinomial logistic regression are not true odds.
 
 Multinomial logistic regression can be thought as of simultenously fitting binary logits for all comparisons among the alternatives.
 
-### Log Odds and Odds Ratios
+### Log Odds\index{Log odds} and Odds Ratios\index{Odds ratio}
 
 In the special case where the covariate is binary, coded 0 or 1, we simplify the notation to $OR_j = OR_j(1,0)$. Let use an example where data have 3 categories of outcome; 0,1 and 2. 
 
 Let's say we have a dataset with the outcome variable, $Y$, and is coded as $0, 1,$ or $2$. In practice one should check that the software package that is going to be used allows a $0$ code as the smallest category. We have used packages that require that the codes begin with $1$.
 
-SO the logit functions (log odds) when the outcome is a D variable with (0,1 and 2 values) are as below
+SO the logit functions (log odds\index{Log odds}) when the outcome is a D variable with (0,1 and 2 values) are as below
 
-1.  the log odds for comparison between 0 and 1 is
+1.  the log odds\index{Log odds} for comparison between 0 and 1 is
 
 $$g_1(x) = ln\frac{P(D=1|X_1)} {P(D=0|X_1)}=\alpha_1 + (\beta_{11}X_1)$$
 
-2.  and, the log odds for comparison between 0 and 2 is
+2.  and, the log odds\index{Log odds} for comparison between 0 and 2 is
 
 $$g_2(x) =  ln\frac{P(D=2|X_1)} {P(D=0|X_1)}=\alpha_2 + (\beta_{21}X_1)$$
 
-If for example, we assume that the outcome labelled with $Y=0$ is the reference outcome. The subscript on the odds ratio indicates which outcome is being compared to the reference category outcome. The odds ratio of outcome $Y = j$ versus $Y = 0$ for the covariate values of $x = a$ versus $x = b$ is:
+If for example, we assume that the outcome labelled with $Y=0$ is the reference outcome. The subscript on the odds ratio\index{Odds ratio} indicates which outcome is being compared to the reference category outcome. The odds ratio\index{Odds ratio} of outcome $Y = j$ versus $Y = 0$ for the covariate values of $x = a$ versus $x = b$ is:
 
 $$OR_{j}(a,b)= \frac{Pr(Y=j|x=a)/(Pr(Y=0|x=a)} {Pr(Y=j|x=b)/Pr(Y=0|x=b)}$$
 
-Each odds ratio is calculated in a manner similar to that used in standard logistic regression. That is:
+Each odds ratio\index{Odds ratio} is calculated in a manner similar to that used in standard logistic regression. That is:
 
 $$OR_1(X=1,X=0)= \frac{Pr(D=1|X=1)/(Pr(D=0|X=1)} {Pr(Y=1|X=0)/Pr(D=0|X=0)}=\exp^{\beta_{11}}$$
 
 $$OR_2(X=2,X=0)= \frac{Pr(D=2|X=1)/(Pr(D=0|X=1)} {Pr(D=2|X=0)/Pr(D=0|X=0)}=\exp^{\beta_{21}}$$
 
-### Conditional probabilities
+### Conditional probabilities\index{Conditional probabilities}
 
-The conditional probabilities for the multinomial logit model are: 
+The conditional probabilities\index{Conditional probabilities} for the multinomial logit model\index{Multinomial logit model} are: 
 
 $$Pr(D = 0 | x) = \frac{1}{1+e^{g_1(x)} + e^{g_2(x)}}$$
 
@@ -109,7 +109,7 @@ library(gtsummary)
 
 ### Dataset
 
-The dataset we are going to use comes from the low birth weight dataset. The dataset can be loaded from **aplore3** package. In this chapter, we have categorized variable low from a numerical variable to a categorical variable. 
+The dataset we are going to use comes from the low birth weight dataset. The dataset can be loaded from **aplore3**aplore3 package. In this chapter, we have categorized variable low from a numerical variable to a categorical variable. 
 
 
 - me: the outcome variable is mammography experience (0 = never, 1 = within a year, 2 = over a year ago)
@@ -121,7 +121,7 @@ The dataset we are going to use comes from the low birth weight dataset. The dat
 
 ### Read data
 
-We will use `haven::read_dta()` function to read stata `.dta` data into the memory. Remember, we can also use `foreign::read.dta()` function to read stata `.dta` data. It is your choice.  
+We will use `haven::read_dta()`\index{haven} function to read stata\index{STATA} `.dta` data into the memory. Remember, we can also use `foreign::read.dta()`\index{foreign} function to read stata\index{STATA} `.dta` data. It is your choice.  
 
 We use `here()` to indicate that the folder `data` contains the dataset `mammog9.dta` 
 
@@ -185,7 +185,7 @@ dat.m1 %>%
 
 ## Univariable multinomial logistic regression 
 
-We will use **VGAM** package and we need to reverse the levels for variable **me2** to replicate the outputs in Chapter 8 from tthe Applied Logistic Regression book [@Hosmer2013-03-22]. To do that, we make the group `never` (the last group) as the reference category.
+We will use **VGAM**\index{VGAM} package and we need to reverse the levels for variable **me2** to replicate the outputs in Chapter 8 from tthe Applied Logistic Regression book [@Hosmer2013-03-22]. To do that, we make the group `never` (the last group) as the reference category.
 
 The steps below:
 
@@ -206,7 +206,7 @@ dat.m1 <-
 table(dat.m1$me) ; summary(dat.m1$me2) ; summary(dat.m1$me3)
 ```
 
-The function `VGAM::vglm()` runs the multinomial logistic regression. Using the `vglm()`A function we will estimate a multinomial logit model for 
+The function `VGAM::vglm()` runs the multinomial logistic regression. Using the `vglm()`A function we will estimate a multinomial logit model\index{Multinomial logit model} for 
 
 1.  group 1 vs group 3 : over a year ago vs never did me
 2.  group 2 vs group 3 : within a year ago vs never did me
@@ -215,7 +215,7 @@ So, the reference group is - again -  the *never* group.
 
 The steps we are taking are:
 
-- Load the **VGAM** library
+- Load the **VGAM**\index{VGAM} library
 - Estimate the model and name the model object as `fitmlog1`
 - Return the result of `fitmlog1`
 
@@ -272,7 +272,7 @@ b_ci_fitmlog2
 ```
 
 
-Afterwards, we will *exponentiate* the coefficients to obtain the **relative-risk ratio**. And combine the results to the previous table. Then we will name the columns of the object `tab_fitmlog2`. 
+Afterwards, we will *exponentiate* the coefficients to obtain the **relative-risk ratio**\index{Relative-risk ratio}. And combine the results to the previous table. Then we will name the columns of the object `tab_fitmlog2`. 
 
 ```{r}
 rrr_fitmlog2 <- exp(b_ci_fitmlog2)
@@ -282,7 +282,7 @@ colnames(tab_fitmlog2) <- c('b', 'lower b', 'upper b',
 tab_fitmlog2
 ```
 
-## Multivariable multinomial logistic regression 
+## Multivariable multinomial logistic regression\index{Multivariable multinomial logistic regression} 
 
 We will add other covariates to our model and name the new (multivariable) model as `fitmlog3`. Using the `factor()` function, we  could easily convert the numeric variables (for example `sympt`) to a categorical variable.
 
@@ -338,8 +338,8 @@ summary(fitmlog5)
 
 The sequence of codes below will:
 
-1. return the log odds and the RRR 
-2. return the $95\%$ CI for the log odds and the CI for RRR
+1. return the log odds\index{Log odds} and the RRR 
+2. return the $95\%$ CI for the log odds\index{Log odds} and the CI for RRR
 3. combine the objects into a table
 4. rename the columns
 
@@ -379,7 +379,7 @@ predict.vgam(fitmlog5, type = 'response') %>%
 
 ## Presentation of table of statistics 
 
-We can make a *better* table using **knitr** and **kableExtra** packages
+We can make a *better* table using **knitr**\index{knitr} and **kableExtra**\index{kableExtra} packages
 
 ```{r}
 library(knitr)
