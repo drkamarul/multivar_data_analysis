@@ -1,14 +1,20 @@
 # Missing data
 
-## Introduction
+## Objectives
 
-### Background
+At the end of the chapter, readers will be able to:
+
+- To perform a simple imputation\index{Simple imputation}
+- To perform a single imputation\index{Single imputation}
+- To perform a multiple imputation
+
+## Introduction
 
 Missing data\index{Missing data} data is quite a common issue in research. The causes of missing data should always be investigated and more data should be collected if possible. There are three types of missing data:
 
-1.  Missing completely at random (MCAR\index{MCAR})\
-2.  Missing at random (MAR\index{MAR})\
-3.  Missing not at random (MNAR\index{MNAR})
+1. Missing completely at random (MCAR\index{MCAR})
+2. Missing at random (MAR\index{MAR})
+3. Missing not at random (MNAR\index{MNAR})
 
 ```{r NAtype, out.width="65%", echo=FALSE, fig.cap="Illustration of missing data mechanism for the three types of missing data. X represents an observed variable, Y represents a variable with part of missing values that have been observed, Z represents a cause of missing values and R represents a variable with part of missing values that have been missing."}
 knitr::include_graphics("NAtype.png")
@@ -20,25 +26,17 @@ Missing data (*R*) is said to be MAR\index{MAR} if the cause of missing data (*Z
 
 Lastly, the missing data (*R*) is considered MNAR\index{MNAR} if the cause of missing data (*Z*) is related to the variable itself (*Y*) and to other variables (*X*) as well. Also, the missingness is considered MNAR\index{MNAR} if the causes completely unknown to us. In other words, we can not logically deduce that the missing data fit MCAR\index{MCAR} or MAR\index{MAR} types. For example, missing a weight information for an obese individuals as the normal weighing scale may not able to weigh the individuals. Thus, the missing weight values (*R*) is considered MNAR\index{MNAR} as the missingness is related the variable itself (*Y*). However, we can never be sure of this without a further investigation about the mechanism of missingnness and its causes. MNAR\index{MNAR} is the most problematic type among the three. There are a few approaches to differentiate between MCAR\index{MCAR} and MAR-MNAR. However, an approach to differentiate between MAR\index{MAR} and MNAR\index{MNAR} has yet to be proposed. Thus, we need to use a logical reasoning to differentiate between the two types.
 
-### Objectives
-
-At the end of the chapter, the reader will be able to:
-
--   To perform a simple imputation\index{Simple imputation}\
--   To perform a single imputation\index{Single imputation}\
--   To perform a multiple imputation
-
 ## Preliminaries
 
 ### Packages
 
 We will use these packages:
 
--   `mice`\index{mice}: for the single and multiple imputation\
--   `VIM`\index{VIM}: for missing data exploration\
--   `naniar`\index{naniar}: for missing data exploration\
--   `tidyverse`\index{tidyverse}: for data wrangling and manipulation\
--   `gtsummary`\index{gtsummary}: to provide a nice result in a table
+- **mice**\index{mice}: for the single and multiple imputation
+- **VIM**\index{VIM}: for missing data exploration
+- **naniar**\index{naniar}: for missing data exploration
+- **tidyverse**\index{tidyverse}: for data wrangling and manipulation
+- **gtsummary**\index{gtsummary}: to provide a nice result in a table
 
 ```{r, warning=FALSE, message=FALSE}
 library(mice)
@@ -103,8 +101,8 @@ md.pattern(coroNA, rotate.names = TRUE)
 
 Additionally, we can assess the correlation:
 
-1.  Between variables with missing values\
-2.  Between variables with missing values and variable with non-missing values
+1. Between variables with missing values
+2. Between variables with missing values and variable with non-missing values
 
 First, we need to take variables with missing values only. Then, we code a missing value with 1 and non-missing value with 0.
 
@@ -143,16 +141,16 @@ mcar_test(coroNA)
 
 We going to cover four approaches to handling missing data:
 
-1.  Listwise deletion\index{Listwise deletion}\
-2.  Simple imputation\index{Simple imputation}:\
-    -   Mean substitution\
-    -   Median substitution\
-    -   Mode substitution\
-3.  Single imputation\index{Single imputation}:\
-    -   Regression imputation\
-    -   Stochastic regression imputation\
-    -   Decision tree imputation\
-4.  Multiple imputation\index{Multiple imputation}
+1. Listwise deletion\index{Listwise deletion}
+2. Simple imputation\index{Simple imputation}:
+    + Mean substitution
+    + Median substitution
+    + Mode substitution
+3. Single imputation\index{Single imputation}:
+    + Regression imputation
+    + Stochastic regression imputation
+    + Decision tree imputation
+4. Multiple imputation\index{Multiple imputation}
 
 Each approach has their own caveats which we will cover in each section below.
 
@@ -171,7 +169,7 @@ As shown in the information above (at the bottom), 136 rows or observations were
 
 A simple imputation\index{Simple imputation} includes mean, median and mode substitution is a relatively easy approach. In this approach, the missing values is replaced by a mean or median for numerical variable, and mode for categorical variable. This simple imputation\index{Simple imputation} approach only appropriate if missing data is MCAR\index{MCAR} and the amount of missing data is relatively small.
 
-1.  Mean substitution
+1. Mean substitution
 
 `replace_na` will replace the missing values in age with its mean.
 
@@ -183,7 +181,7 @@ mean_sub <-
 summary(mean_sub)
 ```
 
-2.  Median substitution
+2. Median substitution
 
 `replace_na` will replace the missing values in age with its median.
 
@@ -195,7 +193,7 @@ med_sub <-
 summary(med_sub)
 ```
 
-3.  Mode substitution
+3. Mode substitution
 
 We need to find the mode, the most frequent level or group in the variable. In race variable, it is malay.
 
@@ -217,7 +215,7 @@ summary(mode_sub)
 
 In single imputation\index{Single imputation}, missing data is imputed by any methods producing a single set of a complete dataset. In facts, the simple imputation\index{Simple imputation} approaches (mean, median and mode) are part of single imputation\index{Single imputation} techniques. Single imputation\index{Single imputation} is better compared to the previous techniques that we have covered so far. This approach incorporate more information from other variables to impute the missing values. However, this approach produce a result with a small standard error, which reflect a false precision in the result. Additionally, a single imputation\index{Single imputation} approach do not take into account uncertainty about the missing data (except for stochastic regression imputation). Additionally, this approach is applicable if the missing data is at least MAR\index{MAR}.
 
-1.  Regression imputation
+1. Regression imputation
 
 We will do a linear regression imputation for numerical variables (age and chol) and multinomial or polytomous logistic regression\index{Multinomial logistic regression} for categorical variable (since race has three levels; malay, chinese and indian).
 
@@ -240,11 +238,11 @@ meth
 
 `mice()` function contains a few arguments:
 
--   `m`: number of imputed sets (will be used in the multiple imputation\index{Multiple imputation} later)\
--   `method`: to specify a method of imputation\
--   `predictorMatrix`: to specify predictors for imputation\
--   `printFlag`: print history on the R console\
--   `seed`: random number for reproducibility
+- `m`: number of imputed sets (will be used in the multiple imputation\index{Multiple imputation} later)
+- `method`: to specify a method of imputation
+- `predictorMatrix`: to specify predictors for imputation
+- `printFlag`: print history on the R console
+- `seed`: random number for reproducibility
 
 ```{r}
 regImp <- mice(coroNA %>% select(-id), 
@@ -254,9 +252,9 @@ regImp
 
 Here, we can see the summary of our imputation model:
 
-1.  Number of multiple imputation\index{Multiple imputation}\
-2.  Imputation methods\
-3.  PredictorMatrix
+1. Number of multiple imputation\index{Multiple imputation}
+2. Imputation methods
+3. PredictorMatrix
 
 We can further assess the full predictor matrix from the model.
 
@@ -288,7 +286,7 @@ coro_regImp <- complete(regImp, 1)
 summary(coro_regImp)
 ```
 
-2.  Stochastic regression imputation
+2. Stochastic regression imputation
 
 Stochastic regression imputation is an extension of regression imputation. This method attempts to account for the missing data uncertainty by adding a noise or extra variance. This method only applicable for numerical variable.
 
@@ -322,7 +320,7 @@ coro_srImp <- complete(srImp, 1)
 summary(coro_srImp)
 ```
 
-3.  Decision tree imputation
+3. Decision tree imputation
 
 Decision tree or classification and regression tree (CART) is a popular method in machine learning area. This method can be applied to impute a missing values for both numerical and categorical variables.
 
@@ -406,15 +404,15 @@ pool(lr_mi) %>%
 
 `mice` package\index{mice} has provided an easy flow to run the analysis for multiple imputation\index{Multiple imputation}:
 
-1.  `mice()`: impute the missing data\
-2.  `with()`: run a statistical analysis\
-3.  `pool()`: pool the results
+1. `mice()`: impute the missing data
+2. `with()`: run a statistical analysis
+3. `pool()`: pool the results
 
 Additionally, a model comparison can be done as well. There are three methods available for the model comparison:
 
-1.  `D1()`: multivariate Wald test\
-2.  `D2()`: pools test statistics from each analysis of the imputed datasets\
-3.  `D3()`: likelihood-ratio test statistics
+1. `D1()`: multivariate Wald test
+2. `D2()`: pools test statistics from each analysis of the imputed datasets
+3. `D3()`: likelihood-ratio test statistics
 
 `D2()` is less powerful compared to the other two methods.
 
@@ -436,10 +434,16 @@ Also, we get a similar result from the remaining two methods for the model compa
 
 `gtsummary`\index{gtsummary} package can be used for all the analyses run on the approaches of handling missing data that we have covered in this chapter. Here is an example to get a nice table using `tbl_regression()` from a linear regression model run on the multiple imputation\index{Multiple imputation} approach.
 
-```{r, warning=FALSE, message=FALSE}
+```{r warning=FALSE, message=FALSE, echo=TRUE, eval=FALSE}
 tbl_regression(lr_mi2)
 ```
 
-## References
+```{r warning=FALSE, message=FALSE, echo=FALSE, eval=TRUE}
+tbl_regression(lr_mi2) %>% 
+  modify_footnote(everything() ~ NA, abbreviation = TRUE) %>% 
+  as_gt()
+```
+
+## Resources
 
 We suggest @Schafer2002 and @kang2013 for theoretical details on the missing data, @Zhang2015 for missing data exploration and @heyman2019 and @buuren2018 for more details on single and multiple imputation\index{Multiple imputation}.
