@@ -1,0 +1,798 @@
+\indexentry{RStudio|hyperpage}{1}
+\indexentry{RStudio cloud|hyperpage}{1}
+\indexentry{RStudio|hyperpage}{1}
+\indexentry{RStudio cloud|hyperpage}{1}
+\indexentry{RStudio|hyperpage}{1}
+\indexentry{R script|hyperpage}{1}
+\indexentry{Packages|hyperpage}{1}
+\indexentry{RStudio cloud|hyperpage}{1}
+\indexentry{RStudio cloud|hyperpage}{1}
+\indexentry{RStudio|hyperpage}{1}
+\indexentry{RStudio|hyperpage}{1}
+\indexentry{RStudio cloud|hyperpage}{1}
+\indexentry{RStudio cloud|hyperpage}{1}
+\indexentry{RStudio|hyperpage}{1}
+\indexentry{RStudio IDE|hyperpage}{2}
+\indexentry{RStudio cloud|hyperpage}{2}
+\indexentry{RStudio cloud|hyperpage}{2}
+\indexentry{RStudio cloud|hyperpage}{2}
+\indexentry{RStudio cloud|hyperpage}{3}
+\indexentry{RStudio cloud|hyperpage}{3}
+\indexentry{SPSS|hyperpage}{3}
+\indexentry{Bluesky statistics|hyperpage}{3}
+\indexentry{jamovi|hyperpage}{3}
+\indexentry{jamovi|hyperpage}{5}
+\indexentry{SPSS|hyperpage}{5}
+\indexentry{SAS|hyperpage}{5}
+\indexentry{jamovi|hyperpage}{5}
+\indexentry{jamovi|hyperpage}{5}
+\indexentry{jamovi|hyperpage}{5}
+\indexentry{RStudio server|hyperpage}{5}
+\indexentry{RStudio|hyperpage}{5}
+\indexentry{RStudio workbench|hyperpage}{5}
+\indexentry{RStudio server|hyperpage}{5}
+\indexentry{RStudio server|hyperpage}{5}
+\indexentry{RStudio server|hyperpage}{5}
+\indexentry{RStudio server|hyperpage}{5}
+\indexentry{RStudio server|hyperpage}{6}
+\indexentry{RStudio workbench|hyperpage}{6}
+\indexentry{RStudio|hyperpage}{6}
+\indexentry{RStudio IDE|hyperpage}{6}
+\indexentry{RStudio IDE|hyperpage}{7}
+\indexentry{RStudio IDE|hyperpage}{7}
+\indexentry{RStudio|hyperpage}{7}
+\indexentry{RStudio|hyperpage}{7}
+\indexentry{RStudio|hyperpage}{8}
+\indexentry{RStudio|hyperpage}{8}
+\indexentry{RStudio|hyperpage}{8}
+\indexentry{RStudio|hyperpage}{8}
+\indexentry{RStudio|hyperpage}{8}
+\indexentry{RStudio|hyperpage}{8}
+\indexentry{RStudio|hyperpage}{11}
+\indexentry{RStudio cloud|hyperpage}{11}
+\indexentry{RStudio|hyperpage}{11}
+\indexentry{RStudio cloud|hyperpage}{11}
+\indexentry{RStudio|hyperpage}{11}
+\indexentry{RStudio|hyperpage}{11}
+\indexentry{RStudio|hyperpage}{11}
+\indexentry{RStudio|hyperpage}{11}
+\indexentry{RStudio|hyperpage}{13}
+\indexentry{Packages|hyperpage}{13}
+\indexentry{R script|hyperpage}{17}
+\indexentry{Packages|hyperpage}{17}
+\indexentry{R script|hyperpage}{17}
+\indexentry{R script|hyperpage}{17}
+\indexentry{R script|hyperpage}{17}
+\indexentry{R script|hyperpage}{17}
+\indexentry{R script|hyperpage}{17}
+\indexentry{R script|hyperpage}{18}
+\indexentry{R script|hyperpage}{18}
+\indexentry{R script|hyperpage}{18}
+\indexentry{Help pane|hyperpage}{20}
+\indexentry{Packages|hyperpage}{21}
+\indexentry{Packages|hyperpage}{21}
+\indexentry{Packages|hyperpage}{21}
+\indexentry{Packages|hyperpage}{21}
+\indexentry{Packages|hyperpage}{21}
+\indexentry{Packages|hyperpage}{21}
+\indexentry{CRAN|hyperpage}{21}
+\indexentry{Packages|hyperpage}{21}
+\indexentry{Task Views|hyperpage}{21}
+\indexentry{Task Views|hyperpage}{21}
+\indexentry{Packages|hyperpage}{21}
+\indexentry{CRAN|hyperpage}{21}
+\indexentry{Packages|hyperpage}{21}
+\indexentry{Packages|hyperpage}{21}
+\indexentry{Packages|hyperpage}{21}
+\indexentry{Packages|hyperpage}{23}
+\indexentry{Packages|hyperpage}{23}
+\indexentry{GUI|hyperpage}{23}
+\indexentry{Packages|hyperpage}{23}
+\indexentry{tidyverse|hyperpage}{23}
+\indexentry{Packages|hyperpage}{24}
+\indexentry{GitHub repository|hyperpage}{24}
+\indexentry{Working directory|hyperpage}{24}
+\indexentry{Working directory|hyperpage}{24}
+\indexentry{Working directory|hyperpage}{24}
+\indexentry{RStudio IDE|hyperpage}{25}
+\indexentry{New project|hyperpage}{25}
+\indexentry{New project|hyperpage}{25}
+\indexentry{RStudio|hyperpage}{26}
+\indexentry{RStudio|hyperpage}{26}
+\indexentry{RStudio|hyperpage}{26}
+\indexentry{RStudio cloud|hyperpage}{27}
+\indexentry{RStudio cloud|hyperpage}{27}
+\indexentry{RStudio cloud|hyperpage}{27}
+\indexentry{RStudio cloud|hyperpage}{27}
+\indexentry{RStudio cloud|hyperpage}{27}
+\indexentry{RStudio cloud|hyperpage}{31}
+\indexentry{GitHub|hyperpage}{31}
+\indexentry{GitHub|hyperpage}{31}
+\indexentry{GitHub|hyperpage}{31}
+\indexentry{GitHub|hyperpage}{32}
+\indexentry{GitHub|hyperpage}{32}
+\indexentry{RStudio cloud|hyperpage}{32}
+\indexentry{RStudio cloud|hyperpage}{32}
+\indexentry{RStudio cloud|hyperpage}{33}
+\indexentry{Git repository|hyperpage}{34}
+\indexentry{GitHub|hyperpage}{34}
+\indexentry{Clone|hyperpage}{34}
+\indexentry{Clone|hyperpage}{34}
+\indexentry{RStudio cloud|hyperpage}{34}
+\indexentry{RStudio cloud|hyperpage}{34}
+\indexentry{New project|hyperpage}{36}
+\indexentry{GitHub repository|hyperpage}{36}
+\indexentry{GitHub|hyperpage}{36}
+\indexentry{Working directory|hyperpage}{39}
+\indexentry{GitHub repository|hyperpage}{39}
+\indexentry{graphics|hyperpage}{42}
+\indexentry{ggplot2|hyperpage}{42}
+\indexentry{lattice|hyperpage}{43}
+\indexentry{graphics|hyperpage}{43}
+\indexentry{survminer|hyperpage}{43}
+\indexentry{sjPlot|hyperpage}{43}
+\indexentry{ggplot2|hyperpage}{43}
+\indexentry{ggplot2|hyperpage}{43}
+\indexentry{ggplot2|hyperpage}{43}
+\indexentry{Grammar of graphics|hyperpage}{43}
+\indexentry{ggplot2|hyperpage}{43}
+\indexentry{Scatterplot|hyperpage}{43}
+\indexentry{ggplot2|hyperpage}{43}
+\indexentry{ggplot2|hyperpage}{43}
+\indexentry{Grammar of graphics|hyperpage}{43}
+\indexentry{lattice|hyperpage}{43}
+\indexentry{R markdown|hyperpage}{44}
+\indexentry{SPSS|hyperpage}{45}
+\indexentry{STATA|hyperpage}{45}
+\indexentry{SAS|hyperpage}{45}
+\indexentry{haven|hyperpage}{45}
+\indexentry{rio|hyperpage}{45}
+\indexentry{SAS|hyperpage}{45}
+\indexentry{SPSS|hyperpage}{45}
+\indexentry{STATA|hyperpage}{45}
+\indexentry{haven|hyperpage}{45}
+\indexentry{SAS|hyperpage}{45}
+\indexentry{SAS|hyperpage}{45}
+\indexentry{SPSS|hyperpage}{45}
+\indexentry{STATA|hyperpage}{45}
+\indexentry{ggplot2|hyperpage}{45}
+\indexentry{tidyverse|hyperpage}{45}
+\indexentry{tidyverse|hyperpage}{45}
+\indexentry{tidyverse|hyperpage}{45}
+\indexentry{dplyr|hyperpage}{45}
+\indexentry{readr|hyperpage}{45}
+\indexentry{ggplot2|hyperpage}{45}
+\indexentry{here|hyperpage}{46}
+\indexentry{tidyverse|hyperpage}{46}
+\indexentry{tidyverse|hyperpage}{46}
+\indexentry{tidyverse|hyperpage}{46}
+\indexentry{tidyverse|hyperpage}{46}
+\indexentry{GUI|hyperpage}{46}
+\indexentry{tidyverse|hyperpage}{46}
+\indexentry{gapminder|hyperpage}{48}
+\indexentry{gapminder|hyperpage}{48}
+\indexentry{gapminder|hyperpage}{48}
+\indexentry{gapminder|hyperpage}{48}
+\indexentry{Basic plots|hyperpage}{50}
+\indexentry{Scatterplot|hyperpage}{50}
+\indexentry{ggplot2|hyperpage}{50}
+\indexentry{tidyverse|hyperpage}{50}
+\indexentry{Scatterplot|hyperpage}{51}
+\indexentry{Scatterplot|hyperpage}{51}
+\indexentry{ggplot2|hyperpage}{51}
+\indexentry{Scatterplot|hyperpage}{52}
+\indexentry{ggplot2|hyperpage}{53}
+\indexentry{ggplot2|hyperpage}{53}
+\indexentry{ggplot2|hyperpage}{58}
+\indexentry{Scatterplot|hyperpage}{58}
+\indexentry{Line plot|hyperpage}{59}
+\indexentry{Scatterplot|hyperpage}{64}
+\indexentry{Bar chart|hyperpage}{67}
+\indexentry{Saving plots|hyperpage}{76}
+\indexentry{here|hyperpage}{78}
+\indexentry{here|hyperpage}{78}
+\indexentry{Data wrangling|hyperpage}{81}
+\indexentry{Data wrangling|hyperpage}{81}
+\indexentry{Data transformation|hyperpage}{81}
+\indexentry{Data wrangling|hyperpage}{81}
+\indexentry{dplyr|hyperpage}{81}
+\indexentry{dplyr|hyperpage}{81}
+\indexentry{dplyr|hyperpage}{81}
+\indexentry{tidyverse|hyperpage}{81}
+\indexentry{dplyr|hyperpage}{81}
+\indexentry{tidyverse|hyperpage}{82}
+\indexentry{Data transformation|hyperpage}{82}
+\indexentry{Data wrangling|hyperpage}{82}
+\indexentry{New variable|hyperpage}{82}
+\indexentry{dplyr|hyperpage}{82}
+\indexentry{dplyr|hyperpage}{82}
+\indexentry{New variable|hyperpage}{82}
+\indexentry{SPSS|hyperpage}{83}
+\indexentry{STATA|hyperpage}{83}
+\indexentry{SAS|hyperpage}{83}
+\indexentry{haven|hyperpage}{84}
+\indexentry{rio|hyperpage}{84}
+\indexentry{readr|hyperpage}{84}
+\indexentry{foreign|hyperpage}{84}
+\indexentry{readr|hyperpage}{84}
+\indexentry{tidyverse|hyperpage}{84}
+\indexentry{rio|hyperpage}{84}
+\indexentry{readxl|hyperpage}{84}
+\indexentry{haven|hyperpage}{84}
+\indexentry{SPSS|hyperpage}{84}
+\indexentry{STATA|hyperpage}{84}
+\indexentry{SAS|hyperpage}{84}
+\indexentry{here|hyperpage}{84}
+\indexentry{lubridate|hyperpage}{84}
+\indexentry{New variable|hyperpage}{90}
+\indexentry{New variable|hyperpage}{91}
+\indexentry{Group data|hyperpage}{98}
+\indexentry{Summary statistics|hyperpage}{98}
+\indexentry{Group data|hyperpage}{98}
+\indexentry{Categorical variable|hyperpage}{98}
+\indexentry{Summary statistics|hyperpage}{98}
+\indexentry{Group data|hyperpage}{98}
+\indexentry{Group data|hyperpage}{98}
+\indexentry{dplyr|hyperpage}{100}
+\indexentry{dplyr|hyperpage}{100}
+\indexentry{tidyverse|hyperpage}{100}
+\indexentry{Data transformation|hyperpage}{100}
+\indexentry{Categorical variable|hyperpage}{100}
+\indexentry{Data transformation|hyperpage}{100}
+\indexentry{Categorical variable|hyperpage}{100}
+\indexentry{Factor variable|hyperpage}{100}
+\indexentry{Factor variable|hyperpage}{100}
+\indexentry{Recoding variable|hyperpage}{102}
+\indexentry{Categorical variable|hyperpage}{102}
+\indexentry{dplyr|hyperpage}{103}
+\indexentry{dplyr|hyperpage}{103}
+\indexentry{dbplyr|hyperpage}{103}
+\indexentry{Categorical variable|hyperpage}{103}
+\indexentry{haven|hyperpage}{104}
+\indexentry{foreign|hyperpage}{104}
+\indexentry{Numerical variable|hyperpage}{104}
+\indexentry{Data transformation|hyperpage}{104}
+\indexentry{dplyr|hyperpage}{104}
+\indexentry{John Tukey|hyperpage}{105}
+\indexentry{Numerical variable|hyperpage}{106}
+\indexentry{ggplot2|hyperpage}{106}
+\indexentry{ggplot2|hyperpage}{106}
+\indexentry{Faceting|hyperpage}{106}
+\indexentry{tidyverse|hyperpage}{107}
+\indexentry{Data wrangling|hyperpage}{107}
+\indexentry{summarytools|hyperpage}{107}
+\indexentry{Summary statistics|hyperpage}{107}
+\indexentry{patchwork|hyperpage}{107}
+\indexentry{here|hyperpage}{107}
+\indexentry{tidyverse|hyperpage}{107}
+\indexentry{summarytools|hyperpage}{107}
+\indexentry{tidyverse|hyperpage}{107}
+\indexentry{readxl|hyperpage}{108}
+\indexentry{Categorical variable|hyperpage}{117}
+\indexentry{Bar chart|hyperpage}{117}
+\indexentry{Categorical variable|hyperpage}{118}
+\indexentry{Bar chart|hyperpage}{118}
+\indexentry{dplyr|hyperpage}{119}
+\indexentry{tidyverse|hyperpage}{119}
+\indexentry{dplyr|hyperpage}{119}
+\indexentry{dplyr|hyperpage}{120}
+\indexentry{Numerical variable|hyperpage}{121}
+\indexentry{Numerical variable|hyperpage}{121}
+\indexentry{Histogram|hyperpage}{121}
+\indexentry{Numerical variable|hyperpage}{121}
+\indexentry{Histogram|hyperpage}{121}
+\indexentry{Density curve|hyperpage}{122}
+\indexentry{Density curve|hyperpage}{122}
+\indexentry{Histogram|hyperpage}{123}
+\indexentry{Density curve|hyperpage}{123}
+\indexentry{Histogram|hyperpage}{123}
+\indexentry{Density curve|hyperpage}{123}
+\indexentry{Numerical variable|hyperpage}{124}
+\indexentry{Categorical variable|hyperpage}{124}
+\indexentry{Histogram|hyperpage}{124}
+\indexentry{Boxplot|hyperpage}{124}
+\indexentry{Numerical variable|hyperpage}{125}
+\indexentry{Categorical variable|hyperpage}{125}
+\indexentry{Faceting|hyperpage}{125}
+\indexentry{Summary statistics|hyperpage}{126}
+\indexentry{Line plot|hyperpage}{127}
+\indexentry{gapminder|hyperpage}{127}
+\indexentry{Summary statistics|hyperpage}{128}
+\indexentry{Error bar|hyperpage}{129}
+\indexentry{Error bar|hyperpage}{129}
+\indexentry{Error bar|hyperpage}{129}
+\indexentry{Scatterplot|hyperpage}{129}
+\indexentry{Scatterplot|hyperpage}{130}
+\indexentry{Scatterplot|hyperpage}{130}
+\indexentry{ggplot2|hyperpage}{132}
+\indexentry{ggplot2|hyperpage}{132}
+\indexentry{gapminder|hyperpage}{132}
+\indexentry{Linear regression|hyperpage}{133}
+\indexentry{Linear regression|hyperpage}{133}
+\indexentry{Linear regression|hyperpage}{133}
+\indexentry{Linear regression|hyperpage}{133}
+\indexentry{Linear regression|hyperpage}{133}
+\indexentry{Generalized linear models (GLMs)|hyperpage}{133}
+\indexentry{Logistic regression|hyperpage}{133}
+\indexentry{Poisson regression|hyperpage}{133}
+\indexentry{Linear regression|hyperpage}{133}
+\indexentry{Multiple linear regression (MLR)|hyperpage}{134}
+\indexentry{Simple linear regression (SLR)|hyperpage}{134}
+\indexentry{Multiple linear regression (MLR)|hyperpage}{134}
+\indexentry{Model fit|hyperpage}{134}
+\indexentry{foreign|hyperpage}{134}
+\indexentry{SPSS|hyperpage}{134}
+\indexentry{STATA|hyperpage}{134}
+\indexentry{tidyverse|hyperpage}{134}
+\indexentry{psych|hyperpage}{134}
+\indexentry{gtsummary|hyperpage}{134}
+\indexentry{ggplot2|hyperpage}{134}
+\indexentry{ggpubr|hyperpage}{134}
+\indexentry{GGally|hyperpage}{134}
+\indexentry{rsq|hyperpage}{134}
+\indexentry{broom|hyperpage}{134}
+\indexentry{car|hyperpage}{134}
+\indexentry{STATA|hyperpage}{135}
+\indexentry{Simple linear regression (SLR)|hyperpage}{136}
+\indexentry{Simple linear regression (SLR)|hyperpage}{136}
+\indexentry{Simple linear regression (SLR)|hyperpage}{136}
+\indexentry{ANOVA|hyperpage}{136}
+\indexentry{Histogram|hyperpage}{137}
+\indexentry{Box-and-whiskers plot|hyperpage}{137}
+\indexentry{broom|hyperpage}{139}
+\indexentry{Model fit|hyperpage}{139}
+\indexentry{Model fit|hyperpage}{140}
+\indexentry{Normality|hyperpage}{140}
+\indexentry{Linearity|hyperpage}{140}
+\indexentry{Equal variance|hyperpage}{140}
+\indexentry{Normality|hyperpage}{140}
+\indexentry{Equal variance|hyperpage}{140}
+\indexentry{Linearity|hyperpage}{140}
+\indexentry{gtsummary|hyperpage}{141}
+\indexentry{Multiple linear regression (MLR)|hyperpage}{141}
+\indexentry{Multiple linear regression (MLR)|hyperpage}{141}
+\indexentry{Multiple linear regression (MLR)|hyperpage}{141}
+\indexentry{Dummy variable|hyperpage}{142}
+\indexentry{Dummy variable|hyperpage}{142}
+\indexentry{Binary variable|hyperpage}{142}
+\indexentry{Dummy variable|hyperpage}{142}
+\indexentry{Box-and-whiskers plot|hyperpage}{143}
+\indexentry{Multivariable model|hyperpage}{144}
+\indexentry{Exploratory research|hyperpage}{144}
+\indexentry{Variable selection|hyperpage}{145}
+\indexentry{Confirmatory research|hyperpage}{145}
+\indexentry{Expert judgement|hyperpage}{145}
+\indexentry{Variable selection|hyperpage}{145}
+\indexentry{Dummy variable|hyperpage}{146}
+\indexentry{Dummy variable|hyperpage}{147}
+\indexentry{Dummy variable|hyperpage}{147}
+\indexentry{Dummy variable|hyperpage}{147}
+\indexentry{Dummy variable|hyperpage}{147}
+\indexentry{Variable selection|hyperpage}{147}
+\indexentry{Exploratory research|hyperpage}{147}
+\indexentry{Variable selection|hyperpage}{147}
+\indexentry{Stepwise selection|hyperpage}{147}
+\indexentry{Exploratory research|hyperpage}{147}
+\indexentry{Variable selection|hyperpage}{147}
+\indexentry{Forward selection|hyperpage}{147}
+\indexentry{AIC|hyperpage}{147}
+\indexentry{Stepwise selection|hyperpage}{147}
+\indexentry{AIC|hyperpage}{147}
+\indexentry{AIC|hyperpage}{147}
+\indexentry{Backward selection|hyperpage}{148}
+\indexentry{AIC|hyperpage}{148}
+\indexentry{Bidirectional selection|hyperpage}{149}
+\indexentry{AIC|hyperpage}{149}
+\indexentry{Stepwise selection|hyperpage}{149}
+\indexentry{Exploratory research|hyperpage}{149}
+\indexentry{Interaction|hyperpage}{151}
+\indexentry{Interaction|hyperpage}{151}
+\indexentry{Interaction|hyperpage}{151}
+\indexentry{Interaction|hyperpage}{151}
+\indexentry{Interaction|hyperpage}{152}
+\indexentry{Interaction|hyperpage}{152}
+\indexentry{Interaction|hyperpage}{152}
+\indexentry{Interaction|hyperpage}{152}
+\indexentry{Model fit|hyperpage}{152}
+\indexentry{Model fit|hyperpage}{152}
+\indexentry{Model fit|hyperpage}{152}
+\indexentry{Normality|hyperpage}{152}
+\indexentry{Unstandardized residuals|hyperpage}{152}
+\indexentry{Standardized residuals|hyperpage}{154}
+\indexentry{Standardized predicted values|hyperpage}{154}
+\indexentry{Normality|hyperpage}{154}
+\indexentry{Linearity|hyperpage}{154}
+\indexentry{Equal variance|hyperpage}{154}
+\indexentry{Normality|hyperpage}{154}
+\indexentry{Equal variance|hyperpage}{154}
+\indexentry{Linearity|hyperpage}{154}
+\indexentry{Standardized residuals|hyperpage}{154}
+\indexentry{Standardized predicted values|hyperpage}{154}
+\indexentry{Standardized residuals|hyperpage}{154}
+\indexentry{Standardized predicted values|hyperpage}{155}
+\indexentry{Linearity|hyperpage}{155}
+\indexentry{Model fit|hyperpage}{157}
+\indexentry{Model fit|hyperpage}{158}
+\indexentry{Binary logistic regression|hyperpage}{159}
+\indexentry{Multiple binary logistic regression|hyperpage}{159}
+\indexentry{Simple binary logistic regression|hyperpage}{159}
+\indexentry{Multiple binary logistic regression|hyperpage}{159}
+\indexentry{Logistic model|hyperpage}{159}
+\indexentry{Logit model|hyperpage}{159}
+\indexentry{Binary variable|hyperpage}{159}
+\indexentry{Binary variable|hyperpage}{159}
+\indexentry{Ordinal logistic regression|hyperpage}{160}
+\indexentry{Logistic regression|hyperpage}{160}
+\indexentry{Logistic regression|hyperpage}{160}
+\indexentry{STATA|hyperpage}{160}
+\indexentry{Logistic model|hyperpage}{161}
+\indexentry{Logistic model|hyperpage}{161}
+\indexentry{Logit model|hyperpage}{161}
+\indexentry{Log odds|hyperpage}{161}
+\indexentry{Logistic model|hyperpage}{161}
+\indexentry{Logit model|hyperpage}{161}
+\indexentry{Dummy variable|hyperpage}{162}
+\indexentry{stat|hyperpage}{163}
+\indexentry{haven|hyperpage}{163}
+\indexentry{SPSS|hyperpage}{163}
+\indexentry{STATA|hyperpage}{163}
+\indexentry{SAS|hyperpage}{163}
+\indexentry{tidyverse|hyperpage}{163}
+\indexentry{gtsummary|hyperpage}{163}
+\indexentry{broom|hyperpage}{163}
+\indexentry{LogisticDX|hyperpage}{163}
+\indexentry{here|hyperpage}{163}
+\indexentry{STATA|hyperpage}{164}
+\indexentry{Factor variable|hyperpage}{165}
+\indexentry{Factor variable|hyperpage}{165}
+\indexentry{Log odds|hyperpage}{165}
+\indexentry{Simple binary logistic regression|hyperpage}{166}
+\indexentry{Multiple binary logistic regression|hyperpage}{166}
+\indexentry{Simple binary logistic regression|hyperpage}{167}
+\indexentry{Simple binary logistic regression|hyperpage}{167}
+\indexentry{Log odds|hyperpage}{167}
+\indexentry{Logit model|hyperpage}{167}
+\indexentry{broom|hyperpage}{169}
+\indexentry{Log odds|hyperpage}{169}
+\indexentry{Log odds|hyperpage}{169}
+\indexentry{Log odds|hyperpage}{170}
+\indexentry{Multiple binary logistic regression|hyperpage}{170}
+\indexentry{Log odds|hyperpage}{170}
+\indexentry{Log odds|hyperpage}{170}
+\indexentry{Interaction|hyperpage}{170}
+\indexentry{Multivariable model|hyperpage}{172}
+\indexentry{Log odds|hyperpage}{172}
+\indexentry{Log odds|hyperpage}{172}
+\indexentry{Log odds|hyperpage}{172}
+\indexentry{Log odds|hyperpage}{172}
+\indexentry{Log odds|hyperpage}{172}
+\indexentry{Log odds|hyperpage}{173}
+\indexentry{Log odds|hyperpage}{173}
+\indexentry{Odds ratio|hyperpage}{173}
+\indexentry{Log odds|hyperpage}{173}
+\indexentry{Odds ratio|hyperpage}{173}
+\indexentry{Odds ratio|hyperpage}{173}
+\indexentry{Log odds|hyperpage}{174}
+\indexentry{Odds ratio|hyperpage}{174}
+\indexentry{Log odds|hyperpage}{175}
+\indexentry{Interaction|hyperpage}{177}
+\indexentry{Interaction|hyperpage}{177}
+\indexentry{Interaction|hyperpage}{177}
+\indexentry{ANOVA|hyperpage}{177}
+\indexentry{Interaction|hyperpage}{177}
+\indexentry{Interaction|hyperpage}{177}
+\indexentry{Interaction|hyperpage}{177}
+\indexentry{Interaction|hyperpage}{177}
+\indexentry{Interaction|hyperpage}{177}
+\indexentry{Interaction|hyperpage}{178}
+\indexentry{Interaction|hyperpage}{178}
+\indexentry{Interaction|hyperpage}{178}
+\indexentry{Interaction|hyperpage}{178}
+\indexentry{Interaction|hyperpage}{178}
+\indexentry{Interaction|hyperpage}{178}
+\indexentry{Interaction|hyperpage}{178}
+\indexentry{Interaction|hyperpage}{178}
+\indexentry{Log odds|hyperpage}{179}
+\indexentry{Standardized residuals|hyperpage}{179}
+\indexentry{Log odds|hyperpage}{179}
+\indexentry{Log odds|hyperpage}{179}
+\indexentry{Model fit|hyperpage}{181}
+\indexentry{Model fit|hyperpage}{181}
+\indexentry{gtsummary|hyperpage}{183}
+\indexentry{Log odds ratio|hyperpage}{183}
+\indexentry{Odds ratio|hyperpage}{183}
+\indexentry{Multinomial data|hyperpage}{186}
+\indexentry{Polychotomous data|hyperpage}{186}
+\indexentry{Polytomous data|hyperpage}{186}
+\indexentry{Ordinal logistic regression|hyperpage}{186}
+\indexentry{Multinomial outcome variable|hyperpage}{186}
+\indexentry{Polychotomous outcome variable|hyperpage}{186}
+\indexentry{Multinomial logit model|hyperpage}{187}
+\indexentry{STATA|hyperpage}{187}
+\indexentry{Relative-risk ratio|hyperpage}{187}
+\indexentry{Log odds|hyperpage}{188}
+\indexentry{Odds ratio|hyperpage}{188}
+\indexentry{Log odds|hyperpage}{188}
+\indexentry{Log odds|hyperpage}{188}
+\indexentry{Log odds|hyperpage}{188}
+\indexentry{Odds ratio|hyperpage}{188}
+\indexentry{Odds ratio|hyperpage}{188}
+\indexentry{Odds ratio|hyperpage}{188}
+\indexentry{Conditional probabilities|hyperpage}{189}
+\indexentry{Conditional probabilities|hyperpage}{189}
+\indexentry{Multinomial logit model|hyperpage}{189}
+\indexentry{haven|hyperpage}{190}
+\indexentry{STATA|hyperpage}{190}
+\indexentry{foreign|hyperpage}{190}
+\indexentry{STATA|hyperpage}{190}
+\indexentry{VGAM|hyperpage}{194}
+\indexentry{Multinomial logit model|hyperpage}{195}
+\indexentry{VGAM|hyperpage}{195}
+\indexentry{Relative-risk ratio|hyperpage}{198}
+\indexentry{Multivariable multinomial logistic regression|hyperpage}{199}
+\indexentry{Log odds|hyperpage}{205}
+\indexentry{Log odds|hyperpage}{205}
+\indexentry{knitr|hyperpage}{207}
+\indexentry{kableExtra|hyperpage}{207}
+\indexentry{Poisson regression|hyperpage}{209}
+\indexentry{Poisson regression|hyperpage}{209}
+\indexentry{Count data|hyperpage}{209}
+\indexentry{Rate data|hyperpage}{209}
+\indexentry{Generalized linear models (GLMs)|hyperpage}{209}
+\indexentry{Rate data|hyperpage}{209}
+\indexentry{Poisson regression|hyperpage}{209}
+\indexentry{Poisson regression|hyperpage}{209}
+\indexentry{Poisson regression|hyperpage}{209}
+\indexentry{Poisson regression|hyperpage}{209}
+\indexentry{Poisson regression|hyperpage}{210}
+\indexentry{Poisson regression|hyperpage}{210}
+\indexentry{Poisson regression|hyperpage}{210}
+\indexentry{Poisson regression|hyperpage}{210}
+\indexentry{Poisson regression|hyperpage}{210}
+\indexentry{Odds ratio|hyperpage}{210}
+\indexentry{Poisson regression|hyperpage}{210}
+\indexentry{Odds ratio|hyperpage}{211}
+\indexentry{Poisson regression|hyperpage}{211}
+\indexentry{Count data|hyperpage}{211}
+\indexentry{Rate data|hyperpage}{211}
+\indexentry{Poisson regression|hyperpage}{211}
+\indexentry{Model fit|hyperpage}{211}
+\indexentry{Poisson regression|hyperpage}{211}
+\indexentry{tidyverse|hyperpage}{211}
+\indexentry{psych|hyperpage}{211}
+\indexentry{gtsummary|hyperpage}{211}
+\indexentry{broom|hyperpage}{211}
+\indexentry{epiDisplay|hyperpage}{211}
+\indexentry{epiDisplay|hyperpage}{211}
+\indexentry{Poisson regression|hyperpage}{212}
+\indexentry{Poisson regression|hyperpage}{212}
+\indexentry{Poisson regression|hyperpage}{212}
+\indexentry{Poisson regression|hyperpage}{212}
+\indexentry{epiDisplay|hyperpage}{213}
+\indexentry{Confirmatory research|hyperpage}{216}
+\indexentry{Expert judgement|hyperpage}{216}
+\indexentry{Interaction|hyperpage}{218}
+\indexentry{Interaction|hyperpage}{218}
+\indexentry{Interaction|hyperpage}{219}
+\indexentry{Interaction|hyperpage}{219}
+\indexentry{Interaction|hyperpage}{219}
+\indexentry{Interaction|hyperpage}{219}
+\indexentry{Interaction|hyperpage}{219}
+\indexentry{Model fit|hyperpage}{220}
+\indexentry{Poisson regression|hyperpage}{220}
+\indexentry{Model fit|hyperpage}{220}
+\indexentry{Regression diagnostics|hyperpage}{220}
+\indexentry{Standardized residuals|hyperpage}{220}
+\indexentry{epiDisplay|hyperpage}{220}
+\indexentry{Deviance|hyperpage}{220}
+\indexentry{Model fit|hyperpage}{220}
+\indexentry{AIC|hyperpage}{220}
+\indexentry{AIC|hyperpage}{220}
+\indexentry{AIC|hyperpage}{220}
+\indexentry{Variable selection|hyperpage}{220}
+\indexentry{AIC|hyperpage}{221}
+\indexentry{Interaction|hyperpage}{221}
+\indexentry{Interaction|hyperpage}{221}
+\indexentry{Interaction|hyperpage}{221}
+\indexentry{Interaction|hyperpage}{221}
+\indexentry{Model fit|hyperpage}{221}
+\indexentry{Model fit|hyperpage}{221}
+\indexentry{Overdispersion|hyperpage}{222}
+\indexentry{Quasi-Poisson regression|hyperpage}{222}
+\indexentry{Quasi-Poisson regression|hyperpage}{222}
+\indexentry{Regression diagnostics|hyperpage}{222}
+\indexentry{Standardized residuals|hyperpage}{222}
+\indexentry{Interaction|hyperpage}{223}
+\indexentry{Interaction|hyperpage}{225}
+\indexentry{Interaction|hyperpage}{225}
+\indexentry{Interaction|hyperpage}{225}
+\indexentry{Interaction|hyperpage}{226}
+\indexentry{Interaction|hyperpage}{226}
+\indexentry{Interaction|hyperpage}{226}
+\indexentry{Poisson regression|hyperpage}{227}
+\indexentry{Poisson regression|hyperpage}{227}
+\indexentry{Poisson regression|hyperpage}{228}
+\indexentry{Poisson regression|hyperpage}{228}
+\indexentry{Interaction|hyperpage}{235}
+\indexentry{Interaction|hyperpage}{235}
+\indexentry{Interaction|hyperpage}{235}
+\indexentry{Interaction|hyperpage}{235}
+\indexentry{Interaction|hyperpage}{235}
+\indexentry{Model fit|hyperpage}{236}
+\indexentry{Model fit|hyperpage}{236}
+\indexentry{AIC|hyperpage}{236}
+\indexentry{Standardized residuals|hyperpage}{236}
+\indexentry{AIC|hyperpage}{237}
+\indexentry{Multivariable model|hyperpage}{237}
+\indexentry{AIC|hyperpage}{237}
+\indexentry{Quasi-Poisson regression|hyperpage}{241}
+\indexentry{Overdispersed data|hyperpage}{241}
+\indexentry{Quasi-Poisson regression|hyperpage}{241}
+\indexentry{Overdispersion|hyperpage}{241}
+\indexentry{Overdispersion|hyperpage}{241}
+\indexentry{Quasi-Poisson regression|hyperpage}{241}
+\indexentry{Quasi-Poisson regression|hyperpage}{242}
+\indexentry{Quasi-Poisson regression|hyperpage}{242}
+\indexentry{Quasi-Poisson regression|hyperpage}{243}
+\indexentry{Quasi-Poisson regression|hyperpage}{243}
+\indexentry{Poisson regression|hyperpage}{243}
+\indexentry{Count data|hyperpage}{243}
+\indexentry{Rate data|hyperpage}{243}
+\indexentry{Model fit|hyperpage}{243}
+\indexentry{kaplan-Meier|hyperpage}{245}
+\indexentry{kaplan-Meier|hyperpage}{245}
+\indexentry{Logistic regression|hyperpage}{245}
+\indexentry{Poisson regression|hyperpage}{245}
+\indexentry{Cox proportional hazards regression|hyperpage}{245}
+\indexentry{Duration analysis|hyperpage}{245}
+\indexentry{Time-to-event analysis|hyperpage}{245}
+\indexentry{Duration analysis|hyperpage}{246}
+\indexentry{Non-parametric survival analysis|hyperpage}{246}
+\indexentry{kaplan-Meier|hyperpage}{246}
+\indexentry{Cox proportional hazards regression|hyperpage}{246}
+\indexentry{kaplan-Meier|hyperpage}{246}
+\indexentry{gtsummary|hyperpage}{247}
+\indexentry{tidyverse|hyperpage}{247}
+\indexentry{lubridate|hyperpage}{247}
+\indexentry{survival|hyperpage}{247}
+\indexentry{survminer|hyperpage}{247}
+\indexentry{broom|hyperpage}{247}
+\indexentry{here|hyperpage}{247}
+\indexentry{survival|hyperpage}{247}
+\indexentry{gtsummary|hyperpage}{252}
+\indexentry{kaplan-Meier|hyperpage}{255}
+\indexentry{kaplan-Meier|hyperpage}{255}
+\indexentry{Survival probability|hyperpage}{255}
+\indexentry{Survival probability|hyperpage}{255}
+\indexentry{kaplan-Meier|hyperpage}{255}
+\indexentry{Survival probability|hyperpage}{257}
+\indexentry{Survival probability|hyperpage}{258}
+\indexentry{kaplan-Meier|hyperpage}{258}
+\indexentry{kaplan-Meier|hyperpage}{260}
+\indexentry{Log-rank test|hyperpage}{260}
+\indexentry{Peto-peto test|hyperpage}{260}
+\indexentry{Log-rank test|hyperpage}{260}
+\indexentry{kaplan-Meier|hyperpage}{260}
+\indexentry{Peto-peto test|hyperpage}{260}
+\indexentry{Peto-peto test|hyperpage}{262}
+\indexentry{Peto-peto test|hyperpage}{262}
+\indexentry{Peto-peto test|hyperpage}{262}
+\indexentry{Peto-peto test|hyperpage}{262}
+\indexentry{Semi-parametric models|hyperpage}{263}
+\indexentry{Cox proportional hazards regression|hyperpage}{264}
+\indexentry{Cox proportional hazards regression|hyperpage}{265}
+\indexentry{kaplan-Meier|hyperpage}{265}
+\indexentry{Survival probability|hyperpage}{265}
+\indexentry{Log-rank test|hyperpage}{265}
+\indexentry{Peto-peto test|hyperpage}{265}
+\indexentry{Cox proportional hazards regression|hyperpage}{265}
+\indexentry{Cox proportional hazards regression|hyperpage}{266}
+\indexentry{Interaction|hyperpage}{270}
+\indexentry{Interaction|hyperpage}{273}
+\indexentry{Interaction|hyperpage}{273}
+\indexentry{Interaction|hyperpage}{273}
+\indexentry{Interaction|hyperpage}{273}
+\indexentry{Interaction|hyperpage}{273}
+\indexentry{Interaction|hyperpage}{273}
+\indexentry{Interaction|hyperpage}{274}
+\indexentry{Interaction|hyperpage}{274}
+\indexentry{Proportional hazard assumption|hyperpage}{275}
+\indexentry{Scaled Schoenfeld|hyperpage}{275}
+\indexentry{survival|hyperpage}{275}
+\indexentry{Deviance|hyperpage}{276}
+\indexentry{Schoenfeld|hyperpage}{276}
+\indexentry{Scaled Schoenfeld|hyperpage}{276}
+\indexentry{Schoenfeld|hyperpage}{277}
+\indexentry{Survival probability|hyperpage}{284}
+\indexentry{Martingale residuals|hyperpage}{285}
+\indexentry{Deviance|hyperpage}{285}
+\indexentry{Schoenfeld|hyperpage}{285}
+\indexentry{Dfbeta|hyperpage}{285}
+\indexentry{Scaled Schoenfeld|hyperpage}{285}
+\indexentry{Influential observations|hyperpage}{286}
+\indexentry{Dfbeta|hyperpage}{286}
+\indexentry{Influential observations|hyperpage}{286}
+\indexentry{Dfbeta|hyperpage}{286}
+\indexentry{Adjusted survival|hyperpage}{287}
+\indexentry{Adjusted survival|hyperpage}{287}
+\indexentry{Weibull|hyperpage}{294}
+\indexentry{Weibull|hyperpage}{296}
+\indexentry{Weibull|hyperpage}{298}
+\indexentry{Weibull|hyperpage}{298}
+\indexentry{Regression diagnostics|hyperpage}{298}
+\indexentry{Weibull|hyperpage}{298}
+\indexentry{Weibull|hyperpage}{299}
+\indexentry{Regression diagnostics|hyperpage}{299}
+\indexentry{Weibull|hyperpage}{299}
+\indexentry{Simple imputation|hyperpage}{301}
+\indexentry{Single imputation|hyperpage}{301}
+\indexentry{Missing data|hyperpage}{301}
+\indexentry{MCAR|hyperpage}{301}
+\indexentry{MAR|hyperpage}{301}
+\indexentry{MNAR|hyperpage}{301}
+\indexentry{MCAR|hyperpage}{301}
+\indexentry{MCAR|hyperpage}{301}
+\indexentry{MAR|hyperpage}{301}
+\indexentry{MAR|hyperpage}{302}
+\indexentry{MAR|hyperpage}{302}
+\indexentry{MAR|hyperpage}{302}
+\indexentry{MAR|hyperpage}{302}
+\indexentry{MNAR|hyperpage}{302}
+\indexentry{MNAR|hyperpage}{303}
+\indexentry{MCAR|hyperpage}{303}
+\indexentry{MAR|hyperpage}{303}
+\indexentry{MNAR|hyperpage}{303}
+\indexentry{MNAR|hyperpage}{303}
+\indexentry{MCAR|hyperpage}{303}
+\indexentry{MAR|hyperpage}{303}
+\indexentry{MNAR|hyperpage}{303}
+\indexentry{mice|hyperpage}{303}
+\indexentry{VIM|hyperpage}{303}
+\indexentry{naniar|hyperpage}{303}
+\indexentry{tidyverse|hyperpage}{303}
+\indexentry{gtsummary|hyperpage}{303}
+\indexentry{naniar|hyperpage}{305}
+\indexentry{VIM|hyperpage}{305}
+\indexentry{Pattern of missingness|hyperpage}{306}
+\indexentry{mice|hyperpage}{306}
+\indexentry{MCAR|hyperpage}{309}
+\indexentry{MCAR|hyperpage}{309}
+\indexentry{MCAR|hyperpage}{309}
+\indexentry{MAR|hyperpage}{309}
+\indexentry{MNAR|hyperpage}{309}
+\indexentry{Listwise deletion|hyperpage}{309}
+\indexentry{Simple imputation|hyperpage}{309}
+\indexentry{Single imputation|hyperpage}{310}
+\indexentry{Multiple imputation|hyperpage}{310}
+\indexentry{Listwise deletion|hyperpage}{310}
+\indexentry{Listwise deletion|hyperpage}{310}
+\indexentry{Listwise deletion|hyperpage}{311}
+\indexentry{MCAR|hyperpage}{311}
+\indexentry{Simple imputation|hyperpage}{311}
+\indexentry{Simple imputation|hyperpage}{311}
+\indexentry{Simple imputation|hyperpage}{311}
+\indexentry{MCAR|hyperpage}{311}
+\indexentry{Single imputation|hyperpage}{314}
+\indexentry{Single imputation|hyperpage}{314}
+\indexentry{Simple imputation|hyperpage}{314}
+\indexentry{Single imputation|hyperpage}{314}
+\indexentry{Single imputation|hyperpage}{314}
+\indexentry{Single imputation|hyperpage}{314}
+\indexentry{MAR|hyperpage}{314}
+\indexentry{Multinomial logistic regression|hyperpage}{314}
+\indexentry{Multinomial logistic regression|hyperpage}{315}
+\indexentry{Multiple imputation|hyperpage}{315}
+\indexentry{Multiple imputation|hyperpage}{316}
+\indexentry{Multiple imputation|hyperpage}{322}
+\indexentry{Multiple imputation|hyperpage}{322}
+\indexentry{Multiple imputation|hyperpage}{322}
+\indexentry{Single imputation|hyperpage}{322}
+\indexentry{MAR|hyperpage}{322}
+\indexentry{Multiple imputation|hyperpage}{322}
+\indexentry{Single imputation|hyperpage}{322}
+\indexentry{dplyr|hyperpage}{326}
+\indexentry{mice|hyperpage}{326}
+\indexentry{Multiple imputation|hyperpage}{326}
+\indexentry{gtsummary|hyperpage}{328}
+\indexentry{Multiple imputation|hyperpage}{328}
+\indexentry{Multiple imputation|hyperpage}{329}
