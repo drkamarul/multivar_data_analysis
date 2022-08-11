@@ -216,7 +216,7 @@ tib_pois_attack = tidy(pois_attack_final, exponentiate = TRUE, conf.int = TRUE)
 tib_pois_attack
 ```
 and export it to a .csv file,
-```{r}
+```{r, eval=FALSE}
 write.csv(tib_pois_attack, "tib_pois_attack.csv")
 ```
 
@@ -417,7 +417,7 @@ tib_pois_case = tidy(pois_case_final, exponentiate = TRUE, conf.int = TRUE)
 tib_pois_case
 ```
 and export it to a .csv file,
-```{r}
+```{r, eval=FALSE}
 write.csv(tib_pois_case, "tib_pois_case.csv")
 ```
 
