@@ -1,9 +1,15 @@
 # Poisson regression\index{Poisson regression}
 
-## Introduction
+## Objectives
+After completing this chapter, the readers are expected to
 
-### Background
-Poisson regression\index{Poisson regression} is a regression analysis for count\index{Count data} and rate data\index{Rate data}. As mentioned before in Chapter 7, it is is a type of Generalized linear models (GLMs)\index{Generalized linear models (GLMs)} whenever the outcome is count. It also accommodates rate data\index{Rate data} as we will see shortly. Although count and rate data are very common in medical and health sciences, in our experience, Poisson regression\index{Poisson regression} is underutilized in medical research. Most often, researchers end up using linear regression because they are more familiar with it and lack of exposure to the advantage of using Poisson regression\index{Poisson regression} to handle count and rate data.
+- understand the basic concepts behind Poisson regression\index{Poisson regression} for count\index{Count data} and rate data\index{Rate data}
+- perform Poisson regression\index{Poisson regression} for count and rate
+- perform model fit\index{Model fit} assessment
+- present and interpret the results of Poisson regression\index{Poisson regression} analyses
+
+## Introduction
+Poisson regression\index{Poisson regression} is a regression analysis for count\index{Count data} and rate data\index{Rate data}. As mentioned before in Chapter 7, it is is a type of Generalized linear models (GLMs)\index{Generalized linear model}\index{GLM} whenever the outcome is count. It also accommodates rate data\index{Rate data} as we will see shortly. Although count and rate data are very common in medical and health sciences, in our experience, Poisson regression\index{Poisson regression} is underutilized in medical research. Most often, researchers end up using linear regression because they are more familiar with it and lack of exposure to the advantage of using Poisson regression\index{Poisson regression} to handle count and rate data.
 
 Count is discrete numerical data. Although it is convenient to use linear regression to handle the count outcome by assuming the count or _discrete_ numerical data (e.g. the number of hospital admissions) as _continuous_ numerical data (e.g. systolic blood pressure in mmHg), it may result in illogical predicted values. For example, by using linear regression to predict the number of asthmatic attacks in the past one year, we may end up with a negative number of attacks, which does not make any clinical sense! So, it is recommended that medical researchers get familiar with Poisson regression\index{Poisson regression} and make use of it whenever the outcome variable is a count variable.
 
@@ -19,22 +25,16 @@ We might be interested in knowing the relationship between the number of asthmat
 Basically, for Poisson regression\index{Poisson regression}, the relationship between the outcome and predictors is as follows,
 
 $$\begin{aligned}
-natural\ log\ of\ count\ outcome = numerical\ predictors + categorical\ predictors
+natural\ log\ of\ count\ outcome = &\ numerical\ predictors \\
+& + categorical\ predictors
 \end{aligned}$$
 
 At times, the count is proportional to a denominator\index{Rate data}. For example, given the same number of deaths, the death rate in a small population will be higher than the rate in a large population. If we were to compare the the number of deaths between the populations, it would not make a fair comparison. Thus, we may consider adding denominators in the Poisson regression\index{Poisson regression} modelling in form of offsets. This denominator could also be the unit time of exposure, for example person-years of cigarette smoking. This will be explained later under Poisson regression\index{Poisson regression} for rate section.
 
 In the previous chapter, we learned that logistic regression allows us to obtain the odds ratio\index{Odds ratio}, which is approximately the relative risk given a predictor. For Poisson regression\index{Poisson regression}, by taking the exponent of the coefficient, we obtain the _rate ratio_ RR\index{Rate ratio} (also known as _incidence rate ratio_ IRR\index{Incidence rate ratio}),
+
 $$RR=exp(b_{p})$$
 for the coefficient $b_p$ of the _p_'s predictor. This is interpreted in similar way to the odds ratio\index{Odds ratio} for logistic regression, which is approximately the relative risk given a predictor.
-
-### Objectives
-After completing this chapter, the readers are expected to
-
-- understand the basic concepts behind Poisson regression\index{Poisson regression} for count\index{Count data} and rate data\index{Rate data}
-- perform Poisson regression\index{Poisson regression} for count and rate
-- perform model fit\index{Model fit} assessment
-- present and interpret the results of Poisson regression\index{Poisson regression} analyses
 
 ## Prepare R Environment for Analysis
 
@@ -71,7 +71,8 @@ We might be interested in knowing the relationship between the number of asthmat
 Multiple Poisson regression for count is given as,
 
 $$\begin{aligned}
-ln(count\ outcome) = &\ intercept + coefficients \times numerical\ predictors \\
+ln(count\ outcome) = &\ intercept \\
+& + coefficients \times numerical\ predictors \\
 & + coefficients \times categorical\ predictors
 \end{aligned}$$
 
@@ -130,7 +131,8 @@ summary(pois_attack_all)
 From the output, we noted that `gender` is not significant with _P_ > 0.05, although it was significant at the univariable analysis. Now, we fit a model excluding `gender`,
 ```{r}
 # minus gender
-pois_attack_all1 = glm(attack ~ res_inf + ghq12, data = asthma, family = "poisson")
+pois_attack_all1 = glm(attack ~ res_inf + ghq12, data = asthma, 
+                       family = "poisson")
 summary(pois_attack_all1)
 ```
 From the output, both variables are significant predictors of asthmatic attack (or more accurately the natural log of the count of asthmatic attack). This serves as our **preliminary model**.
@@ -138,7 +140,8 @@ From the output, both variables are significant predictors of asthmatic attack (
 ### Interaction\index{Interaction}
 Now, we include a two-way interaction\index{Interaction} term between `res_inf` and `ghq12`.
 ```{r}
-pois_attack_allx = glm(attack ~ res_inf * ghq12, data = asthma, family = "poisson")
+pois_attack_allx = glm(attack ~ res_inf * ghq12, data = asthma, 
+                       family = "poisson")
 summary(pois_attack_allx)
 ```
 It turns out that the interaction\index{Interaction} term `res_inf * ghq12` is significant. We may include this interaction\index{Interaction} term in the final model. However, this might complicate our interpretation of the result as we can no longer interpret individual coefficients. Given that the _P_-value of the interaction\index{Interaction} term is close to the commonly used significance level of 0.05, we may choose to ignore this interaction\index{Interaction}. But keep in mind that the decision is yours, the analyst. Having said that, if the purpose of modelling is mainly for prediction, the issue is less severe because we are more concerned with the predicted values than with the clinical interpretation of the result. However, if you insist on including the interaction\index{Interaction}, it can be done by writing down the equation for the model, substitute the value of `res_inf` with yes = 1 or no = 0, and obtain the coefficient for `ghq12`. We will see how to do this under **Presentation and interpretation** below.
@@ -155,16 +158,19 @@ epiDisplay::poisgof(pois_attack_all1)
 #### Model-to-model AIC\index{AIC} comparison {-}
 We may also compare the models that we fit so far by Akaike information criterion (AIC\index{AIC}). Recall that R uses AIC\index{AIC} for stepwise automatic variable selection\index{Variable selection}, which was explained in Linear Regression chapter.
 ```{r}
-AIC(pois_attack1, pois_attack2, pois_attack3, pois_attack_all1, pois_attack_allx)
+AIC(pois_attack1, pois_attack2, pois_attack3, 
+    pois_attack_all1, pois_attack_allx)
 ```
 The best model is the one with the lowest AIC\index{AIC}, which is the model model with the interaction\index{Interaction} term. However, since the model with the interaction\index{Interaction} term differ slightly from the model without interaction\index{Interaction}, we may instead choose the simpler model without the interaction\index{Interaction} term.
 
 #### Scaled Pearson chi-square statistic {-}
 Pearson chi-square statistic divided by its _df_ gives rise to scaled Pearson chi-square statistic [@fleiss2003]. The closer the value of this statistic to 1, the better is the model fit\index{Model fit}. First, Pearson chi-square statistic is calculated as,
+
 $$\chi^2_P = \sum_{i=1}^n \frac{(y_i - \hat y_i)^2}{\hat y_i}$$
 easily obtained in R as below.
 ```{r}
-x2 = sum((asthma$attack - pois_attack_all1$fitted)^2 / pois_attack_all1$fitted)
+x2 = sum((asthma$attack - pois_attack_all1$fitted)^2 / 
+           pois_attack_all1$fitted)
 ```
 Then we obtain scaled Pearson chi-square statistic $\chi^2_P / df$, where $df = n - p$. $n$ is the number of observations `nrow(asthma)` and $p$ is the number of coefficients/parameters we estimated for the model `length(pois_attack_all1$coefficients)`.
 ```{r}
@@ -175,8 +181,8 @@ The value of `sx2` is `r round(sx2, 3)`, which is close to 1. This indicates goo
 
 It is actually easier to obtain scaled Pearson chi-square by changing the `family = "poisson"` to `family = "quasipoisson"` in the `glm` specification, then viewing the `dispersion` value from the summary of the model. It works because scaled Pearson chi-square is an estimator of the overdispersion\index{Overdispersion} parameter in a quasi-Poisson regression\index{Quasi-Poisson regression} model [@fleiss2003]. We will discuss about quasi-Poisson regression\index{Quasi-Poisson regression} later towards the end of this chapter.
 ```{r}
-qpois_attack_all1_summ = summary(glm(attack ~ res_inf + ghq12, data = asthma, 
-                                     family = "quasipoisson"))
+qpois_attack_all1_summ = summary(glm(attack ~ res_inf + ghq12, 
+                                     data = asthma, family = "quasipoisson"))
 qpois_attack_all1_summ$dispersion
 ```
 
@@ -212,7 +218,8 @@ Based on this table, we may interpret the results as follows:
 
 We can also view and save the output in a format suitable for exporting to the spreadsheet format for later use. We use `tidy()` function for the job,
 ```{r}
-tib_pois_attack = tidy(pois_attack_final, exponentiate = TRUE, conf.int = TRUE)
+tib_pois_attack = tidy(pois_attack_final, exponentiate = TRUE, 
+                       conf.int = TRUE)
 tib_pois_attack
 ```
 and export it to a .csv file,
@@ -224,18 +231,22 @@ Then, we display the coefficients (i.e. without the exponent) and transfer the v
 ```{r}
 round(summary(pois_attack_final)$coefficients, 2)
 ```
+
 $$\begin{aligned}
 ln(attack) = & -0.34 + 0.43\times res\_inf + 0.05\times ghq12
 \end{aligned}$$
 
 From the table and equation above, the effect of an increase in GHQ-12 score is by one mark might not be clinically of interest. Let say, as a clinician we want to know the effect of an increase in GHQ-12 score by six marks instead, which is 1/6 of the maximum score of 36. From the coefficient for GHQ-12 of 0.05, the risk is calculated as
+
 $$IRR_{GHQ12\ by\ 6} = exp(0.05\times 6) = 1.35$$
+
 Or we may fit the model again with some adjustment to the data and `glm` specification. First, we divide `ghq12` values by 6 and save the values into a new variable `ghq12_by6`, followed by fitting the model again using the edited data set and new variable,
 ```{r}
 # Divide ghq12 by 6
-asthma_new = asthma %>% mutate(ghq12_by6 = ghq12/6)
+asthma_new = asthma %>% mutate(ghq12_by6 = ghq12 / 6)
 # Fit the model
-pois_attack_final_by6 = glm(attack ~ res_inf + ghq12_by6, data = asthma_new, family = "poisson")
+pois_attack_final_by6 = glm(attack ~ res_inf + ghq12_by6, 
+                            data = asthma_new, family = "poisson")
 ```
 
 Now we view the results for the re-fitted model,
@@ -252,21 +263,27 @@ Now we will go through the interpretation of the model with interaction\index{In
 ```{r}
 round(summary(pois_attack_allx)$coefficients, 2)
 ```
+
 $$\begin{aligned}
-ln(attack) = & -0.34 + 0.43\times res\_inf + 0.05\times ghq12 -0.03\times res\_inf\times ghq12
+ln(attack) = & -0.34 + 0.43\times res\_inf + 0.05\times ghq12 \\
+             & -0.03\times res\_inf\times ghq12
 \end{aligned}$$
 
 As we need to interpret the coefficient for `ghq12` by the status of `res_inf`, we write an equation for each `res_inf` status. When `res_inf` = 1 (yes),
+
 $$\begin{aligned}
-ln(attack) & = -0.63 + 1.02\times res\_inf + 0.07\times ghq12 -0.03\times res\_inf\times ghq12 \\
-& = -0.63 + 1.02\times 1 + 0.07\times ghq12 -0.03\times 1\times ghq12 \\
-& = 0.39 + 0.04\times ghq12
+ln(attack) = & -0.63 + 1.02\times res\_inf + 0.07\times ghq12 \\
+& -0.03\times res\_inf\times ghq12 \\
+= & -0.63 + 1.02\times 1 + 0.07\times ghq12 -0.03\times 1\times ghq12 \\
+= &\ 0.39 + 0.04\times ghq12
 \end{aligned}$$
 and when `res_inf` = 0 (no),
+
 $$\begin{aligned}
-ln(attack) & = -0.63 + 1.02\times res\_inf + 0.07\times ghq12 -0.03\times res\_inf\times ghq12 \\
-& = -0.63 + 1.02\times 0 + 0.07\times ghq12 -0.03\times 0\times ghq12 \\
-& = -0.63 + 0.07\times ghq12
+ln(attack) = & -0.63 + 1.02\times res\_inf + 0.07\times ghq12 \\
+& -0.03\times res\_inf\times ghq12 \\
+= & -0.63 + 1.02\times 0 + 0.07\times ghq12 -0.03\times 0\times ghq12 \\
+= & -0.63 + 0.07\times ghq12
 \end{aligned}$$
 
 Now, based on the equations, we may interpret the results as follows:
@@ -279,7 +296,8 @@ Based on these IRRs, the effect of an increase of GHQ-12 score is slightly highe
 ### Prediction
 We can use the final model above for prediction. Relevant to our data set, we may want to know the expected number of asthmatic attacks per year for a patient with recurrent respiratory infection and GHQ-12 score of 8,
 ```{r}
-pred = predict(pois_attack_final, list(res_inf = "yes", ghq12 = 8), type = "response")
+pred = predict(pois_attack_final, list(res_inf = "yes", ghq12 = 8), 
+               type = "response")
 round(pred, 1)
 ```
 
@@ -287,7 +305,8 @@ Now, let's say we want to know the expected number of asthmatic attacks per year
 ```{r}
 new_data = data.frame(res_inf = rep(c("yes", "no"), each = 4),
                       ghq12 = rep(c(0, 12, 24, 36), 2))
-new_data$attack_pred = round(predict(pois_attack_final, new_data, type = "response"), 1)
+new_data$attack_pred = round(predict(pois_attack_final, new_data, 
+                                     type = "response"), 1)
 new_data
 ```
 
@@ -346,8 +365,8 @@ From the outputs, all variables including the dummy variables are important with
 ### Multivariable analysis
 For the multivariable analysis, we included `cigar_day` and `smoke_yrs` as predictors of `case`.
 ```{r}
-pois_case = glm(case ~ cigar_day + smoke_yrs, data = smoke, family = "poisson", 
-                offset = log(person_yrs))
+pois_case = glm(case ~ cigar_day + smoke_yrs, data = smoke, 
+                family = "poisson", offset = log(person_yrs))
 summary(pois_case)
 ```
 From the output, both variables are significant predictors of the rate of lung cancer cases, although we noted the _P_-values are not significant for `smoke_yrs20-24` and `smoke_yrs25-29` dummy variables. This model serves as our **preliminary model**.
@@ -355,8 +374,8 @@ From the output, both variables are significant predictors of the rate of lung c
 ### Interaction\index{Interaction}
 Now, we include a two-way interaction\index{Interaction} term between `cigar_day` and `smoke_yrs`. From the output, although we noted that the interaction\index{Interaction} terms are not significant, the standard errors for `cigar_day` and the interaction\index{Interaction} terms are extremely large. This might point to a numerical issue with the model [@hosmer2013]. So, we may drop the interaction\index{Interaction} term from our model.
 ```{r}
-pois_casex = glm(case ~ cigar_day * smoke_yrs, data = smoke, family = "poisson", 
-                 offset = log(person_yrs))
+pois_casex = glm(case ~ cigar_day * smoke_yrs, data = smoke,
+                 family = "poisson", offset = log(person_yrs))
 summary(pois_casex)
 ```
 
@@ -378,7 +397,8 @@ The comparison by AIC\index{AIC} clearly shows that the multivariable model\inde
 ```{r}
 # Scaled Pearson chi-square statistic using quasipoisson
 qpois_case_summ = summary(glm(case ~ cigar_day + smoke_yrs, data = smoke, 
-                              family = "quasipoisson", offset = log(person_yrs)))
+                              family = "quasipoisson", 
+                              offset = log(person_yrs)))
 qpois_case_summ$dispersion
 ```
 The value of dispersion i.e. the scaled Pearson chi-square statistic is close to 1. This again indicates that the model has good fit.
@@ -390,7 +410,8 @@ std_res[abs(std_res) > 1.96]
 index = names(std_res[abs(std_res) > 1.96])
 # points of discrepancies
 cbind(smoke[index,], case_pred = pois_case$fitted[index]) %>%
-  mutate(rate = round(case/person_yrs, 4), rate_pred = round(case_pred/person_yrs, 4))
+  mutate(rate = round(case/person_yrs, 4), 
+         rate_pred = round(case_pred/person_yrs, 4))
 ```
 Lastly, we noted only a few observations (number 6, 8 and 18) have discrepancies between the observed and predicted cases. This shows how well the fitted Poisson regression model for rate explains the data at hand.
 
@@ -413,7 +434,8 @@ We leave the rest of the IRRs for you to interpret. But take note that the IRRs 
 
 Then, we view and save the output in the spreadsheet format for later use. We use `tidy()`,
 ```{r}
-tib_pois_case = tidy(pois_case_final, exponentiate = TRUE, conf.int = TRUE)
+tib_pois_case = tidy(pois_case_final, exponentiate = TRUE, 
+                     conf.int = TRUE)
 tib_pois_case
 ```
 and export it to a .csv file,
@@ -426,11 +448,13 @@ Now, we present the model equation, which unfortunately this time quite a length
 round(summary(pois_case_final)$coefficients, 2)
 ```
 and put the values in the equation. Remember to include the offset in the equation.
+
 $$\begin{aligned}
-ln(case) = &\ ln(person\_yrs) -11.32 + 0.06\times cigar\_day + 0.96\times smoke\_yrs(20-24) \\
-& + 1.71\times smoke\_yrs(25-29) + 3.21\times smoke\_yrs(30-34) + 3.24\times smoke\_yrs(35-39) \\
-& + 4.21\times smoke\_yrs(40-44) + 4.45\times smoke\_yrs(45-49) + 4.89\times smoke\_yrs(50-54) \\
-& + 5.37\times smoke\_yrs(55-59)
+ln(case) = &\ ln(person\_yrs) -11.32 + 0.06\times cigar\_day \\
+& + 0.96\times smoke\_yrs(20-24) + 1.71\times smoke\_yrs(25-29) \\
+& + 3.21\times smoke\_yrs(30-34) + 3.24\times smoke\_yrs(35-39) \\
+& + 4.21\times smoke\_yrs(40-44) + 4.45\times smoke\_yrs(45-49) \\
+& + 4.89\times smoke\_yrs(50-54) + 5.37\times smoke\_yrs(55-59)
 \end{aligned}$$
 
 ## Quasi-Poisson Regression\index{Quasi-Poisson regression} for Overdispersed Data\index{Overdispersed data}
@@ -444,7 +468,8 @@ pois_attack_all1 = glm(attack ~ ., data = asthma, family = "poisson")
 ```
 Then we fit the same model using quasi-Poisson regression\index{Quasi-Poisson regression},
 ```{r}
-qpois_attack_all1 = glm(attack ~ ., data = asthma, family = "quasipoisson")
+qpois_attack_all1 = glm(attack ~ ., data = asthma, 
+                        family = "quasipoisson")
 ```
 
 Now, pay attention to the standard errors and confidence intervals of each models. Can you spot the differences between the two? (Hints: `std.error`, `p.value`, `conf.low` and `conf.high` columns).

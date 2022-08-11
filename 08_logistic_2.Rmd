@@ -10,7 +10,7 @@ At the end of the chapter, the readers will be
 - to perform model assessment of binary logistic regression
 - to present and interpret results from binary logsitic regression
 
-## Background 
+## Introduction
 
 The logistic model\index{Logistic model} (or logit model\index{Logit model}) is used to model the probability of a certain class or event existing such as pass or fail, win or lose, alive or dead or healthy or sick. More specifically, binary logistic regression is used to model the relationship between a covariate or a set of covariates and an outcome variables which is a binary variable\index{Binary variable}.
 

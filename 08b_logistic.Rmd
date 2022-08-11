@@ -10,7 +10,7 @@ At the end of this chapter, readers should be able:
 4.  to predict the outcome based on a logistic regression model from data with polychotomous (multinomial) outcome
 5.  to perform model checking of logistic regression model from data with with polychotomous (multinomial) outcomes
 
-## Background 
+## Introduction
 
 Some data come with multinomial outcomes in which case, the outcome variable is a nominal or polychotomous variable with more than two levels. In multinomial outcome data, the outcome has no natural ordering. if it has, then it is best treated as a ordinal outcome data. For these data, we can modify the binary logistic model to make estimation and inference [@kleinbaum2010logistic ; @Hosmer2013-03-22]. 
 

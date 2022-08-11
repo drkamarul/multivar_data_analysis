@@ -1,4 +1,4 @@
-# Survival Analysis: kaplan-Meier\index{kaplan-Meier} and Cox Proportional Hazard (PH) Regression 
+# Survival Analysis: Kaplan-Meier\index{Kaplan-Meier} and Cox Proportional Hazard (PH) Regression 
 
 ### Objectives 
 
