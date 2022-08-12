@@ -4,16 +4,115 @@
 
 At the end of the chapter, readers will be able to 
 
--
--
--
--
+1. understand the statistical concept of parametric survival analysis
+2. perform parametric survival analysis especially exponential regression model and Weibull regression model
+
 
 ## Introduction
 
+In survival analysis, the Cox proportional hazard regression is very popular to model the association between the time-to-event with covariates or independent variables. It is a form of Generalized Linear Models.
+
+Cox PH regression is a semi-parametric survival analysis model. In addition to Cox proportional hazard regression model, there is an additional class of survival models, called the parametric survival models. With parametric models such as linear regression, logistic regression and Poisson regression, the outcome is assumed to follow some distribution.
+
+In the parametric survival models, the distribution of the outcome (i.e. the time to event) is specified in terms if unknown parameters.  
+
+The interests in parametric models include:
+
+1.  determining the acceleration factor and/or
+2.  determining the hazard ratio.
+
+The common parametric models are:
+
+1. The exponential survival model
+2. The Weibull survival model and
+3. The log-logistic survival model.
+
+### Advantages of parametric survival analysis models
+
+A fully parametric model has some advantages [@Lemeshow_Stanley2008-03-07]:
+
+1. full maximum likelihood may be used to estimate the parameters
+2. the estimated coefficients or transformations of them can provide clinically meaningful estimates of effect
+3. fitted values from the model can provide estimates of survival time
+4. residuals can be computed as differences between observed and predicted values of time
+
+An analysis of censored time-to-event data using a fully parametric model can almost have the look and feel of a normal-errors linear regression analysis.
+
+## Parametric survival analysis model
+
+The shape of the survival or hazard curve is informative of the process and provides a link to substantive issues.
+
+Parametric models mean the outcome is assumed to follow some distributions. This also means that the outcome follows some family of distributions of similar form BUT with unknown parameters.
+
+In parametric survival analysis all parts of the model are specified, both the hazard function and the effect of any covariates.
+
+The strength of this is that estimation is easier and estimated survival curves are smoother as they draw information from the whole data. The main drawback to parametric methods is that they require extra assumptions that may not be appropriate.
+
+Parametric models have proportional hazard metrics and accelerated failure time (AFT ) metrics. AFT models allow covariates to predict survival.
+
+Often, no analytic solution for the MLE exists. In such cases, a numerical approach must be taken. A popular method is to use Newton Raphson.
+
+Again, a parametric survival model is one of which survival time (the outcome) is assumed to follow a known distribution. The parametric models specify the baseline hazard and the baseline hazard indicates which model to be used, for examples:
+
+1. **Weibull model**
+2. Log-logistic model
+3. Log-normal model
+4. **Exponential model**
+5. Generalized Gamma model
+
+For parametric survival models, time is assumed to follow some distribution whose probability density function $f(t)$ can be expressed in terms of unknown parameters. Once a probability density function is specified for survival time, the corresponding survival and hazard functions can be determined.
+
+The survival function can be also expressed in terms of hazard function by exponentiating the negative cumulative hazard function.Probability density function can also be expressed as the product of the hazard and the survival function, $f(t) =h(t)S(t)$
+
+Many parametric models are **Accelerated Failure Time (AFT)** models rather than **Proportional Hazard** models. And remember, *Constant Hazard* fulfills *Proportional Hazard* assumption but *Proportional Hazard* does not mean a model has *Constant Hazard*.
+
+### Proportional hazard parametric models
+
+Parametric models can be presented either as a **proportional hazard models** or **accelerated failure time (AFT)** models. Parametric models that have both the proportional hazards models and accelerated failure time models are:
+
+1. Exponential model
+2. Weibull model
+
+If we take the Exponential model as an example, in the exponential survival model with a single covariate, $X$ then the hazard function for the proportional hazard model is:
+
+$$h(t) = \exp^{(\beta_0 + \beta_1 x)}$$
+$$h(t) = \exp^{\beta_0} \exp^{\beta_1x}$$
+$$h(t) = h_0 \exp^{\beta_1x}$$
+
+### Accelerated failure time model (AFT) models
+
+Again, if we take the Exponential model with a single covariate, $X$ then the hazard function for the AFT model is
+
+$$h(t) = \frac{1}{(\exp^{\alpha_0 + \alpha_1x})}$$
+$$h(t) = \exp^{\alpha_0}\exp^{\alpha_1x}$$
+$$h(t) = h_0 \exp^{-\alpha_1x}$$
+
+A convenient and plausible way to characterize the distribution of time to event, denoted T, as a function of a single covariate is via the equation:
+
+$$T = \exp^{\beta_0 + \beta_1x} \times \epsilon$$
+
+
+For the exponential model, these are equivalent, but this is not true in general. In other parametric models, it is possible for a model to be proportional hazard models but not AFT, or AFT but not proportional hazard models, or both, or neither.
+
+Because time must be positive, then:
+
+1. the systematic component, $\exp^{\beta_0 + \beta_1x}$ must be positive
+2. the error component $\epsilon$ must also be positive
+
+We can linearize the model, by taking the natural log of each side of the equation. And, now it becomes:
+
+
+$$ln(T) = \beta_0 + \beta_1x + \epsilon^*$$
+
+The error component, $\epsilon^*$ can follow different distribution. If the error component follows the exponential distribution then we call the model as the exponential regression model. Other possible distribution includes Weibull regression model, log-normal model, log-logistics and others.
+
+Survival time models that can be linearized by taking logs are called accelerated failure time models. The effect of covariate is multiplicative (proportional) with respect to survival time. Whereas, for the PH models, the assumption is that; the effect of covariates is multiplicative with respect to hazard.
+
+## Analysis
+
 This study was conducted from latest release data from the 2017 submission of the SEER database (1973 to 2015 data) of the National Cancer Institute. Patients with a diagnosis of AO were selected from the SEER database using the International Classification of Diseases for Oncology, Third Edition (ICD-O-3) histology code 9451. There are 1824 patients were diagnosed with AO in this dataset.
 
-## Dataset
+### Dataset
 
 The dataset contains all variables of our interest. For the purpose of this assignment, we want to explore prognostic factor association of age, surgery status and marital status with the survival of AO patients. The variables in the dataset as follow:
 
@@ -27,7 +126,7 @@ The dataset contains all variables of our interest. For the purpose of this assi
 
 -   status : survival status coded as "1 = died" and "0 = censored"
 
-## Set the enviroment 
+### Set the enviroment 
 
 ```{r}
 library(here)
@@ -38,14 +137,14 @@ library(flexsurv)
 library(SurvRegCensCov)
 ```
 
-## Read dataset
+### Read dataset
 
 ```{r}
 d1 <- read_csv(here('data','survivaloa.csv'))
 ```
 
 
-## Data Wrangling
+### Data Wrangling
 
 ```{r}
 d1<- d1 %>% select(age, surgery, marital, survivaltime, status) %>%
@@ -53,7 +152,7 @@ d1<- d1 %>% select(age, surgery, marital, survivaltime, status) %>%
 glimpse(d1)
 ```
 
-## Exploratory Data Analysis
+### Exploratory Data Analysis
 
 ```{r}
 summary(d1)
@@ -71,7 +170,7 @@ tbl_summary(by = status,
   bold_labels()
 ```
 
-## Weibull (Accelerated Failure Time)\index{Weibull}
+### Weibull (Accelerated Failure Time)\index{Weibull}
 
 ```{r}
 wei.mod.aft <- flexsurvreg(Surv(survivaltime, status) ~ age + surgery + marital, 
@@ -79,7 +178,7 @@ wei.mod.aft <- flexsurvreg(Surv(survivaltime, status) ~ age + surgery + marital,
 wei.mod.aft
 ```
 
-### Interpretation
+#### Interpretation
 
 - The estimated log time to die for every increment of 1 year of age was $-0.0527$. The Acceleration Factor (AF) or Time Ratio (TR) is $\exp(-0.0527)$ which is 0.949. This means that every 1 year of age OA patient has shorter time by a factor of 0.949 to die. Another way to state the effect is that every 1 year of age AO patient, the survival time is significantly shorter by $5.1\%$ when adjusted for surgery status and marital status. The reduction period to die could be range between $4.6\%$ and $5.7\%$ when the similar model applied in the similar population (Adj. TR = $0.949$, $95\%$ CI = $0.943,0.954$).
 
@@ -90,7 +189,7 @@ wei.mod.aft
 - Whereas the estimated log time to die in subjects who are separated or divorce or widowed (in comparison to those are married) was $-0.100$. The Acceleration Factor (AF) or Time Ratio (TR) is $\exp(-0.100)$ which is 0.905. The survival time for patients who are separated or divorce or widowed is estimated to be $90.5\%$ of that of patients who are married. Another way to state the effect is that survival time among patients who are separated or divorce or widowed is shorter by $9.5\%$ when adjusted for surgery status and age. The period to die could be range between shorter by $26.7\%$ and longer by $12.0\%$ when the similar model applied in the similar population. However, this factor is not a significant contribution (Adj. TR = 0.905, $95\%$ CI = 0.733,1.12).
 
 
-## Weibull (Proportional Hazard)\index{Weibull}
+### Weibull (Proportional Hazard)\index{Weibull}
 
 ```{r}
 wei.mod.ph <- flexsurvreg(Surv(survivaltime, status) ~ age + marital + surgery, 
@@ -98,7 +197,7 @@ wei.mod.ph <- flexsurvreg(Surv(survivaltime, status) ~ age + marital + surgery,
 wei.mod.ph
 ```
 
-### Interpretation
+#### Interpretation
 
 - Patients who has underwent surgery has significantly reduce hazard of death by $39.9\%$ as compared to patients who did not underwent surgery when adjusted for age and marital status. The reduction of hazard of death could be range between $28.5\%$ and $39.4\%$ when the similar model applied in the similar population (Adj. HR = 0.601, $95\%$ CI = 0.506,0.715).
 
@@ -108,7 +207,7 @@ wei.mod.ph
 
 - On the other hands, Patients who are single has significantly increase hazard of death by $33.4\%$ as compared to patients who are married when adjusted for age and surgery status. The increment of hazard of death could be range between $13.4\%$ and $56.8\%$ when the similar model applied in the similar population (Adj. HR = 1.334, $95\%$ CI = 1.134,1.568).
 
-## Model adequacy for Weibull distribution\index{Weibull}
+### Model adequacy for Weibull distribution\index{Weibull}
 
 ```{r}
 WeibullDiag(Surv(time = d1$survivaltime, event = d1$status == 1) ~ surgery, 
@@ -123,4 +222,13 @@ WeibullDiag(Surv(time = d1$survivaltime, event = d1$status == 1) ~ marital, data
 
 Weibull\index{Weibull} regression diagnostic\index{Regression diagnostics} plot showing that the lines for marital status are generally parallel and linear in its scale. Thus, the Weibull\index{Weibull} model is fit.
 
+## Resources 
 
+There are two resources we recommend for further readings:
+
+- Applied Survival Analysis: Regression Modeling of Time-to-Event Data, Second Edition [@Lemeshow_Stanley2008-03-07]
+- Survival Analysis: A Self-Learning Text, Third Edition [@Kle2012]
+
+## Summary
+
+In this chapter we learned briefly the concept of parametric survival analysis. We are also shown how to perform parametrics survival analysis using the AFT and PH metrics using the Weibull parametric survival model. 
