@@ -4,16 +4,28 @@
 
 ## Objectives
 
-In this chapter, we would like to achieve these objectives: 
+At the end of the chapter, the readers will  
 
-1. Introduce R
-2. Introduce RStudio\index{RStudio}
-2. Introduce RStudio Cloud\index{RStudio cloud}. This is a platform where we can run RStudio\index{RStudio} on the cloud
-3. Guide readers to install R on local machine 
-4. Guide readers to install RStudio on local machine 
-5. Briefly describe optional installations of latex editor (Miktex or Tex Live and MacTex)
-6. Demonstrate to readers how R scripts\index{R script} work
-7. Describe R packages\index{Packages} and R Taskview 
+1. be introduced to R programming language
+2. be introduced to RStudio\index{RStudio} IDE
+3. be introduced to RStudio Cloud\index{RStudio cloud}. RStudio Cloud a platform where users can run RStudio\index{RStudio} on the cloud
+4. be able to install R on their local machine 
+5. be able to install RStudio IDE on their local machine 
+6. understand how to install latex editor (Miktex or Tex Live and MacTex). Latex editor is optional but is required if users want to render PDF outputs. 
+7. understand the structure of R scripts\index{R script} work
+8. understand R packages\index{Packages} and R Taskview 
+
+## R programming language
+
+R is a language and environment for statistical computing and graphics. It is a GNU project which is similar to the S language and environment which was developed at Bell Laboratories. R provides a wide variety of statistical (linear and nonlinear modelling, classical statistical tests, time-series analysis, classification, clustering and others) and graphical techniques, and is highly extensible. 
+
+One of R’s strengths is the ease with which well-designed publication-quality plots can be produced, including mathematical symbols and formulae where needed. R is available as Free Software under the terms of the Free Software Foundation’s GNU General Public License in source code form. It compiles and runs on a wide variety of UNIX platforms and similar systems (including FreeBSD and Linux), Windows and MacOS.
+
+## RStudio IDE
+
+RStudio is an integrated development environment (IDE) for R. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management.
+
+RStudio is available in open source and commercial editions and runs on the desktop (Windows, Mac, and Linux) or in a browser connected to RStudio Server or RStudio Workbench (Debian/Ubuntu, Red Hat/CentOS, and SUSE Linux).
 
 ## RStudio Cloud\index{RStudio cloud}
 
@@ -30,7 +42,7 @@ RStudio\index{RStudio} described it as a lightweight, cloud-based solution that 
 
 RStudio Cloud\index{RStudio cloud} has the free and the commercial version (which is fortunately very affordable). To start using RStudio Cloud\index{RStudio cloud}, visit <https://rstudio.cloud/>. On the page, click `Sign Up`.
 
-![Sign Up Page for RStudio Cloud](1login.png)
+![Sign Up Page for RStudio Cloud](1login.png){width=60%}
 
 
 With RStudio Cloud\index{RStudio cloud}, there is almost nothing to configure and you do not need dedicated hardware, installation or annual purchase contract required. Individual users, instructors and students only need a browser to do, share, teach and learn data science.
@@ -40,14 +52,14 @@ With RStudio Cloud\index{RStudio cloud}, there is almost nothing to configure an
 
 This is the registration and login webpage for RStudio Cloud\index{RStudio cloud}. 
 
-![RStudio Cloud webpage](cloud.PNG)
+![RStudio Cloud webpage](cloud.PNG){width=60%}
 
 
 ### Register and log in
 
 You can register now. After registration, you can log in. 
 
-![RStudio Cloud Registration](cloud2.PNG)
+![RStudio Cloud Registration](cloud2.PNG){width=60%}
 
 
 ## Point and click R GUI
@@ -57,13 +69,19 @@ There are a number of GUI versions of R also known as R GUI. The interface resem
 - Bluesky statistics\index{Bluesky statistics} <https://www.blueskystatistics.com/>
 - JAMOVI\index{jamovi} - <https://www.jamovi.org/>
 
-This is the **Bluesky statistics** software
+BlueSky Statistics can help users:
 
-![Bluesky Statistics software](bluesky.PNG)]
+- migrate from expensive propriety statistical applications to R.
+- ease the R learning curve.
+- use the cutting edge analytics available in R without having to learn programming.
+- get results in true word processing tables automatically.
+- quickly add your own menus and dialog boxes to any R functions.
 
-And this is **jamovi** software
+![Bluesky Statistics software](bluesky.PNG){width=60%}
 
-![jamovi software](jamovi.PNG)
+And this is **jamovi** software. jamovi aims to be a neutral platform, and takes no position with respect to competing statistical philosophies. The project was not founded to promote a particular statistical ideology, instead wanting to serve as a safe space where different statistical approaches might be published side-by-side, and consider themselves first-rate members of the jamovi community.
+
+![jamovi software](jamovi.PNG){width=60%}
 
 
 jamovi\index{jamovi} is an interesting software. It is a new “3rd generation” statistical spreadsheet. It is designed from the ground up to be easy to use, it is a compelling alternative to costly statistical products such as SPSS\index{SPSS} and SAS\index{SAS}. jamovi\index{jamovi} is built on top of the R statistical language, giving you access to the best the statistics community has to offer. jamovi\index{jamovi} will always be free and open because jamovi\index{jamovi} is made by the scientific community, for the scientific community.
@@ -95,7 +113,7 @@ Though you can use the native R software (that you just installed) to run R code
 We will show this step by step. First, let us install R on your machine. To install R, go to [cran](https://cran.r-project.org/). Then choose the R version that's correct for your machine OS. For example, for Windows OS the link is <https://cran.r-project.org/bin/windows/base/R-4.2.1-win.exe>. And for Mac OS, the download link is  <https://cran.r-project.org/bin/macosx/base/R-4.2.1.pkg>. Similarly, if you are using Linux, follow the steps as listed before.
 
 
-![CRAN website](cran.PNG)
+![CRAN website](cran.PNG){width=60%}
 
 It is always recommended that you install the latest version of R. During this writing, the latest version is R version 4.2.1 known as Funny-Looking Kid version that was released on 2022/06/23. You can have multiple R version on the same local machines. So you do not need to uninstall the old R version in order to install a new R version.
 
@@ -104,7 +122,7 @@ It is always recommended that you install the latest version of R. During this w
 
 Now, to install RStudio IDE\index{RStudio IDE}, go here <https://www.rstudio.com/products/rstudio/download/#download>. Choose the supported platforms correct for your machine OS. The size of download will be around 90-110 MB.
 
-![RStudio website](rstudio2.PNG)
+![RStudio website](rstudio2.PNG){width=60%}
 
 
 ### Checking R and RStudio\index{RStudio} Installations 
@@ -118,21 +136,28 @@ Now, we assume you have installed both R and RStudio\index{RStudio}. To make sur
 - Do you need to update R and RStudio\index{RStudio}? By knowing the versions of R and RStudio\index{RStudio}, now you know if you need to update both or one of them. 
 
 
-### Installation of MiKTeX, TeXLive and MacTex
+### Installation of TinyTeX, MiKTeX or MacTeX (for Mac OS) and TeX Live
 
-It is necessary to install Latex editor if you want to convert the outputs you generated in R into PDF format. But if you do not need to produce PDF document, then you do not have to install it.   
+Based on experience, as you go along, you may find it is very attractive to convert your analysis into PDF document. It is necessary to install Latex editor if you want to convert the outputs you generated in R into PDF format. But if you do not need to produce PDF document, then you do not have to install it.   
 
-Based on experience, as you go along, you may find it is very attractive to convert your analysis into PDF document. And because of that, you need to install the Latex editor. 
+We encourage users to first install TinyTeX. If you render your R document into PDF just by using TinyTeX, then that's enough. To install TinyTeX, follow the instruction from <https://yihui.org/tinytex/> . For R users, it is simple running these two codes `install.packages('tinytex')` and `tinytex::install_tinytex()`
 
-![RMarkdown](rmarkdown.PNG)]
+If you require more functionalities then you may think of getting common latex editors such as :
 
-This is MiKTeX, for Window OS 
+- MiKTex
+- MacTeX
+- Tex Live
 
-![MikTeX webpage](miktex.PNG)
 
-And this is MacTeX, for Mac OS
+![RMarkdown](rmarkdown.PNG){width=40%}
 
-![MacTeX webpage](mactex.PNG)
+This is MiKTeX, if you are using Window OS 
+
+![MikTeX webpage](miktex.PNG){width=60%}
+
+And this is MacTeX, for Mac OS users 
+
+![MacTeX webpage](mactex.PNG){width=60%}
 
 
 ## Starting your RStudio\index{RStudio} 
@@ -141,16 +166,16 @@ You can either login to RStudio Cloud\index{RStudio cloud} and automatically see
 
 Click this link <https://rstudio.cloud/spaces/156361/join?access_code=WtlSxNuTm%2Fz7E%2BLb%2FW2XnOw480%2BBTmL4B%2FqjYRIg>
 
-![RStudio Cloud space for this book](book_rstudio_cloud.PNG)
+![RStudio Cloud space for this book](book_rstudio_cloud.PNG){width=60%}
 
 
 To start R on your machine, and if you are using Windows, find the RStudio\index{RStudio} program in your start bar in your machine. And start it. You will see an interface like below. This is definitely different with what you see on your screen because I am using the Vibrant Ink Theme. To choose the theme of your choice, click **Global Options** then, click **Apperance**. There are a number of themes available for you to choose. 
 
-![Rstudio Interface with Vibrant Ink theme](rstudio.PNG)
+![Rstudio Interface with Vibrant Ink theme](rstudio.PNG){width=60%}
 
 What you see on RStudio\index{RStudio} now? You should see three panes if you start RStudio\index{RStudio} for the first time or four  panes if you have used RStudio\index{RStudio} before.
 
-![RStudio Panes](rstudio_def.PNG)
+![RStudio Panes](rstudio_def.PNG){width=60%}
 
 
 
@@ -158,7 +183,7 @@ What you see on RStudio\index{RStudio} now? You should see three panes if you st
 
 In Console tab, this is where we will see most of the results generated from codes in RStudio\index{RStudio}. 
 
-![Console Pane](console.PNG)
+![Console Pane](console.PNG){width=60%}
 
 
 ### Files, Plots, Packages\index{Packages}, Help and Viewer Pane 
@@ -168,13 +193,13 @@ In this console, you will see
 - List of objects (Remember, R is an object-oriented-programming or oop)
 - R files, datasets, tables, list etc 
 
-![File, Plots and Viewer Pane](files.PNG)
+![File, Plots and Viewer Pane](files.PNG){width=60%}
 
 ### Environment, History, Connection and Build Pane
 
 In the environment, history, connection and build pane, you will see this
 
-![Environment Pane](envir.PNG)
+![Environment Pane](envir.PNG){width=60%}
 
 
 
@@ -182,6 +207,6 @@ In the environment, history, connection and build pane, you will see this
 
 In the Source pane, you can create R files and write your R codes
 
-![Source Pane](source.PNG)
+![Source Pane](source.PNG){width=40%}
 
 
