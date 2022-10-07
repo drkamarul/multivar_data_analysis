@@ -4,6 +4,8 @@
 
 Data visualization is viewed by many disciplines as a modern equivalent of visual communication. It involves the creation and study of the visual representation of data. Data visualization requires "information that has been abstracted in some schematic form, including attributes or variables for the units of information". You can read more about data visualization here <https://en.m.wikipedia.org/wiki/Data_visualization> and here <https://en.m.wikipedia.org/wiki/Michael_Friendly>  
 
+## Objectives
+
 In this chapter, we want to achieve these objectives:
 
 1. To introduce concept of data visualization
