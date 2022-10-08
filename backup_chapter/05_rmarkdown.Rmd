@@ -1,6 +1,15 @@
-# R Markdown
+# Reproducible Analysis using R Markdown
 
 ## Motivation
+
+## Objectives 
+
+At the end of the chapter, readers will be able to 
+
+-
+-
+-
+-
 
 ### What is R Markdown?
 
