@@ -1,76 +1,82 @@
-# Data Wrangling  
+# Data Wrangling
+
+## Introduction
+
+Data wrangling removes errors and combines complex data sets to make them more accessible and easier to analyze. Due to the rapid expansion of the amount of data and data sources available today, storing and organizing large quantities of data for analysis is becoming increasingly necessary.
+
+### Definition of data wrangling\index{Data wrangling}
+
+Data wrangling\index{Data wrangling} is also known as Data Munging or Data Transformation\index{Data transformation}. It is loosely the process of manually converting or mapping data from one "raw" form into another format. The process allows for more convenient consumption of the data. You can find more information [here](https://community.modeanalytics.com/sql/tutorial/data-wrangling-with-sql/)
+
+Data wrangling sometimes is also referred to as data munging. It is the process of transforming and mapping data from one "raw" data form into another format to make it more appropriate and valuable for various downstream purposes such as analytics. The goal of data wrangling is to ensure quality and valuable data. Data analysts typically spend the majority of their time in the process of data wrangling compared to the actual analysis of the data. Almost all data require data wrangling before further analysis. There are three main parts to data wrangling [@Wickham2017R].
+
+![Main parts of data wrangling](data-science-wrangle.png){width="60%"}
 
 ## Objectives
 
-At the end of the chapter, readers will be able to 
+At the end of the chapter, readers will
 
--
--
--
--
-
-
-## Definition of data wrangling\index{Data wrangling}  
-
-Data wrangling\index{Data wrangling} is also known as Data Munging or Data Transformation\index{Data transformation}. It is loosely the process of manually converting or mapping data from one "raw" form into another format. The process allows for more convenient consumption of the data. In doing so, we will be using semi-automated tools in RStudio. You can find more information here <https://community.modeanalytics.com/sql/tutorial/data-wrangling-with-sql/>
+-   understand the role of data wrangling
+-   understand the basic capabilities of **dplyr** package
+-   acquire skills to perform common data wrangling using **dplyr** and **forcats** packages
 
 ## Data wrangling\index{Data wrangling} with **dplyr**\index{dplyr} package
 
-### **dplyr**\index{dplyr} package 
+### **dplyr**\index{dplyr} package
 
-**dplyr**\index{dplyr} is a package grouped inside **tidyverse**\index{tidyverse} collection of packages. **dplyr**\index{dplyr} package is a very useful package to munge or wrangle or to tranform your data. It is a grammar of data manipulation. It provides a consistent set of verbs that help you solve the most common data manipulation challenges. This **tidyverse**\index{tidyverse} webpage <https://github.com/tidyverse/dplyr> has more information and examples. 
+**dplyr**\index{dplyr} is a package grouped inside **tidyverse**\index{tidyverse} collection of packages. **dplyr**\index{dplyr} package is very useful to munge, wrangle, or transform your data. It is a grammar of data manipulation. It provides a consistent set of verbs that help you solve the most common data manipulation challenges. This **tidyverse**\index{tidyverse} [webpage](https://github.com/tidyverse/dplyr) has more information and examples.
 
-## Common procedures for doing data transformation\index{Data transformation} 
+### Common data wrangling processes
 
-The common data wrangling\index{Data wrangling} procedures that data analyst does include:
+The common data wrangling\index{Data wrangling} processes include:
 
-1.  reducing the size of dataset by selecting certain variables (or columns)
-2.  generating new variableNew variable\index{New variable} from existing variables 
-3.  sorting observation of a variable 
-4.  grouping observations based on certain criteria
-5.  reducing variable to groups to in order to estimate summary statistic 
+-   reducing the size of dataset by selecting certain variables (or columns)
+-   generating new variable\index{New variable} from existing variables
+-   sorting\index{Sorting} observation of a variable
+-   grouping\index{Grouping} observations based on certain criteria
+-   reducing variables to groups in order to estimate summary statistic
 
-## Some **dplyr**\index{dplyr} functions 
+### Some **dplyr**\index{dplyr} functions
 
 For the procedures listed above, the corresponding **dplyr**\index{dplyr} functions are
 
-1.  `dplyr::select()` - to select a number of variables from a dataframe
-2.  `dplyr::mutate()` - to generate a new variable\index{New variable} from existing variables 
-3.  `dplyr::arrange()` - to sort observation of a variable
-4.  `dplyr::filter()` - to group observations that fulfil certain criteria 
-5.  `dplyr::group_by()` and `dplyr::summarize()` - to reduce variable to groups in order to provide summary statistic  
+-   `dplyr::select()` - to select a number of variables from a dataframe
+-   `dplyr::mutate()` - to generate a new variable\index{New variable} from existing variables
+-   `dplyr::arrange()` - to sort observation of a variable
+-   `dplyr::filter()` - to group observations that fulfil certain criteria
+-   `dplyr::group_by()` and `dplyr::summarize()` - to reduce variable to groups in order to provide summary statistic
 
+## Preparation
 
-## Create a new project or set your working directory
+### Create a new project or set the working directory
 
-It is very important to ensure you know where your working directory is. To do so, the best practice is *is to create a new project everytime you want to start new analysis with R*. To do so, create a new project by `File -> New Project`. If you do not start with a new project, you still need to know **Where is my working directory?**. 
+It is essential to ensure you know where your working directory is. The recommended practice *is to create a new project every time you want to start a new analysis with R*. To do so, create a new project by `File -> New Project`. If you do not start with an R new project, you still need to know **the location of your working directory on your computer**.
 
 So, again we emphasize that every time you want to start processing your data, please make sure:
 
-1.  you use R project. It is much easier and cleaner to start your work with a new R project. Once you have done or need to log off your computer, close the project and reopen the project the next time you need to.  
-2.  that if you are not using R project, you are inside the correct working directory. Type `getwd()` to display the active **working directory**.  And to set a new working directory use the function `setwd()`. Once you are know where your working directory is, you can start read or import data into your working directory. 
+1.  use R project. It is much easier and cleaner to start your work with a new R project. Once you have done or need to log off your computer, close the project and reopen the project the next time you need to.\
+2.  if you are not using R project, you are inside the correct working directory. Type `getwd()` to display the active **working directory**. And to set a new working directory, use the function `setwd()`. Once you know where your working directory is, you can start reading or importing data into your working directory.
 
+Once inside the project, you can import your data if necessary.
 
-Once you are inside the project, you can import your data if necessary. 
+### Load the libraries
 
-## Load the libraries
+Remember, there are several packages you can use to read the data into R. R can read almost all (if not all format) types of data format. For example, we know that common data formats are the:
 
-Remember, there are a number of packages you can use to read the data into R. R can read almost all (if not all format) types of data format. For example, we know that common data format are the:
+-   SPSS\index{SPSS} (`.sav`) format,
+-   Stata\index{STATA} (`.dta`) format,
+-   SAS\index{SAS} format,
+-   MS Excel (`.xlsx`) format
+-   Comma-separated-values `.csv` format.
 
-1.  SPSS\index{SPSS} (`.sav`) format, 
-2.  Stata\index{STATA} (`.dta`) format, 
-3.  SAS\index{SAS} format, 
-4.  MS Excel (`.xlsx`) format
-5.  Comma-separated-values `.csv` format. 
+However, there are other formats, too, such as data in DICOM format. DICOM format data includes data from CT scans and MRI images. There are data in shapefile format to store geographical information. Three packages - **haven**\index{haven}, **rio**\index{rio}, **readr**\index{readr} and **foreign**\index{foreign} packages - are very useful to read or import your data into R memory.
 
-But they are other formats too for examples data in DICOM format. DICOM format data includes data from CT scan and MRI images. There are data in shapefile format to store geographical information. Three packages - **haven**\index{haven}, **rio**\index{rio}, **readr**\index{readr} and **foreign**\index{foreign} packages - are very useful to read or import your data into R memory. 
+-   **readr**\index{readr} provides a fast and friendly way to read rectangular data (like csv, tsv, and fwf). This is contained inside the **tidyverse**\index{tidyverse} metapackage
+-   **rio**\index{rio} provides a quick way to read almost all type of spreadsheet and statistical software data
+-   **readxl**\index{readxl} reads .xls and .xlsx sheets.
+-   **haven**\index{haven} reads SPSS\index{SPSS}, Stata\index{STATA}, and SAS\index{SAS} data.
 
-1.  **readr**\index{readr} provides a fast and friendly way to read rectangular data (like csv, tsv, and fwf). This is contained inside the **tidyverse**\index{tidyverse} metapackage
-2.  **rio**\index{rio} provides a quick way to read almost all type of spreadsheet and statistical software data
-2.  **readxl**\index{readxl} reads .xls and .xlsx sheets.
-3.  **haven**\index{haven} reads SPSS\index{SPSS}, Stata\index{STATA}, and SAS\index{SAS} data.
-
-We will use the **here**\index{here} package to facilitate us working with the working directory and **lubridate**\index{lubridate} to help us wrangle dates. 
+We will use the **here**\index{here} package to facilitate us working with the working directory and **lubridate**\index{lubridate} to help us wrangle dates.
 
 ```{r}
 library(tidyverse)
@@ -79,51 +85,48 @@ library(here)
 library(lubridate)
 ```
 
+When we read datasets with long variable names and spaces - especially after reading the MS Excel dataset - we can use the **janitor** package to generate more R user-friendly variable names.
 
-When we read dataset that have long variable names and spaces - especially after reading MS Excel dataset - we can use the **janitor** package to generate more R user-friendly variable names. 
+### Datasets
 
-## Datasets
+We will use two datasets.
 
-We will use 2 datasets
+-   the stroke dataset in `csv` format
+-   the peptic ulcer dataset in `xlsx` format
 
-- the stroke dataset in `csv` format
-- the peptic ulcer dataset in `xlsx` format
+Let's read the datasets and name it, each as
 
-Let's read the datasets and name it, each as 
-
-- stroke
-- pep
+-   stroke
+-   pep
 
 ```{r}
 stroke <- read_csv(here('data', 'stroke_data.csv'))
 pep <- import(here('data', 'peptic_ulcer.xlsx'))
 ```
 
-
 Take a peek at the dataset
 
-- 219 observations
-- 12 variables 
+-   219 observations
+-   12 variables
 
 ```{r}
 glimpse(stroke)
 ```
 
-- 121 observations
-- 34 variables
+-   121 observations
+-   34 variables
 
 ```{r}
 glimpse(pep)
 ```
 
+Next, we examine the first ten observations of the data. The rest of the observations are not shown. You can also see the types of variables:
 
-Next, we examine the first 10 observations of the data. There rest are NOT SHOWN. You can also see the types of the variables:
+-   `chr` (character),
+-   `int` (integer),
+-   `dbl` (double)
 
-1.  `chr` (character),
-2.  `int` (integer), 
-3.  `dbl` (double)
-
-```{r datastarwars1}
+```{r}
 stroke
 ```
 
@@ -133,21 +136,21 @@ pep %>% slice_head(n = 10)
 
 ## Select variables, generate new variable\index{New variable} and rename variable
 
-We will work with these functions
+We will work with these functions.
 
-- `dplyr::select()`
-- `dplyr::mutate()` and
-- `dplyr::rename()`
+-   `dplyr::select()`
+-   `dplyr::mutate()` and
+-   `dplyr::rename()`
 
-### Select variables using `dplyr::select()`
+### Select\index{Select} variables using `dplyr::select()`
 
-When you work with large datasets with many columns, sometimes it is easier to select only the necessary columns to reduce the size of dataset. This is possible by creating a smaller dataset (less variables). Then you can work on at the initial part of data analysis with this smaller dataset. This will greatly help data exploration.   
+When you work with large datasets with many columns, it is sometimes easier to select only the necessary columns to reduce the dataset size. This is possible by creating a smaller dataset (fewer variables). Then you can work on the initial part of data analysis with this smaller dataset. This will greatly help data exploration.
 
-To create smaller datasets, select some of the columns (variables) in the dataset. For example, in `pep` data, we have 34 variables. Let us generate a new dataset named as `pep2` with only 10 variables , 
-
+To create smaller datasets, select some of the columns (variables) in the dataset. For example, in `pep` data, we have 34 variables. Let us generate a new dataset named `pep2` with only ten variables ,
 
 ```{r}
-pep2 <- pep %>% dplyr::select(age, systolic, diastolic, perforation, twc,
+pep2 <- pep %>% 
+  dplyr::select(age, systolic, diastolic, perforation, twc,
                               gender, vomiting, malena, ASA, outcome)
 glimpse(pep2)
 ```
@@ -156,119 +159,126 @@ The new dataset `pep2` is now created. You can see it in the `Environment` pane.
 
 ### Generate new variable\index{New variable} using `mutate()`
 
-With `mutate()`, you can generate new variable. For example, in the dataset `pep2`, we want to create a new variable named as `pulse_pressure`. This variable equals systolic minus diastolic BP.  
+With `mutate()`\index{Mutate}, you can generate a new variable. For example, in the dataset `pep2`, we want to create a new variable named `pulse_pressure`. This variable equals systolic minus diastolic BP.
 
 $$pulse \: pressure = systolic \: BP - diastolic \: BP $$
 
-
 ```{r}
-pep2 <- pep2 %>% mutate(pulse_pressure = systolic - diastolic)
-pep2 %>% dplyr::select(systolic, diastolic, pulse_pressure )
+pep2 <- pep2 %>% 
+  mutate(pulse_pressure = systolic - diastolic)
+pep2 %>% 
+  dplyr::select(systolic, diastolic, pulse_pressure )
 ```
-Now for stroke dataset, we will convert doa and dod, both a character variable to variable of date type
+
+Now for the stroke dataset, we will convert doa and dod, both character variables, to a variable of the *date* type
 
 ```{r}
-stroke <- stroke %>% mutate(doa = dmy(doa), dod = dmy(dod))
+stroke <- stroke %>% 
+  mutate(doa = dmy(doa), dod = dmy(dod))
 stroke
 ```
 
+### Rename variable using `rename()`\index{Rename}
 
+Now, we want to rename
 
-### Rename variable using `rename()`
-
-Now, we want to rename 
-
-- variable gender to sex 
-- variable ASA to asa
-
+-   variable gender to sex
+-   variable ASA to asa
 
 ```{r}
-pep2 <- pep2 %>% rename(sex = gender,
+pep2 <- pep2 %>% 
+  rename(sex = gender,
                         asa = ASA)
 ```
 
+## Sorting data and selecting observation
 
-## Sorting data and select observation
-
-The function `arrange()` can sort the data. And the function `filter()` allows you to select observations based on your criteria. 
+The function `arrange()`\index{arrange} can sort the data. And the function `filter()`\index{filter} allows you to select observations based on your criteria.
 
 ### Sorting data using `arrange()`
 
-We can sort data in ascending or descending order. To do that, we will use `arrange()`. It will sort the observation based on the values of the specified variable. For dataset `stroke`, let us sort the `doa` from the earliest.  
+We can sort\index{sort} data in ascending or descending order using the `arrange()` function. For example, for dataset `stroke`, let us sort the `doa` from the earliest.
 
 ```{r}
-stroke %>% arrange(doa)
+stroke %>% 
+  arrange(doa)
 ```
 
 ### Select observation using `filter()`
 
-To select observations based on certain criteria, we use the `filter()` function. Here, in this example, we will create a new dataset (which we will name as `stroke_m_40`) that contains patients that have sex as male and Glasgow Coma Scale (gcs) at 7 or higher:
+We use the `filter()` function to select observations based on certain criteria. Here, in this example, we will create a new dataset (which we will name as `stroke_m_40`) that contains patients that have sex as male and Glasgow Coma Scale (gcs) at 7 or higher:
 
-- gender is male 
-- gcs at 7 or higher
+-   gender is male
+-   gcs at 7 or higher
 
 ```{r}
-stroke_m_7 <- stroke %>% filter(sex == 'male', gcs >= 7)
+stroke_m_7 <- stroke %>% 
+  filter(sex == 'male', gcs >= 7)
 stroke_m_7
 ```
 
-Next, we will create a new dataset (named as `stroke_high_BP`) that contain
+Next, we will create a new dataset (named `stroke_high_BP`) that contain
 
-- `sbp` above 130 OR `dbp` above 90, AND
+-   `sbp` above 130 OR `dbp` above 90
 
 ```{r}
-stroke_high_BP <- stroke %>% filter(sbp > 130 | dbp > 90)
+stroke_high_BP <- stroke %>% 
+  filter(sbp > 130 | dbp > 90)
 stroke_high_BP
 ```
 
-## Group data\index{Group data} and get summary statistics\index{Summary statistics} 
+## Group data\index{Group data} and get summary statistics\index{Summary statistics}
 
-The`group_by()` function allows us to group data\index{Group data} based on categorical variable\index{Categorical variable}. Using the  `summarize` we do summary statistics\index{Summary statistics} for the overall data or for groups created using `group_by()` function. 
+The`group_by()` function allows us to group data\index{Group data} based on categorical variable\index{Categorical variable}. Using the `summarize` we do summary statistics\index{Summary statistics} for the overall data or for groups created using `group_by()` function.
 
 ### Group data\index{Group data} using `group_by()`
 
-The `group_by` function will prepare the data for group analysis. For example, 
+The `group_by` function will prepare the data for group analysis. For example,
 
-1.  to get summary values for mean `sbp`, mean `dbp` and mean `gcs`
-2.  for sex
+-   to get summary values for mean `sbp`, mean `dbp` and mean `gcs`
+-   for sex
 
 ```{r}
-stroke_sex <- stroke %>% group_by(sex)
+stroke_sex <- stroke %>% 
+  group_by(sex)
 ```
 
 ### Summary statistic using `summarize()`
 
-Now that we have a group data\index{Group data} named `stroke_sex`, now, we would summarize our data using the mean and standard deviation (SD) for the groups specified above. 
+Now that we have a group data\index{Group data} named `stroke_sex`, now, we would summarize our data using the mean and standard deviation (SD) for the groups specified above.
 
 ```{r}
-stroke_sex %>% summarise(meansbp = mean(sbp, na.rm = TRUE), 
-                     meandbp  = mean(dbp, na.rm = TRUE),
-                     meangcs = mean(gcs, na.rm = TRUE))
+stroke_sex %>% 
+  summarise(meansbp = mean(sbp, na.rm = TRUE), 
+            meandbp  = mean(dbp, na.rm = TRUE),
+            meangcs = mean(gcs, na.rm = TRUE))
 ```
 
 To calculate the frequencies for two variables for pep dataset
 
-- sex
-- outcome
+-   sex
+-   outcome
 
 ```{r}
-pep2 %>% group_by(sex) %>%
+pep2 %>% 
+  group_by(sex) %>%
   count(outcome, sort = TRUE)
 ```
 
-or 
+or
 
 ```{r}
-pep2 %>% count(sex, outcome, sort = TRUE)
+pep2 %>% 
+  count(sex, outcome, sort = TRUE)
 ```
-
 
 ## More complicated **dplyr**\index{dplyr} verbs
 
-To be more efficent, use multiple **dplyr**\index{dplyr} (a package inside tidyverse\index{tidyverse} metapackage) functions in one line of R code. For example, 
+To be more efficient, use multiple **dplyr**\index{dplyr} (a package inside tidyverse\index{tidyverse} meta-package) functions in one line of R code. For example,
 
 ```{r filterstarwars}
-pep2 %>% filter(sex == "male", diastolic >= 60, systolic >= 80) %>% 
+pep2 %>% 
+  filter(sex == "male", diastolic >= 60, systolic >= 80) %>% 
   dplyr::select(age, systolic, diastolic, perforation, outcome) %>%
   group_by(outcome) %>%
   summarize(mean_sbp = mean(systolic, na.rm = TRUE), 
@@ -277,44 +287,48 @@ pep2 %>% filter(sex == "male", diastolic >= 60, systolic >= 80) %>%
             freq = n())
 ```
 
-
-## Data transformation\index{Data transformation} for categorical variables\index{Categorical variable} 
+## Data transformation\index{Data transformation} for categorical variables\index{Categorical variable}
 
 ### **forcats** package
 
-Data transformation\index{Data transformation} for categorical variables\index{Categorical variable} (factor variables\index{Factor variable}) can be facilitated using the **forcats** package. 
+Data transformation\index{Data transformation} for categorical variables\index{Categorical variable} (factor variables\index{Factor variable}) can be facilitated using the **forcats** package.
 
 ### Conversion from numeric to factor variables\index{Factor variable}
 
-Now, we will convert the integer (numerical) variable to a factor (categorical) variable. For example, we will generate a new factor (categorical) variable named as `high_bp` from variable `sbp` and `dbp` (which both are double variable). We will label `high_bp`as *High* or *Not High*.
+Now, we will convert the integer (numerical) variable to a factor (categorical) variable. For example, we will generate a new factor (categorical) variable named `high_bp` from variables `sbp` and `dbp` (both double variables). We will label `high_bp`as *High* or *Not High*.
 
 The criteria:
 
-- if sbp $sbp \geq 130$ or $dbp \geq 90$ then labelled as High, else is Not High
+-   if sbp $sbp \geq 130$ or $dbp \geq 90$ then labelled as High, else is Not High
 
 ```{r}
 stroke <- stroke %>% 
-  mutate(high_bp = if_else(sbp >= 130 | dbp >= 90, "High", "Not High"))
+  mutate(high_bp = if_else(sbp >= 130 | dbp >= 90, 
+                           "High", "Not High"))
 stroke %>% count(high_bp)
 ```
 
-of by using `cut()`
+of by using `cut()`\index{cut}
 
 ```{r}
 stroke <- stroke %>% 
   mutate(cat_sbp = cut(sbp, breaks = c(-Inf, 120, 130, Inf),
                        labels = c('<120', '121-130', '>130')))
 stroke %>% count(cat_sbp)
-stroke %>% group_by(cat_sbp) %>% summarize(minsbp = min(sbp),
-                                           maxsbp = max(sbp))
 ```
 
+```{r}
+stroke %>% 
+  group_by(cat_sbp) %>% 
+  summarize(minsbp = min(sbp),
+            maxsbp = max(sbp))
+```
 
-### Recoding variables\index{Recoding variable} 
+### Recoding variables\index{Recoding variable}
 
-We use this function to recode variables from the old levels to the new levels. For example:
+We use this function to recode\index{recode} variables from old to new levels. For example:
 
-```{r } 
+```{r }
 stroke <- stroke %>%
   mutate(cat_sbp2 = recode(cat_sbp, "<120" = "120 or less",
                           "121-130" = "121 to 130",
@@ -324,15 +338,16 @@ stroke %>% count(cat_sbp2)
 
 ### Changing the level of categorical variable\index{Categorical variable}
 
-Variable `cat_sbp` will be ordered as 
+Variable `cat_sbp` will be ordered as
 
-- less or 120, then 
-- 121 - 130, then
-- 131 or higher
+-   less or 120, then
+-   121 - 130, then
+-   131 or higher
 
 ```{r}
 levels(stroke$cat_sbp)
 ```
+
 To change in reverse for example, we can use `fct_relevel`
 
 ```{r}
@@ -344,39 +359,14 @@ levels(stroke$relevel_cat_sbp)
 stroke %>% count(relevel_cat_sbp)
 ```
 
+## Additional resources
+
+The link to webpages below helps readers explore more about Data transformation\index{Data transformation} or wrangling using R.
+
+-   **dplyr**\index{dplyr} [vignettes](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
+-   example of using **forcats** [here](http://r4ds.had.co.nz/factors.html)
+-   **rio** [package](https://garthtarr.github.io/meatR/rio.html) to help readers read data into R 
+
 ## Summary
 
-**dplyr**\index{dplyr} package is a very useful package that encourages users to use proper verb when manipulating variables (columns) and observations (rows). We have learned to use 5 functions but there are more functions available.  Other useful functions include:
-
-1.  `dplyr::distinct()`
-2.  `dplyr::transmutate()`
-3.  `dplyr::sample_n()` and `dplyr::sample_frac()`
-
-Also note that, package **dplyr**\index{dplyr} is very useful when it is combined with another function that is `group_by`
-
-If you working with database, you can use **dbplyr**\index{dbplyr} which has been developed to perform very effectively with databases. 
-
-For categorical variables\index{Categorical variable}, you can use **forcats** package. 
-
-## Self-practice
-
-If you have completed the tutorial above, you may:
-
-1.  Read your own data (hints: **haven**\index{haven}, **foreign**\index{foreign}) or you can download data from <https://www.kaggle.com/datasets> . Maybe can try this dataset <https://www.kaggle.com/blastchar/telco-customer-churn>
-2.  Create a smaller dataset by selecting some variable (hints: `dplyr::select()`)
-3.  Creating a dataset with some selection (hints: `dplyr::filter()`)
-4.  Generate a new variable (hints`dplyr::mutate()`)
-5.  Creata an object using pipe and combining `dplyr::select()`, `dplyr::filter()` and `dplyr::mutate()` in one single line of R code
-6.  Summarise the mean, standard deviation and median for numerical variables\index{Numerical variable} `dplyr::group_by()` and `dplyr::summarize()`
-7.  Calculare the number of observations for categorical variables (hints: `dplyr::count()`)
-8.  Recode a categorical variable (hints: `forcats::fct_recode()`)
-
-
-## Resources
-
-You may head to these webpages to explore more about Data transformation\index{Data transformation} or wrangling using R:
-
-1.  **dplyr**\index{dplyr} vignettes here <https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html>
-2.  **forcats** examples here <http://r4ds.had.co.nz/factors.html>
-3.  reading data into R <https://garthtarr.github.io/meatR/rio.html>
-
+**dplyr**\index{dplyr} package is a very useful package that encourages users to use proper verb when manipulating variables (columns) and observations (rows). We have learned to use five functions but there are more functions available. Other useful functions include `dplyr::distinct()`, `dplyr::transmutate()`, `dplyr::sample_n()` and `dplyr::sample_frac()`. If you are working with a database, you can use **dbplyr**\index{dbplyr}, which performs data wrangling very effectively with databases. For categorical variables\index{Categorical variable}, you can use **forcats** package.
