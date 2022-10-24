@@ -146,21 +146,24 @@ The `tbl_summary()` function from **gtsummary**\index{gtsummary} package can pro
 
 ```{r}
 stroke %>%
-  tbl_summary()
+  tbl_summary() %>%
+  as_gt()
 ```
 
 To obtain the patients characteristics based on status: 
 
 ```{r}
 stroke %>% 
-  tbl_summary(by = status)
+  tbl_summary(by = status) %>%
+  as_gt()
 ```
 
 To obtain the patients characteristics based on stroke types: 
 
 ```{r}
 stroke %>% 
-  tbl_summary(by = stroke_type)
+  tbl_summary(by = stroke_type) %>%
+  as_gt()
 ```
 
 ## Kaplan-Meier\index{Kaplan-Meier} survival estimates 
@@ -447,13 +450,15 @@ By using `tbl_uvregression()` we can generate simple univariable model for all c
 
 ```{r}
 stroke %>%
-  dplyr::select(time2, status, sex, dm, gcs, sbp, dbp, wbc, stroke_type, referral_from) %>%
+  dplyr::select(time2, status, sex, dm, gcs, sbp, dbp, wbc, 
+                stroke_type, referral_from) %>%
   tbl_uvregression(
     method = coxph,
     y = Surv(time2, event = status == 'dead'),
     exponentiate = TRUE,
     pvalue_fun = ~style_pvalue(.x, digits = 3)
-  ) 
+  ) %>%
+  as_gt()
 ```
 
 ### Multiple Cox PH regression
@@ -580,26 +585,26 @@ We can plots these residuals
 - Schoenfeld\index{Schoenfeld}
 - scaled Schoenfeld\index{Scaled Schoenfeld}
 
-<!-- For example, let's start with plotting the residuals -->
+For example, let's start with plotting the residuals
 
-<!-- ```{r} -->
-<!-- ggcoxdiagnostics(stroke_mv, type = "deviance") -->
-<!-- ``` -->
+```{r}
+#ggcoxdiagnostics(stroke_mv, type = "deviance")
+```
 
-<!-- Now, we will use Schoenfeld\index{Schoenfeld} -->
+Now, we will use Schoenfeld\index{Schoenfeld}
 
 
-<!-- ```{r} -->
-<!-- ggcoxdiagnostics(stroke_mv, type = "schoenfeld") -->
-<!-- ``` -->
+```{r}
+#ggcoxdiagnostics(stroke_mv, type = "schoenfeld")
+```
 
-<!-- ```{r} -->
-<!-- ggcoxdiagnostics(stroke_mv, type = "deviance", ox.scale = 'time') -->
-<!-- ``` -->
+```{r}
+#ggcoxdiagnostics(stroke_mv, type = "deviance", ox.scale = 'time')
+```
 
-<!-- ```{r} -->
-<!-- ggcoxdiagnostics(stroke_mv, type = "deviance", ox.scale = "linear.predictions") -->
-<!-- ``` -->
+```{r}
+#ggcoxdiagnostics(stroke_mv, type = "deviance", ox.scale = "linear.predictions")
+```
 
 ```{r}
 #ggcoxdiagnostics(stroke_mv, type = "schoenfeld", ox.scale = "observation.id")
@@ -736,7 +741,8 @@ stroke_mv %>%
      ) %>%
    add_nevent(location = 'level') %>%
    bold_p(t = 0.10) %>%
-   bold_labels()
+   bold_labels() %>%
+  as_gt()
 ```
 
 

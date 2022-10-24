@@ -1,13 +1,5 @@
 # Parametric Survival Analysis
 
-## Objectives
-
-At the end of the chapter, readers will be able to 
-
-1. understand the statistical concept of parametric survival analysis
-2. perform parametric survival analysis especially exponential regression model and Weibull regression model
-
-
 ## Introduction
 
 In survival analysis, the Cox proportional hazard regression is very popular to model the association between the time-to-event with covariates or independent variables. It is a form of Generalized Linear Models.
@@ -21,20 +13,27 @@ The interests in parametric models include:
 1.  determining the acceleration factor and/or
 2.  determining the hazard ratio.
 
-The common parametric models are:
+The common parametric models include:
 
 1. The exponential survival model
 2. The Weibull survival model and
 3. The log-logistic survival model.
 
+## Objectives
+
+At the end of the chapter, readers will be able to 
+
+- understand the statistical concept of parametric survival analysis
+- perform parametric survival analysis specifically the exponential regression model and the Weibull regression model
+
 ### Advantages of parametric survival analysis models
 
 A fully parametric model has some advantages [@Lemeshow_Stanley2008-03-07]:
 
-1. full maximum likelihood may be used to estimate the parameters
-2. the estimated coefficients or transformations of them can provide clinically meaningful estimates of effect
-3. fitted values from the model can provide estimates of survival time
-4. residuals can be computed as differences between observed and predicted values of time
+- full maximum likelihood may be used to estimate the parameters
+- the estimated coefficients or transformations of them can provide clinically meaningful estimates of effect
+- fitted values from the model can provide estimates of survival time
+- residuals can be computed as differences between observed and predicted values of time
 
 An analysis of censored time-to-event data using a fully parametric model can almost have the look and feel of a normal-errors linear regression analysis.
 
@@ -147,7 +146,8 @@ d1 <- read_csv(here('data','survivaloa.csv'))
 ### Data Wrangling
 
 ```{r}
-d1<- d1 %>% dplyr::select(age, surgery, marital, survivaltime, status) %>%
+d1<- d1 %>% 
+  dplyr::select(age, surgery, marital, survivaltime, status) %>%
   mutate_if(is.character, as.factor)
 glimpse(d1)
 ```
@@ -156,18 +156,25 @@ glimpse(d1)
 
 ```{r}
 summary(d1)
-d1 %>% mutate(status = recode(status,"0" = "Censored", "1" = "Death")) %>%
+```
+
+```{r}
+d1 %>% 
+  mutate(status = recode(status,"0" = "Censored", "1" = "Death")) %>%
 tbl_summary(by = status,
               statistic = list(all_continuous() ~ "{mean} ({sd})", 
                               all_categorical() ~ "{n} ({p}%)"),
               type = list(where(is.logical) ~ "categorical"),
-              label = list(age ~ "Age (in years old)", surgery ~ "Surgery Status", marital~"Marital Status", survivaltime ~ "Time (month)"),
+              label = list(age ~ "Age (in years old)", 
+                           surgery ~ "Surgery Status", 
+                           marital~"Marital Status", survivaltime ~ "Time (month)"),
             missing_text = "Missing") %>% 
   modify_caption("**Table 1. Patient Characteristic**")  %>%
   modify_header(label ~ "**Variable**") %>% 
   modify_spanning_header(c("stat_1", "stat_2") ~ "**Survival Status**") %>%
   modify_footnote(all_stat_cols() ~ "Mean (SD) or Frequency (%)") %>%
-  bold_labels()
+  bold_labels() %>%
+  as_gt()
 ```
 
 ### Weibull (Accelerated Failure Time)\index{Weibull}
@@ -231,4 +238,4 @@ There are two resources we recommend for further readings:
 
 ## Summary
 
-In this chapter we learned briefly the concept of parametric survival analysis. We are also shown how to perform parametrics survival analysis using the AFT and PH metrics using the Weibull parametric survival model. 
+In this chapter we learned briefly the concept of parametric survival analysis. We are also shown how to perform parametric survival analysis using the AFT and PH metrics using the Weibull parametric survival model. 

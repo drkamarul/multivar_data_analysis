@@ -142,7 +142,7 @@ Now, we can look at the summary statistics
 ```{r}
 fatal %>%
   tbl_summary() %>%
-  as_hux_table()
+  as_gt()
 ```
 
 or to get summary statistics for each status category:
@@ -150,7 +150,7 @@ or to get summary statistics for each status category:
 ```{r}
 fatal %>%
   tbl_summary(by = status) %>%
-  as_hux_table()
+  as_gt()
 ```
 
 
@@ -415,13 +415,15 @@ The **gtsummary**\index{gtsummary} package has a useful function `tbld_regressio
 This is the table for adjusted log odds ratio\index{Log odds ratio}:
 
 ```{r}
-tbl_regression(fatal_mv2)
+tbl_regression(fatal_mv2) %>%
+  as_gt()
 ```
 
 And this is the table for adjusted odds ratio\index{Odds ratio}:
 
 ```{r}
-tbl_regression(fatal_mv2, exponentiate = TRUE)
+tbl_regression(fatal_mv2, exponentiate = TRUE) %>%
+  as_gt()
 ```
 
 ## Further readings

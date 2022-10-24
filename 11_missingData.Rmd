@@ -1,5 +1,12 @@
 # Missing data
 
+## Introduction
+
+Missing data can significantly affect the performance of predictive risk modeling, an important technique for developing medical guidelines. The two most commonly used strategies for managing missing data are to impute or delete values, and the former can cause bias, while the later can cause both bias and loss of statistical power. Several techniques designed to deal with missing data are described and applied to an illustrative example. These methods include complete-case analysis, available-case analysis, as well as single and multiple imputation.
+
+Researchers should report the details of missing data, and appropriate methods for dealing with missing values should be incorporated into the data analysis.
+
+
 ## Objectives
 
 At the end of the chapter, readers will be able to:
@@ -8,7 +15,7 @@ At the end of the chapter, readers will be able to:
 - To perform a single imputation\index{Single imputation}
 - To perform a multiple imputation
 
-## Introduction
+## Types of missing data
 
 Missing data\index{Missing data} data is quite a common issue in research. The causes of missing data should always be investigated and more data should be collected if possible. There are three types of missing data:
 
@@ -447,3 +454,5 @@ tbl_regression(lr_mi2) %>%
 ## Resources
 
 We suggest @Schafer2002 and @kang2013 for theoretical details on the missing data, @Zhang2015 for missing data exploration and @heyman2019 and @buuren2018 for more details on single and multiple imputation\index{Multiple imputation}.
+
+## Summary

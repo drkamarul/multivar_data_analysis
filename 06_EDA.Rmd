@@ -87,7 +87,8 @@ pep %>%
     statistic = list(all_continuous() ~ "{mean} ({sd})", 
                      all_categorical() ~ "{n} / {N} ({p}%)"),
     digits = all_continuous() ~ 2) %>% 
-  modify_caption("Patient Characteristics (N = {N})") 
+  modify_caption("Patient Characteristics (N = {N})") %>%
+  as_gt()
 ```
 
 
@@ -360,7 +361,9 @@ gapminder %>%
         missing = "no", 
         digits = all_continuous() ~ 1 
         )) %>%
-  modify_caption("**Characteristics for 1962, 1982 and 2002 for Asia** (N = {N})") 
+  modify_caption("**Characteristics for 1962, 1982 
+                 and 2002 for Asia** (N = {N})") %>%
+  as_gt() 
 ```
 
 ### Plotting means and error bars\index{Error bar}

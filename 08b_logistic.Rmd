@@ -205,7 +205,8 @@ ms %>%
   modify_header(label ~ "**Variable**") %>%
   modify_spanning_header(c("stat_1", "stat_2", "stat_3") ~ "**Glycemic Control Status**") %>%
   modify_footnote(all_stat_cols() ~ "Mean (SD) or Frequency (%)") %>%
-  bold_labels()
+  bold_labels() %>%
+  as_gt()
 ```
 ### Confirm the order of cat_fbs
 
