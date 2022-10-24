@@ -1,42 +1,34 @@
 # Binary Logistic Regression\index{Binary logistic regression}
 
-## Objectives
+## Introduction 
 
-At the end of the chapter, the readers will be  
-
-- to understand the concept of simple and multiple binary logistic regression\index{Multiple binary logistic regression} 
-- to perform simple binary logistic regression\index{Simple binary logistic regression}
-- to perform multiple binary logistic regression\index{Multiple binary logistic regression}
-- to perform model assessment of binary logistic regression
-- to present and interpret results from binary logsitic regression
-
-## Introduction
-
-The logistic model\index{Logistic model} (or logit model\index{Logit model}) is used to model the probability of a certain class or event existing such as pass or fail, win or lose, alive or dead or healthy or sick. More specifically, binary logistic regression is used to model the relationship between a covariate or a set of covariates and an outcome variables which is a binary variable\index{Binary variable}.
-
-A binary variable\index{Binary variable} is a categorical outcome has two categories or levels. In medical and health research, binary outcome variable is very common. Some example where the outcome is binary include:
+A binary variable\index{Binary variable} is a categorical outcome that has two categories or levels. In medical and health research, the binary outcome variable is very common. Some examples where the outcome is binary include:
 
 - survival status when the status of cancer patients at the end of treatment are coded as either alive or dead
 - relapse status when the status of a patient is coded as either relapse or not relapse
 - satisfaction level when patients who come to clinics are asked if they are satisfied or not satisfied with the service 
 - glucose control when patients were categorized as either good control or poor control based on Hba1c 
 
-In a binary logistic regression model, the dependent variable has two levels (categorical). When the outcome variable has more than two levels or categories, the analysis are modeled by multinomial logistic regression and, if the multiple categories are ordered, by ordinal logistic regression\index{Ordinal logistic regression} (for example the proportional odds ordinal logistic model). 
+In a binary logistic regression model, the dependent variable has two levels (categorical). When the outcome variable has more than two levels or categories, the analysis are modelled by multinomial logistic regression and, if the multiple categories are ordered, by ordinal logistic regression\index{Ordinal logistic regression} (for example, the proportional odds ordinal logistic model).
 
+## Objectives
 
-## Further readings
+At the end of the chapter, the readers will be able 
 
-There are a number of good references to help readers understand binary logistic regression better. The references that we list below also contains workflow that will be useful for readers when modelling logistic regression\index{Logistic regression}. 
+- to understand the concept of simple and multiple binary logistic regression\index{Multiple binary logistic regression} 
+- to perform simple binary logistic regression\index{Simple binary logistic regression}
+- to perform multiple binary logistic regression\index{Multiple binary logistic regression}
+- to perform model assessment of binary logistic regression
+- to present and interpret results from binary logistic regression
 
-We highly recommend readers to read 
+## Logistic regression model
 
-- the Applied Logistic Regression book [@hosmer2013applied]
-- the Logistic Regression\index{Logistic regression}: Self Learning Text [@kleinbaum2010logistic]
-- the workflow from A Handbook of Statistical Analyses Using R [@R-HSAUR]
+The logistic model\index{Logistic model} (or logit model\index{Logit model}) is used to model the probability of a particular class or event existing, such as pass or fail, win or lose, alive or dead or healthy or sick. More specifically, binary logistic regression is used to model the relationship between a covariate or a set of covariates and an outcome variable which is a binary variable\index{Binary variable}.
+
 
 ## Dataset
 
-We will use a dataset named `stroke.dta` which in STATA\index{STATA} format. These data come from a study of hospitalized stroke patients. They original dataset contain 12 variables but our main variables of interest are:
+We will use a dataset named `stroke.dta` which in STATA\index{STATA} format. These data come from a study of hospitalized stroke patients. The original dataset contains 12 variables, but our main variables of interest are:
 
 - status : Status of patient during hospitalization (alive or dead)
 - gcs : Glasgow Coma Scale on admission (range from 3 to 15)
@@ -46,11 +38,11 @@ We will use a dataset named `stroke.dta` which in STATA\index{STATA} format. The
 - sbp : Systolic Blood Pressure (mmHg)
 - age : age of patient on admission
 
-The outcome variable is variable status. It is labelled as either dead or alive which is the outcome of each patient during hospitalization.   
+The outcome variable is variable status. It is labelled as either dead or alive, which is the outcome of each patient during hospitalization.   
 
-## logit and logistic models\index{Logistic model}
+## Logit and logistic models\index{Logistic model}
 
-The simple binary logit and logistic models\index{Logistic model} refer to a a model with only one covariate (also known as independent variable). For example, if the covariate is gcs (Glasgow Coma Scale), the simple logit model\index{Logit model} is written as:
+The simple binary logit\index{logit} and logistic models\index{Logistic model} refer to a a model with only one covariate (also known as independent variable). For example, if the covariate is gcs (Glasgow Coma Scale), the simple logit model\index{Logit model} is written as:
 
 $$\hat{g}(x)= ln\left[ \frac{\hat\pi(x)}{1 - {\hat\pi(x)}} \right]$$
 
@@ -66,13 +58,15 @@ The $\pi(x) = E(Y|x)$ represents the conditional mean of $Y$ given $x$ when the 
 If we have decided (based on our clinical expertise and literature review) that a model that could explain death consists of gcs, stroke type, sex, dm, age and sbp, then the logit model\index{Logit model} can be expanded to:
 
 $$\hat{g}(x)  = \hat\beta_0 + \hat\beta_1(gcs) + \hat\beta_2(stroke type) + \hat\beta_3(sex)+ \hat\beta_4(dm) + \hat\beta_5(sbp) +  \hat\beta_6(age)$$
-This is the odds for death given certain value of gcs, sbp and age and certain categories of stroke stype, sex and diabetes. While the probability of deaths is 
+
+These are the odds for death given certain gcs, sbp and age values and specific categories of stroke type, sex and diabetes. While the probability of death is 
 
 $$\hat{\pi}(x) = \frac{exp^{\hat\beta_0 + \hat\beta_1(gcs) + \hat\beta_2(stroke type) + \hat\beta_3(sex)+ \hat\beta_4(dm) + \hat\beta_5(sbp) + \hat\beta_6(age)})}{1 + exp^{\hat\beta_0 + \hat\beta_1(gcs) + \hat\beta_2(stroke type) + \hat\beta_3(sex)+ \hat\beta_4(dm) + \hat\beta_5(sbp) + \hat\beta_6(age)}}$$
 
-In many datasets, some of the independent variables are discrete, nominal scale variables such as race, sex, treatment group, and so forth. And because of that it is inappropriate to include them in the model as if they were interval scale variables. Though in many software, they are represented by numbers, but these numbers are used merely identifiers.
+In many datasets, some independent variables are either discrete or nominal scale variables. Such variables include race, sex, treatment group, and age categories. Including them in the model is inappropriate as if they were interval scale variables is inappropriate. In some statistical software, these variables are represented by numbers. However, be careful; these numbers are used merely as identifiers or labels for the groups. 
 
-In this situation, we will use a method called design variables (or dummy variables\index{Dummy variable}). Suppose, for example, assuming that one of the independent variables is obesity type, which is now coded as “Class 1”, “Class 2” and “Class 3”. In this case, there are 3 levels or categories, hence two design variables ($D - 1$) are necessary, let's say D1 and D2. One possible coding strategy is that when the patient is in “Class 1” then the two design variables, for D1 and D2 would both be set equal to zero. In this example, "Class 1" is the reference category. When the patient is in “Class 2”, then D1 is set as 1 and D2 as 0; when the patient is in "Class 3", the we will set D1 as 0 and D2 and 1. All these coding assignment can be done automatically in the software. But to interpret, we must know which category is the reference.  
+
+In this situation, we will use a method called design variables (or dummy variables\index{Dummy variable}). Suppose, for example, assuming that one of the independent variables is obesity type, which is now coded as “Class 1”, “Class 2” and “Class 3”. In this case, there are 3 levels or categories, hence two design variables ($D - 1$) are necessary, let's say D1 and D2. One possible coding strategy is that when the patient is in “Class 1” then the two design variables, for D1 and D2 would both be set equal to zero. In this example, "Class 1" is the reference category. When the patient is in “Class 2”, then D1 is set as 1 and D2 as 0; when the patient is in "Class 3", the we will set D1 as 0 and D2 and 1. All these coding assignments can be done automatically in the software. But to interpret, we must know which category is the reference.  
 
 
 ## Prepare environment for analysis
@@ -131,7 +125,7 @@ glimpse(fatal)
 
 ## Explore data
 
-Variables sex, status, dm and stroke type are labelled variable. This means eventhough they are coded as numbers but the numbers represent the groups or categories or levels of the variables. Basically, they are categorical variables.
+Variables sex, status, dm and stroke type are labelled variables which means that even though they are coded as numbers, the numbers represent the groups or categories or levels of the variables. They are categorical variables.
 
 We will transform all of them to factor variables\index{Factor variable}. We can quickly do this using the function `across()`. Below, we will transform all labelled variables to factor variables\index{Factor variable}:
 
@@ -164,7 +158,7 @@ fatal %>%
 We now can perform binary logistic regression to estimate the regression parameters $\hat\beta_s$ or the log odds\index{Log odds}. Usually, we can do this in two steps:
 
 1.  The simple binary logistic regression\index{Simple binary logistic regression} or the univariable logistic regression. In this analysis, there is only one independent variable or covariate in the model. This is also known as the crude or unadjusted analysis. 
-2.  The multiple binary logistic regression\index{Multiple binary logistic regression} or the multivariable logistic regression. Here, we expand our model and include two or more independent variables (covariates). This is a adjusted model and we can obtain the estimate of a particular covariate independent of the other covariates in the model.  
+2.  The multiple binary logistic regression\index{Multiple binary logistic regression} or the multivariable logistic regression. Here, we expand our model and include two or more independent variables (covariates). The multiple binary logistic regression model is an adjusted model, and we can obtain the estimate of a particular covariate independent of the other covariates in the model.  
 
 ## Simple binary logistic regression\index{Simple binary logistic regression} 
 
@@ -173,7 +167,7 @@ The simple binary logistic regression\index{Simple binary logistic regression} h
 1.  status as the dependent variable.
 2.  gcs as the independent variable. 
 
-The independent variable can be a numerical or a categorical variable. To estimate the log odds\index{Log odds} (the regression parameters, $\beta$) for the covariate Glasgow Coma Scale (GCS), we can write the logit model\index{Logit model} as: 
+The independent variable can be numerical or a categorical variable. To estimate the log odds\index{Log odds} (the regression parameters, $\beta$) for the covariate Glasgow Coma Scale (GCS), we can write the logit model\index{Logit model} as: 
 
 $$log\frac{p(status = dead)}{1 - p(status = dead)}  = \hat\beta_0 + \hat\beta_1(gcs)$$
 
@@ -202,7 +196,7 @@ tidy(fatal_glm_1, conf.int = TRUE)
 
 The estimates here are the log odds\index{Log odds} for death for a given value of gcs. In this example, each unit increase in gcs, the crude or unadjusted log odds\index{Log odds} for death due to stroke change by a factor $-0.388$ with $95%$ CI ranges from $-0.497  and 	-0.292$.    
 
-Now, let's use another covariate, `stroke_type`. Stroke type has 2 levels or categories; Haemorrhagic Stroke (HS) and Ischaemic Stroke (IS). HS is known to cause higher risk for deaths in stroke. We will model stroke type (`stroke_type`), name the model as `fatal_glm_2` and show the result using `tidy()`
+Now, let's use another covariate, `stroke_type`. Stroke type has 2 levels or categories; Haemorrhagic Stroke (HS) and Ischaemic Stroke (IS). HS is known to cause a higher risk for deaths in stroke. We will model stroke type (`stroke_type`), name the model as `fatal_glm_2` and show the result using `tidy()`
 
 ```{r}
 fatal_glm_2 <- 
@@ -218,9 +212,9 @@ It seems that patients with Haemorrhagic Stroke (HS) had higher log odds\index{L
 
 The is strong motivation to include other covariates in the model. This is because
 
-- It is unlikely that only one variable (gcs or stroke type) that is related with stroke. For example, cardiovascular disease has many factors that affect the outcome. So, it makes more sense to consider adding other seemingly important independent variable in the model. 
+- It is unlikely that only one variable (gcs or stroke type) is related with stroke. For example, cardiovascular disease has many factors that affect the outcome. So, it makes more sense to consider adding another seemingly important independent variable in the model. 
 - by adding more covariates in the model, we can estimate the adjusted log odds\index{Log odds}. These are the log odds\index{Log odds} of a particular covariate independent of other covariates.
-- we can add other covariate to adjust for the confounding effects
+- we can add other covariates to adjust for the confounding effects
 - interaction\index{Interaction} (the product of two covariates) can also be estimated
 
 To add or not to add variables is a big subject on its own. Usually it is governed by clinical experience, subject matter experts and some preliminary analysis. 
@@ -247,15 +241,15 @@ log_odds
 We could see in the multivariable model\index{Multivariable model}, that
 
 - with one unit increase in Glasgow Coma Scale (GCS), the log odds\index{Log odds} for death during hospitalization equals to $-0.328$, adjusting for other covariates
-- patients with HS has $1.266$ times the log odds\index{Log odds} for death as compared to patients with IS, adjusting for other covariates.
+- patients with HS have $1.266$ times the log odds\index{Log odds} for death as compared to patients with IS, adjusting for other covariates.
 - female patients have $0.430$ times the log odds\index{Log odds} for death as compared to male patients, adjusting for other covariates
-- patients with diabetes mellitus had $0.474$ times the log odds\index{Log odds} for deaths as compared to patients with no diabetes mellitus
+- patients with diabetes mellitus have $0.474$ times the log odds\index{Log odds} for deaths as compared to patients with no diabetes mellitus
 - With one mmHg increase in systolic blood pressure, the log odds\index{Log odds} for deaths change by a factor of $0.00086$, when adjusting for other variables.  
 - with an increase in one year of age, the log odds\index{Log odds} for deaths change by a factor of $0.024$, when adjusting for other variables.  
 
 ## Convert the log odds\index{Log odds} to odds ratio\index{Odds ratio}
 
-For lay person, it is difficult to interpret the log odds\index{Log odds}. It is easier to interpret using the odds ratio\index{Odds ratio}. To do this, we can use the argument `exponentiate = TRUE` in the `tidy()` function. However, we also know that the odds ratio\index{Odds ratio} can be easily calculate by $\exp^{\beta_i}$
+For the lay person, it is not easy to interpret the log odds\index{Log odds}. It is easier to interpret using the odds ratio\index{Odds ratio}. To do this, we can use the argument `exponentiate = TRUE` in the `tidy()` function. However, we also know that the odds ratio\index{Odds ratio} can be easily calculate by $\exp^{\beta_i}$
 
 ```{r}
 odds_ratio <- tidy(fatal_mv1,
@@ -266,7 +260,7 @@ odds_ratio
 
 ## Making inference 
 
-Let us combine the results from the log odds\index{Log odds} and the odds ratio\index{Odds ratio} and rename the table properly.
+Let us rename the table appropriately to combine the results from the log odds\index{Log odds} and the odds ratio\index{Odds ratio}.
 
 ```{r}
 tab_logistic <- bind_cols(log_odds, odds_ratio) 
@@ -284,17 +278,17 @@ tab_logistic %>%
 
 In the model, it means that:
 
-- if **gcs** increases by 1 unit (when *stroke type* is adjusted), the log odds\index{Log odds} for death changes by a factor $-0.32$ or the odds for death changes by a factor $0.72$ (odds for death reduces for $28\%$). The the $95\%CI$ are between $21\%,36\%$, adjusting for other covariates.
-- patients with HS has $3.55\%$ times higher odds for stroke deaths - with $95\%CI : 17\%, 85\%$ - as compared to patients with HS, adjusting for other independent variables.
+- if **gcs** increases by 1 unit (when *stroke type* is adjusted), the log odds\index{Log odds} for death changes by a factor $-0.32$ or the odds for death changes by a factor $0.72$ (odds for death reduces for $28\%$). The $95\%CI$ are between $21\%,36\%$, adjusting for other covariates.
+- patients with HS have $3.55\%$ times higher odds for stroke deaths - with $95\%CI : 17\%, 85\%$ - as compared to patients with HS, adjusting for other independent variables.
 - female patients have $53\%$ higher odds for death as compared to female patients ($p = 0.154$), adjusting for other covariates
-- patients with diabetes mellitus had $60.6\%$ higher odds for deaths compared to patients with no diabetes mellitus though the p value is above $5\%$ ($p = 0.642\%$)
+- patients with diabetes mellitus have $60.6\%$ higher odds for deaths compared to patients with no diabetes mellitus though the p value is above $5\%$ ($p = 0.642\%$)
 - With one mmHg increase in systolic blood pressure, the odds for death change by a factor $1.00086$, when adjusting for other variables. The p value is also larger than $5\%$.  
 - with an increase in one year of age, the odds for deaths increase by a factor of $1.025$, when adjusting for other variables. However, the p value is $0.115$  
 
 
 ## Model comparison
 
-It is not advisable to assess the important of variables based on their p-values or the Wald statistics. The better way is to use likelihood ratio to compare models and assess the importance of variables. 
+It is not advisable to assess the importance of variables based on their p-values or the Wald statistics. The better way is to use the likelihood ratio to compare models and assess the importance of variables.  
 
 For example, is there any statistical difference between model 1 (`fatal_mv`) and model 2 (`fatal_glm_1`) if we set the level of significance at $5\%$?
 
@@ -344,7 +338,7 @@ tidy(fatal_mv2_ia)
 
 $$\hat{g}(x)  = \hat\beta_0 + \hat\beta_1(gcs) + \hat\beta_2(stroke type) + \hat\beta_3(age)+ \hat\beta_4(gcs \times stroke_type)$$
 
-To decide if an interaction\index{Interaction} term should stay in the model, we suggest you to consider the biological and statistical significance. If you think the interaction\index{Interaction} justifies both reasons, then it is preferred you keep the interaction\index{Interaction} term in the model. For example, for our model:
+To decide if an interaction\index{Interaction} term should stay in the model, we suggest you consider the biological and statistical significance. If you think the interaction\index{Interaction} justifies both reasons, then it is preferred that you keep the interaction\index{Interaction} term in the model. For example, for our model:
 
 - the coefficient for the interaction\index{Interaction} term for stroke type and gcs is not significant at %5\%$ level.
 - after getting further advice from the stroke experts, we believe that the effect of gcs on stroke death is not largely different between different stroke type
@@ -412,7 +406,7 @@ fit_m$gof
 
 The Hosmer Lemeshow, modified Hosmer Lemeshow and Oseo Rojek are all above $5\%$ values which are supportive of good fit of the model. 
 
-## Presentation
+## Presentation of logistic regression model
 
 The **gtsummary**\index{gtsummary} package has a useful function `tbld_regression()` to produce a formatted table suitable for publication. 
 
@@ -428,6 +422,13 @@ And this is the table for adjusted odds ratio\index{Odds ratio}:
 tbl_regression(fatal_mv2, exponentiate = TRUE)
 ```
 
-## Resources
+## Further readings
 
+There are a number of good references to help readers understand binary logistic regression better. The references that we list below also contains workflow that will be useful for readers when modelling logistic regression\index{Logistic regression}. 
+
+We highly recommend readers to read Applied Logistic Regression [@hosmer2013applied], Logistic Regression\index{Logistic regression}: Self Learning Text [@kleinbaum2010logistic] to strengthen your theory and concepts on logistic regression. And next you can refer to A Handbook of Statistical Analyses Using R [@R-HSAUR] which provides in greater details the R codes relevant to logistic regression models. 
+
+## Summary
+
+In this chapter, we briefly explain that when readers want to model the relationship of a single or multiple independent variables with a binary outcome, then one of the analyses of choice is binary logit or logistic regression model. Then, we demonstrated simple and multiple binary logistic regression using `glm()` function and making predictions from the logistic regression model. Lastly, using **gtsummary** package readers can quickly create a nice regression table.  
 

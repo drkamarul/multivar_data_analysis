@@ -1,5 +1,13 @@
 # Linear Regression\index{Linear regression}
 
+## Introduction
+Linear regression\index{Linear regression} is one of the most common statistical analyses in medical and health sciences. Linear regression\index{Linear regression} models the linear (i.e. straight line) relationship between:
+
+- **outcome**: numerical variable (e.g. blood pressure, BMI, cholesterol level).
+- **predictors/independent variables**: numerical variables and categorical variables (e.g. gender, race, education level).
+
+In simple words, we might be interested in knowing the relationship between the cholesterol level and its associated factors, for example gender, age, BMI and lifestyle. This can be explored by a Linear regression\index{Linear regression} analysis.
+
 ## Objectives
 
 After completing this chapter, the readers are expected to
@@ -10,13 +18,7 @@ After completing this chapter, the readers are expected to
 - perform model fit\index{Model fit} assessment of linear regression models
 - present and interpret the results of linear regression analyses
 
-## Introduction
-Linear regression\index{Linear regression} is one of the most common statistical analyses in medical and health sciences. Linear regression\index{Linear regression} models the linear (i.e. straight line) relationship between:
-
-- **outcome**: numerical variable (e.g. blood pressure, BMI, cholesterol level).
-- **predictors/independent variables**: numerical variables and categorical variables (e.g. gender, race, education level).
-
-In simple words, we might be interested in knowing the relationship between the cholesterol level and its associated factors, for example gender, age, BMI and lifestyle. This can be explored by a Linear regression\index{Linear regression} analysis.
+## Linear regression models
 
 Linear regression\index{Linear regression} is a type of Generalized linear models (GLMs)\index{Generalized linear model}\index{GLM}, which also includes other outcome types, for example categorical and count. In subsequent chapters, we will cover these outcome types in form of logistic regression\index{Logistic regression} and Poisson regression\index{Poisson regression}. Basically, the relationship between the outcome and predictors in a linear regression\index{Linear regression} is structured as follows,
 
@@ -417,4 +419,4 @@ new_data
 
 ## Summary
 
-In this chapter, we went through the basics about SLR and MLR. We performed the analysis for each and learned how to assess the model fit\index{Model fit} for the regression models. We learned how to nicely present and interpret the results. In addition, we also learned how to utilize the model for prediction.
+In this chapter, we went through the basics about SLR and MLR. We performed the analysis for each and learned how to assess the model fit\index{Model fit} for the regression models. We learned how to nicely present and interpret the results. In addition, we also learned how to utilize the model for prediction. Excellent texts on regression includes Biostatistics: Basic Concepts and Methodology for the Health Sciences [@daniel2014biostatistics] and the more advanced books such as Applied Linear Statistical Models [@KUTNER2013-01-01] and Epidemiology: Study Design and Data Analysis [@woodward2013epidemiology].
