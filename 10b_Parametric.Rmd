@@ -147,7 +147,7 @@ d1 <- read_csv(here('data','survivaloa.csv'))
 ### Data Wrangling
 
 ```{r}
-d1<- d1 %>% select(age, surgery, marital, survivaltime, status) %>%
+d1<- d1 %>% dplyr::select(age, surgery, marital, survivaltime, status) %>%
   mutate_if(is.character, as.factor)
 glimpse(d1)
 ```

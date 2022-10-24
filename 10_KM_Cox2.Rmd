@@ -1,16 +1,6 @@
 # Survival Analysis: Kaplan-Meier\index{Kaplan-Meier} and Cox Proportional Hazard (PH) Regression 
 
-### Objectives 
-
-At the end of the chapter, the readers will be  
-
-- to perform kaplan-Meier\index{kaplan-Meier} survival analysis
-- to perform the simple (univariable) Cox PH regression analysis 
-- to perform the multiple (multivariable) Cox PH regression analysis 
-
 ## Introduction
-
-### Background
 
 Regression concerns the relationship between a response variable and one or more exploratory variables. The independent variables are also called covariates. Some common regression analysis in health and medicine is linear regression, logistic regression\index{Logistic regression}, Poisson regression\index{Poisson regression} and Cox proportional hazards regression\index{Cox proportional hazards regression}. Linear regression falls under the general linear model while the other three regression models fall under the generalized linear regression. 
 
@@ -32,16 +22,23 @@ And for variable time, it can be in any time form such as days, weeks, years or 
 - weeks before recurrence
 - days taken from the start of treatment to treatment success 
 
+## Objectives 
 
-### Types of survival analysis
+At the end of the chapter, the readers will be  
+
+- to perform Kaplan-Meier\index{Kaplan-Meier} survival analysis
+- to perform the simple (univariable) Cox PH regression analysis 
+- to perform the multiple (multivariable) Cox PH regression analysis 
+
+## Types of survival analysis
 
 There are three main types of survival analysis:
 
-- the non-parametric survival analysis\index{Non-parametric survival analysis} for example kaplan-Meier\index{kaplan-Meier} estimates.
-- the semi-parametric survival analysis for example Cox proportional hazards regression\index{Cox proportional hazards regression}.
+- the non-parametric survival analysis\index{Non-parametric survival analysis} for example Kaplan-Meier\index{Kaplan-Meier} estimates.
+- the semi-parametric survival analysis for example Cox proportional hazards (PH) regression\index{Cox proportional hazards regression}.
 - the parametric survival analysis for example Weibull parametric survival analysis. 
 
-In medical literature, we usually perform the non-parametric analysis for example the kaplan-Meier\index{kaplan-Meier} estimates at the beginning of the analysis to understand the trend of survival probabilities. Following that, we perform simple (univariable) or multiple (multivariable) Cox proportional hazard (PH) regression model. If we are sure with the distribution of the risk and aim to estimate the survival time, then we can perform parametric survival analysis.  
+In medical literature, we usually perform the non-parametric analysis for example the Kaplan-Meier\index{Kaplan-Meier} estimates at the beginning of the analysis to understand the trend of survival probabilities. Following that, we perform simple (univariable) or multiple (multivariable) Cox proportional hazard (PH) regression model. If we are sure with the distribution of the risk and aim to estimate the survival time, then we can perform parametric survival analysis.  
 
 
 
@@ -126,9 +123,9 @@ These data come from patients who were admitted at a tertiary hospital due to ac
 
 The outcome of interest is time from admission to death. The time variable is `time2` (in days) and the event variable is `status`. The event of interest is `dead`. We also note that variables dates and other categorical variables are in character format. The rest are in numerical format. 
 
-## Exploratory data
+## Explore data
 
-We will convert the variables doa and doa to a more valid format that is date:
+We will convert the variable doa and variable doa to a more valid format (date format):
 
 ```{r}
 stroke <- 
@@ -166,9 +163,9 @@ stroke %>%
   tbl_summary(by = stroke_type)
 ```
 
-## kaplan-Meier\index{kaplan-Meier} survival estimates 
+## Kaplan-Meier\index{Kaplan-Meier} survival estimates 
 
-kaplan-Meier\index{kaplan-Meier} survival estimates is the non-parametric survival estimates. It provides the survival probability\index{Survival probability} estimates at different time. Using `survfit()`, we can estimate the survival probability\index{Survival probability} based on kaplan-Meier\index{kaplan-Meier} (KM). 
+Kaplan-Meier\index{Kaplan-Meier} survival estimates is the non-parametric survival estimates. It provides the survival probability\index{Survival probability} estimates at different time. Using `survfit()`, we can estimate the survival probability\index{Survival probability} based on Kaplan-Meier\index{Kaplan-Meier} (KM). 
 
 Let's estimate the survival probabilities for 
 
@@ -197,10 +194,10 @@ summary(KM_str_type2)
 
 ## Plot the survival probability\index{Survival probability}  
 
-The KM estimate provides the survival probabilites. We can plot these probabilities to look at the trend of survival over time. The plot provides
+The KM estimate provides the survival probabilities. We can plot these probabilities to look at the trend of survival over time. The plot provides
 
-1.  survival probability\index{Survival probability} on the y-axis
-2.  time on the x-axis
+1.  survival probability\index{Survival probability} on the $y-axis$
+2.  time on the $x-axis$
 
 ```{r}
 ggsurvplot(KM_str_type2, 
@@ -211,7 +208,7 @@ ggsurvplot(KM_str_type2,
            pval = TRUE)
 ```
 
-We can perform the kaplan-Meier\index{kaplan-Meier} estimates for variable dm too: 
+We can perform the Kaplan-Meier\index{Kaplan-Meier} estimates for variable dm too: 
 
 ```{r}
 KM_dm <- survfit(Surv(time = time2, 
@@ -231,7 +228,7 @@ ggsurvplot(KM_dm,
            pval = TRUE)
 ```
 
-## Comparing kaplan-Meier\index{kaplan-Meier} estimates across groups 
+## Comparing Kaplan-Meier\index{Kaplan-Meier} estimates across groups 
 
 There are a number of available tests to compare the survival estimates between groups based on KM. The tests include: 
 
@@ -241,7 +238,7 @@ There are a number of available tests to compare the survival estimates between 
 
 ### Log-rank test\index{Log-rank test}
 
-From kaplan-Meier\index{kaplan-Meier} survival curves, we could see the graphical representation of survival probabilities in different group over time. And to answer question if the survival estimates are different between levels or groups we can use statistical tests for example the log rank and the peto-peto tests\index{Peto-peto test}.
+From Kaplan-Meier\index{Kaplan-Meier} survival curves, we could see the graphical representation of survival probabilities in different group over time. And to answer question if the survival estimates are different between levels or groups we can use statistical tests for example the log rank and the peto-peto tests\index{Peto-peto test}.
 
 For all the test, the null hypothesis is that that the survival estimates between levels or groups are not different. For example, to do that:
 
@@ -253,7 +250,7 @@ survdiff(Surv(time = time2,
          rho = 0)
 ```
 
-The survival estimates between the stroke types (*IS* vs *HS* groups) are different at the level of $5\%$ significance (p = 0.03). 
+The survival estimates between the stroke types (*IS* vs *HS* groups) are different at the level of $5\%$ significance (p-value = 0.03). 
 
 And for the survival estimates based on diabetes status:
 
@@ -264,7 +261,7 @@ survdiff(Surv(time = time2,
          rho = 0)
 ```
 
-The survival estimates between patients with and without diabetes (dm status *yes* vs *no* groups) are not different (p = 0.1). 
+The survival estimates between patients with and without diabetes (dm status *yes* vs *no* groups) are not different (p-value = 0.1). 
 
 ### peto-peto test\index{Peto-peto test}
 
@@ -359,7 +356,7 @@ If the value of the coefficient is $\beta = ln(2)$, then the interpretation is t
 
 ### Advantages of the Cox proportional hazards regression\index{Cox proportional hazards regression}
 
-If you remember that by using kaplan-Meier\index{kaplan-Meier} (KM) analysis, we could estimate the survival probability\index{Survival probability}. And using the log-rank\index{Log-rank test} or peto-peto test\index{Peto-peto test}, we could compare the survival between categorical covariates. However, the disadvantages of KM include:
+If you remember that by using Kaplan-Meier\index{Kaplan-Meier} (KM) analysis, we could estimate the survival probability\index{Survival probability}. And using the log-rank\index{Log-rank test} or peto-peto test\index{Peto-peto test}, we could compare the survival between categorical covariates. However, the disadvantages of KM include:
 
 1.  Need to categorize numerical variable to compare survival
 2.  It is a univariable analysis
@@ -492,6 +489,7 @@ stroke_mv2 <-
         data = stroke)
 tidy(stroke_mv, exponentiate = TRUE, conf.int = TRUE)
 ```
+
 We can confirm this by running the likelihood ratio test between the two Cox PH models:
 
 ```{r}
@@ -566,7 +564,7 @@ stroke_zph <- cox.zph(stroke_mv, transform = 'km')
 stroke_zph
 ```
 
-The global test is not significant (p value = 0.65)E and the p-value for each of the covariate is also larger than 0.05. These evidence support that the there risks are proportional over time. 
+The global test is not significant (p value = 0.65) and the p-value for each of the covariate is also larger than 0.05. These evidence support that the there risks are proportional over time. 
 
 
 ```{r}
@@ -579,35 +577,35 @@ stroke_zph_rank
 We can plots these residuals
 
 - deviance\index{Deviance}
-- schoenfeld\index{Schoenfeld}
-- scaled schoenfeld\index{Scaled Schoenfeld}
+- Schoenfeld\index{Schoenfeld}
+- scaled Schoenfeld\index{Scaled Schoenfeld}
 
-For example, let's start with plotting the residuals
+<!-- For example, let's start with plotting the residuals -->
+
+<!-- ```{r} -->
+<!-- ggcoxdiagnostics(stroke_mv, type = "deviance") -->
+<!-- ``` -->
+
+<!-- Now, we will use Schoenfeld\index{Schoenfeld} -->
+
+
+<!-- ```{r} -->
+<!-- ggcoxdiagnostics(stroke_mv, type = "schoenfeld") -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- ggcoxdiagnostics(stroke_mv, type = "deviance", ox.scale = 'time') -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- ggcoxdiagnostics(stroke_mv, type = "deviance", ox.scale = "linear.predictions") -->
+<!-- ``` -->
 
 ```{r}
-ggcoxdiagnostics(stroke_mv, type = "deviance")
+#ggcoxdiagnostics(stroke_mv, type = "schoenfeld", ox.scale = "observation.id")
 ```
 
-Now, we will use schoenfeld\index{Schoenfeld}
-
-
-```{r}
-ggcoxdiagnostics(stroke_mv, type = "schoenfeld")
-```
-
-```{r}
-ggcoxdiagnostics(stroke_mv, type = "deviance", ox.scale = 'time')
-```
-
-```{r}
-ggcoxdiagnostics(stroke_mv, type = "deviance", ox.scale = "linear.predictions")
-```
-
-```{r}
-ggcoxdiagnostics(stroke_mv, type = "schoenfeld", ox.scale = "observation.id")
-```
-
-You may refer to this link for more details http://pdf.medrang.co.kr/CSAM/2017/024/csam-24-583_suppl.pdf 
+You may refer to this [link](http://pdf.medrang.co.kr/CSAM/2017/024/csam-24-583_suppl.pdf) for more details  
 
 
 ```{r}
@@ -654,12 +652,12 @@ stroke_lp %>%
   slice(1:10)
 ```
 
-- The predicted risk which is the risk score $exp(lp)$ ("risk"),
+- The predicted risk which is the risk score $exp(lp)$ (*risk*),
 
 ```{r}
-risks <- 
-  augment(stroke_mv, 
-                 data = stroke, 
+risks <-
+  augment(stroke_mv,
+                 data = stroke,
                  type.predict = "risk")
 risks %>%
   dplyr::select(status, gcs, stroke_type, referral_from, .fitted:.resid) %>%
@@ -669,17 +667,18 @@ risks %>%
 - The expected is the expected number of events given the covariates and follow-up time ("expected"). The survival probability\index{Survival probability} for a subject is equal to $exp(-expected)$. 
 
 ```{r}
-expected <- 
-  augment(stroke_mv, 
-          data = stroke, 
-          type.predict = "expected")
-expected %>%
-  dplyr::select(status, gcs, stroke_type, referral_from, .fitted:.resid) %>%
-  mutate(surv_prob = exp(-(.fitted))) %>%
+expected <- augment(stroke_mv, 
+                    data = stroke, 
+                    type.predict = "expected")
+
+expected %>% 
+  dplyr::select(status, gcs, stroke_type, 
+                referral_from, .fitted:.resid) %>% 
+  mutate(surv_prob = exp(-(.fitted))) %>% 
   slice(1:10)
 ```
 
-The Cox model is a relative risk model; predictions of type "linear predictor", "risk", and "terms" are all relative to the sample from which they came. By default, the reference value for each of these is the mean covariate within strata. Predictions of type "expected" incorporate the baseline hazard and are thus absolute instead of relative; the reference option has no effect on these. 
+The Cox model is a relative risk model; predictions of type *linear predictor*, *risk*, and *terms* are all relative to the sample from which they came. By default, the reference value for each of these is the mean covariate within strata. Predictions of type *expected* incorporate the baseline hazard and are thus absolute instead of relative; the reference option has no effect on these. 
 
 ### Residuas from Cox PH model
 
@@ -687,7 +686,7 @@ Here, we will generate the
 
 - martingale residuals\index{Martingale residuals}
 - deviance\index{Deviance}
-- schoenfeld\index{Schoenfeld}
+- Schoenfeld\index{Schoenfeld}
 - dfbeta\index{Dfbeta}
 - scaled schoenfeld\index{Scaled Schoenfeld}
 
@@ -705,11 +704,11 @@ We may check the $dfbetas$ residual\index{Dfbeta}. This is residual that comes f
 
 
 ```{r}
-ggcoxdiagnostics(stroke_mv, 
-                 type = "dfbetas", 
-                 point.size = 0, 
-                 hline.col = "black", 
-                 sline.col = "black") + geom_bar(stat = "identity")
+# ggcoxdiagnostics(stroke_mv,
+#                  type = "dfbetas",
+#                  point.size = 0,
+#                  hline.col = "black",
+#                  sline.col = "black") + geom_bar(stat = "identity")
 
 ```
 
@@ -721,8 +720,8 @@ The function `surv_adjustedcurves()` calculates while the function `ggadjustedcu
 
 
 ```{r}
-ggadjustedcurves(stroke_mv, 
-                 data = stroke)
+# ggadjustedcurves(stroke_mv,
+#                  data = stroke)
 ```
 
 ## Presentation and interpretation
@@ -730,17 +729,17 @@ ggadjustedcurves(stroke_mv,
 The Cox PH model that we believe explains the risk for death among hospitalized acute stroke patients can be presented as below:
 
 ```{r}
-stroke_mv %>%
+stroke_mv %>% 
   tbl_regression(
-    exponentiate = TRUE,
-    pvalue_fun = ~style_pvalue(.x, digits = 3)
-    ) %>%
-  add_nevent(location = 'level') %>%
-  bold_p(t = 0.10) %>%
-  bold_labels()
+     exponentiate = TRUE,
+     pvalue_fun = ~style_pvalue(.x, digits = 3)
+     ) %>%
+   add_nevent(location = 'level') %>%
+   bold_p(t = 0.10) %>%
+   bold_labels()
 ```
 
 
-## References
+## Summary
 
-For further understanding of the survival analysis concepts and application, excellent text include [@Lemeshow_Stanley2008-03-07][@survival-book]
+For further understanding of the survival analysis concepts and application, excellent texts include Survival Analysis: A Self-Learning Text [@Kle2012] and Applied Survival Analysis: Regression Modeling of Time-to-Event Data [@Lemeshow_Stanley2008-03-07]. 
