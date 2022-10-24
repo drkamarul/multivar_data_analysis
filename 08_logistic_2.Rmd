@@ -9,7 +9,7 @@ A binary variable\index{Binary variable} is a categorical outcome that has two c
 - satisfaction level when patients who come to clinics are asked if they are satisfied or not satisfied with the service 
 - glucose control when patients were categorized as either good control or poor control based on Hba1c 
 
-In a binary logistic regression model, the dependent variable has two levels (categorical). When the outcome variable has more than two levels or categories, the analysis are modelled by multinomial logistic regression and, if the multiple categories are ordered, by ordinal logistic regression\index{Ordinal logistic regression} (for example, the proportional odds ordinal logistic model).
+In statistics, the logistic model (or logit model) is a statistical model that models the probability of an event taking place by having the log-odds for the event be a linear combination of one or more independent variables. In a binary logistic regression model, the dependent variable has two levels (categorical). 
 
 ## Objectives
 
@@ -23,7 +23,9 @@ At the end of the chapter, the readers will be able
 
 ## Logistic regression model
 
-The logistic model\index{Logistic model} (or logit model\index{Logit model}) is used to model the probability of a particular class or event existing, such as pass or fail, win or lose, alive or dead or healthy or sick. More specifically, binary logistic regression is used to model the relationship between a covariate or a set of covariates and an outcome variable which is a binary variable\index{Binary variable}.
+The logistic model\index{Logistic model} (or logit model\index{Logit model}) is used to model the probability of a particular class or event existing, such as pass or fail, win or lose, alive or dead or healthy or sick. 
+
+More specifically, binary logistic regression is used to model the relationship between a covariate or a set of covariates and an outcome variable which is a binary variable\index{Binary variable}.
 
 
 ## Dataset

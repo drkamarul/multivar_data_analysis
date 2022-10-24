@@ -1,20 +1,8 @@
 # Multinomial Logistic Regression
 
-## Objectives 
-
-At the end of this chapter, readers should be able:
-
-1.  to understand the concept of logistic regression model to analyze data with polychotomous (multinomial) outcome
-2.  to estimate parameters of interest in a logistic regression model from data with polychotomous (multinomial) outcome
-3.  to make inference based on a logistic regression model from data with polychotomous (multinomial) outcome
-4.  to predict the outcome based on a logistic regression model from data with polychotomous (multinomial) outcome
-5.  to perform model checking of logistic regression model from data with with polychotomous (multinomial) outcomes
-
 ## Introduction
 
 Some data come with multinomial outcomes in which case, the outcome variable is a nominal or polychotomous variable with more than two levels. In multinomial outcome data, the outcome has no natural ordering. if it has, then it is best treated as a ordinal outcome data. For these data, we can modify the binary logistic model to make estimation and inference [@kleinbaum2010logistic ; @Hosmer2013-03-22]. 
-
-
 
 Variables with more than two levels are known as either:
 
@@ -24,14 +12,24 @@ Variables with more than two levels are known as either:
 
 If we employ logistic regression to such data, then the analysis is known as polytomous or multinomial logistic regression. Again, the polychotomous outcome does not have any natural order. When the categories of the outcome variable do have a natural order, ordinal logistic regression\index{Ordinal logistic regression} is preferred. 
 
+## Objectives 
+
+At the end of this chapter, readers should be able:
+
+- to understand the concept of logistic regression model to analyze data with polychotomous (multinomial) outcome
+- to estimate parameters of interest in a logistic regression model from data with polychotomous (multinomial) outcome
+- to make inference based on a logistic regression model from data with polychotomous (multinomial) outcome
+- to predict the outcome based on a logistic regression model from data with polychotomous (multinomial) outcome
+- to perform model checking of logistic regression model from data with with polychotomous (multinomial) outcomes
+
 
 ## Examples of multinomial outcome variables\index{Multinomial outcome variable} 
 
 Examples of data with polychotomous outcome variables\index{Polychotomous outcome variable} (with more than two levels) include:
 
-1.  disease symptoms that have been classified by subjects as being absent, mild, moderate, or severe,
-2.  tumour invasiveness  classified as in situ, locally invasive, ormetastatic, or
-3.  patient preferred treatment regimen,  selected from among three or more options for example oral medication only, oral medication plus  injection medication or injection only.
+- disease symptoms that have been classified by subjects as being absent, mild, moderate, or severe,
+- tumour invasiveness  classified as in situ, locally invasive, ormetastatic, or
+- patient preferred treatment regimen,  selected from among three or more options for example oral medication only, oral medication plus  injection medication or injection only.
 
 A numerical outcome can be categorized based on different cut-off points. The newly created categorical variable is now either treated as a nominal or polychotomous or multinomial outcome  or as a ordinal outcome. That justifies the use of multinomial logistic regression. 
 
@@ -94,298 +92,269 @@ $$Pr(D = 2 | x) = \frac{e^{g_2(x)}}{1+e^{g_1(x)} + e^{g_2(x)}}$$
 
 ## Prepare environment
 
-Start brand new analysis with a new project in RStudio 
+Start brand new analysis with a new project in RStudio. To do so,
 
-### Loading libraries
+- Go to RStudio Menu
+- Click File
+- Click New Project 
+- Choose either New Directory or Existing Directory (to point to existing folder usually with the dataset)
 
-- the general packages libraries
+### Load libraries
+
+We will load 
+
+- **here** package that enables easy file referencing
+- **tidyverse** for data wrangling and plotting 
+- **haven** to read data in various statistical formats
+- **gtsummary** to produce statistical tables 
+- **VGAM** package where we will be using the `vglm()` function to perform multinomial logistic regression
+- **kableExtra** to produce nice tables for the results 
+
 
 ```{r}
 library(here)
 library(tidyverse)
 library(haven)
 library(gtsummary)
+library(VGAM)
+library(kableExtra)
 ```
 
 ### Dataset
 
-The dataset we are going to use comes from the low birth weight dataset. The dataset can be loaded from **aplore3**aplore3 package. In this chapter, we have categorized variable low from a numerical variable to a categorical variable. 
+The datasets contains all variables of our interest. For the purpose of this assignment, we want to explore association of hypertension status, weight and total cholesterol with the result of screening FBS. The variables in the datasets as follow:
 
-
-- me: the outcome variable is mammography experience (0 = never, 1 = within a year, 2 = over a year ago)
--  sympt: "You do not need a mamogram unless you develop symptoms". Codes are, 1 = Strongly Agree, 2 = Agree, 3 = Disagree, 4 = Strongly Disagree
--  pb: Perceived benefit of mammography. Score between 5 - 20 
--  HIST: Mother or Sister with a history of breast cancer. Codes are 0 = No, 1 = Yes 
--  bse: "Has anyone taught you how to examine your own breasts: that is BSE". Codes are 0 = No, 1 = Yes
--  detc: "How likely is it that a mamogram could find a new case of breast cancer". Codes are 1= Not likely, 2 = Somewhat likely, 3 = Very likely
-
+1.  fbs : Fasting Blood Sugar (mmol/L). The data ranges from 2.51 mmol/L to 28.01 mmol/L.
+2.  totchol : Total Cholesterol (mmol/L). The data ranges from 0.18 mmol/L to 23.14 mmol/L.
+3.  hpt : Hypertension Status. Coded as Yes and No.
+4.  weight : Body weight measures in kilogram. The data ranges between 30kg to 187.8kg.
+ 
 ### Read data
 
 We will use `haven::read_dta()`\index{haven} function to read stata\index{STATA} `.dta` data into the memory. Remember, we can also use `foreign::read.dta()`\index{foreign} function to read stata\index{STATA} `.dta` data. It is your choice.  
 
-We use `here()` to indicate that the folder `data` contains the dataset `mammog9.dta` 
+We use `here()` to indicate that the folder `data` contains the dataset. And then we specify `metabolic_syndrome.dta` as the dataset to be read. 
+
+```{r}
+ms <- read_dta(here('data','metabolic_syndrome.dta'))
+```
+
+We can then quickly glance at the number of observations and the type of variables in the `ms` dataset. 
+
+```{r}
+glimpse(ms)
+```
+
+### Data Wrangling
+
+We will
+
+- select only variable `fbs`, `totchol`, `hpt` and `weight`
+- convert all character variables to factor variables 
+- then take a glance of the updated `ms` dataset again
 
 
 ```{r}
-dat.m1 <- read_dta(here('data','mammog9.dta'))
+ms <- ms %>% 
+  select(fbs, totchol, hpt , weight) %>% 
+  mutate(across(where(is.labelled), as_factor))
+glimpse(ms)
 ```
 
-We can then quickly check types variables
+### Create new categorical variable from fbs
+
+Let us create a categorical (also known as a factor variable) based on this classification: 
+
+1. Normal if fbs is less than 6.1 mmol/L
+2. Impaired Fasting Glucose (IFG)  if fbs is between 6.1 mmol/L to 6.9 mmol/L
+3. Diabetis Mellitus (DM) if fbs is 7.00 mmol/L or higher 
+
+```{r}
+ms <- ms %>%
+  mutate(cat_fbs = cut(fbs, 
+                       breaks = c(2.50 , 6.10 , 6.90 , 28.01 ),
+                       labels = c("Normal","IFG", "DM")))
+ms %>% 
+  count(cat_fbs)
+```
+
+We notice that there were 250 data has no values recorded as `NA`. Thus, we decide to remove observations when there are missing values for variable `cat_fbs`.
 
 
 ```{r}
-glimpse(dat.m1)
+ms <- ms %>%
+  filter(!is.na(cat_fbs)) 
+ms %>%
+  count(cat_fbs)
 ```
+
+### Exploratory data analysis
 
 Next, is to return the table of summary statistics 
 
 ```{r}
-tbl_summary(dat.m1)
+ms %>%
+  tbl_summary(by = cat_fbs,
+              statistic = list(all_continuous() ~ "{mean} ({sd})", 
+                              all_categorical() ~ "{n} ({p}%)"),
+              type = list(where(is.logical) ~ "categorical"),
+              label = list(fbs ~ "Fasting Blood Sugar (mmol/L)", 
+                           totchol ~ "Total Cholesterol (mmol/L)", hpt~"Hypertension", weight ~ "Weight (kg)"),
+              missing_text = "Missing") %>% 
+  modify_caption("**Table 1. Survey Participant Characteristic**")  %>%
+  modify_header(label ~ "**Variable**") %>%
+  modify_spanning_header(c("stat_1", "stat_2", "stat_3") ~ "**Glycemic Control Status**") %>%
+  modify_footnote(all_stat_cols() ~ "Mean (SD) or Frequency (%)") %>%
+  bold_labels()
 ```
-
-We will create a new variable `me2`, then we will check the categories of the variable `me2` to ensure it validly mirror variable `me`
+### Confirm the order of cat_fbs
 
 ```{r}
-dat.m1 <- 
-  dat.m1 %>% 
-  mutate(me2 = 
-           factor(me, 
-                  labels =   c("never","within.a.year","over.a.year.ago")))
+levels(ms$cat_fbs)
 ```
-
+However, we would like the DM as the smallest category. To do that we will use the `fct_relevel()` function. 
 
 ```{r}
-dat.m1 %>% 
-  count(me2)
+ms <- ms %>% 
+  mutate(cat_fbs = fct_relevel(cat_fbs, 
+                               c("DM", 'IFG', 'Normal')))
+levels(ms$cat_fbs)
 ```
 
-We will do the same thing to variable `hist`:
+## Estimation
+
+Our intention to investigate the relationship between totchol, hpt and weight with the outcome variables `cat_fbs`. Thus, we will perform multinomial logistic regression model to estimate the relation for 2 models:
+
+- Model 1: DM vs Normal
+- Model 2: IFG vs Normal
+
+In both models, the reference group is Normal
+
+### Single Independent Variable 
+
+For independent variable totchol 
 
 ```{r}
-dat.m1 <- 
-  dat.m1 %>% 
-  mutate(hist2 = factor(hist,
-                        labels = c("no","yes")))
+log_chol <- vglm(cat_fbs ~ totchol, 
+                 multinomial, data = ms)
+summary(log_chol)
 ```
+This is the model where hpt is the independent variable
 
 ```{r}
-dat.m1 %>% 
-  count(hist2)
+log_hpt <- vglm(cat_fbs ~ hpt, 
+                 multinomial, data = ms)
+summary(log_hpt)
 ```
 
-We can now generate a table of summary statistics based on categories of `me2`. The summary statistics for numerical variables will be mean and SD. 
+And lastly, the independent variable is weight
 
 ```{r}
-dat.m1 %>%
-  select(-me, -hist) %>%
-  tbl_summary(by = me2,
-              statistic = list(all_continuous() ~ "{mean} ({sd})"))
+log_wt <- vglm(cat_fbs ~ weight, 
+                 multinomial, data = ms)
+summary(log_wt)
 ```
 
+### Multiple Independent Variables
 
-## Univariable multinomial logistic regression 
-
-We will use **VGAM**\index{VGAM} package and we need to reverse the levels for variable **me2** to replicate the outputs in Chapter 8 from tthe Applied Logistic Regression book [@Hosmer2013-03-22]. To do that, we make the group `never` (the last group) as the reference category.
-
-The steps below:
-
-- confirm the order of variable me2
-- generate variable me3 that equals to me2
-- change order of me3 from over a year to within a year to never
-- confirm observations are still correct
+We feel that totchol, hpt and weight are all important independent variables. Hence, we want to fit a model with the three independent variables as the covariates. 
 
 ```{r}
-levels(dat.m1$me2)
+mlog <- vglm(cat_fbs ~ totchol + hpt + weight, 
+             multinomial, data = ms)
+summary(mlog)
 ```
+### Model with interaction term between independent variables 
+
+Then, we hypothesize that there could be a significant interaction between totchol and weight. And to test the hypothesis, we extend the multivariable logistic regression model by adding an interaction term. This interaction term is a product between variable weight and totchol.
 
 ```{r}
-dat.m1 <- 
-  dat.m1 %>% 
-  mutate(me3 = fct_relevel(me2,
-                       c("over.a.year.ago", 'within.a.year', 'never')))
-table(dat.m1$me) ; summary(dat.m1$me2) ; summary(dat.m1$me3)
+mlogi <- vglm(cat_fbs ~ totchol + hpt + weight + totchol*weight, 
+              multinomial, data = ms)
+summary(mlogi)
 ```
 
-The function `VGAM::vglm()` runs the multinomial logistic regression. Using the `vglm()`A function we will estimate a multinomial logit model\index{Multinomial logit model} for 
 
-1.  group 1 vs group 3 : over a year ago vs never did me
-2.  group 2 vs group 3 : within a year ago vs never did me
+The interaction term in our model showed p-values above 0.05 (p-values of 0.80 and  0.07, respectively). As the p-value is bigger than the level of significance at $5\%$ and the value of regression parameters for the interaction terms are likely not clinically meaningful, we have decided not to use the model with an interaction term. 
 
-So, the reference group is - again -  the *never* group. 
 
-The steps we are taking are:
-
-- Load the **VGAM**\index{VGAM} library
-- Estimate the model and name the model object as `fitmlog1`
-- Return the result of `fitmlog1`
-
-```{r}
-library(VGAM)
-fitmlog1 <- vglm(me3 ~ hist2, multinomial, data = dat.m1)
-summary(fitmlog1)
-```
-
-Be careful:
-
-1.  (Intercept):1 for outcome me = over a year ago vs never
-2.  (Intercept):2 for outcome me =  within a year vs never
-3.  hist2yes:1 for outcome me = over a year ago vs never
-4.  hist2yes:2 for outcome me =  within a year vs never
-
-Next, we will convert `detc` to a new categorical variable `detc2`. 
-
-```{r}
-dat.m1 <- 
-  dat.m1 %>% 
-  mutate(detc2 = factor(detc))
-```
-
-We will fit the multinomial logit again (with covariate `detc2`) and name the model as `fitmlog2`. Remember, the comparisons are:
-
-1.  group 1 vs group 3 : for outcome me = over a year ago vs never
-2.  group 2 vs group 3 : for outcome me =  within a year vs never
-
-```{r}
-fitmlog2 <- vglm(me3 ~ detc2, multinomial, data = dat.m1)
-summary(fitmlog2)
-```
 
 ## Inferences
 
-For the inference, we will:
+For the inference, we will
 
-1.  calculate the $95\%$ CI (interval estimates)
-2.  calculate the p-values (hypothesis testing)
+- calculate the $95\%$ CI (interval estimates)
+- calculate the p-values (hypothesis testing)
 
-Because there is `broom::tidy()` for object with class vglm, we will use the codes below to produce a rather nice table:
+There is no facility inside the`broom::tidy()` function to generate confidence intervals for object with class `vglm`. Because of that we will use the `coef()`, `confint()` and `cind(0` functions to produce a rather nice table of inferences. 
 
-1.  return the regression coefficents for all $\hat\beta$ as an object named `b_fitmlog2`
-2.  return the the confidence intervals for all $\hat\beta$ as an object named `ci_fitmlog2` 
-3.  combine the $\hat\beta$ and the corresponding $95\%$ CIs
+We are going to follow these steps:
+
+- set the number of digits equal to 2 to limit the decimal numbers
+- return the regression coefficents for all $\hat\beta$ as an object named `b_fitmlog2`
+- return the the confidence intervals for all $\hat\beta$ as an object named `ci_fitmlog2` 
+- combine the $\hat\beta$ and the corresponding $95\%$ CIs
 
 
 ```{r}
-b_fitmlog2 <- coef(fitmlog2)
-ci_fitmlog2 <- confint(fitmlog2)
-b_ci_fitmlog2 <- cbind(b_fitmlog2, ci_fitmlog2)
-b_ci_fitmlog2
+b_mlog <- coef(mlog)
+ci_mlog <- confint(mlog)
+b_ci_mlog <- cbind(b_mlog,ci_mlog)
+b_ci_mlog %>% 
+  kbl()
 ```
 
-
-Afterwards, we will *exponentiate* the coefficients to obtain the **relative-risk ratio**\index{Relative-risk ratio}. And combine the results to the previous table. Then we will name the columns of the object `tab_fitmlog2`. 
-
-```{r}
-rrr_fitmlog2 <- exp(b_ci_fitmlog2)
-tab_fitmlog2 <- cbind(b_ci_fitmlog2, rrr_fitmlog2)
-colnames(tab_fitmlog2) <- c('b', 'lower b', 'upper b', 
-                            'rrr', 'lower rrr', 'upper rrr')
-tab_fitmlog2
-```
-
-## Multivariable multinomial logistic regression\index{Multivariable multinomial logistic regression} 
-
-We will add other covariates to our model and name the new (multivariable) model as `fitmlog3`. Using the `factor()` function, we  could easily convert the numeric variables (for example `sympt`) to a categorical variable.
-
+Afterwards, we will *exponentiate* the coefficients to obtain the **relative-risk ratio**\index{Relative-risk ratio}. We then combine the results to the previous table. Finally, we will name the columns of the object `tab_fitmlog2`. 
 
 ```{r}
-fitmlog3 <- vglm(me3 ~ factor(sympt) + pb + hist2 + bse + detc2,
-                 multinomial, data = dat.m1)
-summary(fitmlog3)
-```
-
-Variable **sympt** has 4 categories. To replicate the results as in Chapter 8 in Applied Logistic Regression book [@Hosmer2013-03-22], we recode **sympt** (4 categories) into 2 category factor variable **symptd**. This can be done using the `ifelse()` function
-
-```{r}
-dat.m1 <- 
-  dat.m1 %>% 
-  mutate(symptd = ifelse(sympt<3, '<3', '3 or more')) 
-dat.m1 %>%  
-  count(sympt,symptd)
-```
-
-Now, we refit the model and name the model as `fitmlog4`.
-
-```{r}
-fitmlog4 <- vglm(me3 ~ symptd + pb + hist2 + bse + detc2,
-                 multinomial, data = dat.m1)
-summary(fitmlog4)
-```
-
-## Inferences 
-
-We could get the the confidence intervals and the p-values for each covariate. Then we will `cbind` (combine the columns) them together. 
-
-```{r}
-b_fitmlog4 <- coef(fitmlog4)
-ci_fitmlog4 <- confint(fitmlog4)
-cbind(b_fitmlog4, ci_fitmlog4)
-```
-
-As in the book, we will convert predictor variable `detc` (3 categories) to a binary category variable named as `detcd`. Then, we fit the model with covariate `detcd` and name the model as `fitmlog5`.
-
-```{r}
-dat.m1 <- 
-  dat.m1 %>% 
-  mutate(detcd = ifelse(detc<3, '<3', '3 or more'))
-```
-
-```{r}
-fitmlog5 <- 
-  vglm(me3 ~ symptd + pb + hist2 + bse + detcd,
-                 multinomial, data = dat.m1)
-summary(fitmlog5)
-```
-
-The sequence of codes below will:
-
-1. return the log odds\index{Log odds} and the RRR 
-2. return the $95\%$ CI for the log odds\index{Log odds} and the CI for RRR
-3. combine the objects into a table
-4. rename the columns
-
-
-```{r}
-b_rrr_fitmlog5 <- cbind(coef(fitmlog5), exp(coef(fitmlog5)))
-ci_b_rrr.fitmlog5 <- cbind(confint(fitmlog5), exp(confint(fitmlog5)))
-res_fitmlog5 <- cbind(b_rrr_fitmlog5, ci_b_rrr.fitmlog5)
-colnames(res_fitmlog5) <- c('b', 'rrr', 
-                            'lower 95% b','upper 95% b', 
-                            'lower 95% rrr' , 'upper b95% rrr')
-res_fitmlog5
+rrr_mlog <- exp(b_ci_mlog)
+tab_mlog <- cbind(b_ci_mlog, rrr_mlog)
+colnames(tab_mlog) <- c('b', 'lower b', 'upper b',
+                        'rrr', 'lower rrr', 'upper rrr')
+tab_mlog %>%
+  kbl()
 ```
 
 ## Interpretation
 
-We will choose one numerical variable (`pb`) and one categorical variable (`hist`) for interpretation. 
+The result from our multivariable logistic regression models is
 
-For `pb`
+```{r}
+tab_mlog %>%
+  kbl()
+```
 
-- With one unit increase in score for `pb`, the relative rate (RR) ratio for doing me over a year ago change for a factor of 0.86 ($95\%$ CI 0.74 to 0.99, p-value = 0.033) or $14\%$ lower RR compared to never did me (when adjusting for other covariates)  
-- With one unit increase in score for `pb`, the relative rate ratio for doing me within a year ago change for a factor of 0.78 ($95\%$ CI 0.68 to 0.90, p-value = $< 0.0001$) or $22\%$ lower RR compared to never did me (when adjusting for other covariates)
+The table shows that:
 
-For `hist`
-
-- Women with positive family history of breast cancer have 2.90 times the relative rate compared to women with no family history of breast cancer ($95\%$ CI 1.19 to 7.03) for doing me over a year ago than no me at all, when adjusting for other covariates (p-value 0.0189).   
-- Women with positive family history of breast cancer have 3.71 times the relative rate compared to women with no family history of breast cancer ($95\%$ CI 1.21 to 8.67) for doing me within a year ago than no me at all, when adjusting for other covariates (p-value 0.003).
+- Every increment 1 mmol/L of totchol (Total cholesterol) when controlling for hypertension status and weight; a) the odds of being in DM group (in comparison to Normal) change by 0.277 (Adjusted RRR = 1.32, $95\%$ CI : 1.232, 1.413, p-value \<0.001) and b) the odds of being in IFG group (in comparison to being in Normal) change by 0.239 (Adjusted RRR = 1.27, $95\%$ CI : 1.169,1.381, p-value \<0.001). 
+- Every increment 1 kg of weight when controlling for hypertension status and total cholesterol; a) the odds of being in DM group (in comparison to being in Normal) increase by 0.023 (Adjusted RRR = 1.02, $95\%$ CI : 1.017,1.029, p-value \<0.001), and b) the odds of being in IFG group (in comparison being in Normal) increase by 0.022 (Adjusted RRR = 1.02, $95\%$ CI : 1.015,1.030, p-value \<0.001). 
+- In the population with hypertension (as compared with participant without hypertension)  when controlling for weight and total cholesterol; a) their odds of being in DM group (in comparison to being in Normal) change by 0.900 (Adjusted RRR = 2.5, $95\%$ CI : 1.942, 3.114, p-value \<0.001). When repeated research on this population, the odds ranging between reduced the odds by 0.481 to 0.677, and b) and their odds of being in IFG group (in comparison to being Normal) change by 0.867 (Adjusted RRR = 2.38, 95% CI : 1.789, 3.166, p-value \<0.001).  
 
 ## Prediction
 
 We can calculate the predicted probability of each category of outcome by using the `predict()` function. Below are the result for the top 10 observations. 
 
 ```{r}
-predict.vgam(fitmlog5, type = 'response') %>% 
+predict.vgam(mlog, type = 'response') %>% 
   head(10)
 ```
 
-## Presentation of table of statistics 
+## Presentation of multinomial regression model  
 
 We can make a *better* table using **knitr**\index{knitr} and **kableExtra**\index{kableExtra} packages
 
 ```{r}
-library(knitr)
-library(kableExtra)
-kable(res_fitmlog5, digits = 3) %>%
+tab_mlog %>%
+  kbl(., digits = 3) %>%
   kable_styling(bootstrap_options = 
                   c("striped", "hover", "condensed", "responsive"))
 ```
+
+## Further readings
+
+We are big fans of two excellent books on logistic regression. The first one is Applied Logistic Regression [@hosmer2013applied] and the second one is Logistic Regression\index{Logistic regression}: Self Learning Text [@kleinbaum2010logistic]. You will acquire strong understanding of the concepts and model building process from the two books. To see what packages and functions relevant to logistic regression, you can refer to A Handbook of Statistical Analyses Using R [@R-HSAUR]. 
+
+## Summary
+
+In this chapter, we extend binary logistic regression analysis to data with a categorical outcome variable but has three or more levels. We describe the multinomial logistic regression model, the log odds and also the conditional probabilities. When then show estimation for the single and multiple multinomial logistic regression including models with an interaction. Following that, we describe how to make inferences and perform predictions. Lastly, we make use of **kableExtra** package to produce a nice table for our model. 
 
