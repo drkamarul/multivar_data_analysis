@@ -127,8 +127,7 @@ We can combine the two tables using `tbl_merge()`.
 ```{r}
 tbl_merge(
   tbls = list(tab_gender, tab_outcome),
-  tab_spanner = c("**Gender**", "**Outcome**")
-) %>%
+  tab_spanner = c("**Gender**", "**Outcome**")) %>%
   as_gt()
 ```
 
