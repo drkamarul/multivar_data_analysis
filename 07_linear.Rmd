@@ -1,13 +1,5 @@
 # Linear Regression\index{Linear regression}
 
-## Introduction
-Linear regression\index{Linear regression} is one of the most common statistical analyses in medical and health sciences. Linear regression\index{Linear regression} models the linear (i.e. straight line) relationship between:
-
-- **outcome**: numerical variable (e.g. blood pressure, BMI, cholesterol level).
-- **predictors/independent variables**: numerical variables and categorical variables (e.g. gender, race, education level).
-
-In simple words, we might be interested in knowing the relationship between the cholesterol level and its associated factors, for example gender, age, BMI and lifestyle. This can be explored by a Linear regression\index{Linear regression} analysis.
-
 ## Objectives
 
 After completing this chapter, the readers are expected to
@@ -17,6 +9,15 @@ After completing this chapter, the readers are expected to
 - perform multiple linear regression\index{Multiple linear regression (MLR)}
 - perform model fit\index{Model fit} assessment of linear regression models
 - present and interpret the results of linear regression analyses
+
+
+## Introduction
+Linear regression\index{Linear regression} is one of the most common statistical analyses in medical and health sciences. Linear regression\index{Linear regression} models the linear (i.e. straight line) relationship between:
+
+- **outcome**: numerical variable (e.g. blood pressure, BMI, cholesterol level).
+- **predictors/independent variables**: numerical variables and categorical variables (e.g. gender, race, education level).
+
+In simple words, we might be interested in knowing the relationship between the cholesterol level and its associated factors, for example gender, age, BMI and lifestyle. This can be explored by a Linear regression\index{Linear regression} analysis.
 
 ## Linear regression models
 

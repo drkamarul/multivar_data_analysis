@@ -1,5 +1,13 @@
 # RStudio Project for this book
 
+## Objectives
+
+At the end of the chapter, we hope readers will be able 
+
+- to link their RStudio with our datasets. The datasets are on our GitHub\index{GitHub} repository. 
+- to create an RStudio Cloud project using our GitHub\index{GitHub} repository
+- to create an RStudio project on a local machine using our GitHub\index{GitHub} repository
+
 ## Introduction
 
 In this chapter, we will guide you to have a similar folder and file structure to our project for this book. This folder and file structure will help you run the codes with minimal error risk. Furthermore, to achieve this, we will use the RStudio Project. 
@@ -10,15 +18,6 @@ On the RStudio Project [webpage](https://support.rstudio.com/hc/en-us/articles/2
 - In a brand new directory
 - In an existing directory where you already have R code and data
 - By cloning a version control (Git or Subversion) repository
-
-
-## Objectives
-
-At the end of the chapter, we hope readers will be able 
-
-- to link their RStudio with our datasets. The datasets are on our GitHub\index{GitHub} repository. 
-- to create an RStudio Cloud project using our GitHub\index{GitHub} repository
-- to create an RStudio project on a local machine using our GitHub\index{GitHub} repository
 
 ## Dataset repository on GitHub\index{GitHub}
 

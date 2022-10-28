@@ -1,5 +1,15 @@
 # Survival Analysis: Kaplan-Meier\index{Kaplan-Meier} and Cox Proportional Hazard (PH) Regression 
 
+## Objectives 
+
+At the end of the chapter, the readers will be  
+
+- to understand the basic concept of non-parametric survival analysis such as the Kaplan-Meier\index{Kaplan-Meier} estimates and the semi-parametric survival analysis such the Cox proportional hazard (PH) regression. 
+- to perform the Kaplan-Meier analysis 
+- to test the hypothesis of the survival distributions for two samples.
+- to perform the simple (univariable) Cox PH regression analysis 
+- to perform the multiple (multivariable) Cox PH regression analysis 
+
 ## Introduction
 
 Regression concerns the relationship between a response variable and one or more exploratory variables. The independent variables are also called covariates. Some common regression analysis in health and medicine is linear regression, logistic regression\index{Logistic regression}, Poisson regression\index{Poisson regression} and Cox proportional hazards regression\index{Cox proportional hazards regression}. Linear regression falls under the general linear model while the other three regression models fall under the generalized linear regression. 
@@ -21,14 +31,6 @@ And for variable time, it can be in any time form such as days, weeks, years or 
 - years from diagnosis to death
 - weeks before recurrence
 - days taken from the start of treatment to treatment success 
-
-## Objectives 
-
-At the end of the chapter, the readers will be  
-
-- to perform Kaplan-Meier\index{Kaplan-Meier} survival analysis
-- to perform the simple (univariable) Cox PH regression analysis 
-- to perform the multiple (multivariable) Cox PH regression analysis 
 
 ## Types of survival analysis
 
@@ -748,4 +750,4 @@ stroke_mv %>%
 
 ## Summary
 
-For further understanding of the survival analysis concepts and application, excellent texts include Survival Analysis: A Self-Learning Text [@Kle2012] and Applied Survival Analysis: Regression Modeling of Time-to-Event Data [@Lemeshow_Stanley2008-03-07]. 
+In this chapter, we briefly describe the concept of survival analysis data, two common types of survival analysis (Kaplan-Meier and Cox PH regression) and provide skills to perform the analysis using R. We illustrate how to to test for survival estimates for two samples and how to model the time-to-event data using single and multiple covariates in Cox PH regression. For further understanding of the survival analysis concepts and application, excellent texts include Survival Analysis: A Self-Learning Text [@Kle2012] and Applied Survival Analysis: Regression Modeling of Time-to-Event Data [@Lemeshow_Stanley2008-03-07]. 

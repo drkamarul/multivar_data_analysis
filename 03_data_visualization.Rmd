@@ -1,9 +1,5 @@
 # Data Visualisation
 
-## Introduction
-
-Many disciplines view data visualisation as a modern equivalent of visual communication. It involves the creation and study of the visual representation of data. Data visualisation requires "information that has been abstracted in some schematic form, including attributes or variables for the units of information". You can read more about data visualization [here](https://en.m.wikipedia.org/wiki/Data_visualization) and [here](https://en.m.wikipedia.org/wiki/Michael_Friendly)
-
 ## Objectives
 
 In this chapter, readers will:
@@ -12,6 +8,11 @@ In this chapter, readers will:
 -   be able to understand the ingredients for good graphics
 -   be able to generate plots using **ggplot** packages
 -   be able to save plots in different formats and graphical settings
+
+## Introduction
+
+Many disciplines view data visualisation as a modern equivalent of visual communication. It involves the creation and study of the visual representation of data. Data visualisation requires "information that has been abstracted in some schematic form, including attributes or variables for the units of information". You can read more about data visualization on this [wikipedia](https://en.m.wikipedia.org/wiki/Data_visualization) page and another  [wikipedia](https://en.m.wikipedia.org/wiki/Michael_Friendly) page.
+
 
 ## History and objectives of data visualisation
 

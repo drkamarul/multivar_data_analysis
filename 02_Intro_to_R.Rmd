@@ -1,12 +1,6 @@
 \mainmatter
 
-# R, RStudio\index{RStudio} and RStudio Cloud\index{RStudio cloud}
-
-## Introduction
-
-R is a language and environment for statistical computing and graphics. It is a GNU project similar to the S language and environment developed at Bell Laboratories. R provides a wide variety of statistical (linear and nonlinear modelling, classical statistical tests, time-series analysis, classification, clustering and others) and graphical techniques and is highly extensible.
-
-One of R's strengths is the ease with which well-designed publication-quality plots can be produced, including mathematical symbols and formulae where needed. R is available as Free Software under the terms of the Free Software Foundation's GNU General Public License in source code form. It compiles and runs on various UNIX platforms and similar systems (including FreeBSD and Linux), Windows and macOS.
+# R, RStudio\index{RStudio} and RStudio Cloud\index{RStudio Cloud}
 
 ## Objectives
 
@@ -14,24 +8,30 @@ At the end of the chapter, the readers will
 
 -   be introduced to the R programming language
 -   be introduced to RStudio\index{RStudio} IDE
--   be introduced to RStudio Cloud\index{RStudio cloud}. RStudio Cloud is a platform where users can run RStudio\index{RStudio} on the cloud
+-   be introduced to RStudio Cloud\index{RStudio Cloud}. RStudio Cloud is a platform where users can run RStudio\index{RStudio} on the cloud
 -   be able to install R on their local machine
 -   be able to install RStudio IDE on their local machine
 -   understand how to install latex editor (Miktex or Tex Live and MacTex). A latex editor is optional but is required if users want to render PDF outputs.
 -   understand the structure of R scripts\index{R script} work
--   understand R packages\index{Packages} and R Taskview
+-   understand R packages\index{Packages} and R Taskview\index{Taskview}
 
-## RStudio IDE
+## Introduction
+
+R is a language and environment for statistical computing and graphics. It is a GNU project similar to the S language and environment developed at Bell Laboratories. R provides a wide variety of statistical (linear and nonlinear modelling, classical statistical tests, time-series analysis, classification, clustering and others) and graphical techniques and is highly extensible.
+
+One of R's strengths is the ease with which well-designed publication-quality plots can be produced, including mathematical symbols and formulae where needed. R is available as Free Software under the terms of the Free Software Foundation's GNU General Public License in source code form. It compiles and runs on various UNIX platforms and similar systems (including FreeBSD and Linux), Windows and macOS.
+
+## RStudio IDE\index{RStudio IDE}
 
 RStudio is an integrated development environment (IDE) for R. It includes a console and syntax-highlighting editor that supports direct code execution and tools for plotting, history, debugging and workspace management.
 
 RStudio is available in open source and commercial editions and runs on the desktop (Windows, Mac, and Linux) or in a browser connected to RStudio Server or RStudio Workbench (Debian/Ubuntu, Red Hat/CentOS, and SUSE Linux).
 
-## RStudio Cloud\index{RStudio cloud}
+## RStudio Cloud\index{RStudio Cloud}
 
-RStudio cloud\\index{RStudio cloud} by RStudio\\index{RStudio} facilitates the learning of R. Anyone can sign up and start using RStudio\\index{RStudio} on the cloud. It is one of the quickest ways to learn R.
+RStudio Cloud\\index{RStudio Cloud} by RStudio\\index{RStudio} facilitates the learning of R. Anyone can sign up and start using RStudio\\index{RStudio} on the cloud. It is one of the quickest ways to learn R.
 
-Using RStudio Cloud\\index{RStudio cloud}, we do not have to install R on our local machine. RStudio Cloud\\index{RStudio cloud} allows collaboration between R teachers and students. It also helps colleagues work together on R projects.
+Using RStudio Cloud\\index{RStudio Cloud}, we do not have to install R on our local machine. RStudio Cloud\\index{RStudio Cloud} allows collaboration between R teachers and students. It also helps colleagues work together on R projects.
 
 RStudio\\index{RStudio} described it as a lightweight, cloud-based solution that allows anyone to do, share, teach and learn data science online. And it also adds that by using this platform, we can
 
@@ -43,7 +43,7 @@ RStudio\\index{RStudio} described it as a lightweight, cloud-based solution that
 
 -   learn data science in an instructor-led environment or with interactive tutorials.
 
-RStudio Cloud\\index{RStudio cloud} has the free and the commercial version (which is fortunately very affordable). To start using RStudio Cloud\\index{RStudio cloud}, visit <https://rstudio.cloud/>. On the page, click \`Sign Up\`.
+RStudio Cloud\\index{RStudio Cloud} has the free and the commercial version (which is fortunately very affordable). To start using RStudio Cloud\\index{RStudio Cloud}, visit <https://rstudio.cloud/>. On the page, click \`Sign Up\`.
 
 ![Sign up page for RStudio Cloud](1login.png){width="60%"}
 
@@ -150,7 +150,7 @@ And this is MacTeX, for the macOS users
 
 ## Starting your RStudio\index{RStudio}
 
-You can either login to RStudio Cloud\index{RStudio cloud} and automatically see the RStudio interface OR you can start RStudio\index{RStudio} on your local machine by loading it. Remember, to login to RStudio Cloud\index{RStudio cloud}, go to <https://rstudio.cloud>. You will be asked for your username and password.
+You can either login to RStudio Cloud\index{RStudio Cloud} and automatically see the RStudio interface OR you can start RStudio\index{RStudio} on your local machine by loading it. Remember, to login to RStudio Cloud\index{RStudio Cloud}, go to <https://rstudio.cloud>. You will be asked for your username and password.
 
 Click this [link](https://rstudio.cloud/spaces/156361/join?access_code=WtlSxNuTm%2Fz7E%2BLb%2FW2XnOw480%2BBTmL4B%2FqjYRIg)
 

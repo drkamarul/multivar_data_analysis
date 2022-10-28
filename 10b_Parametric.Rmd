@@ -1,5 +1,14 @@
 # Parametric Survival Analysis
 
+## Objectives
+
+At the end of the chapter, readers will be able 
+
+- to understand the basic concept of parametric survival analysis
+- to understand the common parametric survival analysis models such as the exponential\index{exponential} regression model and the Weibull\index{Weibull} survival mode. 
+- to perform the analysis for the exponential regression model and the Weibull regression model
+
+
 ## Introduction
 
 In survival analysis, the Cox proportional hazard regression is very popular to model the association between the time-to-event with covariates or independent variables. It is a form of Generalized Linear Models.
@@ -17,14 +26,7 @@ The common parametric models include:
 
 1. The exponential survival model
 2. The Weibull survival model and
-3. The log-logistic survival model.
-
-## Objectives
-
-At the end of the chapter, readers will be able to 
-
-- understand the statistical concept of parametric survival analysis
-- perform parametric survival analysis specifically the exponential regression model and the Weibull regression model
+3. The log-logistic\index{log-logistic} survival model.
 
 ### Advantages of parametric survival analysis models
 
@@ -39,25 +41,17 @@ An analysis of censored time-to-event data using a fully parametric model can al
 
 ## Parametric survival analysis model
 
-The shape of the survival or hazard curve is informative of the process and provides a link to substantive issues.
+The shape of the survival or hazard curve is informative of the process and provides a link to substantive issues. Parametric models mean the outcome is assumed to follow some distributions. This also means that the outcome follows some family of distributions of similar form **BUT** with unknown parameters. In parametric survival analysis all parts of the model are specified, both the hazard function and the effect of any covariates.
 
-Parametric models mean the outcome is assumed to follow some distributions. This also means that the outcome follows some family of distributions of similar form BUT with unknown parameters.
-
-In parametric survival analysis all parts of the model are specified, both the hazard function and the effect of any covariates.
-
-The strength of this is that estimation is easier and estimated survival curves are smoother as they draw information from the whole data. The main drawback to parametric methods is that they require extra assumptions that may not be appropriate.
-
-Parametric models have proportional hazard metrics and accelerated failure time (AFT ) metrics. AFT models allow covariates to predict survival.
-
-Often, no analytic solution for the MLE exists. In such cases, a numerical approach must be taken. A popular method is to use Newton Raphson.
+The strength of this is that estimation is easier and estimated survival curves are smoother as they draw information from the whole data. The main drawback to parametric methods is that they require extra assumptions that may not be appropriate. Parametric models have proportional hazard metrics and accelerated failure time (AFT ) metrics. AFT models allow covariates to predict survival. Often, no analytic solution for the MLE exists. In such cases, a numerical approach must be taken. A popular method is to use Newton Raphson.
 
 Again, a parametric survival model is one of which survival time (the outcome) is assumed to follow a known distribution. The parametric models specify the baseline hazard and the baseline hazard indicates which model to be used, for examples:
 
 1. **Weibull model**
 2. Log-logistic model
-3. Log-normal model
+3. Log-normal model\index{log-normal}
 4. **Exponential model**
-5. Generalized Gamma model
+5. Generalized Gamma model\index{generalized Gamma}
 
 For parametric survival models, time is assumed to follow some distribution whose probability density function $f(t)$ can be expressed in terms of unknown parameters. Once a probability density function is specified for survival time, the corresponding survival and hazard functions can be determined.
 
@@ -116,13 +110,9 @@ This study was conducted from latest release data from the 2017 submission of th
 The dataset contains all variables of our interest. For the purpose of this assignment, we want to explore prognostic factor association of age, surgery status and marital status with the survival of AO patients. The variables in the dataset as follow:
 
 -   age : biological age at the beginning of the study. This data in numerical values.
-
 -   surgery : is the patient has undergone surgery. Coded as "Yes" and "No"
-
 -   marital : Marital status at diagnosis. Coded as "single", "married", or "separated/divorced/widowed".
-
 -   survivaltime : survival time in month. This data is in numerical values.
-
 -   status : survival status coded as "1 = died" and "0 = censored"
 
 ### Set the enviroment 
@@ -229,13 +219,6 @@ WeibullDiag(Surv(time = d1$survivaltime, event = d1$status == 1) ~ marital, data
 
 Weibull\index{Weibull} regression diagnostic\index{Regression diagnostics} plot showing that the lines for marital status are generally parallel and linear in its scale. Thus, the Weibull\index{Weibull} model is fit.
 
-## Resources 
-
-There are two resources we recommend for further readings:
-
-- Applied Survival Analysis: Regression Modeling of Time-to-Event Data, Second Edition [@Lemeshow_Stanley2008-03-07]
-- Survival Analysis: A Self-Learning Text, Third Edition [@Kle2012]
-
 ## Summary
 
-In this chapter we learned briefly the concept of parametric survival analysis. We are also shown how to perform parametric survival analysis using the AFT and PH metrics using the Weibull parametric survival model. 
+In this chapter we learned briefly the concept of parametric survival analysis. We are also shown how to perform parametric survival analysis for the exponential regression model and the Weibull regression model. In each models, we further illustrate the accelerated failure time (AFT) and proportional hazed (PH) metrics. For more understanding, we recommend Survival Analysis: A Self-Learning Text book [@Kle2012] and Applied Survival Analysis: Regression Modeling of Time-to-Event Data book [@Lemeshow_Stanley2008-03-07].  

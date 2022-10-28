@@ -1,24 +1,24 @@
 # Data Wrangling
 
-## Introduction
-
-Data wrangling removes errors and combines complex data sets to make them more accessible and easier to analyze. Due to the rapid expansion of the amount of data and data sources available today, storing and organizing large quantities of data for analysis is becoming increasingly necessary.
-
-### Definition of data wrangling\index{Data wrangling}
-
-Data wrangling\index{Data wrangling} is also known as Data Munging or Data Transformation\index{Data transformation}. It is loosely the process of manually converting or mapping data from one "raw" form into another format. The process allows for more convenient consumption of the data. You can find more information [here](https://community.modeanalytics.com/sql/tutorial/data-wrangling-with-sql/)
-
-Data wrangling sometimes is also referred to as data munging. It is the process of transforming and mapping data from one "raw" data form into another format to make it more appropriate and valuable for various downstream purposes such as analytics. The goal of data wrangling is to ensure quality and valuable data. Data analysts typically spend the majority of their time in the process of data wrangling compared to the actual analysis of the data. Almost all data require data wrangling before further analysis. There are three main parts to data wrangling [@Wickham2017R].
-
-![Main parts of data wrangling](data-science-wrangle.png){width="60%"}
-
 ## Objectives
 
 At the end of the chapter, readers will
 
--   understand the role of data wrangling
--   understand the basic capabilities of **dplyr** package
+-   understand the role of data wrangling\index{data wrangling}
+-   understand the basic capabilities of **dplyr** package\index{dplyr}
 -   acquire skills to perform common data wrangling using **dplyr** and **forcats** packages
+
+## Introduction
+
+Data wrangling removes errors and combines complex data sets to make them more accessible and easier to analyze. Due to the rapid expansion of the amount of data and data sources available today, storing and organizing large quantities of data for analysis is becoming increasingly necessary.
+
+### Definition of data wrangling\index{data wrangling}
+
+Data wrangling\index{data wrangling} is also known as Data Munging or Data Transformation\index{data transformation}. It is loosely the process of manually converting or mapping data from one "raw" form into another format. The process allows for more convenient consumption of the data. You can find more information at [mode analytics webpage](https://community.modeanalytics.com/sql/tutorial/data-wrangling-with-sql/)
+
+Data wrangling sometimes is also referred to as data munging\index{data munging}. It is the process of transforming and mapping data from one "raw" data form into another format to make it more appropriate and valuable for various downstream purposes such as analytics. The goal of data wrangling is to ensure quality and valuable data. Data analysts typically spend the majority of their time in the process of data wrangling compared to the actual analysis of the data. Almost all data require data wrangling before further analysis. There are three main parts to data wrangling [@Wickham2017R].
+
+![Main parts of data wrangling](data-science-wrangle.png){width="60%"}
 
 ## Data wrangling\index{Data wrangling} with **dplyr**\index{dplyr} package
 

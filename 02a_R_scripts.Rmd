@@ -1,11 +1,5 @@
 # R Scripts\index{R script} and R Packages\index{Packages}
 
-## Introduction
-
-An R script is simply **a text file containing (almost) the same commands that you would enter on the command line of R**. ( almost) refers to the fact that if you are using sink() to send the output to a file, you will have to enclose some commands in print() to get the same output as on the command line.
-
-R packages are **extensions to the R statistical programming language**. R packages contain code, data, and documentation in a standardised collection format that can be installed by users of R, typically via a centralised software repository such as CRAN (the Comprehensive R Archive Network).
-
 ## Objectives
 
 In this chapter, we would like to users 
@@ -15,6 +9,12 @@ In this chapter, we would like to users
 -   to install R packages
 -   to create a new RStudio project
 -   to be able to use RStudio Cloud
+
+## Introduction
+
+An R script is simply **a text file containing (almost) the same commands that you would enter on the command line of R**. ( almost) refers to the fact that if you are using sink() to send the output to a file, you will have to enclose some commands in print() to get the same output as on the command line.
+
+R packages are **extensions to the R statistical programming language**. R packages contain code, data, and documentation in a standardised collection format that can be installed by users of R, typically via a centralised software repository such as CRAN (the Comprehensive R Archive Network).
 
 ## Open a new R script\index{R script}
 
@@ -213,12 +213,12 @@ There are a number of resources on RStudio Cloud\index{RStudio cloud}. For examp
 
 ## Guidance and helps
 
-To see further guidance and help, users may register and join RStudio Community at <https://community.rstudio.com/>. Users can also ask questions on Stack Overflow page at <https://stackoverflow.com/>. There are also mailing list groups on specific topics but users have to subscribe to it. 
+To see further guidance and help, users may register and join RStudio Community at [RStudio Community](https://community.rstudio.com/). Users can also ask questions on [Stack Overflow](https://stackoverflow.com/). There are also mailing list groups on specific topics but users have to subscribe to it. 
 
 
 ## Bookdown
 
-RStudio has provided a website to host online books on R at <https://bookdown.org/>. These books are freely accessible and some of the books are available on Amazon or other book depository as physical books. +
+RStudio has provided a website to host online books, the [Bookdown](https://bookdown.org/). Th books at Bookdown\index{Bookdown}  are freely accessible onlineand some of the books are available on Amazon or other book depository as physical books. +
 
 ![Bookdown](bookdown.PNG){width="60%"}
 

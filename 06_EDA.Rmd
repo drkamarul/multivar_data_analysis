@@ -1,22 +1,21 @@
 # Exploratory data analysis (EDA)
 
-## Introduction
-
-Exploratory Data Analysis (EDA) is the critical process of performing initial investigations on data to discover patterns, spot anomalies, test hypotheses and check assumptions with the help of summary statistics and graphical representations.
-
-In statistics, exploratory data analysis (EDA) is an approach to data analysis to summarize their main characteristics, often with visual methods. A statistical model can be used or not, but primarily EDA is for seeing what the data can tell us beyond the formal modelling or hypothesis testing task.
-
-Exploratory data analysis was promoted by John Tukey\index{John Tukey} to encourage statisticians to explore the data and possibly formulate hypotheses that could lead to new data collection ([Source](https://en.wikipedia.org/wiki/Exploratory_data_analysis))
-
 ## Objectives
 
 At the end of the chapter, readers will be able to
 
 -   perform EDA using graphical methods
-
 -   perform EDA using descriptive statistics
-
 -   acquire basic skills to use **ggplot2** and **gtsummary** packages
+
+## Introduction
+
+Exploratory Data Analysis\index{exploratory data analysis} or EDA\index{eda} is the critical process of performing initial investigations on data to discover patterns, spot anomalies, test hypotheses and check assumptions with the help of summary statistics and graphical representations.
+
+In statistics, exploratory data analysis (EDA) is an approach to data analysis to summarize their main characteristics, often with visual methods. A statistical model can be used or not, but primarily EDA is for seeing what the data can tell us beyond the formal modelling or hypothesis testing task.
+
+Exploratory data analysis was promoted by John Tukey\index{John Tukey} to encourage statisticians to explore the data and possibly formulate hypotheses that could lead to new data collection ([Source](https://en.wikipedia.org/wiki/Exploratory_data_analysis))
+
 
 ## EDA using ggplot2\index{ggplot2} package
 
