@@ -194,16 +194,6 @@ exp.mod.aft <- survreg(Surv(survivaltime, status) ~ age + marital + surgery,
 summary(exp.mod.aft)
 ```
 
-We can also use the `flexsurv()` function:  
-
-```{r}
-exp.mod.aft2 <- flexsurvreg(Surv(survivaltime, status) ~ age + marital + surgery, 
-                           data = d1, dist = 'exponential')
-exp.mod.aft2
-```
-
-
-
 ### Weibull (Accelerated Failure Time)\index{Weibull}
 
 We first start with estimating a Weibull parametric survival model which will return a accelerated failure metric:
