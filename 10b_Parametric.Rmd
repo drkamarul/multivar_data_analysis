@@ -236,7 +236,7 @@ The interpretation of the parameters are as below:
 
 ### Weibull (Proportional Hazard)\index{Weibull}
 
-In contrast to AFT metric, the `flexsurvreg()` could convert the estimation to proportional hazard (PH) metric.  Below, we will obtain the estimate for log hazard ratio and the hazard ratio with their $95\5$ confidence intervals. 
+In contrast to AFT metric, the `flexsurvreg()` could convert the estimation to proportional hazard (PH) metric.  Below, we will obtain the estimate for log hazard ratio and the hazard ratio with their $95\%$ confidence intervals. 
 
 ```{r}
 wei.mod.ph <- flexsurvreg(Surv(survivaltime, status) ~ age + surgery + marital, 

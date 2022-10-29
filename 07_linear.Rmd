@@ -46,7 +46,7 @@ For this chapter, we will be using the following packages:
 
 These are loaded as follows using the function `library()`,
 
-```{r, message=FALSE, error=FALSE}
+```{r, message=FALSE, error=FALSE, warning=FALSE}
 library(foreign)
 library(tidyverse)
 library(psych)
@@ -169,7 +169,7 @@ This plot allows the assessment of normality\index{Normality}, linearity\index{L
 To present the result, we can use `tbl_regression()` to come up with a nice table. We use `slr_chol` of the `glm` output with `tbl_regression()` in the `gtsummary`\index{gtsummary} package.
 
 ```{r, error=FALSE, message=FALSE}
-tbl_regression(slr_chol, intercept = TRUE)
+tbl_regression(slr_chol, intercept = TRUE) 
 ```
 
 Here, we use `intercept = TRUE` to include the intercept value in the table. By default, this is omitted by the `tbl_regression()`.
@@ -214,7 +214,7 @@ Now, for the MLR we are no longer restricted to one predictor. Let say, we are i
 # numerical
 coronary %>% select(-id, -cad, -race, -gender) %>% describe()
 # categorical
-coronary %>% select(race, gender) %>% tbl_summary()
+coronary %>% select(race, gender) %>% tbl_summary() 
 ```
 
 and the pairs plot, where we focus on the distribution of the data by histograms and box-and-whiskers plots\index{Box-and-whiskers plot}. The pairs plot also includes information on the bivariate correlation statistics between the numerical variables.
@@ -368,7 +368,7 @@ mlr_chol_final = mlr_chol_sel
 Similar to SLR, we use `tbl_regression()` to come up with a nice table to present the results.
 
 ```{r, message=FALSE}
-tbl_regression(mlr_chol_final, intercept = TRUE)
+tbl_regression(mlr_chol_final, intercept = TRUE) 
 ```
 
 It will be useful to be able to save the output in the spreadsheet format for later use. We can use `tidy()` function in this case and export it to a .csv file,
