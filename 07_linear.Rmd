@@ -168,8 +168,12 @@ This plot allows the assessment of normality\index{Normality}, linearity\index{L
 
 To present the result, we can use `tbl_regression()` to come up with a nice table. We use `slr_chol` of the `glm` output with `tbl_regression()` in the `gtsummary`\index{gtsummary} package.
 
-```{r, error=FALSE, message=FALSE}
+```{r, eval=FALSE, error=FALSE, message=FALSE}
 tbl_regression(slr_chol, intercept = TRUE) 
+```
+
+```{r, error=FALSE, message=FALSE, echo=FALSE}
+tbl_regression(slr_chol, intercept = TRUE) %>% as_gt()
 ```
 
 Here, we use `intercept = TRUE` to include the intercept value in the table. By default, this is omitted by the `tbl_regression()`.
@@ -208,13 +212,21 @@ Whenever the predictor is a categorical variable with more than two levels, we u
 
 ### Data exploration
 
-Now, for the MLR we are no longer restricted to one predictor. Let say, we are interested in knowing the relationship between blood pressure (SBP and DBP), age, BMI, race and render as the predictors and the cholesterol level (outcome). As before, we explore the variables by the descriptive statistics,
+Now, for the MLR we are no longer restricted to one predictor. Let's say, we are interested in knowing the relationship between blood pressure (SBP and DBP), age, BMI, race and render as the predictors and the cholesterol level (outcome). As before, we explore the variables by the descriptive statistics,
 
 ```{r, message=FALSE}
 # numerical
 coronary %>% select(-id, -cad, -race, -gender) %>% describe()
+```
+
+```{r, message=FALSE, eval=FALSE}
 # categorical
 coronary %>% select(race, gender) %>% tbl_summary() 
+```
+
+```{r, message=FALSE, echo=FALSE}
+# categorical
+coronary %>% select(race, gender) %>% tbl_summary() %>% as_gt()
 ```
 
 and the pairs plot, where we focus on the distribution of the data by histograms and box-and-whiskers plots\index{Box-and-whiskers plot}. The pairs plot also includes information on the bivariate correlation statistics between the numerical variables.
@@ -367,8 +379,12 @@ mlr_chol_final = mlr_chol_sel
 
 Similar to SLR, we use `tbl_regression()` to come up with a nice table to present the results.
 
-```{r, message=FALSE}
+```{r, message=FALSE, eval=TRUE}
 tbl_regression(mlr_chol_final, intercept = TRUE) 
+```
+
+```{r, message=FALSE, echo=FALSE}
+tbl_regression(mlr_chol_final, intercept = TRUE) %>% as_gt()
 ```
 
 It will be useful to be able to save the output in the spreadsheet format for later use. We can use `tidy()` function in this case and export it to a .csv file,

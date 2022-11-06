@@ -31,7 +31,7 @@ natural\ log\ of\ count\ outcome = &\ numerical\ predictors \\
 & + categorical\ predictors
 \end{aligned}$$
 
-At times, the count is proportional to a denominator\index{Rate data}. For example, given the same number of deaths, the death rate in a small population will be higher than the rate in a large population. If we were to compare the the number of deaths between the populations, it would not make a fair comparison. Thus, we may consider adding denominators in the Poisson regression\index{Poisson regression} modelling in form of offsets. This denominator could also be the unit time of exposure, for example person-years of cigarette smoking. This will be explained later under Poisson regression\index{Poisson regression} for rate section.
+At times, the count is proportional to a denominator\index{Rate data}. For example, given the same number of deaths, the death rate in a small population will be higher than the rate in a large population. If we were to compare the the number of deaths between the populations, it would not make a fair comparison. Thus, we may consider adding denominators in the Poisson regression\index{Poisson regression} modelling in the forms of offsets. This denominator could also be the unit time of exposure, for example person-years of cigarette smoking. This will be explained later under Poisson regression\index{Poisson regression} for rate section.
 
 In the previous chapter, we learned that logistic regression allows us to obtain the odds ratio\index{Odds ratio}, which is approximately the relative risk given a predictor. For Poisson regression\index{Poisson regression}, by taking the exponent of the coefficient, we obtain the _rate ratio_ RR\index{Rate ratio} (also known as _incidence rate ratio_ IRR\index{Incidence rate ratio}),
 
@@ -234,8 +234,12 @@ pois_attack_final = pois_attack_all1
 
 We use `tbl_regression()` to come up with a table for the results. Here, for interpretation, we exponentiate the coefficients to obtain the incidence rate ratio, _IRR_.
 
-```{r, message = FALSE}
+```{r, message = FALSE, eval=FALSE}
 tbl_regression(pois_attack_final, exponentiate = TRUE)
+```
+
+```{r, message = FALSE, echo=FALSE}
+tbl_regression(pois_attack_final, exponentiate = TRUE) %>% as_gt()
 ```
 
 Based on this table, we may interpret the results as follows:
@@ -482,8 +486,12 @@ pois_case_final = pois_case
 ```
 and use `tbl_regression()` to come up with a table for the results. Again, for interpretation, we exponentiate the coefficients to obtain the incidence rate ratio, _IRR_\index{Incidence rate ratio}\index{Rate ratio}.
 
-```{r, message = FALSE}
+```{r, message = FALSE, eval=FALSE}
 tbl_regression(pois_case_final, exponentiate = TRUE)
+```
+
+```{r, message = FALSE, echo=FALSE}
+tbl_regression(pois_case_final, exponentiate = TRUE) %>% as_gt()
 ```
 
 From this table, we interpret the IRR values as follows:
