@@ -12,8 +12,7 @@ rmd_files: ["index.Rmd",
 "08b_logistic.Rmd" ,
 "09_poisson.Rmd",
 "10_KM_Cox2.Rmd" ,
-#"10b_Parametric.Rmd",
-"10c_Parametric.Rmd",
+"10b_Parametric.Rmd",
 "11_missingData.Rmd",
 "13_References.Rmd"]
 clean: [packages.bib, references.bib, bookdown.bbl]
