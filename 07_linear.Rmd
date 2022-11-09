@@ -180,7 +180,7 @@ tbl_regression(slr_chol) %>% as_gt()
 It is also very informative to present the model equation,
 
 $$chol = 3.0 + 0.04\times dbp$$
-where we obtain the intercept value from 'summary(slr_chol)'.
+where we obtain the intercept value from `summary(slr_chol)`.
 
 Based on the $R^2$ (which was `r round(rsq(slr_chol), 3)`), table and model equation, we may interpret the results as follows:
 
