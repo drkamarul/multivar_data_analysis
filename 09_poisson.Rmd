@@ -237,7 +237,6 @@ We use `tbl_regression()` to come up with a table for the results. Here, for int
 ```{r, message = FALSE, eval=FALSE}
 tbl_regression(pois_attack_final, exponentiate = TRUE)
 ```
-
 ```{r, message = FALSE, echo=FALSE}
 tbl_regression(pois_attack_final, exponentiate = TRUE) %>% as_gt()
 ```
@@ -489,7 +488,6 @@ and use `tbl_regression()` to come up with a table for the results. Again, for i
 ```{r, message = FALSE, eval=FALSE}
 tbl_regression(pois_case_final, exponentiate = TRUE)
 ```
-
 ```{r, message = FALSE, echo=FALSE}
 tbl_regression(pois_case_final, exponentiate = TRUE) %>% as_gt()
 ```

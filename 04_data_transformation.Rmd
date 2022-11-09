@@ -100,8 +100,8 @@ Let's read the datasets and name it, each as
 -   pep
 
 ```{r}
-stroke <- read_csv(here('data', 'stroke_data.csv'))
-pep <- import(here('data', 'peptic_ulcer.xlsx'))
+stroke <- read_csv(here("data", "stroke_data.csv"))
+pep <- import(here("data", "peptic_ulcer.xlsx"))
 ```
 
 Take a peek at the dataset
