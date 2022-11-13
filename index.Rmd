@@ -1,6 +1,6 @@
 ---
 title: "Data Analysis in Medicine and Health using R"
-author: "Kamarul Imran, Wan Nor Arifin, Tengku Muhammad Hanis Tengku Mukhtar"
+author: "Kamarul Imran, Wan Nor Arifin, Tengku Muhammad Hanis Tengku Mokhtar"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 knit: "bookdown::render_book"
