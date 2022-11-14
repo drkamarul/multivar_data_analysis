@@ -463,3 +463,5 @@ tbl_regression(lr_mi2) %>%
 We suggest @Schafer2002 and @kang2013 for theoretical details on the missing data, @Zhang2015 for missing data exploration and @heyman2019 and @buuren2018 for more details on single and multiple imputation\index{Multiple imputation}.
 
 ## Summary
+
+This chapter provides an overview of the type of missing data and how to investigate it, either visually, descriptively or statistically. This chapter also covers practical methods for handling missing data in research from a simple method like a listwise deletion to a more advanced method of multiple imputation. There is extensive literature on the approach to missing data that are not included in this brief chapter. However, we hope this chapter will give readers a solid starting point to further explore other resources.

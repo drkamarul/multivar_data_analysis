@@ -39,9 +39,9 @@ It is not recommended to adjust for every available Covariate because it has som
 
 ## Variable selection for prediction 
 
-Variable selection means choosing among many variables which to include in a particular model, that is, to select appropriate variables from a complete list of variables by removing those that are irrelevant or redundant.1 The purpose of such selection is to determine a set of variables that will provide the best fit for the model so that accurate predictions can be made [@Chowdhurye000262].
+Variable selection means choosing among many variables which to include in a particular model, that is, to select appropriate variables from a complete list of variables by removing those that are irrelevant or redundant. The purpose of such selection is to determine a set of variables that will provide the best fit for the model so that accurate predictions can be made [@Chowdhurye000262].
 
-Chowdhurye000262 listed some variable selection methods:
+@Chowdhurye000262 listed some variable selection methods:
 
 - Backward elimination\index{backward elimination}
 - Forward selection\index{forward selection}
