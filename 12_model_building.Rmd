@@ -12,9 +12,9 @@ At the end of the chapter, readers will be able
 
 In previous chapters, we avoided going into details of model building and variable selection processes. This is because the choices, workflows and approaches for both processes varies and depends on the objectives and preferences of the users or analysts. It is very rare that a statistical model has a single independent variable or predictor only. Almost always, the models contains more than one single independent variable. The collection of independent variables can consist of numerical only or categorical only or a mix of numerical and categorical independent variables.     
 
-Statisticians coin the model with one independent variable as a univariate model and a model with more than one independent variables as multivariate model but some analysts prefer to call these as *univariable* and multivariable model. [@{NickCox2013] claimed that *multivariable* is mostly biostatistical in usage. It does not mean something other than "multivariate". He added that univariate, bivariate, multivariate just count the number of variables, one, two or many. 
+Statisticians coin the model with one independent variable as a univariate model and a model with more than one independent variables as multivariate model but some analysts prefer to call these as *univariable* and multivariable model. @NickCox2013 claimed that *multivariable* is mostly biostatistical in usage. It does not mean something other than *multivariate*. He added that univariate, bivariate, multivariate just count the number of variables, one, two or many. 
 
-**variate** means random variable\index{random variable} in statistics terminology. If we literally follow the definition, "multivariate analysis" may only cover non regression type analyses for multiple random variables (e.g., principal component analysis and factor analysis) or regression analyses with multiple outcome variables (e.g., multivariate analysis of variance). However, in most situations described as “multivariate analysis”, medical researchers’ intentions are clear: adjust for multiple covariates as explanatory variables in regression models. In fact, we usually model the conditional expectation  $E(Y|X)$ by regression an alysis in observational studies where the joint distribution $(X, Y)$ is not controlled by researchers. We thus believe that “multivariate adjustment” or “multivariate analysis” is not necessarily misuse of the terminology. We therefore adopted "multivariate [@Peters2008].
+**variate** means random variable\index{random variable} in statistics terminology. If we literally follow the definition, *multivariate analysis* may only cover non regression type analyses for multiple random variables (e.g., principal component analysis and factor analysis) or regression analyses with multiple outcome variables (e.g., multivariate analysis of variance). However, in most situations described as “multivariate analysis”, medical researchers’ intentions are clear: adjust for multiple covariates as explanatory variables in regression models. In fact, we usually model the conditional expectation  $E(Y|X)$ by regression an analysis in observational studies where the joint distribution $(X, Y)$ is not controlled by researchers. We thus believe that *multivariate adjustment* or *multivariate analysis* is not necessarily misuse of the terminology as stated by others [@Peters2008].
 
 ## Model building
 
@@ -39,7 +39,7 @@ It is not recommended to adjust for every available Covariate because it has som
 
 ## Variable selection for prediction 
 
-Variable selection means choosing among many variables which to include in a particular model, that is, to select appropriate variables from a complete list of variables by removing those that are irrelevant or redundant.1 The purpose of such selection is to determine a set of variables that will provide the best fit for the model so that accurate predictions can be made [Chowdhurye000262].
+Variable selection means choosing among many variables which to include in a particular model, that is, to select appropriate variables from a complete list of variables by removing those that are irrelevant or redundant.1 The purpose of such selection is to determine a set of variables that will provide the best fit for the model so that accurate predictions can be made [@Chowdhurye000262].
 
 Chowdhurye000262 listed some variable selection methods:
 
@@ -67,7 +67,7 @@ In all possible subset selection, every possible combination of variables is che
 
 ## Stopping rule and selection criteria in automatic variable selection
 
-In all stepwise selection methods including all subset selection, a stopping rule or selection criteria for inclusion or exclusion of variables need to be set. Generally, a standard significance level for hypothesis testing is used.7 However, other criteria are also frequently used as a stopping rule such as the AIC, BIC or Mallows’ Cp statistic [Chowdhurye000262]. 
+In all stepwise selection methods including all subset selection, a stopping rule or selection criteria for inclusion or exclusion of variables need to be set. Generally, a standard significance level for hypothesis testing is used.7 However, other criteria are also frequently used as a stopping rule such as the AIC, BIC or Mallows’ Cp statistic [@Chowdhurye000262]. 
 
 ## Problems with automatic variable selections 
 
