@@ -9,8 +9,8 @@ biblio-style: apalike
 graphics: yes
 link-citations: yes
 colorlinks: yes
-lot: yes
-lof: yes
+lot: no
+lof: no
 fontsize: 10pt
 bibliography:
 - packages.bib
