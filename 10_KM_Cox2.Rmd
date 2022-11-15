@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Survival Analysis: Kaplan-Meier\index{Kaplan-Meier} and Cox Proportional Hazard (PH) Regression 
 
 ## Objectives 
@@ -487,6 +492,20 @@ stroke_mv <-
 tidy(stroke_mv, exponentiate = TRUE, conf.int = TRUE)
 ```
 
+or we may use `tbl_regression()` for a better output
+
+```{r}
+tbl_regression(stroke_mv) %>%
+  as_gt()
+```
+
+and show the exponentiation of the log hazard ratio to obtain the hazard ratio
+
+```{r}
+tbl_regression(stroke_mv, exponentiate = TRUE) %>%
+  as_gt()
+```
+
 We would like to doubly confirm if the model with covariates stroke_type, gcs and referral_from and really statistically different from model with stroke type and referral from:
 
 ```{r}
@@ -524,30 +543,35 @@ $$= ln[h_0(t) + 1beta_1 + gcs\beta_2 + (1gcs)\beta_3 + dm\beta_4] -$$
 $$ln[h_0(t) + 0beta_1 + gcs\beta_2 + (0gcs)\beta_3 + dm\beta_4]$$
 $$=beta_1 + gcs\beta_3$$
 
-To run model with an interaction\index{Interaction} for Cox PH model, we can:
+This is a Cox PH main effect model. Main effect model means there is no interaction between variables in the model. 
 
 ```{r}
 stroke_noia <- 
   coxph(Surv(time = time2, 
              event = status == 'dead') ~ stroke_type + gcs + dm, 
         data = stroke)
+tidy(stroke_noia, exponentiate = TRUE, conf.int = TRUE)
+```
 
+
+To run model with an interaction\index{Interaction} for Cox PH model for example a two-way interaction between stroke type and gcs, we can run these codes:
+
+```{r}
 stroke_ia <- 
   coxph(Surv(time = time2, 
              event = status == 'dead') ~ stroke_type + gcs + stroke_type:gcs + dm, 
         data = stroke)
-
-tidy(stroke_ia, exponentiate = TRUE, conf.int = TRUE)
+tbl_regression(stroke_ia, exponentiate = TRUE) %>%
+  as_gt()
 ```
 
-It appears that the p-value for the interaction\index{Interaction} term (a product of gcs and stroke type) is large (p value = 0.852). 
+It appears that the p-value for the interaction\index{Interaction} term (a product of gcs and stroke type) is large (p-value = 0.9). 
 
 ```{r}
 anova(stroke_ia, stroke_noia, test = 'Chisq')
 ```
 
-
-And when we run likelihood ratio test, we also observe the same result (p value = 0.851). And because of that, we decide not to add the interaction\index{Interaction} term in the model. However, it is also recommended to confirm this decision after discussion with subject matter expert, in this case, a stroke physician or neurosurgeon.
+And next, when we assess the likelihood ratio test to further confirm the importance of the interaction term. We observe the same result (p value = 0.851). And because of p-value of larger than 0.05 and we also believe that the interaction is not important in clinical setting, we have decided not to add the interaction\index{Interaction} term in the model. We always recommended to confirm the decision to add or remove independent variables including interaction term after discussion with subject matter experts, in this case, they could a stroke physician or a neurosurgeon.
 
 ## The proportional hazard assumption\index{Proportional hazard assumption}
 
@@ -590,7 +614,7 @@ We can plots these residuals
 For example, let's start with plotting the residuals
 
 ```{r}
-#ggcoxdiagnostics(stroke_mv, type = "deviance")
+ggcoxdiagnostics(stroke_mv, type = "deviance")
 ```
 
 Now, we will use Schoenfeld\index{Schoenfeld}
@@ -711,11 +735,11 @@ We may check the $dfbetas$ residual\index{Dfbeta}. This is residual that comes f
 
 
 ```{r}
-# ggcoxdiagnostics(stroke_mv,
-#                  type = "dfbetas",
-#                  point.size = 0,
-#                  hline.col = "black",
-#                  sline.col = "black") + geom_bar(stat = "identity")
+ggcoxdiagnostics(stroke_mv,
+                 type = "dfbetas",
+                 point.size = 0,
+                 hline.col = "black",
+                 sline.col = "black") + geom_bar(stat = "identity")
 
 ```
 
