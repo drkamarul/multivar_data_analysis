@@ -1,20 +1,20 @@
 book_filename: dataanalysis
 repo: https://github.com/drkamarul/multivar_data_analysis
 rmd_files: ["index.Rmd",
-"02_Intro_to_R.Rmd",
-"02a_R_scripts.Rmd",
-"02b_setting_up_Rstudio_project.Rmd",
-"03_data_visualization.Rmd",
-"04_data_transformation.Rmd",
+# "02_Intro_to_R.Rmd",
+# "02a_R_scripts.Rmd",
+# "02b_setting_up_Rstudio_project.Rmd",
+# "03_data_visualization.Rmd",
+# "04_data_transformation.Rmd",
 "06_EDA.Rmd",
-"07_linear.Rmd",
-"08_logistic_2.Rmd",
-"08b_logistic.Rmd" ,
-"09_poisson.Rmd",
-"10_KM_Cox.Rmd" ,
-"10b_Parametric.Rmd",
-"11_missingData.Rmd",
-"12_model_building.Rmd",
+# "07_linear.Rmd",
+# "08_logistic_2.Rmd",
+# "08b_logistic.Rmd" ,
+# "09_poisson.Rmd",
+# "10_KM_Cox.Rmd" ,
+# "10b_Parametric.Rmd",
+# "11_missingData.Rmd",
+# "12_model_building.Rmd",
 "13_References.Rmd"]
 clean: [packages.bib, references.bib, bookdown.bbl]
 new_session: yes

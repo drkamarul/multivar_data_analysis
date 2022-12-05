@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Exploratory data analysis (EDA)
 
 ## Objectives
@@ -358,10 +363,9 @@ gapminder %>%
                          all_categorical() ~ "{n} / {N} ({p}%)"),
         missing = "no", 
         digits = all_continuous() ~ 1 
-        )) %>%
-  modify_caption("**Characteristics for 1962, 1982 
-                 and 2002 for Asia** (N = {N})") %>%
-  as_gt() 
+        )) %>% 
+  as_kable_extra(booktabs = TRUE) %>% 
+  kableExtra::kable_styling(full_width = F)
 ```
 
 ### Plotting means and error bars\index{Error bar}
