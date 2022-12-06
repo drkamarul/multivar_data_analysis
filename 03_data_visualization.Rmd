@@ -102,7 +102,7 @@ R can read almost all (if not all) types of data. The common data formats in dat
 -   MS Excel file (`.xlsx`)
 -   SPSS\index{SPSS} file (`.sav`)
 -   Stata\index{STATA} file (`.dta`)
--   SAS\index{SAS} file
+-   SAS\index{SAS} file (`.sas`)
 
 However, it would help if you had user-contributed packages to read data from statistical software. For example. **haven**\index{haven} and **rio**\index{rio} packages.
 
@@ -201,7 +201,7 @@ Let us start by creating a simple plot using these arguments:
 
 **ggplot2**\index{ggplot2} uses the $+$ sign to connect between functions, including **ggplot2** functions that span multiple lines.
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp))
 ```
@@ -230,7 +230,7 @@ We can see that the variables we want to plot are specified by `aes()`. We can a
 
 The objective of creating plot using multiple (more than two variables) is to enable users to visualize a more complex relationship between more than two variables. Let us take a visualization for variable `year`, variable `life expectancy`, and variable `continent`.
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, 
                            y = lifeExp, 
@@ -247,7 +247,7 @@ From the scatterplot\index{Scatterplot} of these three variables, you may notice
 
 Now, we will replace the third variable with Gross Domestic Product `gdpPercap` and correlates it with the size of `gdpPerCap`.
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, 
                            y = lifeExp, 
@@ -259,7 +259,7 @@ You will notice that *ggplot2*\index{ggplot2} automatically assigns a unique lev
 
 Instead of using colour, we can also use different shapes. Different shapes are helpful, especially when there is no facility to print out colourful plots.
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, 
                            y = lifeExp, 
@@ -269,7 +269,7 @@ ggplot(data = gapminder) +
 
 You may create a different colour plot if you specify the colour outside the `aes` parentheses. For example, let's set the parameter colour to `blue`:
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp), 
              colour = 'blue')
@@ -278,7 +278,7 @@ ggplot(data = gapminder) +
 
 To change the parameter shape, for example, to the plus symbol, you can set the argument for `shape` to equal `3`.
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp), 
              shape = 3)
@@ -296,7 +296,7 @@ You can split our plots based on a factor variable and make subplots using the `
 -   split the plot based on continent
 -   set the number of rows for the plot at 3
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp)) + 
   facet_wrap(~ continent, nrow = 3)
@@ -304,7 +304,7 @@ ggplot(data = gapminder) +
 
 However, you will get a different arrangement of plot if you change the value for the `nrow`
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp)) + 
   facet_wrap(~ continent, nrow = 2)
@@ -321,14 +321,14 @@ ggplot(data = gapminder) +
 
 This is a smooth line plot\index{Line plot}:
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_smooth(mapping = aes(x = gdpPercap, y = lifeExp))
 ```
 
 Let's generate a smooth plot based on continent using the `linetype()` and use `log(gdpPercap)` to reduce the skewness of the data. Use these codes:
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_smooth(mapping = aes(x = log(gdpPercap), 
                             y = lifeExp, 
@@ -337,7 +337,7 @@ ggplot(data = gapminder) +
 
 Another smooth plot but setting the parameter for colour:
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_smooth(mapping = aes(x = log(gdpPercap), 
                             y = lifeExp, 
@@ -348,7 +348,7 @@ ggplot(data = gapminder) +
 
 We can combine more than one `geoms` (type of plots) to overlay plots. The trick is to use multiple `geoms` in a single line of R code:
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_smooth(mapping = aes(x = log(gdpPercap), y = lifeExp))
@@ -356,7 +356,7 @@ ggplot(data = gapminder) +
 
 The codes above show duplication or repetition. To avoid this, we can pass the mapping to `ggplot()`:
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder, 
        mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_point() +
@@ -365,7 +365,7 @@ ggplot(data = gapminder,
 
 And we can expand this to make scatterplot\index{Scatterplot} shows different colour for continent:
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder, 
        mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_point(mapping = aes(colour = continent)) +
@@ -374,7 +374,7 @@ ggplot(data = gapminder,
 
 Or expand this to make the smooth plot shows different colour for continent:
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder, 
        mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_point() +
@@ -383,7 +383,7 @@ ggplot(data = gapminder,
 
 Or both the scatterplot and the smoothplot:
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder, 
        mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_point(mapping = aes(shape = continent)) +
@@ -395,17 +395,38 @@ ggplot(data = gapminder,
 
 Let us create a Bar chart\index{Bar chart}, with y-axis as the frequency.
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_bar(mapping = aes(x = continent))
 ```
 
 If we want the y-axis to show proportion, we can use these codes.
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 ggplot(data = gapminder) +
-  geom_bar(mapping = aes(x = continent, y = ..prop..,
+  geom_bar(mapping = aes(x = continent, y = after_stat(count/sum(count)),
                          group = 1))
+```
+
+Or you can be more elaborate like below:
+
+```{r,out.width='80%'}
+gapminder2 <- 
+  gapminder %>% 
+  count(continent) %>% 
+  mutate(perc = n/sum(n) * 100)
+
+pl <- gapminder2 %>% 
+  ggplot(aes(x = continent, y = n, fill = continent))
+pl <- pl + geom_col()
+pl <- pl + geom_text(aes(x = continent, y = n
+                         , label = paste0(n, " (", round(perc,1),"%)")
+                         , vjust = -0.5
+                         
+                         ))
+pl <- pl + theme_classic()
+pl <- pl + labs(title ="Bar chart showing count and percentage")
+pl
 ```
 
 ### Customizing title
@@ -414,7 +435,7 @@ We can customize many aspects of the plot using **ggplot2** package. For example
 
 Let's name the plot as `mypop`
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 mypop <- ggplot(data = gapminder, 
                 mapping = aes(x = log(gdpPercap), 
                               y = lifeExp)) +
@@ -425,14 +446,14 @@ mypop
 
 You will notice that there is no title in the plot, so now you want to add the title:
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 mypop + 
   ggtitle("GDP (in log) and life expectancy")
 ```
 
 To make the title appear in multiple lines, we can add `\n`:
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 mypop + ggtitle("GDP (in log) and life expectancy:
                 \nData from Gapminder")
 ```
@@ -445,7 +466,7 @@ We can specify the tick marks
 -   max = 12
 -   interval = 1
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 mypop + 
   scale_x_continuous(breaks = seq(0,12,1))
 ```
@@ -469,7 +490,7 @@ mypop +
   theme_bw()
 ```
 
-```{r ,out.width='60%'}
+```{r ,out.width='80%'}
 mypop + 
   theme_classic()
 ```
@@ -505,17 +526,23 @@ We now can see a nice plot. And next, we want to save the plot (currently on the
 -   `png` format
 -   `jpg` format
 
-And we want to save the plots in a folder named as `plots`. To do this
+If we want to save the plots in a folder named as `plots`, then 
 
--   create a folder and name it as `plot`
+- go to working directory
+- click New Folder 
+- name it as `plot`
 
-![New folder as plots](newfolder.png){width="60%"}
+![New folder as plots](newfolder.png){width="80%"}
 
-![Name the folder as plots](plots.png){width="60%"}
+![Name the folder as plots](plots.png){width="40%"}
 
-We are using the `here()` function now. If you notice, we use a new package called **here**\index{here}. This handy package can help get or save files in the correct path (including folder) even when we are using different machines. Many of us remember circumstances when the drive name changes automatically (especially when using a thumb drive) on different computers. By using `here()` from the **here**\index{here} package, we will always get to the correct path or folder.
+This is when the `here()` function is handy. You can easily point to the correct folder so R knows where to locate the file. 
 
-To save the plots in the directory named plots, we can do these:
+`here()` is a function under a small packages called simply as **here**\index{here}. This function helps you retrieve or save file or files or r objects from and to the correct path (including folder). This works even when we are using different machines. 
+
+Many of us recall the uncomfortable experiences when the drive name changes automatically (especially when using a thumb drive) on different computers. By using `here()` from the **here**\index{here} package, we will always get to the correct path or folder.
+
+To save the plots in the directory named plots in different image formats, we can do these:
 
 ```{r}
 ggsave(plot = myplot, 

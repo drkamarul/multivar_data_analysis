@@ -299,10 +299,12 @@ We are going to follow these steps:
 
 ```{r}
 b_mlog <- coef(mlog)
-ci_mlog <- confint(mlog)
-b_ci_mlog <- cbind(b_mlog,ci_mlog)
+ci_mlog <- confint(mlog) 
+b_ci_mlog <- data.frame(b_mlog,ci_mlog) %>%
+  rename("log odds" = b_mlog, "Lower CI" = X2.5.., "Upper CI" = X97.5..)
 b_ci_mlog %>% 
-  kbl()
+  kbl(digits = 2, booktabs = T, caption = "Log odds from multinomial logistic regression") %>%
+  kable_styling(position = "center")
 ```
 
 Afterwards, we will *exponentiate* the coefficients to obtain the **relative-risk ratio**\index{Relative-risk ratio}. We then combine the results to the previous table. Finally, we will name the columns of the object `tab_fitmlog2`. 
@@ -311,21 +313,15 @@ Afterwards, we will *exponentiate* the coefficients to obtain the **relative-ris
 rrr_mlog <- exp(b_ci_mlog)
 tab_mlog <- cbind(b_ci_mlog, rrr_mlog)
 colnames(tab_mlog) <- c('b', 'lower b', 'upper b',
-                        'rrr', 'lower rrr', 'upper rrr')
+                        'RRR', 'lower RRR', 'upper RRR')
 tab_mlog %>%
-  kbl()
+  kbl(digits = 2, booktabs = T, caption = "Log odds and RRR from multinomial logistic regression") %>%
+  kable_styling(position = "center")
 ```
 
 ## Interpretation
 
-The result from our multivariable logistic regression models is
-
-```{r}
-tab_mlog %>%
-  kbl()
-```
-
-The table shows that:
+The result from our multivariable logistic regression models can be interpreted as below: 
 
 - Every increment 1 mmol/L of totchol (Total cholesterol) when controlling for hypertension status and weight; a) the odds of being in DM group (in comparison to Normal) change by 0.277 (Adjusted RRR = 1.32, $95\%$ CI : 1.232, 1.413, p-value \<0.001) and b) the odds of being in IFG group (in comparison to being in Normal) change by 0.239 (Adjusted RRR = 1.27, $95\%$ CI : 1.169,1.381, p-value \<0.001). 
 - Every increment 1 kg of weight when controlling for hypertension status and total cholesterol; a) the odds of being in DM group (in comparison to being in Normal) increase by 0.023 (Adjusted RRR = 1.02, $95\%$ CI : 1.017,1.029, p-value \<0.001), and b) the odds of being in IFG group (in comparison being in Normal) increase by 0.022 (Adjusted RRR = 1.02, $95\%$ CI : 1.015,1.030, p-value \<0.001). 
@@ -342,20 +338,15 @@ predict.vgam(mlog, type = 'response') %>%
 
 ## Presentation of multinomial regression model  
 
-We can make a *better* table using **knitr**\index{knitr} and **kableExtra**\index{kableExtra} packages
+We can make a *better* table using **knitr**\index{knitr} and **kableExtra**\index{kableExtra} packages. Or we can save the results as a `.csv` file so we can edit it using spreadsheets.  
 
 ```{r}
 tab_mlog %>%
-  kbl(., digits = 3) %>%
-  kable_styling(bootstrap_options = 
-                  c("striped", "hover", "condensed", "responsive"))
+  write_csv("results_multinomial.csv")
 ```
 
-## Further readings
-
-We are big fans of two excellent books on logistic regression. The first one is Applied Logistic Regression [@hosmer2013applied] and the second one is Logistic Regression\index{Logistic regression}: Self Learning Text [@kleinbaum2010logistic]. You will acquire strong understanding of the concepts and model building process from the two books. To see what packages and functions relevant to logistic regression, you can refer to A Handbook of Statistical Analyses Using R [@R-HSAUR]. 
 
 ## Summary
 
-In this chapter, we extend binary logistic regression analysis to data with a categorical outcome variable but has three or more levels. We describe the multinomial logistic regression model, the log odds and also the conditional probabilities. When then show estimation for the single and multiple multinomial logistic regression including models with an interaction. Following that, we describe how to make inferences and perform predictions. Lastly, we make use of **kableExtra** package to produce a nice table for our model. 
+In this chapter, we extend binary logistic regression analysis to data with a categorical outcome variable but has three or more levels. We describe the multinomial logistic regression model, the log odds and also the conditional probabilities. When then show estimation for the single and multiple multinomial logistic regression including models with an interaction. Following that, we describe how to make inferences and perform predictions. Lastly, we make use of **kableExtra** package to produce a nice table for our model. We are big fans of two excellent books on logistic regression. The first one is Applied Logistic Regression [@hosmer2013applied] and the second one is Logistic Regression\index{Logistic regression}: Self Learning Text [@kleinbaum2010logistic]. You will acquire strong understanding of the concepts and model building process from the two books. To see what packages and functions relevant to logistic regression, you can refer to A Handbook of Statistical Analyses Using R [@R-HSAUR]. 
 

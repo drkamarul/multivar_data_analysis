@@ -314,18 +314,21 @@ pep %>%
 
 ### Line plot\index{Line plot}
 
-Line graphs are typically used for visualizing how one continuous variable on the y-axis changes concerning another continuous variable on the x-axis. This is very useful for longitudinal data. let us Load **gapminder** package\index{gapminder} so we can use the *gapminder* data.
+Line graphs are typically used for visualizing how one continuous variable on the y-axis changes concerning another continuous variable on the x-axis. This is very useful for longitudinal data. Line graphs can also be used with a discrete variable on the x-axis. This is appropriate when the variable is ordered (e.g., "small," "medium," "large").
+
+Let us Load **gapminder** package\index{gapminder} and view the variables and the observations of the *gapminder* dataset.
 
 ```{r}
 library(gapminder)
+glimpse(gapminder)
 ```
 
-Line graphs can also be used with a discrete variable on the x-axis. This is appropriate when the variable is ordered (e.g., "small," "medium," "large"). We can examine the graphical relationship between variable life expectancy for the Asia continent and for Malaysia in comparison. To do so,  we
+We can plot the relationship between variable life expectancy `lifeExp` only for countried in the Asia continent. To do so,  we
 
-- specify the data. In this case gapminder data
-- filter only continent == "Asia"
-- choose variable life expectancy
-- examine the trend using `geom_line()`
+- specify the data. In this case the *gapminder* dataset
+- choose only Asia continent using the `filter()`
+- choose variable life expectancy for the y axis and year for the x axis. Then we will give different colours to represent different countries. 
+- will use `geom_line()` to generate the line plot
 
 ```{r}
 gapminder %>% 
@@ -346,26 +349,28 @@ gapminder %>%
             sd_life = sd(lifeExp, na.rm = TRUE))
 ```
 
-But you may use **gtsummary** package if you fancy it. We filter in `Asia` only. 
+We may use **gtsummary** package to generate publication ready table. We need to filter for `Asia` continent only to represent the line plot we generated before. 
 
 ```{r}
 gapminder %>%
   select(continent, year, lifeExp, pop, gdpPercap) %>%
   filter(continent == "Asia") %>%
   filter(year == 1962 | year == 1982 | year == 2002) %>%
+  mutate(pop = pop/1000000, gdpPercap = gdpPercap/1000) %>%
   tbl_strata(
     strata = continent,
     .tbl_fun = 
       ~.x %>% 
       tbl_summary( 
         by = year, 
+        label = list(lifeExp ~ "Life Exp", pop ~ "Pop size", gdpPercap ~ "Percap GDP"),
         statistic = list(all_continuous() ~ "{mean} ({sd})",  
                          all_categorical() ~ "{n} / {N} ({p}%)"),
         missing = "no", 
         digits = all_continuous() ~ 1 
         )) %>% 
-  as_kable_extra(booktabs = TRUE) %>% 
-  kableExtra::kable_styling(full_width = F)
+   modify_footnote(all_stat_cols() ~ "Mean(SD), Pop size in million and GDP in thousand") %>%
+  as_gt()
 ```
 
 ### Plotting means and error bars\index{Error bar}
@@ -430,17 +435,6 @@ pep %>%
 ```
 
 
-## Additional resources
-
-These links contain excellent resources to help R users with exploratory data analysis:
-
-- *ggplot2: Elegant Graphics for Data Analysis*\index{ggplot2} [webpage](https://ggplot2-book.org/arranging-plots.html) or its physical book [@chang2013r]. 
-- **ggplot2**\index{ggplot2} [package](https://ggplot2.tidyverse.org/)
-- **gapminder**\index{gapminder} [package](https://cran.r-project.org/web/packages/gapminder/README.html)
-- **gtsummary** [webpage](https://www.danieldsjoberg.com/gtsummary/) [@gtsummary]
-- *R for Data Science* [website](https://r4ds.had.co.nz/) or its physical book [@Wickham2017R]. 
-
 ## Summary
 
-This chapters provides understanding to readers about exploratory data analysis (EDA) and skills for them to perform EDA using graphical methods and reporting descriptive statistics using tables. They also acquire basic skills to read a MS Excel data and then use three important packages to perform EDA (**dplyr**, **ggplot2** and **gtsummary** packages) on the data. Both **dplyr** and **ggplot2** packages can be loaded individually or by loading the **tidyverse** package. 
-
+This chapters provides understanding to readers about exploratory data analysis (EDA) and skills to perform EDA and descriptive statistics. We learned about graphical methods in R and how to report descriptive statistics in tables. We show readers how to read a MS Excel data and then use three important packages to perform EDA (**dplyr**, **ggplot2** and **gtsummary** packages) on the data. The excellent resources available to help readers perform more complicated exploratory data analysis include *ggplot2: Elegant Graphics for Data Analysis*\index{ggplot2} [webpage](https://ggplot2-book.org/arranging-plots.html) or its physical book [@chang2013r], **ggplot2**\index{ggplot2} [package](https://ggplot2.tidyverse.org/), **gtsummary** [webpage](https://www.danieldsjoberg.com/gtsummary/) [@gtsummary] and *R for Data Science* [website](https://r4ds.had.co.nz/) or its physical book [@Wickham2017R]. 
