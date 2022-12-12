@@ -3,13 +3,13 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Exploratory data analysis (EDA)
+# Exploratory Data Analysis
 
 ## Objectives
 
 At the end of the chapter, readers will be able to
 
--   perform EDA using graphical methods
+-   perform exploratory data analysis (EDA) using graphical methods
 -   perform EDA using descriptive statistics
 -   acquire basic skills to use **ggplot2** and **gtsummary** packages
 
