@@ -1,4 +1,4 @@
-# Poisson regression\index{Poisson regression}
+# Poisson Regression\index{Poisson regression}
 
 ## Objectives
 
