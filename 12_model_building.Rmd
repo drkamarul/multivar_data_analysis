@@ -1,12 +1,12 @@
-# Model building and variable selection
+# Model Building and Variable Selection
 
 ## Objectives
 
-At the end of the chapter, readers will be able 
+At the end of the chapter, readers will be able to: 
 
-- to understand basic concept of univariable and multivariable analysis
-- to know about some workflows or methods multivariable model building\index{model building}
-- to compare different types of variables selection\index{variable selection}
+- understand basic concept of univariable and multivariable analysis
+- know about some workflows or methods multivariable model building\index{model building}
+- compare different types of variables selection\index{variable selection}
 
 ## Introduction
 
