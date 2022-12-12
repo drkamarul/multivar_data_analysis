@@ -1,4 +1,4 @@
-# Missing data
+# Introduction to Missing Data Analysis
 
 ## Objectives
 
