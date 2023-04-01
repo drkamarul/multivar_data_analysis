@@ -107,10 +107,10 @@ aggr(coroNA, numbers = TRUE, prop = FALSE)
 
 The labels on x-axis are according to the column names in the dataset. In term of pattern of missingness\index{Pattern of missingness}, about 43 observation are missing age values alone.
 
-Similarly, the pattern of missing data can be explore through `md.pattern()` from `mice`\index{mice} package. The `rotate.names` argument set to true to specify the direction of the variable names on top of the plot horizontally.
+Similarly, the pattern of missing data can be explore through `md.pattern()` from `mice`\index{mice} package. The `plot` argument is set to `FALSE` since the plot is reflective of the pattern of missing data matrix below. To see the plot, the `plot` argument should be set to `TRUE`.
 
 ```{r}
-md.pattern(coroNA, rotate.names = TRUE)
+md.pattern(coroNA, plot = FALSE)
 ```
 
 Additionally, we can assess the correlation:
