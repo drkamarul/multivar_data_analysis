@@ -115,13 +115,13 @@ and the histograms\index{Histogram} and box-and-whiskers plots\index{Box-and-whi
 
 ```{r, fig.cap="Histograms and box-and-whiskers plots for `chol` and `dbp`.", message=FALSE}
 hist_chol = ggplot(coronary, aes(chol)) + 
-  geom_histogram(color = "blue", fill = "white")
+  geom_histogram(color = "black", fill = "white")
 hist_dbp = ggplot(coronary, aes(dbp)) + 
-  geom_histogram(color = "red", fill = "white")
+  geom_histogram(color = "black", fill = "white")
 bplot_chol = ggplot(coronary, aes(chol)) + 
-  geom_boxplot(color = "blue", )
+  geom_boxplot()
 bplot_dbp = ggplot(coronary, aes(dbp)) + 
-  geom_boxplot(color = "red")
+  geom_boxplot()
 ggarrange(hist_chol, bplot_chol, hist_dbp, bplot_dbp)
 ```
 
@@ -156,9 +156,14 @@ rsq(slr_chol)
   
 Next, we can assess the model fit\index{Model fit} by a scatter plot,
 
-```{r, fig.cap="Scatter plot of `chol` (outcome) vs `dbp` (predictor).", message=FALSE}
+```{r, fig.cap="Scatter plot of `chol` (outcome) vs `dbp` (predictor).", message=FALSE, eval=FALSE, }
 plot_slr = ggplot(coronary, aes(x = dbp, y = chol)) + 
   geom_point() + geom_smooth(method = lm)
+plot_slr
+```
+```{r, fig.cap="Scatter plot of `chol` (outcome) vs `dbp` (predictor).", message=FALSE, echo=FALSE}
+plot_slr = ggplot(coronary, aes(x = dbp, y = chol)) + 
+  geom_point() + geom_smooth(method = lm, color = "black")
 plot_slr
 ```
 
