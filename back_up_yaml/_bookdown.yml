@@ -1,0 +1,17 @@
+book_filename: dataanalysis
+repo: https://github.com/drkamarul/multivar_data_analysis
+rmd_files: ["index.Rmd",
+"02_Intro_to_R.Rmd",
+"10_KM_Cox2.Rmd" ,
+"13_References.Rmd"]
+clean: [packages.bib, references.bib, bookdown.bbl]
+new_session: yes
+delete_merged_file: true
+language:
+  label:
+    fig: "FIGURE "
+    tab: "TABLE "
+  ui:
+    edit: "Edit"
+    chapter_name: "Chapter "
+output_dir: _book

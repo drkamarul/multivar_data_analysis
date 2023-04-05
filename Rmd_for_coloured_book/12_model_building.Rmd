@@ -1,0 +1,107 @@
+# Model Building and Variable Selection
+
+## Objectives
+
+At the end of the chapter, readers will be able to: 
+
+- understand basic concept of univariable and multivariable analysis
+- know about some workflows or methods multivariable model building\index{model building}
+- compare different types of variables selection\index{variable selection}
+
+## Introduction
+
+In previous chapters, we avoided going into details of model building and variable selection processes. This is because the choices, workflows and approaches for both processes varies and depends on the objectives and preferences of the users or analysts. It is very rare that a statistical model has a single independent variable or predictor only. Almost always, the models contains more than one single independent variable. The collection of independent variables can consist of numerical only or categorical only or a mix of numerical and categorical independent variables.     
+
+Statisticians coin the model with one independent variable as a univariate model and a model with more than one independent variables as multivariate model but some analysts prefer to call these as *univariable* and multivariable model. @NickCox2013 claimed that *multivariable* is mostly biostatistical in usage. It does not mean something other than *multivariate*. He added that univariate, bivariate, multivariate just count the number of variables, one, two or many. 
+
+**variate** means random variable\index{random variable} in statistics terminology. If we literally follow the definition, *multivariate analysis* may only cover non regression type analyses for multiple random variables (e.g., principal component analysis and factor analysis) or regression analyses with multiple outcome variables (e.g., multivariate analysis of variance). However, in most situations described as “multivariate analysis”, medical researchers’ intentions are clear: adjust for multiple covariates as explanatory variables in regression models. In fact, we usually model the conditional expectation  $E(Y|X)$ by regression an analysis in observational studies where the joint distribution $(X, Y)$ is not controlled by researchers. We thus believe that *multivariate adjustment* or *multivariate analysis* is not necessarily misuse of the terminology as stated by others [@Peters2008].
+
+## Model building
+
+The main goal of a statistical analysis of effects should be the production of the most accurate (valid and precise) effect estimates obtainable from the data and available software [@Greenland2016]. Usually there are three model building strategies according to @Hafermann2021 and @Greenland2015 :
+
+- Adjust all: Enter all the potential confounders in the model (only one set of covariates is considered, although the form of the model may be varied).
+- Predictor selection: Select covariates on the basis of some measure of their ability to predict outcome or exposure (or both) given other covariates in the model.
+- Change in estimate\index{change in estimate} (CIE) selection: Select covariates on the basis of the change in the exposure effect estimate upon excluding them, given the other covariates in the model.
+
+Prerequisites for model buildings include [@Greenland2016]:
+
+- carefully completed data checking, data description and data summarization
+- all quantitative variables have been: re-centreed to ensure that zero is a meaningful reference value present in the data;
+- all quantitative variables have been rescaled so that their units are meaningful differences within the range of the data;
+- univariate distributions and background (contextual) information have been used to select categories or an appropriately flexible form (e.g. splines) for detailed modelling
+
+@Greenland2016 advised that controlling too many variables can lead to or aggravate problems arising from data sparsity or from high multiple correlation of exposure with the controlled confounders (which we term multicollinearity\index{multicolinearity}). They reminded not to control for intermediates (variables on the causal pathway between exposure and diseases) and their descendants. Also not to control for variables that are not part of minimal sufficient adjustment sets, whose control may increase bias. 
+
+If background knowledge is only based on a few preceding studies without sufficient biological support, the methodology of these studies should be carefully investigated, and uncertainties related to the selection or non-selection of variables in such studies should be critically inferred [@Hafermann2021]. The covariates may be forced variables, which we always want to control (typically for age and sex), or unforced variables for which the decision to control may be data based [@Greenland2015].
+
+It is not recommended to adjust for every available Covariate because it has some practical drawbacks. The set of covariates it identifies can be far larger than needed for adequate confounding control (far from minimally sufficient) and may be clumsy for subsequent analyses. there may be many covariates whose causal status (and thus their fulfillment of the criterion) is uncertain. Controlling too many variables by conventional means can lead to or aggravate two closely related problems: (a) data sparsity, in which full control results in too few subjects at crucial combinations of the variables, with consequent inflation of estimates, and (b) multicollinearity, by which we mean high multiple correlation (or more generally, high association) of the controlled variables with study exposures [@Greenland2015]. 
+
+## Variable selection for prediction 
+
+Variable selection means choosing among many variables which to include in a particular model, that is, to select appropriate variables from a complete list of variables by removing those that are irrelevant or redundant. The purpose of such selection is to determine a set of variables that will provide the best fit for the model so that accurate predictions can be made [@Chowdhurye000262].
+
+@Chowdhurye000262 listed some variable selection methods:
+
+- Backward elimination\index{backward elimination}
+- Forward selection\index{forward selection}
+- Stepwise selection\index{stepwise selection}
+- All possible subset selection\index{all possible subset selection}
+
+### Backward elimination
+
+Backward elimination is the simplest of all variable selection methods. This method starts with a full model that considers all of the variables to be included in the model. Variables then are deleted one by one from the full model until all remaining variables are considered to have some significant contribution to the outcome. The variable with the smallest test statistic (a measure of the variable’s contribution to the model) less than the cut-off value or with the highest p value greater than the cut-off value—the least significant variable—is deleted first. Then the model is refitted without the deleted variable and the test statistics or p values are recomputed. Again, the variable with the smallest test statistic or with the highest p value greater than the cut-off value is deleted in the refitted model. This process is repeated until every remaining variable is significant at the cut-off value. The cut-off value associated with the p value is sometimes referred to as ‘p-to-remove’ and does not have to be set at 0.05.
+
+### Forward selection
+
+The forward selection method of variable selection is the reverse of the backward elimination method. The method starts with no variables in the model then adds variables to the model one by one until any variable not included in the model can add any significant contribution to the outcome of the model.1 At each step, each variable excluded from the model is tested for inclusion in the model. If an excluded variable is added to the model, the test statistic or p value is calculated. The variable with the largest test statistic greater than the cut-off value or the lowest p value less than the cut-off value is selected and added to the model. In other words, the most significant variable is added first. The model then is refitted with this variable and test statistics or p values are recomputed for all remaining variables. Again, the variable with the largest test statistic greater than the cut-off value or the lowest p value less than the cut-off value is chosen from among the remaining variables and added to the model. This process continues until no remaining variable is significant at the cut-off level when added to the model. In forward selection, if a variable is added to the model, it remains there.
+
+### Stepwise selection
+
+Stepwise selection methods are a widely used variable selection technique, particularly in medical applications. This method is a combination of forward and backward selection procedures that allows moving in both directions, adding and removing variables at different steps. The process can start with both a backward elimination and forward selection approach. For example, if stepwise selection starts with forward selection, variables are added to the model one at a time based on statistical significance. At each step, after a variable is added, the procedure checks all the variables already added to the model to delete any variable that is not significant in the model. The process continues until every variable in the model is significant and every excluded variable is insignificant. Due to its similarity, this approach is sometimes considered as a modified forward selection.
+
+
+### All possible subset selection
+
+In all possible subset selection, every possible combination of variables is checked to determine the best subset of variables for the prediction model. With this procedure, all one-variable, two-variable, three-variable models, and so on, are built to determine which one is the best according to some specific criteria. If there are K variables, then there are 2K possible models that can be built.
+
+## Stopping rule and selection criteria in automatic variable selection
+
+In all stepwise selection methods including all subset selection, a stopping rule or selection criteria for inclusion or exclusion of variables need to be set. Generally, a standard significance level for hypothesis testing is used.7 However, other criteria are also frequently used as a stopping rule such as the AIC, BIC or Mallows’ Cp statistic [@Chowdhurye000262]. 
+
+## Problems with automatic variable selections 
+
+The problems with automatic variables selection include [@Stata2022]:
+
+- It yields R-squared values that are badly biased to be high.
+- The F and chi-squared tests quoted next to each variable on the printout do not have the claimed distribution.
+- The method yields confidence intervals for effects and predicted values that are falsely narrow
+- It yields p-values that do not have the proper meaning, and the proper correction for them is a difficult problem.
+- It gives biased regression coefficients that need shrinkage 
+- It has severe problems in the presence of collinearity.
+- It is based on methods (e.g., F tests for nested models) that were intended to be used to test prespecified hypotheses.
+- Increasing the sample size does not help very much
+- It allows us to not think about the problem.
+- It uses a lot of paper.
+
+It addition to that, it is possible that automatic variable selection for example,
+
+- stepwise methods will not necessarily produce the best model if there are redundant predictors (common problem).
+- all-possible-subset methods produce the best model for each possible number of terms, but larger models need not necessarily be subsets of smaller ones, causing serious conceptual problems about the underlying logic of the investigation.
+
+
+Models built from automatic variable selection may have an inflated risk of capitalizing on chance features of the data. They often fail when applied to new datasets. They are rarely tested in this way. And since the interpretation of coefficients in a model depends on the other terms included, *it seems unwise,to let an automatic algorithm determine the questions we do and do not ask about our data*.
+
+## Purposeful variable selection
+
+Purposeful variable selection\index{purposeful variable selection} is proposed by @hosmer2013applied. In purposeful variable selection, the steps include
+
+- Univariable analysis: Usually the variables that achieve statistical significance at p-value of 0.20 or known clinically important variables will go to the next steps.
+- multivariable model comparison: This step fits the multivariable model comprising all variables identified in step one. Variables that do not contribute to the model (e.g., with a P value greater than traditional significance level) should be eliminated and a new smaller mode fits. These two models are then compared by using partial likelihood ratio test to make sure that the parsimonious model fits as well as the original model.
+- linearity assumption for categorical outcome: In the step, continuous variables are checked for their linearity in relation to the logit of the outcome.
+- checking interaction: An interaction between two variables implies that the effect of one variable on response variable is dependent on another variable. 
+- model checking 
+
+## Summary
+
+Model building and variable selection are two important processes in order to build an acceptable model for analysis. Parsimony and goodness-of-fit are inappropriate end goals for modeling, as indicated by simulation studies in which full-model analysis sometimes outperforms conventional selection strategies. The simple strategies include controlling of all potential confounders and eliminating some or all variables whose inclusion is of uncertain value. However, no methodology is foolproof and that modeling methods should be documented in enough detail so that readers can interpret results in light of the strengths and weaknesses of those methods.

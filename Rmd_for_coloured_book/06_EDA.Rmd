@@ -1,0 +1,440 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Exploratory Data Analysis
+
+## Objectives
+
+At the end of the chapter, readers will be able to
+
+-   perform exploratory data analysis (EDA) using graphical methods
+-   perform EDA using descriptive statistics
+-   acquire basic skills to use **ggplot2** and **gtsummary** packages
+
+## Introduction
+
+Exploratory Data Analysis\index{exploratory data analysis} or EDA\index{eda} is the critical process of performing initial investigations on data to discover patterns, spot anomalies, test hypotheses and check assumptions with the help of summary statistics and graphical representations.
+
+In statistics, exploratory data analysis (EDA) is an approach to data analysis to summarize their main characteristics, often with visual methods. A statistical model can be used or not, but primarily EDA is for seeing what the data can tell us beyond the formal modelling or hypothesis testing task.
+
+Exploratory data analysis was promoted by John Tukey\index{John Tukey} to encourage statisticians to explore the data and possibly formulate hypotheses that could lead to new data collection ([Source](https://en.wikipedia.org/wiki/Exploratory_data_analysis))
+
+
+## EDA using ggplot2\index{ggplot2} package
+
+### Usage of **ggplot2**\index{ggplot2}
+
+We always start with `ggplot()` function, the state the specific dataset. Next, we choose the aesthetic mapping (with `aes()`) represent the variable or variables to plot) and then we add on layers. These can be converted to R codes as below:
+
+-   geom_X : `geom_point()`, `geom_histogram()`
+-   scales (like `scale_colour_brewer()`)
+-   faceting\index{Faceting} specifications (like `facet_wrap()`)
+-   coordinate systems (like `coord_flip()`).
+
+## Preparation
+
+### Load the libraries
+
+We will use these packages for data exploration:
+
+1.  **tidyverse**\index{tidyverse} package for plotting and data wrangling\index{Data wrangling}
+2.  **gtsummary**\index{gtsummary} package for summary statistics\index{Summary statistics}
+3.  **patchwork**\index{patchwork} to combine plots
+4.  **here**\index{here} to point to the correct working directory
+5.  **readxl**\index{readxl} to read a MS Excel file
+
+The tidyverse\index{tidyverse} is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. We may find more information about the package [here](https://www.tidyverse.org/)
+
+```{r}
+library(tidyverse)
+library(gtsummary)
+library(patchwork)
+library(here)
+library(readxl)
+```
+
+### Read the dataset into R
+
+Let us read the *peptic ulcer data* in MS Excel format. To do this, we will
+
+-   load the **readxl**\index{readxl} package
+-   use the function `read_xlsx()` to read data into R
+
+```{r}
+pep <- read_xlsx(here('data', 'peptic_ulcer.xlsx'))
+```
+
+Examine the data by looking a the number of observations, type of variables and name of variables.
+
+```{r}
+glimpse(pep)
+```
+
+The are quite several variables. For the sake of simplicity, we will select variables which we think might be important for simple data exploration using the `select()` function. 
+
+```{r}
+pep <- pep %>% 
+  select(age, systolic, diastolic, hemoglobin, twc, 
+         ASA, PULP, perforation, gender, epigastric_pain, 
+         malena, tenderness, degree_perforation, outcome) 
+```
+
+## EDA in tables 
+
+We can get the overall descriptive statistics for the peptic ulcer data by using the `tbl_summary` function. 
+
+```{r}
+pep %>% 
+  tbl_summary(
+    statistic = list(all_continuous() ~ "{mean} ({sd})", 
+                     all_categorical() ~ "{n} / {N} ({p}%)"),
+    digits = all_continuous() ~ 2) %>% 
+  modify_caption("Patient Characteristics (N = {N})") %>%
+  as_gt()
+```
+
+
+To stratify the descriptive statistics based on variable outcome, we use the argument `by = `.
+
+```{r}
+tab_outcome <- pep %>% 
+  tbl_summary(
+    by = outcome, 
+    statistic = list(all_continuous() ~ "{mean} ({sd})", 
+                     all_categorical() ~ "{n} / {N} ({p}%)"),
+    digits = all_continuous() ~ 2) %>%
+  modify_caption("Patient Characteristics and Fatality (N = {N})")
+
+tab_outcome %>%
+  as_gt()
+```
+
+Next, we stratify the descriptive statistics based on gender also using the `by = ` argument. 
+
+```{r}
+tab_gender <- pep %>% 
+  tbl_summary(
+    by = gender, 
+    statistic = list(all_continuous() ~ "{mean} ({sd})", 
+                     all_categorical() ~ "{n} / {N} ({p}%)"),
+    digits = all_continuous() ~ 2) %>%
+  modify_caption("**Patient Characteristics and Gender** (N = {N})")
+
+tab_gender %>%
+  as_gt()
+```
+
+We can combine the two tables using `tbl_merge()`. 
+
+```{r}
+tbl_merge(
+  tbls = list(tab_gender, tab_outcome),
+  tab_spanner = c("**Gender**", "**Outcome**")) %>%
+  as_gt()
+```
+
+
+## EDA with plots
+
+### One variable: Distribution of a categorical variable\index{Categorical variable}
+
+#### Bar chart\index{Bar chart}
+
+The frequency of the outcome
+
+```{r}
+pep %>% 
+  group_by(outcome) %>% 
+  summarise(freq = n())
+```
+
+To plot the distribution of a categorical variable\index{Categorical variable}, we can use a Bar chart\index{Bar chart}.
+
+```{r}
+ggplot(data = pep) + 
+  geom_bar(mapping = aes(x = outcome)) +
+  theme_bw()
+```
+
+But we can also pass the `aes()` to ggplot
+
+```{r}
+ggplot(data = pep, mapping = aes(x = outcome)) + 
+  geom_bar() +
+  theme_bw()
+```
+
+Readers can combine **dplyr**\index{dplyr} for data wrangling and then **ggplot2** (both are packages inside the **tidyverse**\index{tidyverse} metapackage) to plot the data. For example, **dplyr**\index{dplyr} part for data wrangling:
+
+```{r}
+pep_age <- pep %>% group_by(outcome) %>% 
+  summarize(mean_age = mean(age)) 
+pep_age
+```
+
+And the **ggplot2** part to make the plot:
+
+```{r}
+ggplot(pep_age, mapping = aes(x = outcome, y = mean_age)) + 
+  geom_col()
+```
+
+We can combine both tasks **dplyr**\index{dplyr} and **ggplot** together that will save time:
+
+```{r}
+pep %>% 
+  group_by(outcome) %>% 
+  summarize(mean_age = mean(age)) %>% 
+  ggplot(mapping = aes(x = outcome, y = mean_age, fill = outcome)) + 
+  geom_col() +
+  ylab("Mean age (Years)") +
+  xlab("Outcome of ulcer") +
+  theme_bw()
+```
+
+As we mentioned before, an excellent resource for graphics using **ggplot2** is availble on this [website](http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_(ggplot2)/). It is a must-go-to website. Of if you prefer the read the physical version, purchase the R Graphics Cookbook [@chang2013r]. 
+
+### One variable: Distribution of a numerical variable\index{Numerical variable}
+
+#### Histogram\index{Histogram}
+
+To plot the distribution of a numerical variable\index{Numerical variable}, we can plot a histogram\index{Histogram}. To specify the number of bin, we can use binwidth and add some customization.
+
+```{r}
+ggplot(data = pep, mapping = aes(x = systolic)) + 
+  geom_histogram(binwidth = 10, fill = "blue") +
+  ylab("Frequency") +
+  xlab("Systolic Blood Pressure") +
+  ggtitle("Systolic BP distribution") +
+  theme_bw()
+```
+
+#### Density curve\index{Density curve}
+
+Let us create a density curve\index{Density curve}. A density curve also helps us examine the distribution of observations.
+
+```{r}
+ggplot(data = pep, mapping = aes(x = diastolic)) + 
+  geom_density() +
+  xlab("Diastolic BP (mmHg)") +
+  ylab("Density") +
+  labs(title = "Density distribution for diastolic BP",
+       caption = "Source : Peptic ulcer disease data") +
+  theme_bw()
+```
+
+#### Histogram\index{Histogram} and density curve\index{Density curve} together
+
+If we want to plot both the histogram\index{Histogram} and the density curve\index{Density curve}, we can use `geom_histogram()` and `geom_density()` in the single line of codes, we can combine two `geoms`.
+
+```{r}
+ggplot(pep, mapping = aes(x = diastolic)) + 
+  geom_histogram(mapping = aes(y = ..density..), binwidth = 10) + 
+  geom_density(colour = 'red') +
+  xlab("Diastolic BP (mmHg)") +
+  ylab("Density") +
+  labs(title = "Density distribution for diastolic BP",
+       caption = "Source : Peptic ulcer disease data") +
+  theme_bw()
+```
+
+### Two variables: Plotting a numerical\index{Numerical variable} and a categorical variable\index{Categorical variable}
+
+#### Overlaying histograms\index{Histogram} and boxplot\index{Boxplot}
+
+By overlaying histograms, examine the distribution of a numerical variable (var **age**) based on variable **outcome**. First, we create an object called `hist_age`. Next, we create a boxplot object and name it as `box-age`. After that, we combine the two objects side-by-side using a vertical bar. 
+
+```{r}
+hist_age <- ggplot(data = pep, aes(x = age, fill = outcome)) +
+    geom_histogram(binwidth = 5, aes(y = ..density..),  
+                   position = "identity", alpha = 0.75) + 
+  geom_density(alpha = 0.25) +
+  xlab("Age") +
+  ylab("Density") +
+  labs(title = "Density distribution",
+       caption = "Source : Peptic ulcer disease data") +
+  theme_bw()
+```
+
+
+```{r}
+box_age <- ggplot(data = pep, aes(x = outcome, y = age)) +
+  geom_boxplot(outlier.shape = NA) + 
+  geom_dotplot(binaxis = "y", binwidth = 1, fill = NA, 
+               colour = "blue", alpha = 0.75) +
+  xlab('Outcome') + ylab('Age') +
+  labs(title = "Box-plot",
+       caption = "Source : Peptic ulcer disease data") +
+  theme_bw()
+```
+
+
+```{r}
+hist_age |  box_age
+```
+
+
+```{r}
+hist_age /  box_age
+```
+
+Read more on **patchwork** package to learn to arrange multiple plot. 
+
+### Three variables: Plotting a numerical\index{Numerical variable} and two categorical variables\index{Categorical variable}
+
+It is hard to visualize three variables in a single histogram plot. But we can use `facet_.()` function to further split the plots.
+
+### Faceting\index{Faceting} the plots
+
+We can see better plots if we split the histogram based on particular grouping. In this example, we stratify the distribution of variable age (a numerical variable) based on outcome and gender (both are categorical variables)
+
+```{r}
+ggplot(data = pep, aes(x = age, fill = gender)) +
+    geom_histogram(binwidth = 5, aes(y = ..density..),  
+                   position = "identity", alpha = 0.25) + 
+  geom_density(aes(colour = gender), alpha = 0.55) +
+  xlab("Age") +
+  ylab("Density") +
+  labs(title = "Density distribution of age for outcome and gender",
+       caption = "Source : Peptic ulcer disease data") +
+  theme_bw() +
+  facet_wrap( ~ outcome)
+```
+
+We can provide the summary statistics\index{Summary statistics} to complement the plots or vice versa.
+
+```{r}
+pep %>% 
+  group_by(outcome, gender) %>%
+  summarize(mean_age = mean(age, na.rm = TRUE), 
+            sd_age = sd(age, na.rm = TRUE))
+```
+
+### Line plot\index{Line plot}
+
+Line graphs are typically used for visualizing how one continuous variable on the y-axis changes concerning another continuous variable on the x-axis. This is very useful for longitudinal data. Line graphs can also be used with a discrete variable on the x-axis. This is appropriate when the variable is ordered (e.g., "small," "medium," "large").
+
+Let us Load **gapminder** package\index{gapminder} and view the variables and the observations of the *gapminder* dataset.
+
+```{r}
+library(gapminder)
+glimpse(gapminder)
+```
+
+We can plot the relationship between variable life expectancy `lifeExp` only for countried in the Asia continent. To do so,  we
+
+- specify the data. In this case the *gapminder* dataset
+- choose only Asia continent using the `filter()`
+- choose variable life expectancy for the y axis and year for the x axis. Then we will give different colours to represent different countries. 
+- will use `geom_line()` to generate the line plot
+
+```{r}
+gapminder %>% 
+  filter(continent == "Asia") %>% 
+  ggplot(mapping = aes(x = year, y = lifeExp, colour = country)) +
+  geom_line(show.legend = FALSE) +
+  xlab("Year") + ylab("Life Expectancy")
+```
+
+And the summary statistics\index{Summary statistics} for the plot. 
+
+```{r}
+gapminder %>%
+  filter(continent == 'Asia') %>%
+  filter(year == 1962 | year == 1982 | year == 2002) %>%
+  group_by(year) %>%
+  summarise(mean_life = mean(lifeExp, na.rm = TRUE), 
+            sd_life = sd(lifeExp, na.rm = TRUE))
+```
+
+We may use **gtsummary** package to generate publication ready table. We need to filter for `Asia` continent only to represent the line plot we generated before. 
+
+```{r}
+gapminder %>%
+  select(continent, year, lifeExp, pop, gdpPercap) %>%
+  filter(continent == "Asia") %>%
+  filter(year == 1962 | year == 1982 | year == 2002) %>%
+  mutate(pop = pop/1000000, gdpPercap = gdpPercap/1000) %>%
+  tbl_strata(
+    strata = continent,
+    .tbl_fun = 
+      ~.x %>% 
+      tbl_summary( 
+        by = year, 
+        label = list(lifeExp ~ "Life Exp", pop ~ "Pop size", gdpPercap ~ "Percap GDP"),
+        statistic = list(all_continuous() ~ "{mean} ({sd})",  
+                         all_categorical() ~ "{n} / {N} ({p}%)"),
+        missing = "no", 
+        digits = all_continuous() ~ 1 
+        )) %>% 
+   modify_footnote(all_stat_cols() ~ "Mean(SD), Pop size in million and GDP in thousand") %>%
+  as_gt()
+```
+
+### Plotting means and error bars\index{Error bar}
+
+We want to error bar\index{Error bar} for life expectancy for Asia continent only. Error bar\index{Error bar} that contains   mean and standard deviation
+
+Our approach is use filter to choose Asia continent only `filter()`. Then generate the mean and SD for life expectancy using `mutate()`. Next is to plot the scatterplot\index{Scatterplot} (country vs mean life expectancy) `geom_point()` and then plot errorbar `geom_errorbar()`
+
+```{r}
+gap_continent <- gapminder %>% 
+  filter(continent == "Asia") %>%
+  group_by(country) %>% 
+  mutate(mean = mean(lifeExp), sd = sd(lifeExp)) %>%
+  arrange(desc(mean))
+```
+
+Plot them with `coord_flip()`
+
+```{r}
+gap_continent %>%   
+  ggplot(mapping = aes(x = country, y = mean)) + 
+  geom_point(mapping = aes(x = country, y = mean)) +
+  geom_errorbar(mapping = aes(ymin = mean - sd, ymax = mean + sd),
+                position = position_dodge()) +
+  coord_flip()
+```
+
+### Scatterplot with fit line\index{Scatterplot}
+
+We are using the the peptic ulcer data `pep` where we will create a fit line between age and size of perforation. We then plot the scatterplot\index{Scatterplot} and and a fit line on it. We name the plot object generated as `pep_fit`.
+
+```{r}
+pep_fit <- pep %>% 
+  ggplot(mapping = aes(x = age, y = perforation, colour = outcome)) +
+  geom_point(show.legend = FALSE) +
+  geom_smooth(method = lm, se = FALSE) +
+  ylab('Size of perforation') +
+  xlab('Age of patient') +
+  labs(title = 'Distribution and fit line',
+       caption = 'Source: Peptic ulcer data') +
+  theme_bw() 
+pep_fit 
+```
+
+Let us see if the patterns are similar for men and women. We will use `facet_wrap()` to split the plots based on variable gender.
+
+```{r}
+pep_fit + facet_grid(. ~ gender)
+```
+
+```{r}
+pep %>%
+  select(gender, perforation, age) %>%
+  tbl_summary(
+    by = gender, 
+    statistic = list(all_continuous() ~ "{mean} ({sd})",  
+                     all_categorical() ~ "{n} / {N} ({p}%)"),
+    missing = "no", 
+    digits = all_continuous() ~ 2 ) %>% 
+  modify_caption("**Patient Characteristics and Gender** (N = {N})") %>%
+  as_gt()
+```
+
+
+## Summary
+
+This chapters provides understanding to readers about exploratory data analysis (EDA) and skills to perform EDA and descriptive statistics. We learned about graphical methods in R and how to report descriptive statistics in tables. We show readers how to read a MS Excel data and then use three important packages to perform EDA (**dplyr**, **ggplot2** and **gtsummary** packages) on the data. The excellent resources available to help readers perform more complicated exploratory data analysis include *ggplot2: Elegant Graphics for Data Analysis*\index{ggplot2} [webpage](https://ggplot2-book.org/arranging-plots.html) or its physical book [@chang2013r], **ggplot2**\index{ggplot2} [package](https://ggplot2.tidyverse.org/), **gtsummary** [webpage](https://www.danieldsjoberg.com/gtsummary/) [@gtsummary] and *R for Data Science* [website](https://r4ds.had.co.nz/) or its physical book [@Wickham2017R]. 

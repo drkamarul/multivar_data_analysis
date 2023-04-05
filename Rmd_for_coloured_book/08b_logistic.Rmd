@@ -1,0 +1,352 @@
+# Multinomial Logistic Regression
+
+## Objectives 
+
+At the end of this chapter, readers should be able:
+
+- to understand the concept of logistic regression model to analyze data with polychotomous (multinomial) outcome
+- to estimate parameters of interest in a logistic regression model from data with polychotomous (multinomial) outcome
+- to make inference based on a logistic regression model from data with polychotomous (multinomial) outcome
+- to predict the outcome based on a logistic regression model from data with polychotomous (multinomial) outcome
+- to perform model checking of logistic regression model from data with with polychotomous (multinomial) outcomes
+
+
+## Introduction
+
+Some data come with multinomial outcomes in which case, the outcome variable is a nominal or polychotomous variable with more than two levels. In multinomial outcome data, the outcome has no natural ordering. if it has, then it is best treated as a ordinal outcome data. For these data, we can modify the binary logistic model to make estimation and inference [@kleinbaum2010logistic ; @Hosmer2013-03-22]. 
+
+Variables with more than two levels are known as either:
+
+1.  multinomial data\index{Multinomial data}
+2.  polychotomous data\index{Polychotomous data}
+3.  polytomous data\index{Polytomous data}
+
+If we employ logistic regression to such data, then the analysis is known as polytomous or multinomial logistic regression. Again, the polychotomous outcome does not have any natural order. When the categories of the outcome variable do have a natural order, ordinal logistic regression\index{Ordinal logistic regression} is preferred. 
+
+## Examples of multinomial outcome variables\index{Multinomial outcome variable} 
+
+Examples of data with polychotomous outcome variables\index{Polychotomous outcome variable} (with more than two levels) include:
+
+- disease symptoms that have been classified by subjects as being absent, mild, moderate, or severe,
+- tumour invasiveness  classified as in situ, locally invasive, ormetastatic, or
+- patient preferred treatment regimen,  selected from among three or more options for example oral medication only, oral medication plus  injection medication or injection only.
+
+A numerical outcome can be categorized based on different cut-off points. The newly created categorical variable is now either treated as a nominal or polychotomous or multinomial outcome  or as a ordinal outcome. That justifies the use of multinomial logistic regression. 
+
+## Models for multinomial outcome data
+
+With a multinomial outcome data, an extension of logistic regression know as multinomial logit or multinomial logistic regression can be performed. In multinomial logistic regression, one of the categories of the outcome variable is designated as the reference category and each of the other levels is compared with this reference. The choice of reference category can be arbitrary and is at the discretion of the researcher. Most software set the first category as the reference (also known as the baseline category) by default.
+
+Other models that can analyze data with polychotomous outcome include:
+
+1. Stereotype logistic regression - each independent variable has one value for each individual
+2. Alternative-specific variables  
+
+
+## Estimation for Multinomial logit model\index{Multinomial logit model}
+
+Remember, interpreting and assessing the significance of the estimated coefficients are the main objectives in regression analysis. in multinomial logistic regression, we would like to model the relationship between covariates with the outcome variable that has more than two categories but without ordering or ranking. 
+
+The actual values taken by the dependent variable are irrelevant. In Stata\index{STATA}, the **exponentiated beta** $\exp^{\beta}$ will generate the so-called the **relative-risk ratio**\index{Relative-risk ratio}. The dependent variable again, is a discrete variable and the model is estimated using maximum likelihood.
+
+In multinomial logistic regression for example in data with three categories of the outcome, the sum of the probabilities for the three outcome categories must be equal to 1 (the total probability). The comparison is done between two categories each time. Because of that, each comparison considers only two probabilities, and the probabilities in the ratio do not sum to 1. Thus, the two odds-like expressions in multinomial logistic regression are not true odds.
+
+Multinomial logistic regression can be thought as of simultenously fitting binary logits for all comparisons among the alternatives.
+
+### Log Odds\index{Log odds} and Odds Ratios\index{Odds ratio}
+
+In the special case where the covariate is binary, coded 0 or 1, we simplify the notation to $OR_j = OR_j(1,0)$. Let use an example where data have 3 categories of outcome; 0,1 and 2. 
+
+Let's say we have a dataset with the outcome variable, $Y$, and is coded as $0, 1,$ or $2$. In practice one should check that the software package that is going to be used allows a $0$ code as the smallest category. We have used packages that require that the codes begin with $1$.
+
+SO the logit functions (log odds\index{Log odds}) when the outcome is a D variable with (0,1 and 2 values) are as below
+
+1.  the log odds\index{Log odds} for comparison between 0 and 1 is
+
+$$g_1(x) = ln\frac{P(D=1|X_1)} {P(D=0|X_1)}=\alpha_1 + (\beta_{11}X_1)$$
+
+2.  and, the log odds\index{Log odds} for comparison between 0 and 2 is
+
+$$g_2(x) =  ln\frac{P(D=2|X_1)} {P(D=0|X_1)}=\alpha_2 + (\beta_{21}X_1)$$
+
+If for example, we assume that the outcome labelled with $Y=0$ is the reference outcome. The subscript on the odds ratio\index{Odds ratio} indicates which outcome is being compared to the reference category outcome. The odds ratio\index{Odds ratio} of outcome $Y = j$ versus $Y = 0$ for the covariate values of $x = a$ versus $x = b$ is:
+
+$$OR_{j}(a,b)= \frac{Pr(Y=j|x=a)/(Pr(Y=0|x=a)} {Pr(Y=j|x=b)/Pr(Y=0|x=b)}$$
+
+Each odds ratio\index{Odds ratio} is calculated in a manner similar to that used in standard logistic regression. That is:
+
+$$OR_1(X=1,X=0)= \frac{Pr(D=1|X=1)/(Pr(D=0|X=1)} {Pr(Y=1|X=0)/Pr(D=0|X=0)}=\exp^{\beta_{11}}$$
+
+$$OR_2(X=2,X=0)= \frac{Pr(D=2|X=1)/(Pr(D=0|X=1)} {Pr(D=2|X=0)/Pr(D=0|X=0)}=\exp^{\beta_{21}}$$
+
+### Conditional probabilities\index{Conditional probabilities}
+
+The conditional probabilities\index{Conditional probabilities} for the multinomial logit model\index{Multinomial logit model} are: 
+
+$$Pr(D = 0 | x) = \frac{1}{1+e^{g_1(x)} + e^{g_2(x)}}$$
+
+$$Pr(D = 1 | x) = \frac{e^{g_1(x)}}{1+e^{g_1(x)} + e^{g_2(x)}}$$
+
+$$Pr(D = 2 | x) = \frac{e^{g_2(x)}}{1+e^{g_1(x)} + e^{g_2(x)}}$$
+
+
+## Prepare environment
+
+Start brand new analysis with a new project in RStudio. To do so,
+
+- Go to RStudio Menu
+- Click File
+- Click New Project 
+- Choose either New Directory or Existing Directory (to point to existing folder usually with the dataset)
+
+### Load libraries
+
+We will load 
+
+- **here** package that enables easy file referencing
+- **tidyverse** for data wrangling and plotting 
+- **haven** to read data in various statistical formats
+- **gtsummary** to produce statistical tables 
+- **VGAM** package where we will be using the `vglm()` function to perform multinomial logistic regression
+- **kableExtra** to produce nice tables for the results 
+
+
+```{r}
+library(here)
+library(tidyverse)
+library(haven)
+library(gtsummary)
+library(VGAM)
+library(kableExtra)
+```
+
+### Dataset
+
+The datasets contains all variables of our interest. For the purpose of this assignment, we want to explore association of hypertension status, weight and total cholesterol with the result of screening FBS. The variables in the datasets as follow:
+
+1.  fbs : Fasting Blood Sugar (mmol/L). The data ranges from 2.51 mmol/L to 28.01 mmol/L.
+2.  totchol : Total Cholesterol (mmol/L). The data ranges from 0.18 mmol/L to 23.14 mmol/L.
+3.  hpt : Hypertension Status. Coded as Yes and No.
+4.  weight : Body weight measures in kilogram. The data ranges between 30kg to 187.8kg.
+ 
+### Read data
+
+We will use `haven::read_dta()`\index{haven} function to read stata\index{STATA} `.dta` data into the memory. Remember, we can also use `foreign::read.dta()`\index{foreign} function to read stata\index{STATA} `.dta` data. It is your choice.  
+
+We use `here()` to indicate that the folder `data` contains the dataset. And then we specify `metabolic_syndrome.dta` as the dataset to be read. 
+
+```{r}
+ms <- read_dta(here('data','metabolic_syndrome.dta'))
+```
+
+We can then quickly glance at the number of observations and the type of variables in the `ms` dataset. 
+
+```{r}
+glimpse(ms)
+```
+
+### Data Wrangling
+
+We will
+
+- select only variable `fbs`, `totchol`, `hpt` and `weight`
+- convert all character variables to factor variables 
+- then take a glance of the updated `ms` dataset again
+
+
+```{r}
+ms <- ms %>% 
+  select(fbs, totchol, hpt , weight) %>% 
+  mutate(across(where(is.labelled), as_factor))
+glimpse(ms)
+```
+
+### Create new categorical variable from fbs
+
+Let us create a categorical (also known as a factor variable) based on this classification: 
+
+1. Normal if fbs is less than 6.1 mmol/L
+2. Impaired Fasting Glucose (IFG)  if fbs is between 6.1 mmol/L to 6.9 mmol/L
+3. Diabetis Mellitus (DM) if fbs is 7.00 mmol/L or higher 
+
+```{r}
+ms <- ms %>%
+  mutate(cat_fbs = cut(fbs, 
+                       breaks = c(2.50 , 6.10 , 6.90 , 28.01 ),
+                       labels = c("Normal","IFG", "DM")))
+ms %>% 
+  count(cat_fbs)
+```
+
+We notice that there were 250 data has no values recorded as `NA`. Thus, we decide to remove observations when there are missing values for variable `cat_fbs`.
+
+
+```{r}
+ms <- ms %>%
+  filter(!is.na(cat_fbs)) 
+ms %>%
+  count(cat_fbs)
+```
+
+### Exploratory data analysis
+
+Next, is to return the table of summary statistics 
+
+```{r}
+ms %>%
+  tbl_summary(by = cat_fbs,
+              statistic = list(all_continuous() ~ "{mean} ({sd})", 
+                              all_categorical() ~ "{n} ({p}%)"),
+              type = list(where(is.logical) ~ "categorical"),
+              label = list(fbs ~ "Fasting Blood Sugar (mmol/L)", 
+                           totchol ~ "Total Cholesterol (mmol/L)", hpt~"Hypertension", weight ~ "Weight (kg)"),
+              missing_text = "Missing") %>% 
+  modify_caption("**Table 1. Survey Participant Characteristic**")  %>%
+  modify_header(label ~ "**Variable**") %>%
+  modify_spanning_header(c("stat_1", "stat_2", "stat_3") ~ "**Glycemic Control Status**") %>%
+  modify_footnote(all_stat_cols() ~ "Mean (SD) or Frequency (%)") %>%
+  bold_labels() %>%
+  as_gt()
+```
+### Confirm the order of cat_fbs
+
+```{r}
+levels(ms$cat_fbs)
+```
+However, we would like the DM as the smallest category. To do that we will use the `fct_relevel()` function. 
+
+```{r}
+ms <- ms %>% 
+  mutate(cat_fbs = fct_relevel(cat_fbs, 
+                               c("DM", 'IFG', 'Normal')))
+levels(ms$cat_fbs)
+```
+
+## Estimation
+
+Our intention to investigate the relationship between totchol, hpt and weight with the outcome variables `cat_fbs`. Thus, we will perform multinomial logistic regression model to estimate the relation for 2 models:
+
+- Model 1: DM vs Normal
+- Model 2: IFG vs Normal
+
+In both models, the reference group is Normal
+
+### Single Independent Variable 
+
+For independent variable totchol 
+
+```{r}
+log_chol <- vglm(cat_fbs ~ totchol, 
+                 multinomial, data = ms)
+summary(log_chol)
+```
+This is the model where hpt is the independent variable
+
+```{r}
+log_hpt <- vglm(cat_fbs ~ hpt, 
+                 multinomial, data = ms)
+summary(log_hpt)
+```
+
+And lastly, the independent variable is weight
+
+```{r}
+log_wt <- vglm(cat_fbs ~ weight, 
+                 multinomial, data = ms)
+summary(log_wt)
+```
+
+### Multiple Independent Variables
+
+We feel that totchol, hpt and weight are all important independent variables. Hence, we want to fit a model with the three independent variables as the covariates. 
+
+```{r}
+mlog <- vglm(cat_fbs ~ totchol + hpt + weight, 
+             multinomial, data = ms)
+summary(mlog)
+```
+### Model with interaction term between independent variables 
+
+Then, we hypothesize that there could be a significant interaction between totchol and weight. And to test the hypothesis, we extend the multivariable logistic regression model by adding an interaction term. This interaction term is a product between variable weight and totchol.
+
+```{r}
+mlogi <- vglm(cat_fbs ~ totchol + hpt + weight + totchol*weight, 
+              multinomial, data = ms)
+summary(mlogi)
+```
+
+
+The interaction term in our model showed p-values above 0.05 (p-values of 0.80 and  0.07, respectively). As the p-value is bigger than the level of significance at $5\%$ and the value of regression parameters for the interaction terms are likely not clinically meaningful, we have decided not to use the model with an interaction term. 
+
+
+
+## Inferences
+
+For the inference, we will
+
+- calculate the $95\%$ CI (interval estimates)
+- calculate the p-values (hypothesis testing)
+
+There is no facility inside the`broom::tidy()` function to generate confidence intervals for object with class `vglm`. Because of that we will use the `coef()`, `confint()` and `cind(0` functions to produce a rather nice table of inferences. 
+
+We are going to follow these steps:
+
+- set the number of digits equal to 2 to limit the decimal numbers
+- return the regression coefficents for all $\hat\beta$ as an object named `b_fitmlog2`
+- return the the confidence intervals for all $\hat\beta$ as an object named `ci_fitmlog2` 
+- combine the $\hat\beta$ and the corresponding $95\%$ CIs
+
+
+```{r}
+b_mlog <- coef(mlog)
+ci_mlog <- confint(mlog) 
+b_ci_mlog <- data.frame(b_mlog,ci_mlog) %>%
+  rename("log odds" = b_mlog, "Lower CI" = X2.5.., "Upper CI" = X97.5..)
+b_ci_mlog %>% 
+  kbl(digits = 2, booktabs = T, caption = "Log odds from multinomial logistic regression") %>%
+  kable_styling(position = "center")
+```
+
+Afterwards, we will *exponentiate* the coefficients to obtain the **relative-risk ratio**\index{Relative-risk ratio}. We then combine the results to the previous table. Finally, we will name the columns of the object `tab_fitmlog2`. 
+
+```{r}
+rrr_mlog <- exp(b_ci_mlog)
+tab_mlog <- cbind(b_ci_mlog, rrr_mlog)
+colnames(tab_mlog) <- c('b', 'lower b', 'upper b',
+                        'RRR', 'lower RRR', 'upper RRR')
+tab_mlog %>%
+  kbl(digits = 2, booktabs = T, caption = "Log odds and RRR from multinomial logistic regression") %>%
+  kable_styling(position = "center")
+```
+
+## Interpretation
+
+The result from our multivariable logistic regression models can be interpreted as below: 
+
+- Every increment 1 mmol/L of totchol (Total cholesterol) when controlling for hypertension status and weight; a) the odds of being in DM group (in comparison to Normal) change by 0.277 (Adjusted RRR = 1.32, $95\%$ CI : 1.232, 1.413, p-value \<0.001) and b) the odds of being in IFG group (in comparison to being in Normal) change by 0.239 (Adjusted RRR = 1.27, $95\%$ CI : 1.169,1.381, p-value \<0.001). 
+- Every increment 1 kg of weight when controlling for hypertension status and total cholesterol; a) the odds of being in DM group (in comparison to being in Normal) increase by 0.023 (Adjusted RRR = 1.02, $95\%$ CI : 1.017,1.029, p-value \<0.001), and b) the odds of being in IFG group (in comparison being in Normal) increase by 0.022 (Adjusted RRR = 1.02, $95\%$ CI : 1.015,1.030, p-value \<0.001). 
+- In the population with hypertension (as compared with participant without hypertension)  when controlling for weight and total cholesterol; a) their odds of being in DM group (in comparison to being in Normal) change by 0.900 (Adjusted RRR = 2.5, $95\%$ CI : 1.942, 3.114, p-value \<0.001). When repeated research on this population, the odds ranging between reduced the odds by 0.481 to 0.677, and b) and their odds of being in IFG group (in comparison to being Normal) change by 0.867 (Adjusted RRR = 2.38, 95% CI : 1.789, 3.166, p-value \<0.001).  
+
+## Prediction
+
+We can calculate the predicted probability of each category of outcome by using the `predict()` function. Below are the result for the top 10 observations. 
+
+```{r}
+predict.vgam(mlog, type = 'response') %>% 
+  head(10)
+```
+
+## Presentation of multinomial regression model  
+
+We can make a *better* table using **knitr**\index{knitr} and **kableExtra**\index{kableExtra} packages. Or we can save the results as a `.csv` file so we can edit it using spreadsheets.  
+
+```{r}
+tab_mlog %>%
+  write_csv("results_multinomial.csv")
+```
+
+
+## Summary
+
+In this chapter, we extend binary logistic regression analysis to data with a categorical outcome variable but has three or more levels. We describe the multinomial logistic regression model, the log odds and also the conditional probabilities. When then show estimation for the single and multiple multinomial logistic regression including models with an interaction. Following that, we describe how to make inferences and perform predictions. Lastly, we make use of **kableExtra** package to produce a nice table for our model. We are big fans of two excellent books on logistic regression. The first one is Applied Logistic Regression [@hosmer2013applied] and the second one is Logistic Regression\index{Logistic regression}: Self Learning Text [@kleinbaum2010logistic]. You will acquire strong understanding of the concepts and model building process from the two books. To see what packages and functions relevant to logistic regression, you can refer to A Handbook of Statistical Analyses Using R [@R-HSAUR]. 
+

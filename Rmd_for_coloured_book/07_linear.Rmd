@@ -1,0 +1,437 @@
+# Linear Regression\index{Linear regression}
+
+## Objectives
+
+After completing this chapter, the readers are expected to
+
+- understand the concept of simple and multiple linear regression\index{Multiple linear regression (MLR)} 
+- perform simple linear regression\index{Simple linear regression (SLR)}
+- perform multiple linear regression\index{Multiple linear regression (MLR)}
+- perform model fit\index{Model fit} assessment of linear regression models
+- present and interpret the results of linear regression analyses
+
+
+## Introduction
+Linear regression\index{Linear regression} is one of the most common statistical analyses in medical and health sciences. Linear regression\index{Linear regression} models the linear (i.e. straight line) relationship between:
+
+- **outcome**: numerical variable (e.g. blood pressure, BMI, cholesterol level).
+- **predictors/independent variables**: numerical variables and categorical variables (e.g. gender, race, education level).
+
+In simple words, we might be interested in knowing the relationship between the cholesterol level and its associated factors, for example gender, age, BMI and lifestyle. This can be explored by a Linear regression\index{Linear regression} analysis.
+
+## Linear regression models
+
+Linear regression\index{Linear regression} is a type of Generalized linear models (GLMs)\index{Generalized linear model}\index{GLM}, which also includes other outcome types, for example categorical and count. In subsequent chapters, we will cover these outcome types in form of logistic regression\index{Logistic regression} and Poisson regression\index{Poisson regression}. Basically, the relationship between the outcome and predictors in a linear regression\index{Linear regression} is structured as follows,
+
+$$\begin{aligned}
+numerical\ outcome = &\ numerical\ predictors \\
+& + categorical\ predictors
+\end{aligned}$$
+
+More appropriate forms of this relationship will explained later under simple and multiple linear regressions sections.
+
+## Prepare R Environment for Analysis
+
+### Libraries
+For this chapter, we will be using the following packages:
+
+- **foreign**\index{foreign}: for reading SPSS\index{SPSS} and STATA\index{STATA} datasets
+- **tidyverse**\index{tidyverse}: a general and powerful package for data transformation
+- **psych**\index{psych}: for descriptive statistics
+- **gtsummary**\index{gtsummary}: for coming up with nice tables for results and plotting the graphs
+- **ggplot2**\index{ggplot2}, **ggpubr**\index{ggpubr}, **GGally**\index{GGally}: for plotting the graphs
+- **rsq**\index{rsq}: for getting $R^2$ value from a GLM model
+- **broom**\index{broom}: for tidying up the results
+- **car**\index{car}: for `vif()` function
+
+These are loaded as follows using the function `library()`,
+
+```{r, message=FALSE, error=FALSE, warning=FALSE}
+library(foreign)
+library(tidyverse)
+library(psych)
+library(gtsummary)
+library(ggplot2)
+library(ggpubr)
+library(GGally)
+library(rsq)
+library(broom)
+library(car)
+```
+
+### Dataset
+We will use the `coronary.dta` dataset in STATA\index{STATA} format. The dataset contains the total cholesterol level, their individual characteristics and intervention groups in a hypothetical clinical trial. The dataset contains 200 observations for nine variables:
+
+1. _id_: Subjects' ID.
+2. _cad_: Coronary artery disease status (categorical) {no cad, cad}.
+2. _sbp_ : Systolic blood pressure in mmHg (numerical).
+2. _dbp_ : Diastolic blood pressure in mmHg (numerical).
+2. _chol_: Total cholesterol level in mmol/L (numerical).
+2. _age_: Age in years (numerical).
+2. _bmi_: Body mass index (numerical).
+2. _race_: Race of the subjects (categorical) {malay, chinese, indian}.
+2. _gender_: Gender of the subjects (categorical) {woman, man}.
+
+The dataset is loaded as follows,
+
+```{r}
+coronary = read.dta("data/coronary.dta")
+```
+
+We then look at the basic structure of the dataset,
+```{r}
+str(coronary)
+```
+
+## Simple Linear Regression\index{Simple linear regression (SLR)}
+
+### About Simple Linear Regression\index{Simple linear regression (SLR)}
+Simple linear regression (SLR)\index{Simple linear regression (SLR)} models _linear_ (straight line) relationship between:
+
+- **outcome**: numerical variable.
+- **ONE predictor**: numerical/categorical variable.
+    
+_Note_: When the predictor is a categorical variable, this is typically analyzed by one-way ANOVA\index{ANOVA}. However, SLR can also handle a categorical variable in the GLM framework.
+
+We may formally represent SLR in form of an equation as follows,
+
+$$numerical\ outcome = intercept + coefficient \times predictor$$
+or in a shorter form using mathematical notations,
+
+$$\hat y = b_0 + b_1x_1$$
+where $\hat y$ (pronounced y hat) is the predicted value of the outcome y.
+
+### Data exploration
+
+Let say, for the SLR we are interested in knowing whether diastolic blood pressure (predictor) is associated with the cholesterol level (outcome). We explore the variables by obtaining the descriptive statistics and plotting the data distribution.
+
+We obtain the descriptive statistics of the variables,
+
+```{r, message=FALSE}
+coronary %>% select(chol, dbp) %>% describe()
+```
+
+and the histograms\index{Histogram} and box-and-whiskers plots\index{Box-and-whiskers plot},
+
+```{r, fig.cap="Histograms and box-and-whiskers plots for `chol` and `dbp`.", message=FALSE}
+hist_chol = ggplot(coronary, aes(chol)) + 
+  geom_histogram(color = "blue", fill = "white")
+hist_dbp = ggplot(coronary, aes(dbp)) + 
+  geom_histogram(color = "red", fill = "white")
+bplot_chol = ggplot(coronary, aes(chol)) + 
+  geom_boxplot(color = "blue", )
+bplot_dbp = ggplot(coronary, aes(dbp)) + 
+  geom_boxplot(color = "red")
+ggarrange(hist_chol, bplot_chol, hist_dbp, bplot_dbp)
+```
+
+### Univariable analysis
+
+For the analysis, we fit the SLR model, which consists of only one predictor (univariable). Here, `chol` is specified as the outcome, and `dbp` as the predictor. In `glm`, the formula is specified as `outcome ~ predictor`. Here, we specify `chol ~ dbp` as the formula in `glm`.
+
+We fit and view the summary information of the model as,
+```{r}
+slr_chol = glm(chol ~ dbp, data = coronary)
+summary(slr_chol)
+```
+
+We can tidy up the glm output and obtain the 95% confidence interval (CI) using `tidy()` from the `broom`\index{broom} package,
+```{r}
+tidy(slr_chol, conf.int = TRUE)
+```
+
+From the output above, we pay attention at these results:
+
+- coefficients, $b$ -- column `estimate`.
+- 95% CI -- columns `conf.low` and `conf.high`.
+- _P_-value -- column `p.value`.
+
+### Model fit\index{Model fit} assessment
+
+It is important to assess to what extend the SLR model reflects the data. First, we can assess this by $R^2$, which is the percentage of the variance for the outcome that is explained by the predictor. In simpler words, to what extend the variation in the values of the outcome is caused/explained by the predictor. This ranges from 0% (the predictor does not explain the outcome at all) to 100% (the predictor explains the outcome perfectly). Here, we obtain the $R^2$ values,
+
+```{r}
+rsq(slr_chol)
+```
+  
+Next, we can assess the model fit\index{Model fit} by a scatter plot,
+
+```{r, fig.cap="Scatter plot of `chol` (outcome) vs `dbp` (predictor).", message=FALSE}
+plot_slr = ggplot(coronary, aes(x = dbp, y = chol)) + 
+  geom_point() + geom_smooth(method = lm)
+plot_slr
+```
+
+This plot allows the assessment of normality\index{Normality}, linearity\index{Linearity} and equal variance\index{Equal variance} assumptions. We expect an elliptical/oval shape (normality\index{Normality}) and equal scatter of dots above and below the prediction line (equal variance\index{Equal variance}). These aspects indicate a linear relationship between `chol` and `dbp` (linearity\index{Linearity}).
+
+### Presentation and interpretation
+
+To present the result, we can use `tbl_regression()` to come up with a nice table. We use `slr_chol` of the `glm` output with `tbl_regression()` in the `gtsummary`\index{gtsummary} package.
+
+```{r, error=FALSE, message=FALSE, eval=FALSE}
+tbl_regression(slr_chol) 
+```
+```{r, error=FALSE, message=FALSE, echo=FALSE}
+tbl_regression(slr_chol) %>% as_gt()
+```
+
+<!--Here, we use `intercept = TRUE` to include the intercept value in the table. By default, this is omitted by the `tbl_regression()`.-->
+
+It is also very informative to present the model equation,
+
+$$chol = 3.0 + 0.04\times dbp$$
+where we obtain the intercept value from `summary(slr_chol)`.
+
+Based on the $R^2$ (which was `r round(rsq(slr_chol), 3)`), table and model equation, we may interpret the results as follows:
+
+- 1mmHg increase in DBP causes 0.04mmol/L increase in cholesterol level.
+- DBP explains `r round(rsq(slr_chol)*100, 1)`% of the variance in cholesterol level.
+
+## Multiple Linear Regression\index{Multiple linear regression (MLR)}
+
+### About Multiple Linear Regression\index{Multiple linear regression (MLR)}
+
+Multiple linear regression (MLR)\index{Multiple linear regression (MLR)} models _linear_ relationship between:
+
+- **outcome**: numerical variable.
+- **MORE than one predictors**: numerical and categorical variables.
+
+We may formally represent MLR in form of an equation,
+
+$$\begin{aligned}
+numerical\ outcome = &\ intercept \\
+& + coefficients \times numerical\ predictors \\
+& + coefficients \times categorical\ predictors
+\end{aligned}$$
+or in a shorter form,
+
+$$\hat y = b_0 + b_1x_1 + b_2x_2 + ... + b_px_p$$
+where we have _p_ predictors.
+
+Whenever the predictor is a categorical variable with more than two levels, we use dummy variable(s)\index{Dummy variable}. There is no issue with binary categorical variable. For the variable with more than two levels, the number of dummy variables\index{Dummy variable} (i.e. once turned into several binary variables\index{Binary variable}) equals number of levels minus one. For example, whenever we have four levels, we will obtain three dummy (binary) variables. As we will see later, `glm` will automatically do this for `factor` variable and provide separate estimates for each dummy variable\index{Dummy variable}.
+
+### Data exploration
+
+Now, for the MLR we are no longer restricted to one predictor. Let's say, we are interested in knowing the relationship between blood pressure (SBP and DBP), age, BMI, race and render as the predictors and the cholesterol level (outcome). As before, we explore the variables by the descriptive statistics,
+
+```{r, message=FALSE}
+# numerical
+coronary %>% select(-id, -cad, -race, -gender) %>% describe()
+```
+
+```{r, message=FALSE, eval=FALSE}
+# categorical
+coronary %>% dplyr::select(race, gender) %>% tbl_summary() 
+```
+```{r, message=FALSE, echo=FALSE}
+# categorical
+coronary %>% dplyr::select(race, gender) %>% tbl_summary() %>% as_gt()
+```
+
+and the pairs plot, where we focus on the distribution of the data by histograms and box-and-whiskers plots\index{Box-and-whiskers plot}. The pairs plot also includes information on the bivariate correlation statistics between the numerical variables.
+
+```{r, fig.cap="Pairs plot for all variables.", message=FALSE}
+coronary %>% select(-id, -cad) %>% ggpairs()
+```
+
+### Univariable analysis
+
+For the univariable analysis in the context of MLR, we aim to select variables that are worthwhile to be included in the multivariable model\index{Multivariable model}.
+
+In the context of **exploratory research**\index{Exploratory research}, we want to choose only variables with _P_-values < 0.25 to be included in MLR. To obtain the _P_-values, you may perform separate SLRs for each of the predictors (on your own). However, obtaining _P_-value for each predictor is easy by `add1()` function. Here, we use likelihood ratio test (LRT) using `test = "LRT"` option to obtain the _P_-values. We start with an intercept only model `slr_chol0` using `chol ~ 1` formula specification in the `glm` followed by `add1()`. `add1()` will test each predictor one by one.
+
+```{r}
+slr_chol0 = glm(chol ~ 1, data = coronary)  # intercept only model
+add1(slr_chol0, scope = ~ sbp + dbp + age + bmi + race + gender, 
+     test = "LRT")
+```
+
+From the output, all variables are important with _P_ < .25 except `gender`. These variables, excluding `gender`, are candidates in this variable selection\index{Variable selection} step.
+
+However, please keep in mind that in the context of **confirmatory research**\index{Confirmatory research}, the variables that we want to include are not merely based on _P_-values alone. It is important to consider expert judgement\index{Expert judgement} as well.
+
+### Multivariable analysis
+
+Multivariable analysis involves more than one predictors. In the univariable variable selection\index{Variable selection}, we decided on several potential predictors. For MLR, we (judiciously) included these variables in an MLR model. In the present dataset, we have the following considerations:
+
+- including both SBP and DBP is redundant, because both represent the blood pressure. These variables are also highly correlated. This is indicated by the correlation value, _r_ = 0.828 and scatter plot for the SBP-DBP pair in the pairs plot in the data exploration step.
+- `gender` was not sigficant, thus we may exclude the variable.
+- let say, as advised by experts in the field, we should exclude `age` in the modelling.
+
+Now, given these considerations, we perform MLR with the selected variables,
+
+```{r}
+mlr_chol = glm(chol ~ dbp + bmi + race, data = coronary)
+summary(mlr_chol)
+```
+
+From the output above, for each variable, we focus these results:
+
+- coefficients, $b$s -- column `estimate`.
+- 95% CIs -- columns `conf.low` and `conf.high`.
+- _P_-values -- column `p.value`.
+
+Note that for a categorical variable with more than two categories, the estimates are obtained for each dummy variable\index{Dummy variable}. In our case, `race` consists of Malay, Chinese and Indian. From the output, the dummy variables\index{Dummy variable} are `racechinese` representing Chinese vs Malay and `raceindian` representing Indian vs Malay dummy variables\index{Dummy variable}, where Malay is set as the baseline comparison group.
+
+We also notice that some variables are not significant at significance level of 0.05, namely `bmi` and `racechinese`. As for `racechinese` dummy variable\index{Dummy variable}, because this forms part of the `race` variable, we accept the variable because it is marginally insignificant (0.0512 vs 0.05) and the other dummy variable\index{Dummy variable} `raceindian` is significant.
+
+#### Stepwise automatic variable selection\index{Variable selection} {-}
+
+We noted that not all variables included in the model are significant. In our case, we may remove `bmi` because it is not statistically significant. But in exploratory research\index{Exploratory research} where we have hundreds of variables, it is impossible to select variables by eye-ball judgement. So, in this case, how to perform the variable selection\index{Variable selection}? To explore the significance of the variables, we may perform stepwise automatic selection. It is important to know stepwise selection\index{Stepwise selection} is meant for exploratory research\index{Exploratory research}. For confirmatory analysis, it is important to rely on expert opinion for the variable selection\index{Variable selection}. We may perform forward, backward or both forward and backward selection combined.
+
+_Forward selection_\index{Forward selection} starts with an intercept only or empty model without variable. It proceeds by adding one variable after another. In R, Akaike information criterion (AIC\index{AIC}) is used as the comparative goodness-of-fit measure and model quality. In the stepwise selection\index{Stepwise selection}, it seeks to find the model with the lowest AIC\index{AIC} iteratively and the steps are shown in the output. More information about AIC\index{AIC} can be referred to @hu2007 and @aic-wiki.
+
+```{r}
+# forward
+mlr_chol_stepforward = step(slr_chol0, scope = ~ dbp + bmi + race, 
+                            direction = "forward")
+```
+
+_Backward selection_\index{Backward selection} starts with a model containing all variables. Then, it proceeds by removing one variable after another, of which it aims to find the model with the lowest AIC\index{AIC}.
+
+```{r}
+# backward
+mlr_chol_stepback = step(mlr_chol, direction = "backward")
+```
+
+_Bidirectional selection_\index{Bidirectional selection}, as implemented in R, starts as with the model with all variables. Then, it proceeds with removing or adding variables, which combines both forward and backward selection methods. It stops once it finds the model with the lowest AIC\index{AIC}.
+
+```{r}
+# both
+mlr_chol_stepboth = step(mlr_chol, direction = "both")
+```
+
+#### Preliminary model {-}
+
+Let say, after considering the _P_-value, stepwise selection\index{Stepwise selection} (in exploratory research\index{Exploratory research}) and expert opinion, we decided that our preliminary model is,
+
+`chol ~ dbp + race`
+
+and we fit the model again to view basic information of the model,
+
+```{r, message=FALSE}
+mlr_chol_sel = glm(chol ~ dbp + race, data = coronary)
+summary(mlr_chol_sel)
+rsq(mlr_chol_sel)
+```
+
+### Interaction\index{Interaction}
+
+Interaction\index{Interaction} is the combination of predictors that requires interpretation of their regression coefficients separately based on the levels of the predictor. For example, we need separate interpretation of the coefficient for `dbp` depending on `race` group: Malay, Chinese or Indian. This makes interpreting our analysis complicated as we can no longer interpret each coefficient on its own. So, most of the time, we pray not to have interaction\index{Interaction} in our regression model. We fit the model with a two-way interaction\index{Interaction} term,
+
+```{r}
+summary(glm(chol ~ dbp * race, data = coronary))
+```
+
+From the output, there is no evidence that suggests the presence of interaction\index{Interaction} because the included interaction\index{Interaction} term was insignificant. In R, it is easy to fit interaction\index{Interaction} by `*`, e.g. `dbp * race` will automatically includes all variables involved. This is equal to specifiying `glm(chol ~ dbp + race + dbp:race, data = coronary)`, where we can use `:` to include the interaction\index{Interaction}.
+
+### Model fit\index{Model fit} assessment
+
+For MLR, we assess the model fit\index{Model fit} by $R^2$ and histogram and scatter plots of residuals. Residuals, in simple term, are the discrepancies between the observed values (dots) and the predicted values (by the fit MLR model). So, the lesser the discrepancies, the better is the model fit\index{Model fit}.
+
+#### Percentage of variance explained, $R^2$ {-}
+
+First, we obtain the $R^2$ values. In comparison to the $R^2$ obtained for the SLR, we include `adj = TRUE` here to obtain an adjusted $R^2$. The adjusted $R^2$ here is the $R^2$ with penalty for the number of predictors _p_. This discourages including too many variables, which might be unnecessary.
+
+```{r}
+rsq(mlr_chol_sel, adj = TRUE)
+```
+
+#### Histogram and box-and-whiskers plot {-}
+
+Second, we plot a histogram and a box-and-whiskers plot to assess the normality\index{Normality} of raw/unstandardized residuals\index{Unstandardized residuals} of the MLR model. We expect normally distributed residuals to indicate a good fit of the MLR model. Here, we have a normally distributed residuals.
+
+```{r, fig.cap="Histogram of raw residuals."}
+rraw_chol = resid(mlr_chol_sel)
+hist(rraw_chol)
+```
+
+```{r, fig.cap="Box-and-whiskers plot of raw residuals."}
+boxplot(rraw_chol)
+```
+
+#### Scatter plots {-}
+
+Third, we plot a standardized residuals\index{Standardized residuals} (Y-axis) vs standardized predicted values\index{Standardized predicted values} (X-axis). Similar to the one for SLR, this plot allows assessment of normality\index{Normality}, linearity\index{Linearity} and equal variance\index{Equal variance} assumptions. The dots should form elliptical/oval shape (normality\index{Normality}) and scattered roughly equal above and below the zero line (equal variance\index{Equal variance}). Both these indicate linearity\index{Linearity}. Our plot below shows that the assumptions are met.
+
+```{r, fig.cap="Scatter plot of standardized residuals vs standardized predicted values"}
+rstd_chol = rstandard(mlr_chol_sel)  # standardized residuals
+pstd_chol = scale(predict(mlr_chol_sel))  # standardized predicted values
+plot(rstd_chol ~ pstd_chol, xlab = "Std predicted", ylab = "Std residuals")
+abline(0, 0)  # normal, linear, equal variance
+```
+
+In addition to the standardized residuals\index{Standardized residuals} vs standardized predicted values\index{Standardized predicted values} plot, for numerical predictors, we assess the linear relationship between the raw residuals and the observed values of the numerical predictors. We plot the raw residuals vs numerical predictor below. The plot interpreted in similar way to the standardized residuals\index{Standardized residuals} vs standardized predicted values\index{Standardized predicted values} plot. The plot shows good linearity\index{Linearity} between the residuals and the numerical predictor.
+
+```{r, fig.cap="Scatter plot of raw residuals vs DBP (numerical predictor)."}
+plot(rraw_chol ~ coronary$dbp, xlab = "DBP", ylab = "Raw Residuals")
+abline(0, 0)
+```
+
+### Presentation and interpretation
+
+After passing all the assumption checks, we may now decide on our final model. We may rename the preliminary model `mlr_chol_sel` to `mlr_chol_final` for easier reference. 
+
+```{r}
+mlr_chol_final = mlr_chol_sel
+```
+
+Similar to SLR, we use `tbl_regression()` to come up with a nice table to present the results.
+
+```{r, message=FALSE, eval=FALSE}
+tbl_regression(mlr_chol_final) 
+```
+```{r, message=FALSE, echo=FALSE}
+tbl_regression(mlr_chol_final) %>% as_gt()
+```
+
+It will be useful to be able to save the output in the spreadsheet format for later use. We can use `tidy()` function in this case and export it to a .csv file,
+
+```{r, eval=FALSE}
+tib_mlr = tidy(mlr_chol_final, conf.int = TRUE)
+write.csv(tib_mlr, "mlr_final.csv")
+```
+
+Then, we present the model equation. Cholesterol level in mmol/L can be predicted by its predictors as given by,
+
+$$chol = 3.30 + 0.03\times dbp + 0.36\times race\ (chinese) + 0.71\times race\ (indian)$$
+Based on the adjusted $R^2$, table and model equation, we may interpret the results as follows:
+
+- 1mmHg increase in DBP causes 0.03mmol/L increase in cholesterol, while controlling for the effect of race.
+- Likewise, 10mmHg increase in DBP causes 0.03 x 10 = 0.3mmol/L increase in cholesterol, while controlling for the effect of race.
+- Being Chinese causes 0.36mmol/L increase in cholesterol in comparison to Malay, while controlling for the effect of DBP.
+- Being Indian causes 0.71mmol/L increase in cholesterol in comparison to Malay, while controlling for the effect of DBP.
+- DBP and race explains 22.3% variance in cholesterol.
+
+For each of this interpretation, please keep in mind to also consider the 95% CI of each of coefficient. For example, being Indian causes 0.71mmol/L increase in cholesterol in comparison to Malay, where this may range from 0.34mmol/L to 1.1mmol/L based on the 95% CI.
+
+## Prediction
+
+In some situations, it is useful to use the SLR/MLR model for prediction. For example, we may want to predict the cholesterol level of a patient given some clinical characteristics. We can use the final model above for prediction. For starter, let us view the predicted values for our sample,
+
+```{r}
+coronary$pred_chol = predict(mlr_chol_final)
+head(coronary)
+```
+
+Compare the predicted values with the observed cholesterol level. Recall that we already checked this for the model fit\index{Model fit} assessment before.
+
+It is more useful to predict for newly observed data. Let us try predicting the cholesterol level for an Indian patient with DBP = 90mmHg,
+
+```{r}
+predict(mlr_chol_final, list(dbp = 90, race = "indian"))
+```
+
+Now, we also do so the data with many more patients,
+
+```{r}
+new_data = data.frame(dbp = c(90, 90, 90), 
+                      race = c("malay", "chinese", "indian"))
+predict(mlr_chol_final, new_data)
+new_data$pred_chol = predict(mlr_chol_final, new_data)
+new_data
+```
+
+## Summary
+
+In this chapter, we went through the basics about SLR and MLR. We performed the analysis for each and learned how to assess the model fit\index{Model fit} for the regression models. We learned how to nicely present and interpret the results. In addition, we also learned how to utilize the model for prediction. Excellent texts on regression includes Biostatistics: Basic Concepts and Methodology for the Health Sciences [@daniel2014biostatistics] and the more advanced books such as Applied Linear Statistical Models [@KUTNER2013-01-01] and Epidemiology: Study Design and Data Analysis [@woodward2013epidemiology].
