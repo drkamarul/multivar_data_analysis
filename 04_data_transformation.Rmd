@@ -104,7 +104,9 @@ stroke <- read_csv(here("data", "stroke_data.csv"))
 pep <- import(here("data", "peptic_ulcer.xlsx"))
 ```
 
-Take a peek at the dataset
+Take a peek at the stroke and pep datasets.
+
+The stroke dataset contains:
 
 -   219 observations
 -   12 variables
@@ -113,6 +115,8 @@ Take a peek at the dataset
 glimpse(stroke)
 ```
 
+The pep datasets contains:
+
 -   121 observations
 -   34 variables
 
@@ -120,18 +124,18 @@ glimpse(stroke)
 glimpse(pep)
 ```
 
-Next, we examine the first ten observations of the data. The rest of the observations are not shown. You can also see the types of variables:
+Next, we examine the first five observations of the data. The rest of the observations are not shown. You can also see the types of variables:
 
 -   `chr` (character),
 -   `int` (integer),
 -   `dbl` (double)
 
 ```{r}
-stroke
+stroke %>% slice_head(n = 5)
 ```
 
 ```{r}
-pep %>% slice_head(n = 10)
+pep %>% slice_head(n = 5)
 ```
 
 ## Select variables, generate new variable\index{New variable} and rename variable
@@ -159,15 +163,18 @@ The new dataset `pep2` is now created. You can see it in the `Environment` pane.
 
 ### Generate new variable\index{New variable} using `mutate()`
 
-With `mutate()`\index{Mutate}, you can generate a new variable. For example, in the dataset `pep2`, we want to create a new variable named `pulse_pressure`. This variable equals systolic minus diastolic BP.
+With `mutate()`\index{Mutate}, you can generate a new variable. For example, in the dataset `pep2`, we want to create a new variable named `pulse_pressure` (systolic minus diastolic blood pressure in mmHg).
 
 $$pulse \: pressure = systolic \: BP - diastolic \: BP $$
+
+And let's oberve the first five observations:
 
 ```{r}
 pep2 <- pep2 %>% 
   mutate(pulse_pressure = systolic - diastolic)
 pep2 %>% 
-  dplyr::select(systolic, diastolic, pulse_pressure )
+  dplyr::select(systolic, diastolic, pulse_pressure ) %>% 
+  slice_head(n = 5)
 ```
 
 Now for the stroke dataset, we will convert doa and dod, both character variables, to a variable of the *date* type
@@ -346,15 +353,14 @@ Variable `cat_sbp` will be ordered as
 
 ```{r}
 levels(stroke$cat_sbp)
+stroke %>% count(cat_sbp)
 ```
 
-To change in reverse for example, we can use `fct_relevel`
+To change the order (in reverse for example), we can use `fct_relevel`. Below the first level group is sbp above 130, followed by 121 to 130 and the highest group is less than 120. 
 
 ```{r}
 stroke <- stroke %>%
-  mutate(relevel_cat_sbp = fct_relevel(cat_sbp, levels = c("131 or higher", 
-                                                       "121 - 130",
-                                                       "less or 120")))
+  mutate(relevel_cat_sbp = fct_relevel(cat_sbp, ">130", "121-130", "<120"))
 levels(stroke$relevel_cat_sbp)
 stroke %>% count(relevel_cat_sbp)
 ```
