@@ -203,7 +203,8 @@ Let us start by creating a simple plot using these arguments:
 
 ```{r ,out.width='80%'}
 ggplot(data = gapminder) +
-  geom_point(mapping = aes(x = year, y = lifeExp))
+  geom_point(mapping = aes(x = year, y = lifeExp)) +
+  theme_bw()
 ```
 
 From the plot, we can see
@@ -230,12 +231,15 @@ We can see that the variables we want to plot are specified by `aes()`. We can a
 
 The objective of creating plot using multiple (more than two variables) is to enable users to visualize a more complex relationship between more than two variables. Let us take a visualization for variable `year`, variable `life expectancy`, and variable `continent`.
 
+This book uses black and white text so we add the `scale_colour_grey() +` codes. If readers want to see the colour of the plot, just delete this line `scale_colour_grey() +`. 
+
 ```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, 
                            y = lifeExp, 
-                           colour = continent))
-
+                           colour = continent)) +
+  scale_colour_grey() +
+  theme_bw()
 ```
 
 From the scatterplot\index{Scatterplot} of these three variables, you may notice that.
@@ -251,8 +255,8 @@ Now, we will replace the third variable with Gross Domestic Product `gdpPercap` 
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, 
                            y = lifeExp, 
-                           size = gdpPercap))
-
+                           size = gdpPercap)) +
+  theme_bw()
 ```
 
 You will notice that *ggplot2*\index{ggplot2} automatically assigns a unique level of the aesthetic (here, a unique colour) to each value of the variable, a process known as scaling. *ggplot2*\index{ggplot2} also adds a legend that explains which levels correspond to which values. For example, the plot suggests that with higher `gdpPerCap`, there is also a longer `lifeExp`.
@@ -263,17 +267,17 @@ Instead of using colour, we can also use different shapes. Different shapes are 
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, 
                            y = lifeExp, 
-                           shape = continent))
-
+                           shape = continent)) +
+  theme_bw()
 ```
 
-You may create a different colour plot if you specify the colour outside the `aes` parentheses. For example, let's set the parameter colour to `blue`:
+You may create a different colour plot if you specify the colour outside the `aes` parentheses. For example, let's set the parameter colour to `blue`. Again, in black and white text, readers will not able to see the colour. 
 
 ```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp), 
-             colour = 'blue')
-
+             colour = 'blue') +
+  theme_bw()
 ```
 
 To change the parameter shape, for example, to the plus symbol, you can set the argument for `shape` to equal `3`.
@@ -281,8 +285,8 @@ To change the parameter shape, for example, to the plus symbol, you can set the 
 ```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp), 
-             shape = 3)
-
+             shape = 3) +
+  theme_bw()
 ```
 
 You may be interested to know what number corresponds to what type of shape. To do so, you can type `?pch` to access the help document. You will see in the Viewer pane, there will be a document that explains various shapes available in R. It also shows what number that represents each shape.
@@ -299,7 +303,8 @@ You can split our plots based on a factor variable and make subplots using the `
 ```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp)) + 
-  facet_wrap(~ continent, nrow = 3)
+  facet_wrap(~ continent, nrow = 3) +
+  theme_bw()
 ```
 
 However, you will get a different arrangement of plot if you change the value for the `nrow`
@@ -307,7 +312,8 @@ However, you will get a different arrangement of plot if you change the value fo
 ```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp)) + 
-  facet_wrap(~ continent, nrow = 2)
+  facet_wrap(~ continent, nrow = 2) +
+  theme_bw()
 ```
 
 ### Overlaying plots
@@ -316,14 +322,16 @@ Each `geom_X()` in ggplot2\index{ggplot2} indicates different visual objects. Th
 
 ```{r ,out.width='60%'}
 ggplot(data = gapminder) +
-  geom_point(mapping = aes(x = gdpPercap, y = lifeExp))
+  geom_point(mapping = aes(x = gdpPercap, y = lifeExp)) +
+  theme_bw()
 ```
 
 This is a smooth line plot\index{Line plot}:
 
 ```{r ,out.width='80%'}
 ggplot(data = gapminder) +
-  geom_smooth(mapping = aes(x = gdpPercap, y = lifeExp))
+  geom_smooth(mapping = aes(x = gdpPercap, y = lifeExp)) +
+  theme_bw()
 ```
 
 Let's generate a smooth plot based on continent using the `linetype()` and use `log(gdpPercap)` to reduce the skewness of the data. Use these codes:
@@ -332,16 +340,19 @@ Let's generate a smooth plot based on continent using the `linetype()` and use `
 ggplot(data = gapminder) +
   geom_smooth(mapping = aes(x = log(gdpPercap), 
                             y = lifeExp, 
-                            linetype = continent))
+                            linetype = continent)) +
+  theme_bw()
 ```
 
-Another smooth plot but setting the parameter for colour:
+Another smooth plot but setting the parameter for colour but in greyscale. Again, if you print on black and white text, you will not be able to see the colour. To see the colour clearly, just remove the `scale_colour_grey() +` codes. 
 
 ```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_smooth(mapping = aes(x = log(gdpPercap), 
                             y = lifeExp, 
-                            colour = continent))
+                            colour = continent)) +
+  scale_colour_grey() +
+  theme_bw()
 ```
 
 ### Combining different plots
@@ -351,7 +362,8 @@ We can combine more than one `geoms` (type of plots) to overlay plots. The trick
 ```{r ,out.width='80%'}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = log(gdpPercap), y = lifeExp)) +
-  geom_smooth(mapping = aes(x = log(gdpPercap), y = lifeExp))
+  geom_smooth(mapping = aes(x = log(gdpPercap), y = lifeExp)) +
+  theme_bw()
 ```
 
 The codes above show duplication or repetition. To avoid this, we can pass the mapping to `ggplot()`:
@@ -360,25 +372,26 @@ The codes above show duplication or repetition. To avoid this, we can pass the m
 ggplot(data = gapminder, 
        mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_point() +
-  geom_smooth()
+  geom_smooth() +
+  theme_bw()
 ```
 
-And we can expand this to make scatterplot\index{Scatterplot} shows different colour for continent:
+And we can expand this to make scatterplot\index{Scatterplot} shows different shape for continent:
 
 ```{r ,out.width='80%'}
 ggplot(data = gapminder, 
        mapping = aes(x = log(gdpPercap), y = lifeExp)) +
-  geom_point(mapping = aes(colour = continent)) +
+  geom_point(mapping = aes(shape = continent)) +
   geom_smooth()
 ```
 
-Or expand this to make the smooth plot shows different colour for continent:
+Or expand this to make the smooth plot shows different line types for continent:
 
 ```{r ,out.width='80%'}
 ggplot(data = gapminder, 
        mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_point() +
-  geom_smooth(mapping = aes(colour = continent))
+  geom_smooth(mapping = aes(linetype = continent))
 ```
 
 Or both the scatterplot and the smoothplot:
@@ -387,8 +400,9 @@ Or both the scatterplot and the smoothplot:
 ggplot(data = gapminder, 
        mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_point(mapping = aes(shape = continent)) +
-  geom_smooth(mapping = aes(colour = continent))
-
+  geom_smooth(mapping = aes(colour = continent)) +
+  scale_colour_grey() +
+  theme_bw()
 ```
 
 ### Statistical transformation
@@ -397,7 +411,9 @@ Let us create a Bar chart\index{Bar chart}, with y-axis as the frequency.
 
 ```{r ,out.width='80%'}
 ggplot(data = gapminder) +
-  geom_bar(mapping = aes(x = continent))
+  geom_bar(mapping = aes(x = continent)) +
+  scale_colour_grey() +
+  theme_bw()
 ```
 
 If we want the y-axis to show proportion, we can use these codes.

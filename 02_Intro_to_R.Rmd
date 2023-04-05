@@ -57,7 +57,7 @@ This is the registration and login webpage for RStudio Cloud\index{RStudio Cloud
 
 ### Register and log in
 
-You can register now. After registration, you can log in.
+Proceed with registration. If you have Google account or GitHub account, you can use either one to quickly register. After you complete the registration, you can log into RStudio Cloud.
 
 ![RStudio Cloud registration page](cloud2.PNG){width="60%"}
 
@@ -76,11 +76,11 @@ BlueSky Statistics can help users to
 -   get results in true word processing tables automatically.
 -   quickly add your own menus and dialog boxes to any R functions.
 
-![Bluesky Statistics software interface](bluesky.PNG){width="60%"}
+![Bluesky Statistics software interface](bluesky.PNG){width="70%"}
 
 And this is **jamovi** software. jamovi aims to be a neutral platform, and takes no position with respect to competing statistical philosophies. The project was not founded to promote a particular statistical ideology, instead wanting to serve as a safe space where different statistical approaches might be published side-by-side, and consider themselves first-rate members of the jamovi community.
 
-![jamovi software](jamovi.PNG){width="60%"}
+![jamovi software](jamovi.PNG){width="70%"}
 
 jamovi\index{jamovi} is an interesting software. It is a new "3rd generation" statistical spreadsheet. It is designed from the ground up to be easy to use, it is a compelling alternative to costly statistical products such as SPSS\index{SPSS} and SAS\index{SAS}. jamovi\index{jamovi} is built on top of the R statistical language, giving you access to the best the statistics community has to offer. jamovi\index{jamovi} will always be free and open because jamovi\index{jamovi} is made by the scientific community, for the scientific community.
 
@@ -108,7 +108,7 @@ Though you can use the native R software (that you just installed) to run R code
 
 We will show this step by step. First, let us install R on your machine. To install R, go to [cran](https://cran.r-project.org/). Then choose the R version that's correct for your machine OS. For example, for Windows OS the link is <https://cran.r-project.org/bin/windows/base/R-4.2.1-win.exe>. And for Mac OS, the download link is <https://cran.r-project.org/bin/macosx/base/R-4.2.1.pkg>. Similarly, if you are using Linux, follow the steps as listed before.
 
-![CRAN website](cran.PNG){width="60%"}
+![CRAN website](cran.PNG){width="70%"}
 
 It is always recommended that users install the latest version of R. During this writing, the latest version is R version 4.2.1 known as Funny-Looking Kid version that was released on 2022/06/23. Users can have multiple R versions on the same local machines. So you do not need to uninstall the old R version to install a new R version.
 
@@ -140,11 +140,9 @@ We encourage users to first install TinyTeX. If you render your R document into 
 
 ![R Markdown](rmarkdown.PNG){width="40%"}
 
-This is MiKTeX, if you are using Window OS
+Install **MiKTeX** as your latex editor if your machine is using Window OS. If you use MacOS, then install **MacTeX**.
 
 ![MikTeX webpage](miktex.PNG){width="60%"}
-
-And this is MacTeX, for the macOS users
 
 ![MacTeX webpage](mactex.PNG){width="60%"}
 

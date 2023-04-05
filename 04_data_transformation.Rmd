@@ -167,7 +167,7 @@ With `mutate()`\index{Mutate}, you can generate a new variable. For example, in 
 
 $$pulse \: pressure = systolic \: BP - diastolic \: BP $$
 
-And let's oberve the first five observations:
+And let's observe the first five observations:
 
 ```{r}
 pep2 <- pep2 %>% 
