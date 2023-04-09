@@ -108,7 +108,7 @@ Though you can use the native R software (that you just installed) to run R code
 
 We will show this step by step. First, let us install R on your machine. To install R, go to [cran](https://cran.r-project.org/). Then choose the R version that's correct for your machine OS. For example, for Windows OS the link is <https://cran.r-project.org/bin/windows/base/R-4.2.1-win.exe>. And for Mac OS, the download link is <https://cran.r-project.org/bin/macosx/base/R-4.2.1.pkg>. Similarly, if you are using Linux, follow the steps as listed before.
 
-![CRAN website](cran.PNG){width="70%"}
+![CRAN website](cran.PNG){width="80%"}
 
 It is always recommended that users install the latest version of R. During this writing, the latest version is R version 4.2.1 known as Funny-Looking Kid version that was released on 2022/06/23. Users can have multiple R versions on the same local machines. So you do not need to uninstall the old R version to install a new R version.
 
@@ -166,28 +166,28 @@ What you see on RStudio\index{RStudio} now? You should see three panes if you st
 
 In Console tab, this is where we will see most of the results generated from codes in RStudio\index{RStudio}.
 
-![Console tab](console.PNG){width="60%"}
+![Console tab](console.PNG){width="80%"}
 
 ### Files, Plots, Packages\index{Packages}, Help and Viewer Pane
 
 In this console, you will see
 
--   List of objects (Remember, R is an object-oriented-programming or oop)
+-   List of objects (Remember, R is an object-oriented-programming or **oop**)
 -   R files, datasets, tables, list etc
 
-![File, Plots, Packages, Help and Viewer pane](files.PNG){width="60%"}
+![File, Plots, Packages, Help and Viewer pane](files.PNG){width="80%"}
 
 ### Environment, History, Connection and Build Pane
 
 In the environment, history, connection and build pane, you will see this
 
-![Environment, History, Connections and Build pane](envir.PNG){width="60%"}
+![Environment, History, Connections and Build pane](envir.PNG){width="80%"}
 
 ### Source Pane
 
 In the Source pane, you can create R files and write your R codes
 
-![Source pane](source.PNG){width="40%"}
+![Source pane](source.PNG){width="80%"}
 
 ## Summary
 

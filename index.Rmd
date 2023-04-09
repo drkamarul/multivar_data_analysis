@@ -58,22 +58,20 @@ The courses we teach include basic and advanced statistics, multivariable data a
 
 We use the [**rmarkdown** package](https://rmarkdown.rstudio.com/) and the [**bookdown** package](https://github.com/rstudio/bookdown) to write this book inside RStudio IDE. We are truly grateful to all the people who have developed both packages and to [POSIT Software](https://posit.co/). Posit Software PBC is an Open Source Data Science Company, previously known as RStudio PBC. Posit Software PBC continuously supports open-source data science initiatives and develops and distributes the fantastic [RStudio IDE](https://posit.co/products/open-source/rstudio/). When writing this physical book, we used R version 4.2.2 and RStudio version 2022.07.2 Build 576. 
 
-The source codes for the book are available on our [GitHub repository](https://github.com/drkamarul/multivar_data_analysis), and the datasets are also available on [GitHub](https://github.com/drkamarul/multivar_data_analysis/tree/main/data). We are indebted to George Knott, the statistics editor at CRC Press, who has been very supportive and understanding when we are chasing the datelines of the book. In addition, CRC Press has been very kind to allow us to have the online version of the book at the [bookdown website](https://bookdown.org/drki_musa/dataanalysis/). Thanks very much, George and CRC Press.  
-
-
+The source codes for the book are available on our [GitHub repository](https://github.com/drkamarul/multivar_data_analysis) and also provided the datasets in the **data** folder at [GitHub](https://github.com/drkamarul/multivar_data_analysis/tree/main/data). We are indebted to George Knott, the statistics editor at Chapman & Hall (CRC Press), who has been very supportive and understanding when we are chasing the datelines of the book. We also appreciate the help of Menon Nivedita, who has taken over the publishing task from George after he moved from his role at Chapman & Hall (CRC Press). In addition, Chapman & Hall (CRC Press) has been very kind to allow us to have the online version of the book at the [bookdown website](https://bookdown.org/drki_musa/dataanalysis/). 
 All in all, we hope everyone enjoys this book!
 
 
 <p>&nbsp;</p>
 
 
-**Kamarul Imran Musa**
+[**Kamarul Imran Musa**](https://github.com/drkamarul)
 <p>&nbsp;</p>
 
-**Wan Nor Arifin Wan Mansor**
+[**Wan Nor Arifin Wan Mansor**](https://github.com/wnarifin)
 <p>&nbsp;</p>
 
-**Tengku Muhammad Hanis Tengku Mokhtar**
+[**Tengku Muhammad Hanis Tengku Mokhtar**](https://github.com/tengku-hanis)
 <p>&nbsp;</p>
 
 *School of Medical Sciences,* 

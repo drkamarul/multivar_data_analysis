@@ -9,6 +9,8 @@ In this chapter, readers will:
 -   be able to generate plots using **ggplot** packages
 -   be able to save plots in different formats and graphical settings
 
+In our physical book, the plots will be published in black and white text. Because of that, some of the R codes that come with **ggplot2** will have an additional line of codes such as `scale_colour_grey()` + `and scale_line_grey()` to make sure the plots suits the black and white text inside our physical book. The online version of our book on the [bookdown website](https://bookdown.org/drki_musa/dataanalysis/) shows the plots in colour.    
+
 ## Introduction
 
 Many disciplines view data visualisation as a modern equivalent of visual communication. It involves the creation and study of the visual representation of data. Data visualisation requires "information that has been abstracted in some schematic form, including attributes or variables for the units of information". You can read more about data visualization on this [wikipedia](https://en.m.wikipedia.org/wiki/Data_visualization) page and another  [wikipedia](https://en.m.wikipedia.org/wiki/Michael_Friendly) page.
@@ -233,7 +235,7 @@ The objective of creating plot using multiple (more than two variables) is to en
 
 This book uses black and white text so we add the `scale_colour_grey() +` codes. If readers want to see the colour of the plot, just delete this line `scale_colour_grey() +`. 
 
-```{r ,out.width='80%'}
+```{r}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, 
                            y = lifeExp, 
@@ -251,7 +253,7 @@ From the scatterplot\index{Scatterplot} of these three variables, you may notice
 
 Now, we will replace the third variable with Gross Domestic Product `gdpPercap` and correlates it with the size of `gdpPerCap`.
 
-```{r ,out.width='80%'}
+```{r ,fig.width=8, fig.height=5}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, 
                            y = lifeExp, 
@@ -261,28 +263,20 @@ ggplot(data = gapminder) +
 
 You will notice that *ggplot2*\index{ggplot2} automatically assigns a unique level of the aesthetic (here, a unique colour) to each value of the variable, a process known as scaling. *ggplot2*\index{ggplot2} also adds a legend that explains which levels correspond to which values. For example, the plot suggests that with higher `gdpPerCap`, there is also a longer `lifeExp`.
 
-Instead of using colour, we can also use different shapes. Different shapes are helpful, especially when there is no facility to print out colourful plots.
+Instead of using colour, we can also use different shapes. Different shapes are helpful, especially when there is no facility to print out colourful plots. And we use `geom_jitter()` to disperse the points away from one another. The argument `alpha=` will set the opacity of the points. However, readers still have difficulty to notice the difference between continents. 
 
-```{r ,out.width='80%'}
+```{r ,fig.width=8, fig.height=5}
 ggplot(data = gapminder) +
-  geom_point(mapping = aes(x = year, 
+  geom_jitter(mapping = aes(x = year, 
                            y = lifeExp, 
-                           shape = continent)) +
-  theme_bw()
-```
-
-You may create a different colour plot if you specify the colour outside the `aes` parentheses. For example, let's set the parameter colour to `blue`. Again, in black and white text, readers will not able to see the colour. 
-
-```{r ,out.width='80%'}
-ggplot(data = gapminder) +
-  geom_point(mapping = aes(x = year, y = lifeExp), 
-             colour = 'blue') +
+                           shape = continent),
+              width = 0.75, alpha = 0.5) +
   theme_bw()
 ```
 
 To change the parameter shape, for example, to the plus symbol, you can set the argument for `shape` to equal `3`.
 
-```{r ,out.width='80%'}
+```{r ,fig.width=8, fig.height=5}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp), 
              shape = 3) +
@@ -300,7 +294,7 @@ You can split our plots based on a factor variable and make subplots using the `
 -   split the plot based on continent
 -   set the number of rows for the plot at 3
 
-```{r ,out.width='80%'}
+```{r ,fig.width=8, fig.height=7}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp)) + 
   facet_wrap(~ continent, nrow = 3) +
@@ -309,7 +303,7 @@ ggplot(data = gapminder) +
 
 However, you will get a different arrangement of plot if you change the value for the `nrow`
 
-```{r ,out.width='80%'}
+```{r ,fig.width=8, fig.height=7}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = year, y = lifeExp)) + 
   facet_wrap(~ continent, nrow = 2) +
@@ -318,9 +312,9 @@ ggplot(data = gapminder) +
 
 ### Overlaying plots
 
-Each `geom_X()` in ggplot2\index{ggplot2} indicates different visual objects. This is a scatterplot\index{Scatterplot}:
+Each `geom_X()` in ggplot2\index{ggplot2} indicates different visual objects. This is a scatterplot\index{Scatterplot} and we set in R code chuck the `fig.width=` equals 6 and `fig.height=` equals 5 (*fig.width=6, fig.height=5*)
 
-```{r ,out.width='60%'}
+```{r , fig.width=6, fig.height=5}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = gdpPercap, y = lifeExp)) +
   theme_bw()
@@ -328,7 +322,7 @@ ggplot(data = gapminder) +
 
 This is a smooth line plot\index{Line plot}:
 
-```{r ,out.width='80%'}
+```{r , fig.width=6, fig.height=5}
 ggplot(data = gapminder) +
   geom_smooth(mapping = aes(x = gdpPercap, y = lifeExp)) +
   theme_bw()
@@ -336,7 +330,7 @@ ggplot(data = gapminder) +
 
 Let's generate a smooth plot based on continent using the `linetype()` and use `log(gdpPercap)` to reduce the skewness of the data. Use these codes:
 
-```{r ,out.width='80%'}
+```{r ,fig.width=7, fig.height=6}
 ggplot(data = gapminder) +
   geom_smooth(mapping = aes(x = log(gdpPercap), 
                             y = lifeExp, 
@@ -346,7 +340,7 @@ ggplot(data = gapminder) +
 
 Another smooth plot but setting the parameter for colour but in greyscale. Again, if you print on black and white text, you will not be able to see the colour. To see the colour clearly, just remove the `scale_colour_grey() +` codes. 
 
-```{r ,out.width='80%'}
+```{r ,fig.width=7, fig.height=6}
 ggplot(data = gapminder) +
   geom_smooth(mapping = aes(x = log(gdpPercap), 
                             y = lifeExp, 
@@ -359,7 +353,7 @@ ggplot(data = gapminder) +
 
 We can combine more than one `geoms` (type of plots) to overlay plots. The trick is to use multiple `geoms` in a single line of R code:
 
-```{r ,out.width='80%'}
+```{r ,fig.width=6, fig.height=5}
 ggplot(data = gapminder) +
   geom_point(mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_smooth(mapping = aes(x = log(gdpPercap), y = lifeExp)) +
@@ -368,7 +362,7 @@ ggplot(data = gapminder) +
 
 The codes above show duplication or repetition. To avoid this, we can pass the mapping to `ggplot()`:
 
-```{r ,out.width='80%'}
+```{r ,fig.width=6, fig.height=5}
 ggplot(data = gapminder, 
        mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_point() +
@@ -378,25 +372,27 @@ ggplot(data = gapminder,
 
 And we can expand this to make scatterplot\index{Scatterplot} shows different shape for continent:
 
-```{r ,out.width='80%'}
+```{r ,fig.width=7, fig.height=6}
 ggplot(data = gapminder, 
        mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_point(mapping = aes(shape = continent)) +
-  geom_smooth()
+  geom_smooth() +
+  theme_bw()
 ```
 
-Or expand this to make the smooth plot shows different line types for continent:
+Or expand this to make the smooth plot shows different linetypes for continent:
 
-```{r ,out.width='80%'}
+```{r ,fig.width=7, fig.height=6}
 ggplot(data = gapminder, 
        mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_point() +
-  geom_smooth(mapping = aes(linetype = continent))
+  geom_smooth(mapping = aes(linetype = continent)) +
+  theme_bw()
 ```
 
 Or both the scatterplot and the smoothplot:
 
-```{r ,out.width='80%'}
+```{r ,fig.width=7, fig.height=6}
 ggplot(data = gapminder, 
        mapping = aes(x = log(gdpPercap), y = lifeExp)) +
   geom_point(mapping = aes(shape = continent)) +
@@ -409,7 +405,7 @@ ggplot(data = gapminder,
 
 Let us create a Bar chart\index{Bar chart}, with y-axis as the frequency.
 
-```{r ,out.width='80%'}
+```{r , out.width="70%"}
 ggplot(data = gapminder) +
   geom_bar(mapping = aes(x = continent)) +
   scale_colour_grey() +
@@ -418,7 +414,7 @@ ggplot(data = gapminder) +
 
 If we want the y-axis to show proportion, we can use these codes.
 
-```{r ,out.width='80%'}
+```{r , out.width="70%"}
 ggplot(data = gapminder) +
   geom_bar(mapping = aes(x = continent, y = after_stat(count/sum(count)),
                          group = 1))
@@ -426,22 +422,20 @@ ggplot(data = gapminder) +
 
 Or you can be more elaborate like below:
 
-```{r,out.width='80%'}
+```{r}
 gapminder2 <- 
   gapminder %>% 
   count(continent) %>% 
   mutate(perc = n/sum(n) * 100)
 
 pl <- gapminder2 %>% 
-  ggplot(aes(x = continent, y = n, fill = continent))
-pl <- pl + geom_col()
-pl <- pl + geom_text(aes(x = continent, y = n
-                         , label = paste0(n, " (", round(perc,1),"%)")
-                         , vjust = -0.5
-                         
-                         ))
+  ggplot(aes(x = continent, y = n, fill = continent)) 
+pl <- pl + geom_col() + scale_fill_grey(start = 0, end = .9)
+pl <- pl + geom_text(aes(x = continent, y = n,
+                         label = paste0(n, " (", round(perc,1),"%)"),
+                         vjust = -0.5))
 pl <- pl + theme_classic()
-pl <- pl + labs(title ="Bar chart showing count and percentage")
+pl <- pl + labs(title ="Bar chart showing counts and percentages")
 pl
 ```
 
@@ -451,65 +445,79 @@ We can customize many aspects of the plot using **ggplot2** package. For example
 
 Let's name the plot as `mypop`
 
-```{r ,out.width='80%'}
+```{r ,fig.width=7, fig.height=6}
 mypop <- ggplot(data = gapminder, 
                 mapping = aes(x = log(gdpPercap), 
-                              y = lifeExp)) +
-  geom_point() +
-  geom_smooth(mapping = aes(colour = continent))
+                              y = lifeExp,
+                              shape = continent)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(mapping = aes(colour =  continent), se = FALSE) +
+  scale_colour_grey() 
 mypop
 ```
 
-You will notice that there is no title in the plot, so now you want to add the title:
+You will notice that there is no title in the plot which is not great. To to add the title, you can add a function `ggtitle()`:
 
-```{r ,out.width='80%'}
+```{r ,fig.width=7, fig.height=6}
 mypop + 
   ggtitle("GDP (in log) and life expectancy")
 ```
 
-To make the title appear in multiple lines, we can add `\n`:
+To make the title appears in multiple lines, we can add `\n`:
 
-```{r ,out.width='80%'}
-mypop + ggtitle("GDP (in log) and life expectancy:
-                \nData from Gapminder")
-```
-
-### Adjusting axes
-
-We can specify the tick marks
-
--   min = 0
--   max = 12
--   interval = 1
-
-```{r ,out.width='80%'}
-mypop + 
-  scale_x_continuous(breaks = seq(0,12,1))
-```
-
-And we can label the x-axis and y-axis:
-
-```{r ,out.width='60%'}
-mypop + 
-  ggtitle("GDP (in log) and life expectancy:
-                \nData from Gapminder") + 
-  ylab("Life Expentancy") + 
-  xlab("Percapita GDP in log")
+```{r,fig.width=7, fig.height=6}
+mypop <- mypop + ggtitle("GDP (in log) and life expectancy:
+                \nData from Gapminder") 
+mypop
 ```
 
 ### Choosing themes
 
 The default is gray theme or `theme_gray()`. But there are many other themes. One of the popular themes is the black and white theme and the classic theme:
 
-```{r ,out.width='60%'}
+```{r ,fig.width=7, fig.height=6}
+mypop <- mypop + theme_bw()
+mypop
+```
+
+
+### Adjusting axes
+
+We can specify the tick marks, for example: 
+
+-   min = 0
+-   max = 12
+-   interval = 1
+
+```{r ,fig.width=7, fig.height=6}
+mypop <- mypop + 
+  scale_x_continuous(breaks = seq(0,12,1)) +
+  scale_y_continuous(breaks = seq(0,90,10)) 
+mypop
+```
+
+And we can label the x-axis and y-axis:
+
+```{r ,fig.width=7, fig.height=6}
 mypop + 
+  ylab("Life Expentancy") + 
+  xlab("Percapita GDP in log")
+```
+
+Perhaps, you may want to use `facet_wrap()` to split the plots based on variable continent to show better differences between the plots. 
+
+```{r}
+ggplot(data = gapminder, 
+       mapping = aes(x = log(gdpPercap), y = lifeExp)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(mapping = aes(line =  continent), se = FALSE) +
+  facet_wrap(~ continent) +
+  ylab("Life Expentancy") + 
+  xlab("Percapita GDP in log") +
+  theme(legend.position="none") +
   theme_bw()
 ```
 
-```{r ,out.width='80%'}
-mypop + 
-  theme_classic()
-```
 
 ## Saving plots\index{Saving plots}
 
@@ -520,11 +528,11 @@ Here, we will show how to save plots in a different format in R. In this example
 -   title
 -   x label
 -   y label
--   classic theme
+-   black and white theme
 
 And then create a new graphical object, `myplot`
 
-```{r ,out.width='60%'}
+```{r ,fig.width=8, fig.height=4}
 myplot <- 
   mypop + 
   ggtitle("GDP (in log) and life expectancy:
@@ -532,7 +540,7 @@ myplot <-
   ylab("Life Expentancy") + 
   xlab("Percapita GDP in log") +
   scale_x_continuous(breaks = seq(0,12,1)) +
-  theme_classic()
+  theme_bw()
 myplot
 ```
 
@@ -546,7 +554,7 @@ If we want to save the plots in a folder named as `plots`, then
 
 - go to working directory
 - click New Folder 
-- name it as `plot`
+- name it as **plot**
 
 ![New folder as plots](newfolder.png){width="80%"}
 
@@ -592,4 +600,6 @@ ggsave(plot = myplot,
 
 ## Summary
 
-In this chapter, we briefly describe important matters before making plots. Then we teach readers to make plots using the **ggplot2** package. This package uses the principle of Grammar for Graphics to ensure the codes are more intuitive to users. Readers learn to generate a simple plot for one variable before plotting two and three variables simultaneously. **ggplot2** is also flexible and contains many customizations to help readers generate fantastic plots and how to save them.
+In this chapter, we briefly describe important matters before making plots. Then we teach readers to make plots using the **ggplot2** package. This package uses the principle of Grammar for Graphics to ensure the codes are more intuitive to users. Readers learn to generate a simple plot for one variable before plotting two and three variables simultaneously. **ggplot2** is also flexible and contains many customization to help readers generate fantastic plots and how to save them.
+
+

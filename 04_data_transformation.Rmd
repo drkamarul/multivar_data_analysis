@@ -2,7 +2,7 @@
 
 ## Objectives
 
-At the end of the chapter, readers will
+At the end of the chapter, readers will be able to
 
 -   understand the role of data wrangling\index{data wrangling}
 -   understand the basic capabilities of **dplyr** package\index{dplyr}
@@ -376,3 +376,5 @@ The link to webpages below helps readers explore more about Data transformation\
 ## Summary
 
 **dplyr**\index{dplyr} package is a very useful package that encourages users to use proper verb when manipulating variables (columns) and observations (rows). We have learned to use five functions but there are more functions available. Other useful functions include `dplyr::distinct()`, `dplyr::transmutate()`, `dplyr::sample_n()` and `dplyr::sample_frac()`. If you are working with a database, you can use **dbplyr**\index{dbplyr}, which performs data wrangling very effectively with databases. For categorical variables\index{Categorical variable}, you can use **forcats** package.
+
+

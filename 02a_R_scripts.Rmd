@@ -97,7 +97,7 @@ If users would like to see more extensive guides on certain function, they may t
 
 Here, we provide an example how a Help Pane\index{Help pane} will look like. 
 
-![Help Pane](lm.PNG){width="60%"}
+![Help Pane](lm.PNG){width="80%"}
 
 ## Packages\index{Packages}
 
@@ -116,7 +116,7 @@ Users can read more about R packages\index{Packages} [here](https://www.datacamp
 
 At the time of writing, the CRAN\index{CRAN} package repository features 12784 packages\index{Packages}. Available R packages are listed on the Cran Task Views\index{Task Views} website.
 
-![CRAN Task Views](packages.PNG){width="70%"}
+![CRAN Task Views](packages.PNG){width="80%"}
 
 CRAN task views\index{Task Views} aim to provide some guidance which packages\index{Packages} on CRAN\index{CRAN} are relevant for tasks related to a certain topic. They give a brief overview of the included packages\index{Packages} and can be automatically installed using the **ctv** package. 
 
@@ -199,13 +199,13 @@ Many data analysts use data stored on their local machines. R will read data and
 
 The data read (in memory) will disappear once you close RStudio\index{RStudio}. But the source dataset will stay in its original location, so there will be no change to your original data (be happy!) unless you save the data frame in the memory and replace the original file. However, we do not recommend you do this.
 
-![Environment pane lists data in the memory. This RStuido IDE uses dark interface](mydata.PNG){width="60%"}
+![Environment pane lists data in the memory. This RStudio IDE interface uses the Vibrant Ink theme which users can choose from the Appearence tab in Global Option menu inside the Tools tab](mydata.PNG){width="70%"}
 
 ## Upload data to RStudio Cloud\index{RStudio cloud}
 
 If users want to use data in the RStuio Cloud, they may have to upload the data to the RStudio Cloud\index{RStudio cloud} directory. They may also use RStudio Cloud to read data from the **Dropbox** folder or **Google Drive** folder.
 
-![Upload tab on RStudio Cloud](upload_data.PNG){width="60%"}
+![Upload tab on RStudio Cloud](upload_data.PNG){width="80%"}
 
 ## More resources on RStudio Cloud\index{RStudio cloud}
 
@@ -218,10 +218,10 @@ To see further guidance and help, users may register and join RStudio Community 
 
 ## Bookdown
 
-RStudio has provided a website to host online books, the [Bookdown](https://bookdown.org/). Th books at Bookdown\index{Bookdown}  are freely accessible onlineand some of the books are available on Amazon or other book depository as physical books. +
+RStudio has provided a website to host online books, the [Bookdown](https://bookdown.org/). The books at Bookdown\index{Bookdown} are freely accessible online. There are some of the books that are available on Amazon or other book depository as physical books such as ours. 
 
-![Examples of two books freely accessible on the Bookdown website](bookdown.PNG){width="60%"}
+![Examples of two books that are freely accessible on the Bookdown website and also available as physical books](bookdown.PNG){width="70%"}
 
 ## Summary
 
-In this chapter, we describe R scripts and R packages. We also show how to write simple R scripts and how to check if any specific R package is available on your machine and how to install it if it is not available. We recommend using RStudio Cloud if you are very new to R. Working directory sometimes confuses new R users, hence we also recommend all R users to create new RStudio Project for new analysis task. There are resources available offline and online and many of them are freely accessible especially at the **bookdown** website.  
+In this chapter, we describe R scripts and R packages. We also show how to write simple R scripts and how to check if any specific R package is available on your machine and how to install it if it is not available. We recommend using RStudio Cloud if you are very new to R. Working directory sometimes confuses new R users, hence we also recommend all R users to create new RStudio Project for new analysis task. There are resources available offline and online and many of them are freely accessible especially at the [Bookdown](https://bookdown.org/) website.  

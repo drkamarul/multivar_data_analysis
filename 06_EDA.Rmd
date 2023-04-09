@@ -152,7 +152,7 @@ pep %>%
 
 To plot the distribution of a categorical variable\index{Categorical variable}, we can use a Bar chart\index{Bar chart}.
 
-```{r}
+```{r ,out.width='50%'}
 ggplot(data = pep) + 
   geom_bar(mapping = aes(x = outcome)) +
   theme_bw()
@@ -160,7 +160,7 @@ ggplot(data = pep) +
 
 But we can also pass the `aes()` to ggplot
 
-```{r}
+```{r ,out.width='50%'}
 ggplot(data = pep, mapping = aes(x = outcome)) + 
   geom_bar() +
   theme_bw()
@@ -176,14 +176,14 @@ pep_age
 
 And the **ggplot2** part to make the plot:
 
-```{r}
+```{r ,out.width='50%'}
 ggplot(pep_age, mapping = aes(x = outcome, y = mean_age)) + 
   geom_col()
 ```
 
 We can combine both tasks **dplyr**\index{dplyr} and **ggplot** together that will save time:
 
-```{r}
+```{r ,out.width='50%'}
 pep %>% 
   group_by(outcome) %>% 
   summarize(mean_age = mean(age)) %>% 
@@ -191,6 +191,7 @@ pep %>%
   geom_col() +
   ylab("Mean age (Years)") +
   xlab("Outcome of ulcer") +
+  scale_fill_grey() +
   theme_bw()
 ```
 
@@ -202,9 +203,9 @@ As we mentioned before, an excellent resource for graphics using **ggplot2** is 
 
 To plot the distribution of a numerical variable\index{Numerical variable}, we can plot a histogram\index{Histogram}. To specify the number of bin, we can use binwidth and add some customization.
 
-```{r}
+```{r ,out.width='60%'}
 ggplot(data = pep, mapping = aes(x = systolic)) + 
-  geom_histogram(binwidth = 10, fill = "blue") +
+  geom_histogram(binwidth = 10) +
   ylab("Frequency") +
   xlab("Systolic Blood Pressure") +
   ggtitle("Systolic BP distribution") +
@@ -215,7 +216,7 @@ ggplot(data = pep, mapping = aes(x = systolic)) +
 
 Let us create a density curve\index{Density curve}. A density curve also helps us examine the distribution of observations.
 
-```{r}
+```{r ,out.width='60%'}
 ggplot(data = pep, mapping = aes(x = diastolic)) + 
   geom_density() +
   xlab("Diastolic BP (mmHg)") +
@@ -229,10 +230,10 @@ ggplot(data = pep, mapping = aes(x = diastolic)) +
 
 If we want to plot both the histogram\index{Histogram} and the density curve\index{Density curve}, we can use `geom_histogram()` and `geom_density()` in the single line of codes, we can combine two `geoms`.
 
-```{r}
+```{r ,out.width='60%'}
 ggplot(pep, mapping = aes(x = diastolic)) + 
   geom_histogram(mapping = aes(y = ..density..), binwidth = 10) + 
-  geom_density(colour = 'red') +
+  geom_density() +
   xlab("Diastolic BP (mmHg)") +
   ylab("Density") +
   labs(title = "Density distribution for diastolic BP",
@@ -246,15 +247,17 @@ ggplot(pep, mapping = aes(x = diastolic)) +
 
 By overlaying histograms, examine the distribution of a numerical variable (var **age**) based on variable **outcome**. First, we create an object called `hist_age`. Next, we create a boxplot object and name it as `box-age`. After that, we combine the two objects side-by-side using a vertical bar. 
 
-```{r}
-hist_age <- ggplot(data = pep, aes(x = age, fill = outcome)) +
-    geom_histogram(binwidth = 5, aes(y = ..density..),  
+
+```{r ,out.width='80%'}
+hist_age <- ggplot(data = pep, aes(x = age, fill = outcome)) + 
+  geom_histogram(binwidth = 5, aes(y = ..density..),  
                    position = "identity", alpha = 0.75) + 
   geom_density(alpha = 0.25) +
   xlab("Age") +
   ylab("Density") +
   labs(title = "Density distribution",
        caption = "Source : Peptic ulcer disease data") +
+   scale_fill_grey() +
   theme_bw()
 ```
 
@@ -263,7 +266,7 @@ hist_age <- ggplot(data = pep, aes(x = age, fill = outcome)) +
 box_age <- ggplot(data = pep, aes(x = outcome, y = age)) +
   geom_boxplot(outlier.shape = NA) + 
   geom_dotplot(binaxis = "y", binwidth = 1, fill = NA, 
-               colour = "blue", alpha = 0.75) +
+               alpha = 0.85) +
   xlab('Outcome') + ylab('Age') +
   labs(title = "Box-plot",
        caption = "Source : Peptic ulcer disease data") +
@@ -271,16 +274,18 @@ box_age <- ggplot(data = pep, aes(x = outcome, y = age)) +
 ```
 
 
-```{r}
+When we plot using Rmarkdown, we set the width of the figure as 9 and height as 4 *r ,fig.width=9, fig.height=4* in the R code chunk to better show the plots side by side. And then set the width of the figure as 9 and height as 4  *r ,fig.width=9, fig.height=4* for the plots in vertical arrangement.You can read more placement of multiple plots from the **patchwork**\index{patchwork} [package](https://patchwork.data-imaginist.com/) to learn about arranging multiple plots in a single figure.   
+
+```{r ,fig.width=9, fig.height=4}
 hist_age |  box_age
 ```
 
 
-```{r}
+```{r ,fig.width=5, fig.height=6}
 hist_age /  box_age
 ```
 
-Read more on **patchwork** package to learn to arrange multiple plot. 
+
 
 ### Three variables: Plotting a numerical\index{Numerical variable} and two categorical variables\index{Categorical variable}
 
@@ -290,11 +295,12 @@ It is hard to visualize three variables in a single histogram plot. But we can u
 
 We can see better plots if we split the histogram based on particular grouping. In this example, we stratify the distribution of variable age (a numerical variable) based on outcome and gender (both are categorical variables)
 
-```{r}
+```{r, out.width="80%"}
 ggplot(data = pep, aes(x = age, fill = gender)) +
     geom_histogram(binwidth = 5, aes(y = ..density..),  
-                   position = "identity", alpha = 0.25) + 
-  geom_density(aes(colour = gender), alpha = 0.55) +
+                   position = "identity", alpha = 0.45) + 
+  geom_density(aes(linetype = gender), alpha = 0.65) +
+  scale_fill_grey() +
   xlab("Age") +
   ylab("Density") +
   labs(title = "Density distribution of age for outcome and gender",
@@ -327,15 +333,16 @@ We can plot the relationship between variable life expectancy `lifeExp` only for
 
 - specify the data. In this case the *gapminder* dataset
 - choose only Asia continent using the `filter()`
-- choose variable life expectancy for the y axis and year for the x axis. Then we will give different colours to represent different countries. 
+- choose variable life expectancy for the y axis and year for the x axis. Then we will give different lines to represent different countries. 
 - will use `geom_line()` to generate the line plot
 
-```{r}
+```{r, out.width="70%"}
 gapminder %>% 
   filter(continent == "Asia") %>% 
-  ggplot(mapping = aes(x = year, y = lifeExp, colour = country)) +
+  ggplot(mapping = aes(x = year, y = lifeExp, linetype = country)) +
   geom_line(show.legend = FALSE) +
-  xlab("Year") + ylab("Life Expectancy")
+  xlab("Year") + ylab("Life Expectancy") +
+  theme_bw()
 ```
 
 And the summary statistics\index{Summary statistics} for the plot. 
@@ -387,15 +394,16 @@ gap_continent <- gapminder %>%
   arrange(desc(mean))
 ```
 
-Plot them with `coord_flip()`
+Plot them with `coord_flip()` and use the black and white theme. We also set `fig.width=5, fig.height=8` in the R code chuck. 
 
-```{r}
+```{r ,fig.width=5, fig.height=7}
 gap_continent %>%   
   ggplot(mapping = aes(x = country, y = mean)) + 
   geom_point(mapping = aes(x = country, y = mean)) +
   geom_errorbar(mapping = aes(ymin = mean - sd, ymax = mean + sd),
                 position = position_dodge()) +
-  coord_flip()
+  coord_flip() +
+  theme_bw()
 ```
 
 ### Scatterplot with fit line\index{Scatterplot}
@@ -404,9 +412,10 @@ We are using the the peptic ulcer data `pep` where we will create a fit line bet
 
 ```{r}
 pep_fit <- pep %>% 
-  ggplot(mapping = aes(x = age, y = perforation, colour = outcome)) +
-  geom_point(show.legend = FALSE) +
-  geom_smooth(method = lm, se = FALSE) +
+  ggplot(aes(x = age, y = perforation, shape = outcome)) +
+  geom_point(show.legend = TRUE) +
+  geom_smooth(aes(x = age, y = perforation, linetype = outcome),
+                  method = lm, se = FALSE) +
   ylab('Size of perforation') +
   xlab('Age of patient') +
   labs(title = 'Distribution and fit line',
