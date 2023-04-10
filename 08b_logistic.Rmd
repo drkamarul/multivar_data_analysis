@@ -13,7 +13,7 @@ At the end of this chapter, readers should be able:
 
 ## Introduction
 
-Some data come with multinomial outcomes in which case, the outcome variable is a nominal or polychotomous variable with more than two levels. In multinomial outcome data, the outcome has no natural ordering. if it has, then it is best treated as a ordinal outcome data. For these data, we can modify the binary logistic model to make estimation and inference [@kleinbaum2010logistic ; @Hosmer2013-03-22]. 
+Some data come with multinomial outcomes in which case, the outcome variable is a nominal or polychotomous variable with more than two levels. In multinomial outcome data, the outcome has no natural ordering. if it has, then it is best treated as a ordinal outcome data. For these data, we can modify the binary logistic model to make estimation and inference [@kleinbaum2010logistic ; @hosmer2013]. 
 
 Variables with more than two levels are known as either:
 
@@ -348,5 +348,5 @@ tab_mlog %>%
 
 ## Summary
 
-In this chapter, we extend binary logistic regression analysis to data with a categorical outcome variable but has three or more levels. We describe the multinomial logistic regression model, the log odds and also the conditional probabilities. When then show estimation for the single and multiple multinomial logistic regression including models with an interaction. Following that, we describe how to make inferences and perform predictions. Lastly, we make use of **kableExtra** package to produce a nice table for our model. We are big fans of two excellent books on logistic regression. The first one is Applied Logistic Regression [@hosmer2013applied] and the second one is Logistic Regression\index{Logistic regression}: Self Learning Text [@kleinbaum2010logistic]. You will acquire strong understanding of the concepts and model building process from the two books. To see what packages and functions relevant to logistic regression, you can refer to A Handbook of Statistical Analyses Using R [@R-HSAUR]. 
+In this chapter, we extend binary logistic regression analysis to data with a categorical outcome variable but has three or more levels. We describe the multinomial logistic regression model, the log odds and also the conditional probabilities. When then show estimation for the single and multiple multinomial logistic regression including models with an interaction. Following that, we describe how to make inferences and perform predictions. Lastly, we make use of **kableExtra** package to produce a nice table for our model. We are big fans of two excellent books on logistic regression. The first one is Applied Logistic Regression [@hosmer2013] and the second one is Logistic Regression\index{Logistic regression}: Self Learning Text [@kleinbaum2010logistic]. You will acquire strong understanding of the concepts and model building process from the two books. To see what packages and functions relevant to logistic regression, you can refer to A Handbook of Statistical Analyses Using R [@R-HSAUR]. 
 

@@ -94,7 +94,7 @@ Models built from automatic variable selection may have an inflated risk of capi
 
 ## Purposeful variable selection
 
-Purposeful variable selection\index{purposeful variable selection} is proposed by @hosmer2013applied. In purposeful variable selection, the steps include
+Purposeful variable selection\index{purposeful variable selection} is proposed by @hosmer2013. In purposeful variable selection, the steps include
 
 - Univariable analysis: Usually the variables that achieve statistical significance at p-value of 0.20 or known clinically important variables will go to the next steps.
 - multivariable model comparison: This step fits the multivariable model comprising all variables identified in step one. Variables that do not contribute to the model (e.g., with a P value greater than traditional significance level) should be eliminated and a new smaller mode fits. These two models are then compared by using partial likelihood ratio test to make sure that the parsimonious model fits as well as the original model.

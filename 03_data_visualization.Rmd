@@ -556,9 +556,9 @@ If we want to save the plots in a folder named as `plots`, then
 - click New Folder 
 - name it as **plot**
 
-![New folder as plots](newfolder.png){width="80%"}
+![In Window OS, click the New Folder icon](newfolder.png){width="80%"}
 
-![Name the folder as plots](plots.png){width="40%"}
+![Rename New Folder as plots](plots.png){width="40%"}
 
 This is when the `here()` function is handy. You can easily point to the correct folder so R knows where to locate the file. 
 
