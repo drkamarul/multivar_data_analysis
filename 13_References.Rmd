@@ -1,0 +1,10 @@
+\backmatter
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+```{r bib, include=FALSE}
+# create a bib file for the R packages used in this document
+knitr::write_bib(c('packages()'), file = 'packages.bib')
+```
