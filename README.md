@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/rstudio/bookdown-demo.svg?branch=master)](https://travis-ci.com/rstudio/bookdown-demo)
 
-This is the *web* version of our book **Multivariable Data Analysis in Health and Medicine Using R**. We built this book using the bookdown package in RStudio IDE. The book is accessible here https://bookdown.org/drki_musa/multivariable_analysis/
+This is the *web* version of our book **Multivariable Data Analysis in Health and Medicine Using R**. We built this book using the bookdown package in RStudio IDE. The book is accessible here https://bookdown.org/drki_musa/dataanalysis/
 
 We appreciate all the people at RStudio for developing the bookdown package and hosting the book on bookdown platform. The package and the platform enables writers such as us to optimally use our time and resources. The platform provides easy access to the book for all readers. 
 
